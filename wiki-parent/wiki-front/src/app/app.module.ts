@@ -8,6 +8,7 @@ import { GuidelineComponent } from './guideline/guideline.component';
 import { ArchitectureTeamComponent } from './architecture-team/architecture-team.component';
 import { RefServiceComponent } from './ref-service/ref-service.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FooterComponent } from './footer/footer.component';
     GuidelineComponent,
     ArchitectureTeamComponent,
     RefServiceComponent,
-    FooterComponent
+    FooterComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule
