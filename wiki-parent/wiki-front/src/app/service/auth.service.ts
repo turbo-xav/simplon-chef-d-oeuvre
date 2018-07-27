@@ -2,22 +2,15 @@ import { Injectable } from '@angular/core';
 import User from '../business/user';
 
 @Injectable()
-export class ServiceAuthService {
-
-  private user: User = null;
+export class AuthService {
 
   constructor() { }
 
   auth(login: String, password: String): User {
-
-  }
-
-  isAuth(): boolean {
-    return (this.user != null);
+    return new User('Xavier', 'Tagliarino');
   }
 
   logOut() {
-    this.user = null;
   }
 
 }

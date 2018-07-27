@@ -1,5 +1,9 @@
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthService } from './service/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,9 +25,11 @@ import { FooterComponent } from './footer/footer.component';
     AuthentificationComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
