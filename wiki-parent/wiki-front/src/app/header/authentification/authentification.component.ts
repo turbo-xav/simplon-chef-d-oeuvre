@@ -1,7 +1,7 @@
 import { AuthService } from '../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import User from '../../business/user';
-import { FormGroup, FormControl, Validators, FormBuilder } from '../../../../node_modules/@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-authentification',
@@ -11,8 +11,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '../../../../nod
 export class AuthentificationComponent implements OnInit {
 
   profileForm: FormGroup;
-  login: FormControl;
-  password: FormControl;
+  //login: FormControl;
+  //password: FormControl;
 
   constructor(private authService: AuthService, private fb: FormBuilder) { }
 
@@ -20,7 +20,6 @@ export class AuthentificationComponent implements OnInit {
 
   ngOnInit() {
     this.createFormControls();
-    this.createForm();
   }
 
   auth() {
@@ -33,15 +32,19 @@ export class AuthentificationComponent implements OnInit {
   }
 
   createFormControls() {
-    this.login = new FormControl('', [Validators.required, Validators.minLength( 10 )] ),
-    this.password = new FormControl('', Validators.required);
-  }
-
-  createForm() {
+    const login = new FormControl('', [Validators.required, Validators.minLength( 6 ), Validators.maxLength(6)] );
+    const password = new FormControl('', Validators.required);
     this.profileForm = this.fb.group({
-      login: this.login ,
-      password: this.password
+      login: login ,
+      password: password
     });
   }
 
+  get login() {
+      return this.profileForm.get('login');
+  }
+
+  get password() {
+    return this.profileForm.get('password');
+  }
 }
