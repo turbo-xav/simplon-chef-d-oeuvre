@@ -12,7 +12,7 @@
       <div class="form-group row">
         <label class="col-4 col-form-label" for="uid">UID</label>
         <div class="col-8">
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': login.invalid && login.dirty, 'is-valid': login.valid && login.dirty}" formControlName="login" id="uid" placeholder="Enter your UID (ex: 417165)" />
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': login.invalid && login.dirty, 'is-valid': login.valid && login.dirty}" formControlName="login" id="uid" placeholder="UID" />
             <div *ngIf="login.invalid && (login.dirty || login.touched)" class="invalid-feedback">
               <div *ngIf="login.errors.required">Your UID is required.</div>
               <div *ngIf="login.errors.minlength || login.errors.maxlength">Your UID must contain 6 characters (ex : A23515 or 417165)</div>
@@ -22,7 +22,7 @@
       <div class="form-group row">
           <label class="col-4 col-form-label" for="password">Password</label>
           <div class="col-8">
-            <input type="password" class="form-control" id="password" [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}" formControlName="password" placeholder="Enter your secret password" />
+            <input type="password" class="form-control" id="password" [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}" formControlName="password" placeholder="Password" />
             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
                 <div *ngIf="password.errors.required">Your password is required.</div>
             </div>
