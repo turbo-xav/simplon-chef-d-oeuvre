@@ -1,17 +1,56 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
+	 xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/tx 
+     	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+     	http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<context:component-scan base-package="com.bnpp.pf.digital.wiki.back" />
-
-	<mvc:annotation-driven />
+	<!-- http://cleancodejava.com/simple-spring-data-jpa-example/ -->
+	<!-- Scans for repositories that will be auto-registered -->
+	<jpa:repositories base-package="com.bnpp.pf.digital.wiki.back" />
+	<!-- Activates various annotations to be detected in bean classes e.g: @Autowired -->
+    <context:annotation-config />
+    <mvc:annotation-driven />
+    
+    <!-- Datasource, that is currently hsqldb (in-memory database). -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@(description=(address=(host=hbackora1.sun.ctlmcof.fr)(port=1521)(protocol=tcp))(connect_data=(service_name=hfrm.mobile)))" />
+        <property name="username" value="mobuser" />
+        <property name="password" value="mobuser" />
+    </bean>
+    
+    <!-- EntityManagerFactory -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+            p:packagesToScan="com.bnpp.pf.digital.wiki.back.entity"
+            p:dataSource-ref="dataSource"
+            >
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true" />
+                <property name="showSql" value="false" />
+            </bean>
+        </property>
+    </bean>
+    
+    <!-- Transactions -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
 	
 
 </beans>
