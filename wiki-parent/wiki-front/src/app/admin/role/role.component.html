@@ -1,3 +1,16 @@
-<p>
-  role works!
-</p>
+<h2>Gestion des roles</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let role of roles">
+      <td>{{role.name}}</td>
+      <td routerLink="/admin/role/add"></td>
+    </tr>
+    
+  </tbody>
+</table>

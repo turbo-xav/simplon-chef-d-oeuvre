@@ -33,6 +33,14 @@
         <property name="password" value="mobuser" />
     </bean>-->
     
+    <!-- Datasource, that is currently hsqldb (in-memory database). -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost/wiki_digital" />
+        <property name="username" value="postgres" />
+        <property name="password" value="abigael1979" />
+    </bean>
+    
     <!-- EntityManagerFactory -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
             p:packagesToScan="com.bnpp.pf.digital.wiki.back.entity"

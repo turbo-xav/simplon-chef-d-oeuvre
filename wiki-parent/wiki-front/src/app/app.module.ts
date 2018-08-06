@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -18,12 +18,17 @@ import { RoleComponent } from './admin/role/role.component';
 import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
 import { UserComponent } from './admin/user/user.component';
 import { UserEditComponent } from './admin/user/user-edit/user-edit.component';
+import { RoleAddComponent } from './admin/role/role-add/role-add.component';
+import { RoleService } from './services/role.service';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
 
 const appRoutes: Routes = [
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/role', component: RoleComponent },
-  { path: 'admin/user', component: UserComponent }
- 
+  { path: 'admin', component: AdminComponent            },
+  { path: 'admin/role', component: RoleComponent        },
+  { path: 'admin/role/edit/:id', component: RoleEditComponent },
+  { path: 'admin/role/add', component: RoleAddComponent },
+  { path: 'admin/user', component: UserComponent        }
+
 ];
 
 @NgModule({
@@ -39,15 +44,17 @@ const appRoutes: Routes = [
     RoleComponent,
     RoleEditComponent,
     UserComponent,
-    UserEditComponent
+    UserEditComponent,
+    RoleAddComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot( appRoutes, { enableTracing: true })
   ],
-providers: [AuthService],
+providers: [AuthService, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

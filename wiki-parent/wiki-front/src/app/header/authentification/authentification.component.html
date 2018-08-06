@@ -1,9 +1,5 @@
 <div *ngIf="user == null; then loginBlock; else userLogOutBlock">
-
 </div>
-<p>Form Status: {{ profileForm.status }}</p>
-<pre>Error : {{ login.valid }}
-</pre>
 
 <ng-template #loginBlock>  
   <div class="row">
