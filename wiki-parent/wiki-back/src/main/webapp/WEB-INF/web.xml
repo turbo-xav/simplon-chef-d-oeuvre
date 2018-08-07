@@ -15,7 +15,7 @@
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-
+<!-- https://docs.spring.io/spring-flex/docs/1.0.x/reference/html/ch02s02.html -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>

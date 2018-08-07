@@ -25,6 +25,18 @@
     <context:annotation-config />
     <mvc:annotation-driven />
     
+    <!-- Datasource, that is currently hsqldb (in-memory database) : 
+    http://javainsimpleway.com/loading-property-values-in-spring-mvc/ 
+        <context:property-placeholder location="classpath:db.properties"/>-->
+    <!-- http://forum.spring.io/forum/spring-projects/web/43674-properties-for-dispatcherservlet -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>					
+			</list>
+		</property>
+	</bean>
+    
     <!-- Datasource, that is currently hsqldb (in-memory database). -->
     <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
@@ -34,11 +46,18 @@
     </bean>-->
     
     <!-- Datasource, that is currently hsqldb (in-memory database). -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://localhost/wiki_digital" />
         <property name="username" value="postgres" />
         <property name="password" value="abigael1979" />
+    </bean>-->
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
     </bean>
     
     <!-- EntityManagerFactory -->
@@ -48,17 +67,21 @@
             >
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="true" />
-                <property name="showSql" value="true" />
+                <property name="generateDdl" value="${hibernate.generateDdl}" />
+                <property name="showSql" value="${hibernate.showSql}" />
+               
             </bean>
         </property>
     </bean>
-    
+        
     <!-- Transactions -->
+    
     <tx:annotation-driven transaction-manager="transactionManager" />
+    
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-	
+    </bean>	
+    
+    
 
 </beans>

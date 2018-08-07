@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name="wiki_tbl_role")
+
 public class Role {
 
     /**
@@ -39,8 +43,9 @@ public class Role {
       * 
       */
       
-    
-    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    //@JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "role")    
     private List<User> users = new ArrayList<User>();   
     
     /**
