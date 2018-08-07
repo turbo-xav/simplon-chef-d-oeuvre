@@ -17,21 +17,75 @@ import javax.persistence.Table;
 @Table(name="wiki_tbl_role")
 public class Role {
 
-    @Id 
+    /**
+      * Id of role : primary key
+      * 
+      */
+	
+	@Id 
     @GeneratedValue(strategy=GenerationType.AUTO)    
     private int id;
     
-    @Column
+	/**
+	 * Name of role
+	 */
+	
+    @Column(length=20)
     private String name;
     
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    /**
+      *
+      * RelationShip with Users
+      * 
+      */
+      
+    
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<User>();   
+    
+    /**
+      * Default constructor
+      */
     
     public Role() {
         
     }
+    
+    /**
+      * Get the list of users
+      * 
+      * @return list of users
+      * 
+      */
 
-    public int getId() {
+    public List<User> getUsers() {
+		return users;
+	}
+
+    /**
+      * Set the users
+      *  
+      * @param users the list of users
+      * 
+      */
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	/**
+	  * Add a user
+	  * 
+	  * @param user : user to add
+	  */
+	
+	public void addUser(User user) {
+		this.users.add(user);
+	}
+
+
+
+	public int getId() {
         return id;
     }
 

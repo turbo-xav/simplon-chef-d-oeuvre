@@ -18,7 +18,6 @@ import { RoleComponent } from './admin/role/role.component';
 import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
 import { UserComponent } from './admin/user/user.component';
 import { UserEditComponent } from './admin/user/user-edit/user-edit.component';
-import { RoleAddComponent } from './admin/role/role-add/role-add.component';
 import { RoleService } from './services/role.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 
@@ -26,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent            },
   { path: 'admin/role', component: RoleComponent        },
   { path: 'admin/role/edit/:id', component: RoleEditComponent },
-  { path: 'admin/role/add', component: RoleAddComponent },
+  { path: 'admin/role/edit', component: RoleEditComponent },
   { path: 'admin/user', component: UserComponent        }
 
 ];
@@ -44,8 +43,7 @@ const appRoutes: Routes = [
     RoleComponent,
     RoleEditComponent,
     UserComponent,
-    UserEditComponent,
-    RoleAddComponent
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,20 @@ export class RoleService {
 
   constructor(private http:  HttpClient) { }
 
-  public addRole(role: Role): Observable<Role> {
-    return  this.http.post<Role>(this.restUrl, this.httpOptions);
+  public saveRole(role: Role): Observable<Role> {
+    if ( role.id != null ) {
+      return  this.http.post<Role>(this.restUrl, role, this.httpOptions);
+    } else {
+      return  this.http.put<Role>(this.restUrl, role, this.httpOptions);
+    }
   }
 
   public getRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(this.restUrl);
+  }
+
+  public getRole(id: number): Observable<Role> {
+    return this.http.get<Role>(this.restUrl + '/' + id);
   }
 
 }

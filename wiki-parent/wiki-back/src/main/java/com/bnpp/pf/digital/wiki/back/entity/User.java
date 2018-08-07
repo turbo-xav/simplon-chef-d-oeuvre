@@ -18,19 +18,19 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)    
     private int id;
     
-    @Column
+    @Column(length=6)
     private String uid; 
     
-    @Column
+    @Column(length=100)
     private String firstName;
     
-    @Column
+    @Column(length=100)
     private String lastName;
     
-    @Column
+    @Column(length=100)
     private String mail;
     
-    @Column
+    @Column(length=20)
     private String password;
     
     
@@ -39,7 +39,7 @@ public class User {
     private Role role; 
     
     public User() {
-        // TODO Auto-generated constructor stub
+        
     }
 
 }

@@ -1,15 +1,16 @@
-<h2>Gestion des roles</h2>
+<h2>Manage roles</h2>
+<p><a routerLink="/admin/role/edit">Add a role</a></p>
 <table>
   <thead>
-    <tr>
+    <tr>      
       <th>Role</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let role of roles">
+    <tr *ngFor="let role of roles">     
       <td>{{role.name}}</td>
-      <td routerLink="/admin/role/add"></td>
+      <td routerLink="/admin/role/edit/{{role.id}}">Edit</td>
     </tr>
     
   </tbody>
