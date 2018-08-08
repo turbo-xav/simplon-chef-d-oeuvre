@@ -20,13 +20,16 @@ import { UserComponent } from './admin/user/user.component';
 import { UserEditComponent } from './admin/user/user-edit/user-edit.component';
 import { RoleService } from './services/role.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent            },
   { path: 'admin/role', component: RoleComponent        },
   { path: 'admin/role/edit/:id', component: RoleEditComponent },
   { path: 'admin/role/edit', component: RoleEditComponent },
-  { path: 'admin/user', component: UserComponent        }
+  { path: 'admin/user', component: UserComponent        },
+  { path: 'admin/user/edit/:id', component:UserEditComponent },
+  { path: 'admin/user/edit', component: UserEditComponent },
 
 ];
 
@@ -52,7 +55,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot( appRoutes, { enableTracing: true })
   ],
-providers: [AuthService, RoleService],
+providers: [
+  AuthService,
+  RoleService,
+  UserService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

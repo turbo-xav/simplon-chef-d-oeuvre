@@ -1,4 +1,29 @@
 <h2>Manage users</h2>
 <p>
-  <a routerLink="/admin/role">Manage Roles</a>
+  <a routerLink="/admin/role">Manage Roles ?</a>
 </p>
+
+<p><a routerLink="/admin/user/edit">Add a user</a></p>
+<table>
+  <thead>
+    <tr>      
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>UID</th>
+      <th>Mail</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">     
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.uid}}</td>
+      <td>{{user.mail}}</td>
+      <td>{{user.role.name}}</td>
+      <td>
+        <a href="#" routerLink="/admin/user/edit/{{user.id}}">Edit</a>
+        <a (click)="delete(user.id)">Delete</a>
+    </tr>    
+  </tbody>
+</table>

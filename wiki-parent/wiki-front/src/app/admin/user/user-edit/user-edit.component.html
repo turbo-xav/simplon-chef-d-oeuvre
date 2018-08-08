@@ -1,3 +1,74 @@
-<p>
-  user-edit works!
-</p>
+<ng-container *ngIf="user != null">
+    <form class="needs-validation" novalidate [formGroup]="userForm">
+        <fieldSet>
+            <legend>User</legend>
+        </fieldSet>
+        <div class="row">
+            
+          <div class="col-5">
+              
+            <div class="form-group row">
+                <label class="col-4 col-form-label" for="name">Firstname :</label>
+                <div class="col-8">
+                  <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': firstName.invalid && firstName.dirty, 'is-valid': firstName.valid && firstName.dirty}" formControlName="firstName" placeholder="firstName of user" />
+                  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-feedback">
+                      <div *ngIf="firstName.errors.required">A name is required for a role.</div>
+                  </div>
+                </div>
+            </div>
+              
+            <div class="form-group row">
+                  <label class="col-4 col-form-label" for="name">Lastname :</label>
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': lastName.invalid && lastName.dirty, 'is-valid': lastName.valid && lastName.dirty}" formControlName="lastName" placeholder="lastName of user" />
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-feedback">
+                        <div *ngIf="lastName.errors.required">A lastname is required for a user.</div>
+                    </div>
+                  </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label" for="name">Mail :</label>
+                <div class="col-8">
+                  <input type="text" class="form-control" id="mail" [(ngModel)]="user.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}" formControlName="mail" placeholder="mail of user" />
+                  <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
+                      <div *ngIf="mail.errors.required">A mail is required for a user.</div>
+                  </div>
+                </div>
+          </div> 
+
+          <div class="form-group row">
+              <label class="col-4 col-form-label" for="name">UID :</label>
+              <div class="col-8">
+                <input type="text" class="form-control" id="uid" [(ngModel)]="user.uid" [ngClass]="{'is-invalid': uid.invalid && uid.dirty, 'is-valid': uid.valid && uid.dirty}" formControlName="uid" placeholder="uid of user" />
+                <div *ngIf="uid.invalid && (uid.dirty || uid.touched)" class="invalid-feedback">
+                    <div *ngIf="uid.errors.required">An UID is required for a user.</div>
+                    <div *ngIf="uid.errors.minlength || uid.errors.maxlength">Your UID must contain 6 characters (ex : A23515 or 417165)</div>
+          
+                </div>
+          </div>
+        </div> 
+           
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="name">Role :</label>
+          <div class="col-8">  
+              <select id="role" formControlName="userRole" [(ngModel)]="user.role.id">
+                  <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                </select>
+          </div>
+        </div>
+
+        <div class="form-group row">                
+          <div class="col-8">
+            <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+          </div>
+        </div> 
+      </div>
+
+        </div>
+            
+           
+         
+    </form>
+  {{user.firstName}} - {{user.lastName}}
+</ng-container>

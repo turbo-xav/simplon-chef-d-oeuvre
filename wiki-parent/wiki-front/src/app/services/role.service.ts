@@ -3,27 +3,22 @@ import { Role } from '../models/role';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 
+import {restRootUrl , httpJsonOptions} from '../config/config';
 
 
 @Injectable()
 export class RoleService {
 
-  restUrl = 'http://localhost:8080/wiki-back/rest/role';
+  restUrl = restRootUrl + '/role';
 
-  httpOptions = {
-    headers: new HttpHeaders( {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      })
-  };
 
   constructor(private http:  HttpClient) { }
 
   public saveRole(role: Role): Observable<Role> {
     if ( role.id != null ) {
-      return  this.http.post<Role>(this.restUrl, role, this.httpOptions);
+      return  this.http.post<Role>(this.restUrl, role, httpJsonOptions);
     } else {
-      return  this.http.put<Role>(this.restUrl, role, this.httpOptions);
+      return  this.http.put<Role>(this.restUrl, role, httpJsonOptions);
     }
   }
 
