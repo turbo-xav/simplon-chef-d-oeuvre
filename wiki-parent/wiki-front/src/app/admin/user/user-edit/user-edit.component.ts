@@ -40,7 +40,6 @@ export class UserEditComponent implements OnInit {
       );
     } else {
       this.user = new User('', '');
-      this.user.role = new Role('');
     }
 
     this.createFormControls();
@@ -58,7 +57,7 @@ export class UserEditComponent implements OnInit {
   createFormControls() {
     const firstName = new FormControl('', [Validators.required]);
     const lastName = new FormControl('', [Validators.required]);
-    const mail = new FormControl('', [Validators.required]);
+    const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
     const userRole = new FormControl('', [Validators.required]);
 
@@ -105,4 +104,3 @@ export class UserEditComponent implements OnInit {
   }
 
 }
-.

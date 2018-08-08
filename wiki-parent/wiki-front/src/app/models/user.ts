@@ -7,7 +7,7 @@ export class User {
     fistName: string;
     lastName: string;
     password: string;
-    role: Role;
+    role: Role = new Role(null);
 
     public constructor(firstName: string, lastName: string) {
         this.fistName = firstName;
