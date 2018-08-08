@@ -3,6 +3,8 @@ package com.bnpp.pf.digital.wiki.back.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 
@@ -13,14 +15,29 @@ import com.bnpp.pf.digital.wiki.back.entity.Role;
  */
 
 //@Repository
-public interface RoleRespository extends JpaRepository<Role, Integer>{
+public interface RoleRepository extends JpaRepository<Role, Integer>{
+    
+	 
+	@Query("SELECT r FROM Role r LEFT OUTER JOIN FETCH r.users u")
+	public List<Role> findAll();
+	
+	/**
+     * 
+     * @param id
+     * @return
+     */
+    
+	
+    Role getById(int id);
+    
     /**
      * 
      * @param id
      * @return
      */
     
-    Role getById(int id);
+    @Query("SELECT r FROM Role r LEFT OUTER JOIN FETCH r.users u WHERE r.id = :id")
+    Role getRoleByIdWithUser(@Param("id") int id);
     
     /**
      * 

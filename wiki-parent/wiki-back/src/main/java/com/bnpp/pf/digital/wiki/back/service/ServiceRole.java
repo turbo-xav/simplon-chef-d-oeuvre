@@ -7,22 +7,27 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.pf.digital.wiki.back.entity.Role;
-import com.bnpp.pf.digital.wiki.back.repository.RoleRespository;
+import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.repository.RoleRepository;
+import com.bnpp.pf.digital.wiki.back.repository.UserRepository;
 
 @Component
 @Transactional
 public class ServiceRole {
 
     @Autowired
-    private RoleRespository roleRespository;
+    private RoleRepository roleRepository;
     
+    @Autowired
+    private UserRepository userRepository;
+        
     /**
      * 
      * @return
      */
     
     public List<Role> findAll() {
-        return roleRespository.findAll();
+        return roleRepository.findAll();
     }
     
     /**
@@ -31,7 +36,11 @@ public class ServiceRole {
      * @return
      */
     public Role getById(int id) {
-        return roleRespository.getById(id);
+        //Role role = roleRespository.getById(id);
+    	Role role = roleRepository.getRoleByIdWithUser(id);
+        /*List<User> users = role.getUsers();
+        users.size();*/
+        return role;
     }
     
     /**
@@ -41,7 +50,7 @@ public class ServiceRole {
      */
     
     public Role save(Role role) {
-        return roleRespository.save(role);
+        return roleRepository.save(role);
     }
     
     /**
@@ -51,7 +60,14 @@ public class ServiceRole {
      */
     
     public void deleteById(int id) {
-        roleRespository.deleteById(id);
+        Role role = roleRepository.getById(id);
+        List<User> users = role.getUsers();
+        for(User user: users) {
+        	user.setRole(null);
+        	userRepository.save(user);
+        }
+        
+    	roleRepository.deleteById(id);
     }
       
 }

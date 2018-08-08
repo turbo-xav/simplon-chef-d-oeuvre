@@ -16,6 +16,18 @@ export class RoleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadRoles();
+  }
+
+  delete(id: number) {
+      this.roleService.deleteRole(id).subscribe(
+          () => {
+            this.loadRoles();
+        }
+      );
+  }
+
+  loadRoles() {
     this.roleService.getRoles().subscribe(
       (roles: Role[]) => {
         this.roles = roles;

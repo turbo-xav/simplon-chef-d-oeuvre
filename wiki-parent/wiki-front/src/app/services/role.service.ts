@@ -35,4 +35,8 @@ export class RoleService {
     return this.http.get<Role>(this.restUrl + '/' + id);
   }
 
+  public deleteRole(id: number) {
+    return this.http.delete(this.restUrl + '/' + id);
+  }
+
 }

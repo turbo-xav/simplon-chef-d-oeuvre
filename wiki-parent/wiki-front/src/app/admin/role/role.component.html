@@ -10,7 +10,9 @@
   <tbody>
     <tr *ngFor="let role of roles">     
       <td>{{role.name}}</td>
-      <td routerLink="/admin/role/edit/{{role.id}}">Edit</td>
+      <td>
+        <a href="#" routerLink="/admin/role/edit/{{role.id}}">Edit</a>
+        <a href="#" (click)="delete(role.id)">Delete</a>
     </tr>
     
   </tbody>

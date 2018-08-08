@@ -3,7 +3,6 @@ package com.bnpp.pf.digital.wiki.back.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +44,7 @@ public class Role {
       
     //@JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnore
-    @OneToMany(mappedBy = "role")    
+    @OneToMany(mappedBy = "role",fetch=FetchType.LAZY)    
     private List<User> users = new ArrayList<User>();   
     
     /**

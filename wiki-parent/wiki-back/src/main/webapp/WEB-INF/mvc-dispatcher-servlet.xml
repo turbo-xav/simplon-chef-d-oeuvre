@@ -23,7 +23,16 @@
 	<jpa:repositories base-package="com.bnpp.pf.digital.wiki.back" />
 	<!-- Activates various annotations to be detected in bean classes e.g: @Autowired -->
     <context:annotation-config />
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+    <!-- <mvc:message-converters>
+            
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.bnpp.pf.digital.wiki.back.mapper.HibernateAwareObjectMapper" />
+                </property>
+            </bean>
+        </mvc:message-converters>-->
+    </mvc:annotation-driven>
     
     <!-- Datasource, that is currently hsqldb (in-memory database) : 
     http://javainsimpleway.com/loading-property-values-in-spring-mvc/ 

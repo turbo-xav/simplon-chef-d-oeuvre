@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="wiki_tbl_user")
 public class User {
@@ -18,7 +20,63 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)    
     private int id;
     
-    @Column(length=6)
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@Column(length=6)
     private String uid; 
     
     @Column(length=100)
@@ -34,8 +92,8 @@ public class User {
     private String password;
     
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_role", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="fk_role")
     private Role role; 
     
     public User() {
