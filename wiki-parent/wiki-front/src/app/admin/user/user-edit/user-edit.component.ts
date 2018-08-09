@@ -90,6 +90,10 @@ export class UserEditComponent implements OnInit {
     return this.userForm.get('userRole');
   }
 
+  changeRole(roleId) {
+    this.user.role = new Role(roleId, null);
+  }
+
   save() {
     if ( this.userForm.valid ) {
       this.userService.saveUser(this.user).subscribe(

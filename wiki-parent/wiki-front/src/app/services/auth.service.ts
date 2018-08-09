@@ -13,7 +13,7 @@ export class AuthService {
 
   auth(login: String, password: String): boolean {
     this.authUser = new User('Xavier', 'Tagliarino');
-    this.authUser.role = new Role('Admin');
+    this.authUser.role = new Role(1,'Admin');
     return true;
   }
 

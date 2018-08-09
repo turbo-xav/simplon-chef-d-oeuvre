@@ -56,9 +56,14 @@
         <div class="form-group row">
           <label class="col-4 col-form-label" for="name">Role :</label>
           <div class="col-8">  
-              <select id="role" formControlName="userRole" [(ngModel)]="user.role.id">
+              
+            <select *ngIf="user.role !== null" id="role" formControlName="userRole" [(ngModel)]="user.role.id" #roleSelect>
                   <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
-                </select>
+            </select>
+
+            <select *ngIf="user.role === null" id="role" formControlName="userRole" (change)="changeRole(roleSelect.value)" #roleSelect>
+                    <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+              </select>
           </div>
         </div>
 

@@ -1,6 +1,4 @@
-<div *ngIf="user === null; then loginBlock; else userLogOutBlock">
-</div>
-{{ isAuth() }}
+<div *ngIf="user === null; then loginBlock; else userLogOutBlock"></div>
 <ng-template #loginBlock>  
   <div class="row">
   <div class="col-5">
@@ -8,7 +6,7 @@
       <div class="form-group row">
         <label class="col-4 col-form-label" for="uid">UID</label>
         <div class="col-8">
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': login.invalid && login.dirty, 'is-valid': login.valid && login.dirty}" formControlName="login" id="uid" placeholder="UID" />
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': login.invalid && login.dirty, 'is-valid': login.valid && login.dirty}" formControlName="login" id="login" placeholder="UID" />
             <div *ngIf="login.invalid && (login.dirty || login.touched)" class="invalid-feedback">
               <div *ngIf="login.errors.required">Your UID is required.</div>
               <div *ngIf="login.errors.minlength || login.errors.maxlength">Your UID must contain 6 characters (ex : A23515 or 417165)</div>
@@ -28,7 +26,7 @@
       </form>
     </div>
     <div class="col-7">
-        <button class="btn btn-primary" type="submit" (click)="auth()">Sign In</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid" (click)="auth()">Sign In</button>
         or
         <button type="button" class="btn btn-outline-primary" routerLink="authentication/account/create">Sign Up ?</button>
         <a href="https://mypassword.group.echonet/ui/home" class="badge badge-primary" target="_blank">Lost password ?</a>

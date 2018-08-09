@@ -1,12 +1,13 @@
 import { User } from './user';
 
 export class Role {
-    id: number;
+    id: number = null;
     name: String;
     users: User[] = [];
 
 
-    public constructor(name: String) {
+    public constructor(id: number, name: String) {
+        this.id = id;
         this.name = name;
     }
 }

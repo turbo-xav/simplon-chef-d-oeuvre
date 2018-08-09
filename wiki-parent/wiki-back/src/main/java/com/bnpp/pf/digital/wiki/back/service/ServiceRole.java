@@ -36,10 +36,7 @@ public class ServiceRole {
      * @return
      */
     public Role getById(int id) {
-        //Role role = roleRespository.getById(id);
     	Role role = roleRepository.getRoleByIdWithUser(id);
-        /*List<User> users = role.getUsers();
-        users.size();*/
         return role;
     }
     

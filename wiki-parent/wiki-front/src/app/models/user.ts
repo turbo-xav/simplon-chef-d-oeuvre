@@ -1,16 +1,16 @@
 import { Role } from './role';
 
 export class User {
-    id: number;
+    id: number = null ;
     uid: string;
     mail: string;
-    fistName: string;
+    firstName: string;
     lastName: string;
     password: string;
-    role: Role = new Role(null);
+    role: Role = new Role(null, null);
 
     public constructor(firstName: string, lastName: string) {
-        this.fistName = firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 }

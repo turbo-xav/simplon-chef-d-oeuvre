@@ -30,7 +30,7 @@ export class RoleEditComponent implements OnInit {
         }
       );
     } else {
-      this.role = new Role('');
+      this.role = new Role(null, '');
     }
 
     this.createFormControls();
