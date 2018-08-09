@@ -19,8 +19,11 @@ import { RoleService } from './services/role.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AccountCreateComponent } from './authentication/account-create/account-create.component';
+import { GetPasswordComponent } from './authentication/get-password/get-password.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent            },
   { path: 'admin/role', component: RoleComponent        },
   { path: 'admin/role/edit/:id', component: RoleEditComponent },
@@ -28,7 +31,8 @@ const appRoutes: Routes = [
   { path: 'admin/user', component: UserComponent        },
   { path: 'admin/user/edit/:id', component: UserEditComponent },
   { path: 'admin/user/edit', component: UserEditComponent },
-  { path: 'authentication/account/create', component: AccountCreateComponent }
+  { path: 'authentication/account/create', component: AccountCreateComponent },
+  { path: 'authentication/get-password', component: GetPasswordComponent }
 
 ];
 
@@ -46,7 +50,9 @@ const appRoutes: Routes = [
     RoleEditComponent,
     UserComponent,
     UserEditComponent,
-    AccountCreateComponent
+    AccountCreateComponent,
+    GetPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
