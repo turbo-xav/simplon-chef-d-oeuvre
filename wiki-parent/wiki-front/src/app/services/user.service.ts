@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {restRootUrl , httpJsonOptions} from '../config/config';
-import { Observable } from '../../../node_modules/rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {

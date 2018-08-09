@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../../models/role';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RoleService } from '../../../services/role.service';
-import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-role-edit',

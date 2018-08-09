@@ -1,6 +1,6 @@
-<div *ngIf="user == null; then loginBlock; else userLogOutBlock">
+<div *ngIf="user === null; then loginBlock; else userLogOutBlock">
 </div>
-
+{{ isAuth() }}
 <ng-template #loginBlock>  
   <div class="row">
   <div class="col-5">
@@ -30,34 +30,21 @@
     <div class="col-7">
         <button class="btn btn-primary" type="submit" (click)="auth()">Sign In</button>
         or
-        <button type="button" class="btn btn-outline-primary">Sign Up ?</button>
+        <button type="button" class="btn btn-outline-primary" routerLink="authentication/account/create">Sign Up ?</button>
         <a href="https://mypassword.group.echonet/ui/home" class="badge badge-primary" target="_blank">Lost password ?</a>
     </div>
     </div>
-  <!--<div class="align">
-    <form class="form-inline my-2 my-xl-0" [formGroup]="profileForm">
-
-       
-    <div class="form-control-feedback" *ngIf="login.errors && (login.dirty || login.touched)">
-      <p *ngIf="login.errors.required">Password is required</p>
-      <p *ngIf="login.errors.minlength">Password must be 8 characters long</p>
-    </div>
-        
-    <input class="form-control" [ngClass]="{'ko': login.invalid && login.dirty, 'ok': login.valid && login.dirty}"  formControlName="login"  required type="text" id="login" name="login"  placeholder="Login" />
-     
-      <input class="form-control"  formControlName="password" required type="password" id="password" name="password" placeholder="Password" />
-      
-      <div>
-        <button type="button" class="btn btn-primary" (click)="auth()">Sign In</button>
-       or <button type="button" class="btn btn-outline-primary">Sign Up ?</button>
-        <a href="#" class="badge badge-primary">Lost password ?</a>
-      </div>
-    </form>  
-  </div>-->
 </ng-template>
 <ng-template #userLogOutBlock>
+  <p *ngIf="user != null">
+    Bienvenue : {{user.fistName}} - {{user.lastName}}
+    <br />
+    Vous être {{user.role.name}}
+
+  </p>
   <p>
-  <a routerLink="/admin/user">Admin</a>
+  
+    <a routerLink="/admin/user">Admin</a>
   |
   <a (click)="logOut()">LogOut</a>
   </p>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Role } from '../models/role';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from '../../../node_modules/rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 import {restRootUrl , httpJsonOptions} from '../config/config';
 

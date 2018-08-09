@@ -1,9 +1,9 @@
-import { RoleService } from './../../../services/role.service';
+import { RoleService } from '../../../services/role.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
-import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../../models/role';
 
 @Component({
