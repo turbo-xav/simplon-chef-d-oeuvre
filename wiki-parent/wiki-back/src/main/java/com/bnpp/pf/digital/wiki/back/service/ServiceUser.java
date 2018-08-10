@@ -2,6 +2,7 @@ package com.bnpp.pf.digital.wiki.back.service;
 
 import java.util.List;
 
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,9 @@ public class ServiceUser {
      */
     
     public User save(User user) {
-        return userRepository.save(user);
+        
+    	userRepository.save(user);
+    	return user;
     }
     
     /**

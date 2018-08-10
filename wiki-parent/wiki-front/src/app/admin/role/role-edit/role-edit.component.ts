@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RoleEditComponent implements OnInit {
 
   role: Role;
-
+  error: Error;
   roleForm: FormGroup;
 
   constructor(private fb: FormBuilder, private roleService: RoleService, private router: Router, private route: ActivatedRoute ) { }
@@ -49,13 +49,16 @@ export class RoleEditComponent implements OnInit {
   }
 
   save() {
+    this.error = null;
     if ( this.roleForm.valid ) {
       this.roleService.saveRole(this.role).subscribe(
-        () => {
+        (data) => {
+          console.log('data',data);
           this.router.navigateByUrl('/admin/role');
         },
-        () => {
-          console.log('error');
+        (response) => {
+          console.log(response.error);
+          this.error = response.error;
         }
       );
     }

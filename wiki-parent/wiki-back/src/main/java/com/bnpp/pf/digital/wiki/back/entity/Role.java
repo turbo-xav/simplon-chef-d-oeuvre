@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="wiki_tbl_role")
@@ -33,7 +32,7 @@ public class Role {
 	 * Name of role
 	 */
 	
-    @Column(length=20)
+    @Column(length=20,unique= true)
     private String name;
     
     /**
@@ -42,7 +41,6 @@ public class Role {
       * 
       */
       
-    //@JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnore
     @OneToMany(mappedBy = "role",fetch=FetchType.LAZY)    
     private List<User> users = new ArrayList<User>();   

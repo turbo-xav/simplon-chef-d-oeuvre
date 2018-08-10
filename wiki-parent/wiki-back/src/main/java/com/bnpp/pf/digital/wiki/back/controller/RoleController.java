@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.entity.User;
-import com.bnpp.pf.digital.wiki.back.service.ServiceRole;
+import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
+import com.bnpp.pf.digital.wiki.back.service.IServiceRole;
 
 @CrossOrigin(origins = {"http://localhost:4200"}, maxAge = 4800, allowCredentials = "false") 
 @RestController
@@ -24,8 +26,10 @@ import com.bnpp.pf.digital.wiki.back.service.ServiceRole;
 public class RoleController {
 
    
-    @Autowired
-    private ServiceRole serviceRole;
+    private static final String CREATING_ERROR_MSG = "creating this role is not possible please verify your database";
+	private static final String UPDATING_ERROR_MSG = "updating this role is not possible please verify your database";
+	@Autowired
+    private IServiceRole serviceRole;
     
     public RoleController() {
         
@@ -66,10 +70,16 @@ public class RoleController {
      */
     
     @RequestMapping(method= RequestMethod.PUT)
-    @ResponseStatus(code=HttpStatus.OK)
-    @ResponseBody
-    public int update(@RequestBody Role role) {
-        return serviceRole.save(role).getId();
+    //@ResponseStatus(code=HttpStatus.OK)
+    //@ResponseBody
+     public ResponseEntity<?> update(@RequestBody Role role) {
+        try {
+			role = serviceRole.save(role);
+        	return new ResponseEntity<Role>(role, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+		
     }
     
     /**
@@ -79,10 +89,15 @@ public class RoleController {
      */
     
     @RequestMapping(method= RequestMethod.POST)
-    @ResponseStatus(code=HttpStatus.OK)
-    @ResponseBody
-    public int insert(@RequestBody Role role) {
-        return serviceRole.save(role).getId();
+    //@ResponseStatus(code=HttpStatus.OK)
+    //@ResponseBody
+    public ResponseEntity<?> insert(@RequestBody Role role) {
+    	try {
+			role = serviceRole.save(role);
+        	return new ResponseEntity<Role>(role, HttpStatus.OK);
+		} catch (Exception e) {		
+			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
     }
     
     

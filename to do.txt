@@ -1,0 +1,4 @@
+1 - Crud : User + error à généraliser
+2 - Authentification
+-- Bookiner spring sécurity côté back
+-- Statégy de JWT côté Front

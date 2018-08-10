@@ -34,8 +34,7 @@ public class UserController {
     @ResponseStatus(code=HttpStatus.OK)
     @ResponseBody
     public List<User> getAll(){
-       return serviceUser.findAll();       
-       
+           	return serviceUser.findAll();
     }
     
     @RequestMapping(path="{id}", method= RequestMethod.GET)

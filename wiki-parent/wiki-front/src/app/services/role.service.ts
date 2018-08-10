@@ -16,9 +16,9 @@ export class RoleService {
 
   public saveRole(role: Role): Observable<Role> {
     if ( role.id != null ) {
-      return  this.http.post<Role>(this.restUrl, role, httpJsonOptions);
-    } else {
       return  this.http.put<Role>(this.restUrl, role, httpJsonOptions);
+    } else {
+      return  this.http.post<Role>(this.restUrl, role, httpJsonOptions);
     }
   }
 

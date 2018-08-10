@@ -1,5 +1,6 @@
 package com.bnpp.pf.digital.wiki.back.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
+import com.bnpp.pf.digital.wiki.back.exception.TechnicalException.TECHNICAL_EXCEPTION_TYPE;
 import com.bnpp.pf.digital.wiki.back.repository.RoleRepository;
 import com.bnpp.pf.digital.wiki.back.repository.UserRepository;
 
 @Component
 @Transactional
-public class ServiceRole {
+public class ServiceRole implements IServiceRole {
 
     @Autowired
     private RoleRepository roleRepository;
@@ -21,42 +24,35 @@ public class ServiceRole {
     @Autowired
     private UserRepository userRepository;
         
-    /**
-     * 
-     * @return
-     */
+    /* (non-Javadoc)
+	 * @see com.bnpp.pf.digital.wiki.back.service.IServiceRole#findAll()
+	 */
     
-    public List<Role> findAll() {
+    @Override
+	public List<Role> findAll() {
         return roleRepository.findAll();
     }
     
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    public Role getById(int id) {
+   
+    @Override
+	public Role getById(int id) {
     	Role role = roleRepository.getRoleByIdWithUser(id);
         return role;
     }
     
-    /**
-     * 
-     * @param role
-     * @return
-     */
     
-    public Role save(Role role) {
-        return roleRepository.save(role);
+    @Override
+	@Transactional()
+    public Role save(Role role) {       
+			return roleRepository.save(role);		
     }
     
-    /**
-     * 
-     * @param id
-     * @return
-     */
+    /* (non-Javadoc)
+	 * @see com.bnpp.pf.digital.wiki.back.service.IServiceRole#deleteById(int)
+	 */
     
-    public void deleteById(int id) {
+    @Override
+	public void deleteById(int id) {
         Role role = roleRepository.getById(id);
         List<User> users = role.getUsers();
         for(User user: users) {

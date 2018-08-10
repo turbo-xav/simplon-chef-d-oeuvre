@@ -10,4 +10,11 @@ export class Role {
         this.id = id;
         this.name = name;
     }
+
+    public addUser(user: User) {
+        this.users.push(user);
+    }
+    public getUsers(): User[] {
+        return this.users;
+    }
 }

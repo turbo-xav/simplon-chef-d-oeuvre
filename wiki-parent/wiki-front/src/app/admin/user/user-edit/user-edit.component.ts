@@ -39,7 +39,7 @@ export class UserEditComponent implements OnInit {
         }
       );
     } else {
-      this.user = new User('', '');
+      this.user = new User( null, '', '', '', '', '', false, true);
     }
 
     this.createFormControls();

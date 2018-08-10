@@ -12,8 +12,8 @@ export class AuthService {
   }
 
   auth(login: String, password: String): boolean {
-    this.authUser = new User('Xavier', 'Tagliarino');
-    this.authUser.role = new Role(1,'Admin');
+    this.authUser = new User(1, 'Xavier', 'Tagliarino', '', '', '', true, true);
+    this.authUser.role = new Role(1, 'Admin');
     return true;
   }
 

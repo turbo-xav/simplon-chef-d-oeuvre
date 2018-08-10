@@ -19,8 +19,53 @@ public class User {
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)    
     private int id;
+    @Column(length=6, unique=true)
+    private String uid; 
     
-    public int getId() {
+    @Column(length=100)
+    private String firstName;
+    
+    @Column(length=100)
+    private String lastName;
+    
+    @Column(length=100, unique=true)
+    private String mail;
+    
+    @Column(length=20)
+    private String password;
+    
+    @Column
+    private boolean enabled;
+    
+    @Column
+    private boolean locked;
+    
+        
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="fk_role")
+    private Role role; 
+    
+    public User() {
+        
+    }
+    
+    public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+	
+	public int getId() {
 		return id;
 	}
 
@@ -75,29 +120,5 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	@Column(length=6)
-    private String uid; 
-    
-    @Column(length=100)
-    private String firstName;
-    
-    @Column(length=100)
-    private String lastName;
-    
-    @Column(length=100)
-    private String mail;
-    
-    @Column(length=20)
-    private String password;
-    
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="fk_role")
-    private Role role; 
-    
-    public User() {
-        
-    }
 
 }
