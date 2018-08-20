@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http
 export class RoleComponent implements OnInit {
 
   roles: Role[] = [];
-  error: string;
+  error: Error;
   constructor(private roleService: RoleService ) {
 
   }

@@ -1,5 +1,9 @@
 
-    <form class="needs-validation" novalidate [formGroup]="userForm">
+    <h2>Account creation</h2>
+    <p *ngIf="noAccount === false">Your account has been sucesfully created</p>
+
+    <p  *ngIf="error != null" class="errorMsg">Error : {{error.msg}}</p>
+    <form *ngIf="noAccount === true" class="needs-validation" novalidate [formGroup]="userForm">
         <fieldSet>
             <legend>Account Creation</legend>
         </fieldSet>

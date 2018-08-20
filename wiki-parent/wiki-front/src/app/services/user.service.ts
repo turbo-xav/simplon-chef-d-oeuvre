@@ -13,9 +13,9 @@ export class UserService {
 
   public saveUser(user: User): Observable<User> {
     if ( user.id != null ) {
-      return  this.http.post<User>(this.restUrl, user, httpJsonOptions);
-    } else {
       return  this.http.put<User>(this.restUrl, user, httpJsonOptions);
+    } else {
+      return  this.http.post<User>(this.restUrl, user, httpJsonOptions);
     }
   }
 

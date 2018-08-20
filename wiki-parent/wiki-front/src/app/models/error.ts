@@ -1,8 +1,9 @@
 export class Error {
 
-    msg: String;
+    public msg: String;
 
     public constructor(msg: string) {
+        console.log(msg);
         this.msg = msg;
     }
 }
