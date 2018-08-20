@@ -1,6 +1,7 @@
 <p>
     <a routerLink="/admin/user">Back to list of users</a>
 </p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 <ng-container *ngIf="user != null">
     <form class="needs-validation" novalidate [formGroup]="userForm">
         <fieldSet>

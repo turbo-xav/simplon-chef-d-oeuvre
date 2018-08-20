@@ -4,6 +4,7 @@
 </p>
 
 <p><a routerLink="/admin/user/edit">Add a user</a></p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 <table>
   <thead>
     <tr>      

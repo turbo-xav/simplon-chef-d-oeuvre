@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../../models/role';
+import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-user-edit',
@@ -15,6 +16,8 @@ export class UserEditComponent implements OnInit {
 
   user: User;
   roles: Role[];
+
+  error: string;
 
   userForm: FormGroup;
 
@@ -50,6 +53,9 @@ export class UserEditComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       (roles: Role[]) => {
         this.roles = roles;
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
       }
     );
   }
@@ -100,8 +106,8 @@ export class UserEditComponent implements OnInit {
         () => {
           this.router.navigateByUrl('/admin/user');
         },
-        () => {
-          console.log('error');
+        (response: HttpErrorResponse) => {
+          this.error = response.error;
         }
       );
     }

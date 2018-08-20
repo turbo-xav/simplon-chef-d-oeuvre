@@ -5,6 +5,7 @@
 <p> 
   <a routerLink="/admin/role/edit">Add a role</a>
 </p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 <table>
   <thead>
     <tr>      

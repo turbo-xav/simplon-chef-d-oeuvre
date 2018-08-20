@@ -5,6 +5,8 @@
 
 	<display-name>Spring Web MVC Wiki Digital</display-name>
 
+	
+
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

@@ -32,7 +32,7 @@ public class Role {
 	 * Name of role
 	 */
 	
-    @Column(length=20,unique= true)
+    @Column(length=20 , unique= true)
     private String name;
     
     /**

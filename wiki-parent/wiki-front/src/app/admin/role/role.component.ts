@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
+import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-role',
@@ -10,7 +11,7 @@ import { RoleService } from '../../services/role.service';
 export class RoleComponent implements OnInit {
 
   roles: Role[] = [];
-
+  error: string;
   constructor(private roleService: RoleService ) {
 
   }
@@ -31,6 +32,10 @@ export class RoleComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       (roles: Role[]) => {
         this.roles = roles;
+      },
+      (response: HttpErrorResponse) => {
+        
+        this.error = response.error;
       }
     );
   }

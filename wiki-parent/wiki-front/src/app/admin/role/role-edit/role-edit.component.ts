@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../../models/role';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -52,12 +53,10 @@ export class RoleEditComponent implements OnInit {
     this.error = null;
     if ( this.roleForm.valid ) {
       this.roleService.saveRole(this.role).subscribe(
-        (data) => {
-          console.log('data',data);
+        () => {
           this.router.navigateByUrl('/admin/role');
         },
-        (response) => {
-          console.log(response.error);
+        (response: HttpErrorResponse) => {
           this.error = response.error;
         }
       );
