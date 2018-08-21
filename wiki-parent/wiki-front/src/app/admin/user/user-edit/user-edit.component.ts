@@ -65,7 +65,7 @@ export class UserEditComponent implements OnInit {
     const lastName = new FormControl('', [Validators.required]);
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
-    const userRole = new FormControl('', [Validators.required]);
+    const userRole = new FormControl('', []);
 
     this.userForm = this.fb.group({
       firstName: firstName,

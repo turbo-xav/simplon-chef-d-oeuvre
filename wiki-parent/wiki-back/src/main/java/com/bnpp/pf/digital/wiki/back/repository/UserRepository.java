@@ -3,6 +3,7 @@ package com.bnpp.pf.digital.wiki.back.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.bnpp.pf.digital.wiki.back.entity.User;
 
@@ -16,7 +17,7 @@ import com.bnpp.pf.digital.wiki.back.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
     
 	 
-	
+	@Query("SELECT u FROM User u LEFT OUTER JOIN FETCH u.role r")
 	public List<User> findAll();
 	
 	/**
@@ -25,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
      * @return
      */
     
-	
+	@Query("SELECT u FROM User u LEFT OUTER JOIN FETCH u.role r WHERE u.id = ?")
 	User getById(int id);
     
     /**

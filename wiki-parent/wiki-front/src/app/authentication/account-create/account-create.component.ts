@@ -35,7 +35,7 @@ export class AccountCreateComponent implements OnInit {
     this.user = new User(null, '', '', '', '', '', false, true);
     this.user.role = null;
     this.createFormControls();
-    //this.error = new Error('test');
+    this.noAccount = true;
   }
 
   createFormControls() {
@@ -69,12 +69,12 @@ export class AccountCreateComponent implements OnInit {
   }
 
   save() {
-
+    this.error = null;
     if ( this.userForm.valid ) {
-      this.userService.saveUser(this.user).subscribe(
+      this.userService.createAccount(this.user).subscribe(
         () => {
           this.noAccount = false;
-          //this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;

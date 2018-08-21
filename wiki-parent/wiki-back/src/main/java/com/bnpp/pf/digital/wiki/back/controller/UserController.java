@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.service.IServiceUser;
 import com.bnpp.pf.digital.wiki.back.service.ServiceUser;
 
-@CrossOrigin(origins = {"http://localhost:4200"}, maxAge = 4800, allowCredentials = "false") 
+@CrossOrigin(origins = {"http://localhost:4200","*"}, maxAge = 4800, allowCredentials = "false") 
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -44,9 +45,16 @@ public class UserController {
 	
     private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this user is not possible please verify your datas";
 	
+    
+    private static final String CREATING_ACCOUNT_ERROR_MSG = "creating this account is not possible due to a technical problem. Please retry later";
+	
+	private static final String CREATING_ACCOUNT_INTERITY_ERROR_MSG = "creating this account is not possible please verify if you are not create an exiting account";
+		
+	private static final String CREATING_ACCOUNT_DATA_ACCESS_ERROR_MSG = "creating this account is not possible due to a technical problem. Please retry later";
+	
    
     @Autowired
-    private ServiceUser serviceUser;
+    private IServiceUser serviceUser;
     
     public UserController() {
         
@@ -145,5 +153,28 @@ public class UserController {
         catch(Exception e) {
         	return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
         }
-    }   
+    }
+    
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    
+    @RequestMapping(path="/account", method= RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> createAccount(@RequestBody User user) {
+    	try {
+			serviceUser.createAccount(user);
+        	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
+		} catch (DataIntegrityViolationException e) {
+			return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+        catch(DataAccessException e) {
+        	return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
+        }
+        catch(Exception e) {
+        	return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_ERROR_MSG), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

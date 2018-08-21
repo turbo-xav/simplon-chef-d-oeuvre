@@ -41,7 +41,7 @@ public class User {
     private boolean locked;
     
         
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_role")
     private Role role; 
     

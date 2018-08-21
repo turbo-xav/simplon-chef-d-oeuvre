@@ -11,6 +11,10 @@ export class UserService {
 
   constructor(private http:  HttpClient) { }
 
+  public createAccount(user: User): Observable<User> {
+    return  this.http.post<User>(this.restUrl + '/account', user, httpJsonOptions);
+  }
+
   public saveUser(user: User): Observable<User> {
     if ( user.id != null ) {
       return  this.http.put<User>(this.restUrl, user, httpJsonOptions);

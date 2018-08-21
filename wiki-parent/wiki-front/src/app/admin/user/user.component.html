@@ -12,7 +12,9 @@
       <th>Lastname</th>
       <th>UID</th>
       <th>Mail</th>
-      <th>Role</th>
+      <th>Role</th>      
+      <th>Enabled</th>
+      <th>Locked</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +24,8 @@
       <td>{{user.uid}}</td>
       <td>{{user.mail}}</td>
       <td>{{user.role != null ? user.role.name : null}}</td>
+      <td>{{user.enabled === true?'yes':'no'}}</td>
+      <td>{{user.locked === true?'yes':'no'}}</td>
       <td>
         <a href="#" routerLink="/admin/user/edit/{{user.id}}">Edit</a>
         <a (click)="delete(user.id)">Delete</a>

@@ -12,7 +12,7 @@ import com.bnpp.pf.digital.wiki.back.repository.UserRepository;
 
 @Component
 @Transactional
-public class ServiceUser {
+public class ServiceUser implements IServiceUser {
 
     
     @Autowired
@@ -57,5 +57,15 @@ public class ServiceUser {
     public void deleteById(int id) {   
     	userRepository.deleteById(id);
     }
+
+	
+	public User createAccount(User user) {
+		
+		user.setRole(null);
+		user.setEnabled(false);
+		user.setLocked(false);
+		userRepository.save(user);
+		return user;
+	}
       
 }

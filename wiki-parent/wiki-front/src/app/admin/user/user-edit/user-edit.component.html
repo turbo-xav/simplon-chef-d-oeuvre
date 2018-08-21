@@ -12,7 +12,7 @@
           <div class="col-5">
               
             <div class="form-group row">
-                <label class="col-4 col-form-label" for="name">Firstname :</label>
+                <label class="col-4 col-form-label" for="firstName">Firstname :</label>
                 <div class="col-8">
                   <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': firstName.invalid && firstName.dirty, 'is-valid': firstName.valid && firstName.dirty}" formControlName="firstName" placeholder="firstName of user" />
                   <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-feedback">
@@ -22,7 +22,7 @@
             </div>
               
             <div class="form-group row">
-                  <label class="col-4 col-form-label" for="name">Lastname :</label>
+                  <label class="col-4 col-form-label" for="lastName">Lastname :</label>
                   <div class="col-8">
                     <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': lastName.invalid && lastName.dirty, 'is-valid': lastName.valid && lastName.dirty}" formControlName="lastName" placeholder="lastName of user" />
                     <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-feedback">
@@ -32,7 +32,7 @@
             </div>
             
             <div class="form-group row">
-                <label class="col-4 col-form-label" for="name">Mail :</label>
+                <label class="col-4 col-form-label" for="mail">Mail :</label>
                 <div class="col-8">
                   <input type="text" class="form-control" id="mail" [(ngModel)]="user.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}" formControlName="mail" placeholder="mail of user" />
                   <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
@@ -43,7 +43,7 @@
           </div> 
 
           <div class="form-group row">
-              <label class="col-4 col-form-label" for="name">UID :</label>
+              <label class="col-4 col-form-label" for="uid">UID :</label>
               <div class="col-8">
                 <input type="text" class="form-control" id="uid" [(ngModel)]="user.uid" [ngClass]="{'is-invalid': uid.invalid && uid.dirty, 'is-valid': uid.valid && uid.dirty}" formControlName="uid" placeholder="uid of user" />
                 <div *ngIf="uid.invalid && (uid.dirty || uid.touched)" class="invalid-feedback">
@@ -55,7 +55,7 @@
         </div> 
            
         <div class="form-group row">
-          <label class="col-4 col-form-label" for="name">Role :</label>
+          <label class="col-4 col-form-label" for="role">Role :</label>
           <div class="col-8">  
               
             <select *ngIf="user.role !== null" id="role" formControlName="userRole" [(ngModel)]="user.role.id" #roleSelect>
@@ -66,6 +66,20 @@
                     <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
               </select>
           </div>
+        </div>
+       
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="enabled">Enabled :</label>
+            <div class="col-8">
+              <input type="checkbox" class="form-control" id="enabled" [checked]="user.enabled" (change)="user.enabled = !user.enabled" />
+            </div>        
+        </div> 
+
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="locked">Locked :</label>
+            <div class="col-8">
+              <input type="checkbox" class="form-control" id="locked" [checked]="user.locked" (change)="user.locked = !user.locked" />
+            </div>
         </div>
 
         <div class="form-group row">                
