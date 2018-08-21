@@ -21,7 +21,7 @@ import com.bnpp.pf.digital.wiki.back.entity.User;
 import com.bnpp.pf.digital.wiki.back.service.IServiceUser;
 import com.bnpp.pf.digital.wiki.back.service.ServiceUser;
 
-@CrossOrigin(origins = {"http://localhost:4200","*"}, maxAge = 4800, allowCredentials = "false") 
+@CrossOrigin(origins = {"http://localhost:4200","*"}) 
 @RestController
 @RequestMapping("/user")
 public class UserController {

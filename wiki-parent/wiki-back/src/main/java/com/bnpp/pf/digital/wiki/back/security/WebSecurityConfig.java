@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        System.out.println("config");
+    	http.authorizeRequests()
           .antMatchers("/user/**").permitAll()
           .anyRequest().authenticated()
           .and()
