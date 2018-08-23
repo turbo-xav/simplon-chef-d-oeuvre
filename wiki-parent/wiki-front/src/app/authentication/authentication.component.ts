@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-authentication',
@@ -11,6 +13,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class AuthenticationComponent implements OnInit {
 
   profileForm: FormGroup;
+
+  error: string = null;
 
   constructor(private authService: AuthService, private fb: FormBuilder) { }
 
@@ -23,6 +27,11 @@ export class AuthenticationComponent implements OnInit {
   public auth() {
     if ( this.authService.auth('417165', 'password') ) {
       this.user = this.authService.getAuthInfos();
+      Observable.interval(1000).subscribe(x => {
+        if( !this.authService.isAuth()) {
+          this.error = 'you are disconnected, please try to connect';
+        }
+      });
     }
   }
 
