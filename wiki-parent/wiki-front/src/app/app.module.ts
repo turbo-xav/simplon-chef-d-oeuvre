@@ -17,7 +17,7 @@ import { RoleEditComponent } from './admin/role/role-edit/role-edit.component';
 import { UserComponent } from './admin/user/user.component';
 import { UserEditComponent } from './admin/user/user-edit/user-edit.component';
 import { RoleService } from './services/role.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AccountCreateComponent } from './authentication/account-create/account-create.component';
 import { GetPasswordComponent } from './authentication/get-password/get-password.component';
@@ -25,6 +25,14 @@ import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
 import { ErrorComponent } from './authentication/error/error.component';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { ErrorService } from './services/error.service';
+
+const interceptors = [{
+  provide: HTTP_INTERCEPTORS,
+  useClass: ErrorInterceptor,
+  multi: true
+}];
 
 
 @NgModule({
@@ -52,13 +60,14 @@ import { ErrorComponent } from './authentication/error/error.component';
     FormsModule,
     HttpClientModule,
     routing
-    //RouterModule.forRoot( appRoutes, { enableTracing: true }),
   ],
 providers: [
-  AuthService,
-  RoleService,
-  UserService,
-  AuthGuard
+  ErrorService ,
+  AuthService ,
+  RoleService ,
+  UserService ,
+  AuthGuard  ,
+  interceptors
 ],
   bootstrap: [AppComponent]
 })

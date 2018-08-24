@@ -10,14 +10,6 @@ import { GetPasswordComponent } from './authentication/get-password/get-password
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
 
-/*const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
-];*/
-
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
@@ -33,4 +25,4 @@ const appRoutes: Routes = [
 
   ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes/*, { enableTracing: true }*/);

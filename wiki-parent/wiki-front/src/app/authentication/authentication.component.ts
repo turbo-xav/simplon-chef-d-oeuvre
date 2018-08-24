@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,8 @@ export class AuthenticationComponent implements OnInit {
 
   public user: User = null;
 
+  public userSubject:  Subject<User>;
+
   ngOnInit() {
     this.createFormControls();
   }
@@ -28,7 +31,7 @@ export class AuthenticationComponent implements OnInit {
     if ( this.authService.auth('417165', 'password') ) {
       this.user = this.authService.getAuthInfos();
       Observable.interval(1000).subscribe(x => {
-        if( !this.authService.isAuth()) {
+        if ( !this.authService.isAuth()) {
           this.error = 'you are disconnected, please try to connect';
         }
       });
