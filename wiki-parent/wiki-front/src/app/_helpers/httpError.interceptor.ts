@@ -34,19 +34,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         this.errorService.addErrors([`navigator is off line`]);
                     } else if (error.status === 401) {
                         this.errorService.addErrors([`you are not allowed to access`]);
-                        this.authService.logOut();
                     } else if (( error.status === 400 )  && error.error) {
-                        this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
+                        //this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
+                        console.log(error.error);
                     } else if (( error.status === 0 ) ) {
                         this.errorService.addErrors([`Unable to connect to API service`]);
+                        this.authService.logOut();
+                        this.router.navigateByUrl('/');
                     } else {
                         this.errorService.addErrors([`An error has occured please try again`]);
+                        this.authService.logOut();
+                        this.router.navigateByUrl('/');
                     }
                 }
-
-
-                this.authService.logOut();
-                this.router.navigateByUrl('/');
                 // return the error to the method that called it
                 return Observable.throw(error);
             }) as any;

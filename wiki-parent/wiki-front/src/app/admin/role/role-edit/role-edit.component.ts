@@ -38,7 +38,7 @@ export class RoleEditComponent implements OnInit {
   }
 
   createFormControls() {
-    const name = new FormControl('', [Validators.required]);
+    const name = new FormControl('', []);
 
     this.roleForm = this.fb.group({
       name: name
