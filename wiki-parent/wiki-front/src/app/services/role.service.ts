@@ -17,7 +17,6 @@ export class RoleService {
 
 
   constructor(private http:  HttpClient) {
-    
   }
 
   public saveRole(role: Role): Observable<Role> {

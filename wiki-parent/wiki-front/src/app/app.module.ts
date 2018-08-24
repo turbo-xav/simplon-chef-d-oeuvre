@@ -25,12 +25,14 @@ import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
 import { ErrorComponent } from './authentication/error/error.component';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
+// import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ErrorService } from './services/error.service';
+import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
+
 
 const interceptors = [{
   provide: HTTP_INTERCEPTORS,
-  useClass: ErrorInterceptor,
+  useClass: HttpErrorInterceptor,
   multi: true
 }];
 

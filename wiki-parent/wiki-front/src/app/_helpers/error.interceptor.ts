@@ -13,8 +13,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.authService.logOut();
 
-        return next.handle(request).do(() => { }, (response) =>  {
+        return next.handle(request).do( () => { }, (response) =>  {
 
             if (response instanceof HttpErrorResponse) {
 

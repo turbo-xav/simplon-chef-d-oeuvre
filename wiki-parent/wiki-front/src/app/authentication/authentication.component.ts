@@ -17,24 +17,43 @@ export class AuthenticationComponent implements OnInit {
 
   error: string = null;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) { }
-
-  public user: User = null;
-
   public userSubject:  Subject<User>;
+
+  public get user() {
+    const user = this.authService.getAuthInfos();
+    return user;
+  }
+
+  constructor(private authService: AuthService, private fb: FormBuilder) {
+
+  const subject: Subject<User> = authService.getAuthUserSubject();
+   subject.subscribe(
+     (user: User) => {
+        this.error = null;
+        if (user === null) {
+          this.error = 'you have been disconnected, please try to reconnect !';
+          setTimeout(() => {
+            this.error = null;
+          }, 2500 );
+        }
+      }
+   );
+  }
 
   ngOnInit() {
     this.createFormControls();
   }
 
   public auth() {
-    if ( this.authService.auth('417165', 'password') ) {
-      this.user = this.authService.getAuthInfos();
-      Observable.interval(1000).subscribe(x => {
+    if ( !this.authService.auth('417165', 'password') ) {
+      this.error = 'you can\'t connect ';
+      //this.user = this.authService.getAuthInfos();
+
+      /*Observable.interval(1000).subscribe(x => {
         if ( !this.authService.isAuth()) {
           this.error = 'you are disconnected, please try to connect';
         }
-      });
+      });*/
     }
   }
 
@@ -44,7 +63,6 @@ export class AuthenticationComponent implements OnInit {
 
   public logOut() {
     this.authService.logOut();
-    this.user = null;
   }
 
   private createFormControls() {
