@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             if (response instanceof HttpErrorResponse) {
 
-                this.authService.logOut();
+                //this.authService.logOut();
 
                 if ( !navigator.onLine) {
                     this.errorService.addErrors([`navigator is off line`]);

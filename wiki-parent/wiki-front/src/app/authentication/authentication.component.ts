@@ -45,7 +45,10 @@ export class AuthenticationComponent implements OnInit {
   }
 
   public auth() {
-    if ( !this.authService.auth('417165', 'password') ) {
+    if ( !this.authService.auth(
+      this.profileForm.get('login').value     ,
+      this.profileForm.get('password').value  )
+    ) {
       this.error = 'you can\'t connect ';
       //this.user = this.authService.getAuthInfos();
 

@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, ViewChild, OnChanges, DoCheck } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';

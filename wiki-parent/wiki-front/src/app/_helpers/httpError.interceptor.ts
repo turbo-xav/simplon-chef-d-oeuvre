@@ -26,17 +26,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 // intercept the respons error and displace it to the console
                 // console.log('Error Occurred : diconnect user for safety');
                 // console.log(error);
-
+                console.log('status ', error.status);
                 if (error instanceof HttpErrorResponse) {
-
-                    this.authService.logOut();
+                    
+                    //this.authService.logOut();
                     if ( !navigator.onLine) {
                         this.errorService.addErrors([`navigator is off line`]);
                     } else if (error.status === 401) {
                         this.errorService.addErrors([`you are not allowed to access`]);
                     } else if (( error.status === 400 )  && error.error) {
                         //this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
-                        console.log(error.error);
+
+                        this.router.navigateByUrl('/');
                     } else if (( error.status === 0 ) ) {
                         this.errorService.addErrors([`Unable to connect to API service`]);
                         this.authService.logOut();

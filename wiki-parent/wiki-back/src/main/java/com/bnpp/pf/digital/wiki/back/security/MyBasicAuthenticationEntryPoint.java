@@ -2,23 +2,23 @@ package com.bnpp.pf.digital.wiki.back.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;
- 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
- 
+
 @Component
-public class AuthenticationEntryPointImpl extends BasicAuthenticationEntryPoint {
+public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
  
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx)
-            throws IOException, ServletException {
-        System.out.println("commence");
-    	response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName());
+    public void commence
+      (HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx) 
+      throws IOException, ServletException {
+        response.addHeader("WWW-Authenticate", "Basic realm=\"\" + getRealmName() + \"\"");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 401 - " + authEx.getMessage());
@@ -26,9 +26,7 @@ public class AuthenticationEntryPointImpl extends BasicAuthenticationEntryPoint 
  
     @Override
     public void afterPropertiesSet() throws Exception {
-        // RealmName appears in the login window (Firefox).
-        setRealmName("o7planning");
+        setRealmName("Baeldung");
         super.afterPropertiesSet();
     }
- 
 }
