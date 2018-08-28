@@ -1,3 +1,4 @@
+import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     { path: 'admin/user/edit/:id', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'authentication/account/create', component: AccountCreateComponent },
-    { path: 'authentication/get-password', component: GetPasswordComponent }
+    { path: 'authentication/get-password', component: GetPasswordComponent },
+    { path: 'organizationchart', component: OrganizationchartComponent },
 
   ];
 

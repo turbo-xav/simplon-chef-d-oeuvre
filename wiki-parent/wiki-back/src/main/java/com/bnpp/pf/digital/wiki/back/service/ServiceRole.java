@@ -28,21 +28,18 @@ public class ServiceRole implements IServiceRole {
 	 * @see com.bnpp.pf.digital.wiki.back.service.IServiceRole#findAll()
 	 */
     
-    @Override
-	public List<Role> findAll() {
+    public List<Role> findAll() {
         return roleRepository.findAll();
     }
     
    
-    @Override
-	public Role getById(int id) {
+    public Role getById(int id) {
     	Role role = roleRepository.getRoleByIdWithUser(id);
         return role;
     }
     
     
-    @Override
-	@Transactional()
+    @Transactional()
     public Role save(Role role) {       
 			return roleRepository.save(role);		
     }
@@ -51,8 +48,7 @@ public class ServiceRole implements IServiceRole {
 	 * @see com.bnpp.pf.digital.wiki.back.service.IServiceRole#deleteById(int)
 	 */
     
-    @Override
-	public void deleteById(int id) {
+    public void deleteById(int id) {
         Role role = roleRepository.getById(id);
         List<User> users = role.getUsers();
         for(User user: users) {
