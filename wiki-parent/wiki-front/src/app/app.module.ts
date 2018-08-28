@@ -30,6 +30,7 @@ import { ErrorService } from './services/error.service';
 import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { BodyComponent } from './body/body.component';
+import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 
 
 const interceptors = [{
@@ -58,7 +59,8 @@ const interceptors = [{
     GetPasswordComponent,
     HomeComponent,
     ErrorComponent,
-    OrganizationchartComponent
+    OrganizationchartComponent,
+    DiagnosticComponent
   ],
   imports: [
     BrowserModule,

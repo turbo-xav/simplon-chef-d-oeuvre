@@ -1,3 +1,4 @@
+import { GuidelineComponent } from './guideline/guideline.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -10,8 +11,10 @@ import { AccountCreateComponent } from './authentication/account-create/account-
 import { GetPasswordComponent } from './authentication/get-password/get-password.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
+import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 
 const appRoutes: Routes = [
+    { path: '',  redirectTo: 'home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
@@ -24,6 +27,8 @@ const appRoutes: Routes = [
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
     { path: 'organizationchart', component: OrganizationchartComponent },
+    { path: 'guideline', component: GuidelineComponent },
+    { path: 'diagnostic', component: DiagnosticComponent }
 
   ];
 

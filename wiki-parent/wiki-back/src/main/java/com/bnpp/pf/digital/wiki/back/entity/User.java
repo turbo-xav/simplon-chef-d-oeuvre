@@ -1,5 +1,8 @@
 package com.bnpp.pf.digital.wiki.back.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,6 +48,10 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_role")
     private Role role; 
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY)    
+    private List<Guideline> guidelines = new ArrayList<Guideline>();   
     
     public User() {
         
