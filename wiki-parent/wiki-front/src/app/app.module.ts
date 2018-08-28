@@ -28,6 +28,8 @@ import { ErrorComponent } from './authentication/error/error.component';
 // import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ErrorService } from './services/error.service';
 import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
+import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
+import { BodyComponent } from './body/body.component';
 
 
 const interceptors = [{
@@ -41,6 +43,7 @@ const interceptors = [{
   declarations: [
     AppComponent,
     HeaderComponent,
+    BodyComponent,
     GuidelineComponent,
     ArchitectureTeamComponent,
     RefServiceComponent,
@@ -54,7 +57,8 @@ const interceptors = [{
     AccountCreateComponent,
     GetPasswordComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    OrganizationchartComponent
   ],
   imports: [
     BrowserModule,

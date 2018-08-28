@@ -1,4 +1,10 @@
+<div [style.minHeight.vh]="100" fxLayout="column">
+
+
 <app-header></app-header>
 <p *ngFor="let error of errors" class="errorMsg">{{error}}</p>
-<router-outlet></router-outlet>
+<app-body fxFlex="1 0 auto"></app-body>
+<!-- <router-outlet></router-outlet> -->
 <!--<app-footer></app-footer>-->
+
+</div>
