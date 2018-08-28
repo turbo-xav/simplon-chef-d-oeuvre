@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -61,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.exceptionHandling().accessDeniedPage("/rest/auth/access-denied")
 		.and()		
 		.logout().logoutUrl("/rest/auth/logout")
-		.logoutSuccessUrl("/rest/role")
+		.logoutSuccessUrl("/rest/auth/access-denied")
 		.deleteCookies("auth_code", "JSESSIONID")
 		.addLogoutHandler(logoutHandler)
 		.clearAuthentication(true)

@@ -24,8 +24,8 @@ public class AuthController {
 		return user.getUid() + user.getPassword();
 	}
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	@ResponseBody
 	public String login(ModelMap model) {
 		return "login";
 	}
@@ -33,18 +33,21 @@ public class AuthController {
 	@RequestMapping(value="/auth-fail", method = RequestMethod.GET)
 	@ResponseBody
 	public String authFail(HttpServletRequest request, HttpServletResponse response) {
+		       
 		return "authFail";
 	}
 	
 	@RequestMapping(value="/access-denied", method = RequestMethod.GET)
 	@ResponseBody
 	public String accessDenied(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		return "accessDenied";
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	@ResponseBody
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		
 		return "logout";		
 	}
 	

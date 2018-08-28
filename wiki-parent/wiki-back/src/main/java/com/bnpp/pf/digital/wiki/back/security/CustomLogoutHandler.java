@@ -1,6 +1,8 @@
 package com.bnpp.pf.digital.wiki.back.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,17 +20,11 @@ import org.springframework.security.web.authentication.rememberme.AbstractRememb
 import org.springframework.stereotype.Component;
 @Component
 public class CustomLogoutHandler implements LogoutHandler  {
-
 	
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
-		
-		 HttpSession session = request.getSession();
-		 session.invalidate();
-	    
-		
-	}
-	
+		request.getSession().invalidate();
+	}	
 	
 } 
