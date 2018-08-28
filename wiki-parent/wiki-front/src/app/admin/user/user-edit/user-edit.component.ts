@@ -19,6 +19,7 @@ export class UserEditComponent implements OnInit {
 
   error: string;
 
+
   userForm: FormGroup;
 
   constructor(
@@ -101,7 +102,7 @@ export class UserEditComponent implements OnInit {
   }
 
   save() {
-    if ( this.userForm.valid ) {
+    //if ( this.userForm.valid ) {
       this.userService.saveUser(this.user).subscribe(
         () => {
           this.router.navigateByUrl('/admin/user');
@@ -110,7 +111,7 @@ export class UserEditComponent implements OnInit {
           this.error = response.error;
         }
       );
-    }
+   // }
   }
 
 }

@@ -36,8 +36,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         this.errorService.addErrors([`you are not allowed to access`]);
                     } else if (( error.status === 400 )  && error.error) {
                         //this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
-
-                        this.router.navigateByUrl('/');
+                        //this.router.navigateByUrl('/');
                     } else if (( error.status === 0 ) ) {
                         this.errorService.addErrors([`Unable to connect to API service`]);
                         this.authService.logOut();

@@ -102,5 +102,14 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String toString() {
+		String	str =	" User : ";
+				str +=	"\n id : "+ getId();
+				str +=	"\n name : "+ getName();
+				
+		return str;
+		
+	}
 
 }

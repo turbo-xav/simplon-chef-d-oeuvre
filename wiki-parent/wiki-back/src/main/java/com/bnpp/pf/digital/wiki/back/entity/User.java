@@ -23,6 +23,7 @@ public class User {
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)    
     private int id;
+    
     @Column(length=6, unique=true)
     private String uid; 
     
@@ -127,6 +128,19 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public String toString() {
+		String	str =	"User :";
+				str +=	"\n id : "+ getId();
+				str +=	"\n firstName : "+ getFirstName();
+				str +=	"\n lastName : "+ getLastName();
+				str +=	"\n mail : "+ getMail();
+				str +=	"\n password : "+ getPassword();
+				str +=	"\n id : "+ getId();
+				str +=	"\n role : "+ getRole();
+		return str;
+		
 	}
 
 }

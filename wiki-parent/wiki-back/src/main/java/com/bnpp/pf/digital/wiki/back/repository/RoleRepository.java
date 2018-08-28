@@ -18,7 +18,7 @@ import com.bnpp.pf.digital.wiki.back.entity.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer>{
     
 	 
-	@Query("SELECT r FROM Role r LEFT OUTER JOIN FETCH r.users u")
+	@Query("SELECT distinct r FROM Role r LEFT OUTER JOIN FETCH r.users u")
 	public List<Role> findAll();
 	
 	/**

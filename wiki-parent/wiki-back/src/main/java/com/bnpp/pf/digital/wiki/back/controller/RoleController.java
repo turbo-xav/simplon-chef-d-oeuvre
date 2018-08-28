@@ -43,7 +43,7 @@ public class RoleController {
 
 	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this role is not possible please verify your datas";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name or this role";
+	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this role";
 
 	@Autowired
 	private IServiceRole serviceRole;

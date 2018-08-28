@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.entity.User;
 import com.bnpp.pf.digital.wiki.back.service.IServiceUser;
 import com.bnpp.pf.digital.wiki.back.service.ServiceUser;
@@ -51,6 +52,15 @@ public class UserController {
 	private static final String CREATING_ACCOUNT_INTERITY_ERROR_MSG = "creating this account is not possible please verify if you are not create an exiting account";
 		
 	private static final String CREATING_ACCOUNT_DATA_ACCESS_ERROR_MSG = "creating this account is not possible due to a technical problem. Please retry later";
+	
+	private static final String MISSING_UID_ERROR_MSG = "please specify the uid of this user";
+	
+	private static final String MISSING_FIRSTNAME_ERROR_MSG = "please specify the firstName of this user";
+
+	private static final String MISSING_LASTNAME_ERROR_MSG = "please specify the lastName of this user";
+
+	private static final String MISSING_MAIL_ERROR_MSG = "please specify the mail of this user";
+
 	
    
     @Autowired
@@ -118,8 +128,32 @@ public class UserController {
     @RequestMapping(method= RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody User user) {
-    	try {
-			serviceUser.save(user);
+    	try {			
+    		
+    		WikiError wikiError = new WikiError("");
+    		if (user.getUid().isEmpty()) {
+    			wikiError.addError("uid", MISSING_UID_ERROR_MSG);
+    		}
+    		
+    		if (user.getFirstName().isEmpty()) {
+    			wikiError.addError("firstName", MISSING_FIRSTNAME_ERROR_MSG);
+			}
+    		
+    		if (user.getLastName().isEmpty()) {
+    			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
+    		}
+    		
+    		if (user.getMail().isEmpty()) {
+    			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
+			}
+    		
+    		if(wikiError.getErrors().size() > 0) {
+    			wikiError.setMsg("some errors has stopped updating of the user");
+    			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
+    		}
+    		
+    		    		
+    		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -142,7 +176,30 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> insert(@RequestBody User user) {
     	try {
-			serviceUser.save(user);
+    		
+    		WikiError wikiError = new WikiError("");
+    		if (user.getUid().isEmpty()) {
+    			wikiError.addError("uid", MISSING_UID_ERROR_MSG);
+    		}
+    		
+    		if (user.getFirstName().isEmpty()) {
+    			wikiError.addError("firstName", MISSING_FIRSTNAME_ERROR_MSG);
+			}
+    		
+    		if (user.getLastName().isEmpty()) {
+    			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
+    		}
+    		
+    		if (user.getMail().isEmpty()) {
+    			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
+			}
+    		
+    		if(wikiError.getErrors().size() > 0) {
+    			wikiError.setMsg("some errors has stopped updating of the user");
+    			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
+    		}
+    		
+    		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
