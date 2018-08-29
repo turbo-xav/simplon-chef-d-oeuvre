@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,7 @@ export class AuthenticationComponent implements OnInit {
   public userSubject:  Subject<User>;
 
   public get user() {
-    const user = this.authService.getAuthInfos();
+    const user = this.authService.getUser();
     return user;
   }
 
@@ -28,10 +29,8 @@ export class AuthenticationComponent implements OnInit {
   const subject: Subject<User> = authService.getAuthUserSubject();
    subject.subscribe(
      (user: User) => {
-
       this.error = null;
-
-      if (user === null) {
+      if (user == null) {
           this.error = 'you have been disconnected, please try to reconnect !';
           setTimeout(() => { this.error = null; }, 2500 );
         }
@@ -41,11 +40,6 @@ export class AuthenticationComponent implements OnInit {
 
   ngOnInit() {
     this.createFormControls();
-    /*this.authService.tryToConnect().subscribe(
-      (r) => {
-        console.log(r);
-      }
-    );*/
   }
 
   public auth() {
