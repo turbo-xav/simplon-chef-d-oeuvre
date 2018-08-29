@@ -1,6 +1,8 @@
 package com.bnpp.pf.digital.wiki.back.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -53,16 +55,23 @@ public class UserController {
 		
 	private static final String CREATING_ACCOUNT_DATA_ACCESS_ERROR_MSG = "creating this account is not possible due to a technical problem. Please retry later";
 	
-	private static final String MISSING_UID_ERROR_MSG = "please specify the uid of this user";
+	private static final String MISSING_UID_ERROR_MSG = "please specify an uid (ex : 417165)";
 	
-	private static final String MISSING_FIRSTNAME_ERROR_MSG = "please specify the firstName of this user";
+	private static final String MISSING_FIRSTNAME_ERROR_MSG = "please specify a firstName ";
 
-	private static final String MISSING_LASTNAME_ERROR_MSG = "please specify the lastName of this user";
+	private static final String MISSING_LASTNAME_ERROR_MSG = "please specify a lastName";
 
-	private static final String MISSING_MAIL_ERROR_MSG = "please specify the mail of this user";
+	private static final String MISSING_MAIL_ERROR_MSG = "please specify the mail";
 
+	private static final String INVALID_MAIL_ERROR_MSG = "please specify a valid mail adress (ex : jean-pierre.dupond@cetelem.fr)";
 	
-   
+	private static final String BAD_FORMAT_UID_ERROR_MSG = "please specify a correct uid with 6 alpha numeric caracters (ex : 41765a)";
+	
+	
+	private static final String MISSING_PASSWORD_ERROR_MSG = "please specify a password (ex : 41765a)";
+	
+	
+	
     @Autowired
     private IServiceUser serviceUser;
     
@@ -130,31 +139,16 @@ public class UserController {
     public ResponseEntity<?> update(@RequestBody User user) {
     	try {			
     		
-    		WikiError wikiError = new WikiError("");
-    		if (user.getUid().isEmpty()) {
-    			wikiError.addError("uid", MISSING_UID_ERROR_MSG);
-    		}
-    		
-    		if (user.getFirstName().isEmpty()) {
-    			wikiError.addError("firstName", MISSING_FIRSTNAME_ERROR_MSG);
-			}
-    		
-    		if (user.getLastName().isEmpty()) {
-    			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
-    		}
-    		
-    		if (user.getMail().isEmpty()) {
-    			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
-			}
+    		WikiError wikiError = this.checkUserDatas(user);   		
     		
     		if(wikiError.getErrors().size() > 0) {
-    			wikiError.setMsg("some errors has stopped updating of the user");
+    			wikiError.setMsg("some errors has stopped saving of the user");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
-    		}
-    		
-    		    		
+    		}    		
     		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
+        	
+        	
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
@@ -177,30 +171,17 @@ public class UserController {
     public ResponseEntity<?> insert(@RequestBody User user) {
     	try {
     		
-    		WikiError wikiError = new WikiError("");
-    		if (user.getUid().isEmpty()) {
-    			wikiError.addError("uid", MISSING_UID_ERROR_MSG);
-    		}
     		
-    		if (user.getFirstName().isEmpty()) {
-    			wikiError.addError("firstName", MISSING_FIRSTNAME_ERROR_MSG);
-			}
-    		
-    		if (user.getLastName().isEmpty()) {
-    			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
-    		}
-    		
-    		if (user.getMail().isEmpty()) {
-    			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
-			}
+    		WikiError wikiError = this.checkUserDatas(user);   		
     		
     		if(wikiError.getErrors().size() > 0) {
-    			wikiError.setMsg("some errors has stopped updating of the user");
+    			wikiError.setMsg("some errors has stopped saving of the user");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
     		}
     		
     		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
+        	
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
@@ -233,5 +214,38 @@ public class UserController {
         catch(Exception e) {
         	return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_ERROR_MSG), HttpStatus.BAD_REQUEST);
         }
+    }
+    
+    
+    private WikiError checkUserDatas(User user) {
+    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+    	
+    	WikiError wikiError = new WikiError("");
+		if (user.getUid().isEmpty()) {
+			wikiError.addError("uid", MISSING_UID_ERROR_MSG);
+		} else if(!Pattern.compile("^[a-zA-Z0-9]{6}$").matcher(user.getUid()).find()) {
+			wikiError.addError("uid", BAD_FORMAT_UID_ERROR_MSG);
+		}
+		
+		if (user.getFirstName().isEmpty()) {
+			wikiError.addError("firstName", MISSING_FIRSTNAME_ERROR_MSG);
+		}
+		
+		if (user.getLastName().isEmpty()) {
+			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
+		}
+		
+		if (user.getPassword().isEmpty()) {
+			wikiError.addError("password", MISSING_PASSWORD_ERROR_MSG);
+		}
+		
+		if (user.getMail().isEmpty()) {
+			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
+		}
+		else if(!Pattern.compile(EMAIL_PATTERN).matcher(user.getMail()).matches()) {
+			wikiError.addError("mail", INVALID_MAIL_ERROR_MSG);
+		}
+		
+		return wikiError;
     }
 }

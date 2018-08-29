@@ -9,101 +9,116 @@
             <legend>User</legend>
         </fieldSet>
         <div class="row">
-            
-          <div class="col-5">
-              
-            <div class="form-group row">
-                <label class="col-4 col-form-label" for="firstName">Firstname :</label>
-                <div class="col-8">
-                  <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': firstName.invalid && firstName.dirty, 'is-valid': firstName.valid && firstName.dirty}" formControlName="firstName" placeholder="firstName of user" />
-                  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-feedback">
-                      <div *ngIf="firstName.errors.required != null">A name is required for a role.</div>
-                  </div>
-                  <!--<div class="invalid-feedback" *ngIf="error.errors != null && error.errors.firstName != null">
-                       <div>{{ error.errors.firstName}}</div>
-                  </div>-->
-                </div>
-            </div>
-              
-            <div class="form-group row">
-                  <label class="col-4 col-form-label" for="lastName">Lastname :</label>
-                  <div class="col-8">
-                    <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': lastName.invalid && lastName.dirty, 'is-valid': lastName.valid && lastName.dirty}" formControlName="lastName" placeholder="lastName of user" />
-                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-feedback">
-                        <div *ngIf="lastName.errors.required != null">A lastname is required for a user.</div>
+
+            <div class="col-5">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="firstName">Firstname :</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': firstName.invalid && firstName.dirty, 'is-valid': firstName.valid && firstName.dirty}"
+                            formControlName="firstName" placeholder="firstName of user" />
+                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-feedback">
+                            <div *ngIf="firstName.errors.required != null">A name is required for a role.</div>
+                        </div>
+                         <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.firstName != null">{{error.errors.firstName}}</div>-->
+
+
                     </div>
-                    <!--<div class="invalid-feedback" *ngIf="error.errors != null && error.errors.lastName != null">
-                        <div>{{ error.errors.lastName}}</div>                        
-                    </div>-->
-                
-                  </div>
-            </div>
-            
-            <div class="form-group row">
-                <label class="col-4 col-form-label" for="mail">Mail :</label>
-                <div class="col-8">
-                  <input type="text" class="form-control" id="mail" [(ngModel)]="user.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}" formControlName="mail" placeholder="mail of user" />
-                  <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
-                      <div *ngIf="mail.errors.required != null ">A mail is required for a user.</div>
-                      <div *ngIf="mail.errors.email != null">invalid mail adress (ex : jean.dupond@cetelem.fr) </div>
-                  </div>
-                  <!--<div class="invalid-feedback"  *ngIf="error.errors != null && error.errors.mail != null">
-                        <div>{{ error.errors.mail}}</div>
-                    </div>-->
-                
                 </div>
-          </div> 
 
-          <div class="form-group row">
-              <label class="col-4 col-form-label" for="uid">UID :</label>
-              <div class="col-8">
-                <input type="text" class="form-control" id="uid" [(ngModel)]="user.uid" [ngClass]="{'is-invalid': uid.invalid && uid.dirty, 'is-valid': uid.valid && uid.dirty}" formControlName="uid" placeholder="uid of user" />
-                <div *ngIf="uid.invalid && (uid.dirty || uid.touched)" class="invalid-feedback">
-                    <div *ngIf="uid.errors.required != null">An UID is required for a user.</div>
-                    <div *ngIf="uid.errors.minlength != null || uid.errors.maxlength != null">Your UID must contain 6 characters (ex : A23515 or 417165)</div>
-                    <!--<div class="invalid-feedback" *ngIf="error.errors != null && error.errors.uid != null">
-                        <div>{{ error.errors.uid}}</div>
-                    </div>-->
-                
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="lastName">Lastname :</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': lastName.invalid && lastName.dirty, 'is-valid': lastName.valid && lastName.dirty}"
+                            formControlName="lastName" placeholder="lastName of user" />
+                        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-feedback">
+                            <div *ngIf="lastName.errors.required != null">A lastname is required for a user.</div>
+                        </div>
+                         <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.lastName != null">{{error.errors.lastName}}</div>-->
+
+                    </div>
                 </div>
-          </div>
-        </div> 
-           
-        <div class="form-group row">
-          <label class="col-4 col-form-label" for="role">Role :</label>
-          <div class="col-8">  
-              
-            <select *ngIf="user.role !== null" id="role" formControlName="userRole" [(ngModel)]="user.role.id" #roleSelect>
-                  <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
-            </select>
 
-            <select *ngIf="user.role === null" id="role" formControlName="userRole" (change)="changeRole(roleSelect.value)" #roleSelect>
-                    <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
-              </select>
-          </div>
-        </div>
-       
-        <div class="form-group row">
-            <label class="col-4 col-form-label" for="enabled">Enabled :</label>
-            <div class="col-8">
-              <input type="checkbox" class="form-control" id="enabled" [checked]="user.enabled" (change)="user.enabled = !user.enabled" />
-            </div>        
-        </div> 
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="mail">Mail :</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="mail" [(ngModel)]="user.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}"
+                            formControlName="mail" placeholder="mail of user" />
+                        <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
+                            <div *ngIf="mail.errors.required != null ">A mail is required for a user.</div>
+                            <div *ngIf="mail.errors.email != null">invalid mail adress (ex : jean.dupond@cetelem.fr) </div>
+                        </div>
+                         <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.mail != null">{{error.errors.mail}}</div>-->
 
-        <div class="form-group row">
-            <label class="col-4 col-form-label" for="locked">Locked :</label>
-            <div class="col-8">
-              <input type="checkbox" class="form-control" id="locked" [checked]="user.locked" (change)="user.locked = !user.locked" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="uid">UID :</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="uid" [(ngModel)]="user.uid" [ngClass]="{'is-invalid': uid.invalid && uid.dirty, 'is-valid': uid.valid && uid.dirty}"
+                            formControlName="uid" placeholder="uid of user" />
+                        <div *ngIf="uid.invalid && (uid.dirty || uid.touched)" class="invalid-feedback">
+                            <div *ngIf="uid.errors.required != null">An UID is required for a user.</div>
+                            <div *ngIf="uid.errors.minlength != null || uid.errors.maxlength != null">Your UID must contain
+                                6 characters (ex : A23515 or 417165)</div>
+                        </div>
+                         <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.uid != null">{{error.errors.uid}}</div>-->
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="password">Password :</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="password" [(ngModel)]="user.password" [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}"
+                            formControlName="password" placeholder="password of user" />
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                            <div *ngIf="password.errors.required != null ">A password is required for a user.</div>
+
+                        </div>
+                        <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.password != null">{{error.errors.password}}</div>-->
+
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="role">Role :</label>
+                    <div class="col-8">
+
+                        <select *ngIf="user.role !== null" id="role" formControlName="userRole" [(ngModel)]="user.role.id" #roleSelect>
+                            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                        </select>
+
+                        <select *ngIf="user.role === null" id="role" formControlName="userRole" (change)="changeRole(roleSelect.value)" #roleSelect>
+                            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="enabled">Enabled :</label>
+                    <div class="col-8">
+                        <input type="checkbox" class="form-control" id="enabled" [checked]="user.enabled" (change)="user.enabled = !user.enabled"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" for="locked">Locked :</label>
+                    <div class="col-8">
+                        <input type="checkbox" class="form-control" id="locked" [checked]="user.locked" (change)="user.locked = !user.locked" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8">
+                        <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+                    </div>
+                </div>
             </div>
+
         </div>
-
-        <div class="form-group row">                
-          <div class="col-8">
-            <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
-          </div>
-        </div> 
-      </div>
-
-        </div>    
     </form>
 </ng-container>

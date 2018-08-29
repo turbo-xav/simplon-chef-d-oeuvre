@@ -29,19 +29,21 @@ export class AuthenticationComponent implements OnInit {
   const subject: Subject<User> = authService.getAuthUserSubject();
    subject.subscribe(
      (user: User) => {
-        this.error = null;
-        if (user === null) {
+
+      this.error = null;
+
+      if (user === null) {
           this.error = 'you have been disconnected, please try to reconnect !';
-          setTimeout(() => {
-            this.error = null;
-          }, 2500 );
+          setTimeout(() => { this.error = null; }, 2500 );
         }
       }
-   );
+    );
   }
 
   ngOnInit() {
+
     this.createFormControls();
+
   }
 
   public auth() {
@@ -50,13 +52,6 @@ export class AuthenticationComponent implements OnInit {
       this.profileForm.get('password').value  )
     ) {
       this.error = 'you can\'t connect ';
-      //this.user = this.authService.getAuthInfos();
-
-      /*Observable.interval(1000).subscribe(x => {
-        if ( !this.authService.isAuth()) {
-          this.error = 'you are disconnected, please try to connect';
-        }
-      });*/
     }
   }
 

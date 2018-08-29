@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../../models/role';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { Error } from '../../../models/error';
 
 @Component({
   selector: 'app-user-edit',
@@ -17,7 +18,7 @@ export class UserEditComponent implements OnInit {
   user: User;
   roles: Role[];
 
-  error: string;
+  error: Error = new Error('');
 
 
   userForm: FormGroup;
@@ -66,14 +67,16 @@ export class UserEditComponent implements OnInit {
     const lastName = new FormControl('', [Validators.required]);
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
+    const password = new FormControl('', [Validators.required]);
     const userRole = new FormControl('', []);
 
     this.userForm = this.fb.group({
-      firstName: firstName,
-      lastName: lastName,
-      mail: mail,
-      uid: uid,
-      userRole: userRole
+      firstName :  firstName  ,
+      lastName  :  lastName   ,
+      mail      :  mail       ,
+      uid       :  uid        ,
+      password  :  password   ,
+      userRole  :  userRole
     });
   }
 
@@ -93,6 +96,10 @@ export class UserEditComponent implements OnInit {
     return this.userForm.get('uid');
   }
 
+  get password() {
+    return this.userForm.get('password');
+  }
+
   get userRole() {
     return this.userForm.get('userRole');
   }
@@ -102,13 +109,14 @@ export class UserEditComponent implements OnInit {
   }
 
   save() {
-    //if ( this.userForm.valid ) {
+    // if ( this.userForm.valid ) {
       this.userService.saveUser(this.user).subscribe(
         () => {
           this.router.navigateByUrl('/admin/user');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;
+          console.log(this.error.errors);
         }
       );
    // }
