@@ -19,7 +19,20 @@ export class AuthService {
     return this.authUserSubject;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+ }
+
+ public tryToConnect() {
+  let headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  headers = headers.append('Authorization', 'Basic ' + btoa('admin:root123'));
+
+  const httpOptions = {
+    headers: headers
+  };
+
+  return this.http.get(this.restUrl, httpOptions);
+ }
 
   public auth(uid: string, password: string): boolean {
 

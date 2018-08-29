@@ -4,8 +4,8 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-	protected Class<?>[] getRootConfigClasses() {
+	/*protected Class<?>[] getRootConfigClasses() {
 		System.out.println("config classes");
 		return new Class[] { MyConfiguration.class };
-	}
+	}*/
 }

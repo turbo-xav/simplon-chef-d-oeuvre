@@ -49,9 +49,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  	.csrf().disable().exceptionHandling()
 	  	.and()
 	  	.authorizeRequests()
-	  	.antMatchers("/**", "/home").permitAll() 
-		//.antMatchers("/rest/role/**").access("hasRole('ADMIN')")
-		//.antMatchers("/rest/user/**").access("hasRole('ADMIN') or hasRole('DBA')")
+	  	.antMatchers("/", "/home").permitAll() 
+		.antMatchers("/rest/role/**").access("hasRole('ADMIN')")
+		.antMatchers("/rest/user/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+		//.antMatchers("/rest/guideline/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
 		.and()
         .httpBasic()
         

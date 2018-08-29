@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
@@ -41,9 +40,12 @@ export class AuthenticationComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createFormControls();
-
+    /*this.authService.tryToConnect().subscribe(
+      (r) => {
+        console.log(r);
+      }
+    );*/
   }
 
   public auth() {
