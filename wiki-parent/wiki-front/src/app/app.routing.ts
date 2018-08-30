@@ -1,3 +1,4 @@
+import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { GuidelineComponent } from './guideline/guideline.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,6 +13,7 @@ import { GetPasswordComponent } from './authentication/get-password/get-password
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
 import { DiagnosticComponent } from './diagnostic/diagnostic.component';
+import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 
 const appRoutes: Routes = [
     { path: '',  redirectTo: 'home', pathMatch: 'full' },
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
     { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
+    { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
+    { path: 'authentication/error/disconnected', component: DisconnectedComponent },
     { path: 'organizationchart', component: OrganizationchartComponent },
     { path: 'guideline', component: GuidelineComponent },
     { path: 'diagnostic', component: DiagnosticComponent }

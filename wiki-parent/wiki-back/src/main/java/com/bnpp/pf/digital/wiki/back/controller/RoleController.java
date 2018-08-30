@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.service.IServiceRole;
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+//@CrossOrigin(origins = { "http://localhost:4200", "*" })
+//@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/role")
 public class RoleController {

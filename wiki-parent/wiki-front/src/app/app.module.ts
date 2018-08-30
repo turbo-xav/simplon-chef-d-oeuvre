@@ -35,6 +35,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { MenuService } from './menu.service';
+import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
+import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 
 
 const interceptors = [{
@@ -64,7 +66,9 @@ const interceptors = [{
     HomeComponent,
     ErrorComponent,
     OrganizationchartComponent,
-    DiagnosticComponent
+    DiagnosticComponent,
+    NotAllowedComponent,
+    DisconnectedComponent
   ],
   imports: [
     BrowserModule,
