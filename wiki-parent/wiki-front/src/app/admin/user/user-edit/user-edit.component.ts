@@ -6,7 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../../models/role';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
-import { Error } from '../../../models/error';
+import { Error } from '../../../models/technical/error';
 
 @Component({
   selector: 'app-user-edit',

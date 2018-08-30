@@ -1,4 +1,4 @@
-<p *ngIf="error != null" class="errorMsg">{{error}}</p>
+<p *ngIf="error" class="errorMsg">{{error}}</p>
 <div *ngIf="user === null; then loginBlock; else userLogOutBlock"></div>
 <ng-template #loginBlock>  
   <div class="row">
