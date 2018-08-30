@@ -21,10 +21,12 @@ body{
 h1{
 	display: table;
 	margin: 5% auto 0;
-	text-transform: uppercase;
-	font-family: 'Anaheim', sans-serif;
-	font-size: 3em;
-	font-weight: 200;
+    text-transform: uppercase;
+    text-align: center;
+	font-style: italic;
+   font-size: 3em;
+    font-weight: bold, 200;
+    color:#5DADE2;
 	text-shadow: 0 1px white, 0 2px black;
 }
 .container{
@@ -47,8 +49,8 @@ h1{
 #carousel figure{
 	display: block;
 	position: absolute;
-	width: 186px;
-	height: 116px;
+	width: 400px;
+	height: 500px;
 	left: 10px;
 	top: 10px;
 	//background: black;
@@ -59,6 +61,10 @@ h1{
 #carousel figure:nth-child(2) { transform: rotateY(120deg) translateZ(288px);}
 #carousel figure:nth-child(3) { transform: rotateY(240deg) translateZ(288px);}
 
+figcaption {
+    text-align: left;
+    caption-side:bottom;
+}
 
 img{
 //	-webkit-filter: grayscale(1);

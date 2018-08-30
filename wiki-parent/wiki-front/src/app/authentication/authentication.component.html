@@ -36,14 +36,12 @@
 </ng-template>
 <ng-template #userLogOutBlock>
   <p *ngIf="user != null">
-    Bienvenue : {{ user.firstName }}  - {{ user.lastName }};
+    Bienvenue : {{ user.firstName }} {{ user.lastName }}
     <br />
-    Vous être {{user.role.name}}
-
+    Vous êtes connecté(e) comme {{user.role.name}} !
   </p>
   <p>
-  
-    <a routerLink="/admin/user">Admin</a>
+      <a routerLink="/admin/user">Admin</a>
   |
   <a (click)="logOut()"><img src="/assets/img/exit.png" alt="disconnect from wiki"/></a>
   </p>

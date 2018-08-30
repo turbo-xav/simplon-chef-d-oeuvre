@@ -1,0 +1,45 @@
+img{
+    height: 2%;
+    width: 2%;
+}
+
+   span {
+     text-align: center;
+     margin-top: 0px;
+     color: rgb(49, 150, 94);
+     font-style: italic;
+     font-Weight: Bold;
+     font-size: 30px;
+   
+   }
+   
+   #titleResponsive {
+    padding-top: 2em;
+       /* text-align: center; */
+       color: rgb(49, 150, 94);
+       font-style: italic;
+       font-Weight: Bold;
+       font-size: 30px;
+   }
+   
+   #fontSize:hover{
+       font-size: 20px;  
+       outline-style:none;
+   }
+   
+   ul {
+       width: 100%;
+       display: flex;
+       justify-content: space-between
+   }
+   
+   li {
+       list-style-type: none;
+   }
+
+   mat-toolbar {
+    background-color: rgb(178, 230, 208);
+    height: 100px;
+    margin-top: 2px;
+   }
+

@@ -31,6 +31,10 @@ import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { BodyComponent } from './body/body.component';
 import { DiagnosticComponent } from './diagnostic/diagnostic.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { MenuService } from './menu.service';
 
 
 const interceptors = [{
@@ -67,6 +71,9 @@ const interceptors = [{
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+   MatToolbarModule,
+   MatMenuModule,
+   MatIconModule,
     routing
   ],
 providers: [
@@ -75,7 +82,8 @@ providers: [
   RoleService ,
   UserService ,
   AuthGuard  ,
-  interceptors
+  interceptors,
+  MenuService
 ],
   bootstrap: [AppComponent]
 })
