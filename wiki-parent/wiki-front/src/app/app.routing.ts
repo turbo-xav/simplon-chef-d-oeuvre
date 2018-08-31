@@ -32,7 +32,8 @@ const appRoutes: Routes = [
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
     { path: 'organizationchart', component: OrganizationchartComponent },
     { path: 'guideline', component: GuidelineComponent },
-    { path: 'diagnostic', component: DiagnosticComponent }
+    { path: 'diagnostic', component: DiagnosticComponent },
+    { path: 'home', component: HomeComponent }
 
   ];
 
