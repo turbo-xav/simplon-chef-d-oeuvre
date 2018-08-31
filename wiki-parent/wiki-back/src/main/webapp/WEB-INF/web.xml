@@ -35,5 +35,14 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- <filter>
+		<filter-name>CORS</filter-name>
+		<filter-class>com.bnpp.pf.digital.wiki.back.security.CORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	        <filter-name>CORS</filter-name>
+	        <url-pattern>/*</url-pattern>
+	</filter-mapping>-->
 
 </web-app>

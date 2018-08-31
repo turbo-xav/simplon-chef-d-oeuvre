@@ -11,7 +11,7 @@ import { AuthInfos } from '../models/auth/authInfos';
 @Injectable()
 export class AuthService {
 
-  private restUrl = restRootUrl + '/auth';
+  private restUrl = 'http://localhost:8080/wiki-back/login';
 
   authUserSubject = new Subject<User>();
 
@@ -27,16 +27,37 @@ export class AuthService {
     const authUser = new User(null, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
     authUser.setRole(new Role(1, 'Admin'));
 
-    this.authUserSubject.next(authUser);
 
-    // Stockage dans le local storage
-    const authInfos: AuthInfos = new AuthInfos();
-    authInfos.user = authUser;
-    const date: Date = new Date();
-    authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
-    sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
+    const params = 'username=' + uid + '&password=' + password;
+    /*const param = new Array();
+    param['username'] = uid;
+    param['password'] = password;*/
 
-    return true;
+    const headers = new HttpHeaders( { 'Content-Type': 'application/x-www-form-urlencoded' });
+
+    this.http.post<any>(this.restUrl, params, { headers })
+      .subscribe(
+        (response) => {
+          console.log('response ', response);
+          this.authUserSubject.next(authUser);
+          // Stockage dans le local storage
+          const authInfos: AuthInfos = new AuthInfos();
+          authInfos.user = authUser;
+          const date: Date = new Date();
+          authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
+          sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
+    }
+    ,
+    (error) => {
+      console.log('error ', error);
+      this.logOut();
+    }
+  );
+  return true;
+  }
+
+  login(): void {
+
   }
 
   isAuth(): boolean {

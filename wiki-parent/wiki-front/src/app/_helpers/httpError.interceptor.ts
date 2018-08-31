@@ -13,26 +13,24 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        // console.log('intercepted request ... ');
 
         // Clone the request to add the new header.
-        const authReq = req.clone({ headers: req.headers.set('headerName', 'headerValue') });
-
-        // console.log('Sending request with new header now ...');
+        //const authReq = req.clone({ headers: req.headers.set('headerName', 'headerValue') });
+        const authReq = req.clone();
+        /*const authReq = req.clone({
+            headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
+          });*/
 
         // send the newly created request
         return next.handle(authReq)
             .catch((error, caught) => {
-                // intercept the respons error and displace it to the console
-                // console.log('Error Occurred : diconnect user for safety');
-                // console.log(error);
                 console.log('status ', error.status);
                 if (error instanceof HttpErrorResponse) {
-                    
                     if ( !navigator.onLine) {
                         this.errorService.addErrors([`navigator is off line`]);
                     } else if (error.status === 401) {
                         this.errorService.addErrors([`you are not allowed to access`]);
+                        this.router.navigateByUrl('/authentication/error/not-allowed');
                     } else if (( error.status === 400 )  && error.error) {
                         //this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
                         //this.router.navigateByUrl('/');
