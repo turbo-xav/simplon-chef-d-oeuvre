@@ -28,7 +28,8 @@ const appRoutes: Routes = [
     { path: 'authentication/get-password', component: GetPasswordComponent },
     { path: 'organizationchart', component: OrganizationchartComponent },
     { path: 'guideline', component: GuidelineComponent },
-    { path: 'diagnostic', component: DiagnosticComponent }
+    { path: 'diagnostic', component: DiagnosticComponent },
+    { path: 'home', component: HomeComponent }
 
   ];
 

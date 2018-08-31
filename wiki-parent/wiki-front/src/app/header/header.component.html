@@ -1,84 +1,52 @@
+<div class="container" class="bg-info">
+  <div class="row">
+    <div class="col-lg-1 col align-self-center">
+      <!--Navbar-->
+      <nav class="navbar navbar-expand{-sm|-md|-lg|-xl} navbar-light bg-info">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar brand -->
+        <!-- <a class="navbar-brand" href="#">Menu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-<mat-toolbar fxLayout="column" fxLayoutAlign="center">
-   
-    <mat-toolbar-row class="align" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" fxHide.xs>
-        <a id="fontSize" *ngFor="let m of menuService.getList('header')" [style.color]="menuService.selectedMenu.name === m.name ? 'pink' : 'grey'"
-          (click)="selectMenu(m, $event)" routerLink="{{m.path}}">
-          {{m.name}}
-      </a>
-      </mat-toolbar-row>
-    <mat-toolbar-row class="toolbar" fxLayoutAlign="space-around" fxHide.xs>
-        <span id="titleResponsive" class="col-md-12" >Wiki Patrimoine Digital France</span>
-     </mat-toolbar-row>
-    <mat-toolbar-row class="align" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-around center" fxHide.xs>
-      <div class="col-xl-9">
-      </div>
-      <div class="col-xl-3" >
-        <app-authentication></app-authentication>
-      </div>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <button mat-icon-button class="col-md-1">
-        <mat-icon>menu</mat-icon>
-      </button>
-           <mat-menu #menu="matMenu">
-        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-          <li>
-             <a mat-list-item routerLink="/guideline">GuideLines </a>
-            <a mat-list-item routerLink="/organizationchart">Organization chart </a>
-            <a mat-list-item routerLink="/diagnostic">Diagnostic </a>
-           </li>
-        </ul>
-      </mat-menu>
-    <!-- </div> -->
-  </mat-toolbar-row>
-   </mat-toolbar>
-<!-- 
-<div class="row">
-    <div class="col-xl-12 navbar navbar-expand-xl navbar-light bg-light">
-      <div class="col-xl-9">
-          <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" routerLink="/">Home page</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/guideline">GuideLines</a>
-              </li>
-             <li class="nav-item">
-                <a class="nav-link" routerLink="/organizationchart">Organization chart</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/diagnostic">Diagnostic</a>
-              </li>
-            </ul>
-            <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="">Acceuil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Guide Line Technique</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Guide Line Fonctionnel</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Architecture Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Référentiel Service</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Etat des Applications</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Infos Pratiques</a>
-          </li>
-        </ul>
-      </div>
-      <div  class="col-xl-3  align">
-           <app-authentication></app-authentication>
-      </div>
+          <!-- Links -->
+          <!-- <ul class="navbar-nav mx-auto">
+                <li class="nav-item active"> -->
+          <a class="nav-link" id="fontSize" *ngFor="let m of menuService.getList('header')" [style.color]="menuService.selectedMenu.name === m.name ? 'pink' : 'black'"
+            (click)="selectMenu(m, $event)" routerLink="{{m.path}}">
+            {{m.name}}</a>
+          <!-- <a class="nav-link" routerLink="/home">Home page <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" routerLink="/guideline">GuideLines <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" routerLink="/organizationchart">Organization chart</a>
+                    <a class="nav-link" routerLink="/diagnostic">Diagnostic</a> -->
+          <!-- </li>
+                </ul>  -->
+          <!-- Links -->
+
+        </div>
+        <!-- Collapsible content -->
+      </nav>
+      <!--/.Navbar-->
     </div>
-  </div> -->
+    <div class="col-lg-8 text-sm-center mx-auto d-none d-sm-block col align-self-center" >
+     
+        <h2 class="text align-self-center">Wiki Patrimoine Digital France</h2>
+     
+    </div>
+    <div class="col-lg-3 col align-self-center">
+      <app-authentication></app-authentication>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
