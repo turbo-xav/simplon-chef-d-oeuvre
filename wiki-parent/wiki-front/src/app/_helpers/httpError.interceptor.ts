@@ -15,25 +15,24 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
 
         // Clone the request to add the new header.
-        //const authReq = req.clone({ headers: req.headers.set('headerName', 'headerValue') });
-        const authReq = req.clone();
-        /*const authReq = req.clone({
-            headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
-          });*/
-
+        // const authReq = req.clone({ headers: req.headers.set('headerName', 'headerValue') });
+        // const authReq = req.clone();
+        const authReq = req.clone({
+            withCredentials: true,
+          });
+        console.log(authReq);
         // send the newly created request
         return next.handle(authReq)
             .catch((error, caught) => {
-                console.log('status ', error.status);
                 if (error instanceof HttpErrorResponse) {
                     if ( !navigator.onLine) {
-                        this.errorService.addErrors([`navigator is off line`]);
+                        this.errorService.addErrors(['navigator is off line']);
                     } else if (error.status === 401) {
-                        this.errorService.addErrors([`you are not allowed to access`]);
+                        this.errorService.addErrors(['you are not connected']);
+                        this.router.navigateByUrl('/authentication/error/disconnected');
+                    }  else if (error.status === 403) {
+                        this.errorService.addErrors(['you are not allowed to acess to this feature']);
                         this.router.navigateByUrl('/authentication/error/not-allowed');
-                    } else if (( error.status === 400 )  && error.error) {
-                        //this.errorService.addErrors(Array.isArray(error.error) ? error.error : [error.error]);
-                        //this.router.navigateByUrl('/');
                     } else if (( error.status === 0 ) ) {
                         this.errorService.addErrors([`Unable to connect to API service`]);
                         this.authService.logOut();

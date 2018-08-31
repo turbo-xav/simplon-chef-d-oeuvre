@@ -3,6 +3,8 @@ package com.bnpp.pf.digital.wiki.back.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,52 +15,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bnpp.pf.digital.wiki.back.entity.User;
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+//@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-	
-	@RequestMapping(value="/auth", method = RequestMethod.POST)
+		
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public String auth(@RequestBody User user) {
-		return user.getUid() + user.getPassword();
+	public void login() {
+		System.out.println("login : " +  getPrincipal());
 	}
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	@ResponseBody
-	public String login(ModelMap model) {
-		return "login";
-	}
-	
-	@RequestMapping(value="/auth-fail", method = RequestMethod.GET)
-	@ResponseBody
-	public String authFail(HttpServletRequest request, HttpServletResponse response) {
-		       
-		return "authFail";
-	}
-	
-	@RequestMapping(value="/access-denied", method = RequestMethod.GET)
-	@ResponseBody
-	public String accessDenied(HttpServletRequest request, HttpServletResponse response) {
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		return "accessDenied";
-	}
-	
+		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	@ResponseBody
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "logout";		
+	public void logout(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("logout success : "+ getPrincipal());
 	}
 	
-	@RequestMapping(value = "/ok", method = RequestMethod.GET)
-	@ResponseBody
-	public String accessDeniedPage(ModelMap model) {
-		return "connected";
-		
-	}
 	
-	/*private String getPrincipal(){
+	private String getPrincipal(){
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -68,5 +44,5 @@ public class AuthController {
 			userName = principal.toString();
 		}
 		return userName;
-	}*/
+	}
 }
