@@ -14,6 +14,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
 import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
+import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
 
 const appRoutes: Routes = [
     { path: '',  redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +33,8 @@ const appRoutes: Routes = [
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
     { path: 'organizationchart', component: OrganizationchartComponent },
     { path: 'guideline', component: GuidelineComponent },
+    { path: 'guideline/edit', component: GuidelineEditComponent },
+    { path: 'guideline/edit/:id', component: GuidelineEditComponent },
     { path: 'diagnostic', component: DiagnosticComponent },
     { path: 'home', component: HomeComponent }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Guideline } from '../models/guideline';
+import { GuidelineService } from '../services/guideline.service';
 
 @Component({
   selector: 'app-guideline',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuidelineComponent implements OnInit {
 
-  constructor() { }
+  guidelines: Guideline[] = [];
+
+  constructor(private guidelineservice: GuidelineService) { }
 
   ngOnInit() {
+    this.loadGuidelines();
   }
+
+  loadGuidelines() {
+    this.guidelineservice.getGuidelines().subscribe(
+      (guidelines: Guideline[]) => {
+        this.guidelines = guidelines;
+      }
+    );
+  }
+
 
 }

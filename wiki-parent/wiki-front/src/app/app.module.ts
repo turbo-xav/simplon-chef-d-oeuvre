@@ -37,6 +37,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MenuService } from './menu.service';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
+import { GuidelineService } from './services/guideline.service';
+import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
 
 
 const interceptors = [{
@@ -68,7 +70,8 @@ const interceptors = [{
     OrganizationchartComponent,
     DiagnosticComponent,
     NotAllowedComponent,
-    DisconnectedComponent
+    DisconnectedComponent,
+    GuidelineEditComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,8 @@ providers: [
   UserService ,
   AuthGuard  ,
   interceptors,
-  MenuService
+  MenuService,
+  GuidelineService
 ],
   bootstrap: [AppComponent]
 })

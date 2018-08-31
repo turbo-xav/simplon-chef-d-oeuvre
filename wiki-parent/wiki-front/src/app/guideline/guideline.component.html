@@ -1,5 +1,28 @@
+<a routerLink="/guideline/edit">+</a>
 <div class="content">
   <h1> Guidelines</h1>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Document file</th>
+          <th>Type</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guideline of guidelines">
+            <td><a routerLink="/guideline/edit/{{guideline.id}}">{{guideline.name}}</a></td>
+            <td>{{guideline.description}}</td>
+            <td>{{guideline.file}}</td>
+            <td>{{guideline.type}}</td>
+            <td><ng-container *ngIf="guideline.user !== null">{{guideline.user.firstName}} {{guideline.user.lastName}}</ng-container></td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
   &nbsp;
   &nbsp;
 </div>
