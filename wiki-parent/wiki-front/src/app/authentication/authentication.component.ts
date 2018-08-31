@@ -24,7 +24,7 @@ export class AuthenticationComponent implements OnInit {
     return user;
   }
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
 
   const subject: Subject<User> = authService.getAuthUserSubject();
    subject.subscribe(
@@ -48,7 +48,9 @@ export class AuthenticationComponent implements OnInit {
       this.profileForm.get('password').value  )
     ) {
       this.error = 'you can\'t connect ';
+      return;
     }
+    this.router.navigateByUrl('/');
   }
 
   public isAuth() {
@@ -57,6 +59,7 @@ export class AuthenticationComponent implements OnInit {
 
   public logOut() {
     this.authService.logOut();
+    this.router.navigateByUrl('/');
   }
 
   private createFormControls() {
