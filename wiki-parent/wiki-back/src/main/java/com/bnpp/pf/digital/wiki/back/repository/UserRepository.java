@@ -28,6 +28,15 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     
 	@Query("SELECT u FROM User u LEFT OUTER JOIN FETCH u.role r WHERE u.id = ?")
 	User getById(int id);
+	
+	/**
+     * 
+     * @param id
+     * @return
+     */
+    
+	@Query("SELECT u FROM User u LEFT OUTER JOIN FETCH u.role r WHERE u.uid = ?")
+	User getByUid(String uid);
     
     /**
      * 

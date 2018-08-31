@@ -11,7 +11,7 @@ import { AuthInfos } from '../models/auth/authInfos';
 @Injectable()
 export class AuthService {
 
-  private restUrl = 'http://localhost:8080/wiki-back/login';
+  private restUrl = 'http://localhost:8080/wiki-back/rest';
 
   authUserSubject = new Subject<User>();
 
@@ -35,10 +35,9 @@ export class AuthService {
 
     const headers = new HttpHeaders( { 'Content-Type': 'application/x-www-form-urlencoded' });
 
-    this.http.post<any>(this.restUrl, params, { headers })
+    this.http.post<any>(this.restUrl + '/login', params, { headers })
       .subscribe(
         (response) => {
-          console.log('response ', response);
           this.authUserSubject.next(authUser);
           // Stockage dans le local storage
           const authInfos: AuthInfos = new AuthInfos();
@@ -101,9 +100,20 @@ export class AuthService {
   }
 
   logOut(): void {
+    if ( sessionStorage.getItem('authInfos') ) {
+      this.http.post(this.restUrl + '/logout', null) 
+      .subscribe(
+        (response) => {
+        sessionStorage.clear();
+        this.authUserSubject.next(this.getUser());
+      }
+    ,
+    (error) => {
+      console.log('error ', error);
+      this.logOut();
+    });
+    }
 
-    sessionStorage.clear();
-    this.authUserSubject.next(this.getUser());
   }
 
 }
