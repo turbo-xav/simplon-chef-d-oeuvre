@@ -39,6 +39,7 @@ import { NotAllowedComponent } from './authentication/error/not-allowed/not-allo
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
 import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
+import { GuidelineDeleteComponent } from './guideline/guideline-delete/guideline-delete.component';
 
 
 const interceptors = [{
@@ -71,7 +72,8 @@ const interceptors = [{
     DiagnosticComponent,
     NotAllowedComponent,
     DisconnectedComponent,
-    GuidelineEditComponent
+    GuidelineEditComponent,
+    GuidelineDeleteComponent
   ],
   imports: [
     BrowserModule,

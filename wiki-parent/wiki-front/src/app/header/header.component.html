@@ -13,24 +13,7 @@
         aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-          <!-- Links -->
-          <!-- <ul class="navbar-nav mx-auto">
-                <li class="nav-item active"> -->
-          <a class="nav-link" id="fontSize" *ngFor="let m of menuService.getList('header')" [style.color]="menuService.selectedMenu.name === m.name ? 'pink' : 'black'"
-            (click)="selectMenu(m, $event)" routerLink="{{m.path}}">
-            {{m.name}}</a>
-          <!-- <a class="nav-link" routerLink="/home">Home page <span class="sr-only">(current)</span></a>
-                    <a class="nav-link" routerLink="/guideline">GuideLines <span class="sr-only">(current)</span></a>
-                    <a class="nav-link" routerLink="/organizationchart">Organization chart</a>
-                    <a class="nav-link" routerLink="/diagnostic">Diagnostic</a> -->
-          <!-- </li>
-                </ul>  -->
-          <!-- Links -->
-
-        </div>
-        <!-- Collapsible content -->
+            <!-- Collapsible content -->
       </nav>
       <!--/.Navbar-->
     </div>
@@ -42,6 +25,18 @@
     <div class="col-lg-2 col align-self-center">
       <app-authentication></app-authentication>
     </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-lg-1 collapse navbar-collapse p-3 mb-2 bg-custom" id="navbarSupportedContent">
+
+    <!-- Links -->
+      <a class="nav-link" id="fontSize" *ngFor="let m of menuService.getList('header')" [style.color]="menuService.selectedMenu.name === m.name ? 'black' : 'grey'"
+      (click)="selectMenu(m, $event)" routerLink="{{m.path}}">
+      {{m.name}}</a>
+    
+    <!-- Links -->
+
   </div>
 </div>
 
