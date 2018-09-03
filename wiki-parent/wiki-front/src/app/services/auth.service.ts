@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Subject } from 'rxjs/Subject';
-import {restRootUrl , httpJsonOptions} from '../config/config';
 import { AuthInfos } from '../models/auth/authInfos';
+import { AppConfig } from '../app.config';
 
 
 
 @Injectable()
 export class AuthService {
 
-  private restUrl = 'http://localhost:8080/wiki-back/rest';
+  private restUrl = AppConfig.settings.apiBack.restUrl;
 
   authUserSubject = new Subject<User>();
 
@@ -101,7 +101,7 @@ export class AuthService {
 
   logOut(): void {
     if ( sessionStorage.getItem('authInfos') ) {
-      this.http.post(this.restUrl + '/logout', null) 
+      this.http.post(this.restUrl + '/logout', null)
       .subscribe(
         (response) => {
         sessionStorage.clear();

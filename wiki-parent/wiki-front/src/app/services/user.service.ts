@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-import {restRootUrl , httpJsonOptions} from '../config/config';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppConfig } from '../app.config';
 
 @Injectable()
 export class UserService {
 
-  restUrl = restRootUrl + '/user';
+  private restUrl = AppConfig.settings.apiBack.restUrl + '/user';
 
   constructor(private http:  HttpClient) { }
 
   public createAccount(user: User): Observable<User> {
-    return  this.http.post<User>(this.restUrl + '/account', user, httpJsonOptions);
+    return  this.http.post<User>(this.restUrl + '/account', user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
   }
 
   public saveUser(user: User): Observable<User> {
     if ( user.id != null ) {
-      return  this.http.put<User>(this.restUrl, user, httpJsonOptions);
+      return  this.http.put<User>(this.restUrl, user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
     } else {
-      return  this.http.post<User>(this.restUrl, user, httpJsonOptions);
+      return  this.http.post<User>(this.restUrl, user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
     }
   }
 

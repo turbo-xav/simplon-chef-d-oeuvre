@@ -47,6 +47,14 @@ const interceptors = [{
   multi: true
 }];
 
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfig } from './app.config';
+import { HttpModule } from '@angular/http';
+
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
+
 
 @NgModule({
   declarations: [
@@ -78,9 +86,10 @@ const interceptors = [{
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-   MatToolbarModule,
-   MatMenuModule,
-   MatIconModule,
+    HttpModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
     routing
   ],
 providers: [
@@ -91,7 +100,11 @@ providers: [
   AuthGuard  ,
   interceptors,
   MenuService,
-  GuidelineService
+  GuidelineService,
+  AppConfig,
+      { provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        deps: [AppConfig], multi: true }
 ],
   bootstrap: [AppComponent]
 })
