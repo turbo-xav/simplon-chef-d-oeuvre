@@ -51,6 +51,7 @@ const interceptors = [{
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './app.config';
 import { HttpModule } from '@angular/http';
+import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -81,7 +82,8 @@ export function initializeApp(appConfig: AppConfig) {
     NotAllowedComponent,
     DisconnectedComponent,
     GuidelineEditComponent,
-    GuidelineDeleteComponent
+    GuidelineDeleteComponent,
+    OrganisationnalChartComponent
   ],
   imports: [
     BrowserModule,

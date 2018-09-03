@@ -101,6 +101,7 @@ export class AuthService {
 
   logOut(): void {
     if ( sessionStorage.getItem('authInfos') ) {
+      sessionStorage.clear();
       this.http.post(this.restUrl + '/logout', null)
       .subscribe(
         (response) => {
@@ -110,7 +111,7 @@ export class AuthService {
     ,
     (error) => {
       console.log('error ', error);
-      this.logOut();
+      //this.logOut();
     });
     }
 

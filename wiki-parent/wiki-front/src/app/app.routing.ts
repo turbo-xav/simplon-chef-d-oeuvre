@@ -1,3 +1,4 @@
+import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { GuidelineComponent } from './guideline/guideline.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'admin/user', component: UserComponent        , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit/:id', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
+    { path: 'admin/organisationnal-chart', component: OrganisationnalChartComponent , canActivate: [AuthGuard]        },
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
     { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
