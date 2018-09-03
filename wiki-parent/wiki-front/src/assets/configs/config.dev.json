@@ -1,0 +1,22 @@
+{
+    "env": {
+        "production": false
+        ,
+        "name": "dev"
+    }
+    ,
+    "logging": {
+        "debug": true
+
+    }
+    ,
+    "apiBack": {
+       "restUrl": "http://localhost:8080/wiki-back/rest"
+       ,
+       "jsonHeaders": 
+        {            
+            "Accept": "application/json" ,
+            "Content-Type": "application/json"            
+        }
+    }
+}
