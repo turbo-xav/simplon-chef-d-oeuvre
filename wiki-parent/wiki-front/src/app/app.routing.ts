@@ -16,6 +16,9 @@ import { ErrorComponent } from './authentication/error/error.component';
 import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
+import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
+import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
+
 
 const appRoutes: Routes = [
     { path: '',  redirectTo: 'home', pathMatch: 'full' },
@@ -29,11 +32,16 @@ const appRoutes: Routes = [
     { path: 'admin/user/edit/:id', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'admin/organisationnal-chart', component: OrganisationnalChartComponent , canActivate: [AuthGuard]        },
+    { path: 'admin/organisationnal-chart/team', component: TeamComponent },
+    { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
+    { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
+
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
     { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
-    { path: 'organizationchart', component: OrganizationchartComponent },
+
+    { path: 'organizationnalchart', component: OrganizationchartComponent },
     { path: 'guideline', component: GuidelineComponent },
     { path: 'guideline/edit', component: GuidelineEditComponent },
     { path: 'guideline/edit/:id', component: GuidelineEditComponent },

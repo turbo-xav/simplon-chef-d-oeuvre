@@ -108,8 +108,10 @@ public class TeamController {
 			if (team.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
+				System.err.println(team);
 				team = serviceTeam.save(team);
-				return new ResponseEntity<Team>(team, HttpStatus.OK);
+				//System.err.println(team);
+				return new ResponseEntity<Integer>(team.getId(), HttpStatus.OK);
 
 			}
 

@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>      
+      <th>Team</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of teams">     
+      <td>{{team.name}}</td>
+      <td>
+        <a href="#" routerLink="/admin/organisationnal-chart/team/edit/{{team.id}}">Edit</a>
+        <a (click)="delete(team.id)">Delete</a>
+    </tr>
+    
+  </tbody>
+</table>

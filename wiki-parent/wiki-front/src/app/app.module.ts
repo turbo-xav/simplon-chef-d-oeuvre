@@ -52,6 +52,9 @@ import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './app.config';
 import { HttpModule } from '@angular/http';
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
+import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
+import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
+import { TeamService } from './services/team.service';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -83,7 +86,9 @@ export function initializeApp(appConfig: AppConfig) {
     DisconnectedComponent,
     GuidelineEditComponent,
     GuidelineDeleteComponent,
-    OrganisationnalChartComponent
+    OrganisationnalChartComponent,
+    TeamComponent,
+    TeamEditComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +110,7 @@ providers: [
   interceptors,
   MenuService,
   GuidelineService,
+  TeamService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,
