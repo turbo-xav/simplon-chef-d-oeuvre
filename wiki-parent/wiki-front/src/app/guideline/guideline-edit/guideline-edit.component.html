@@ -1,3 +1,81 @@
 <p>
-  guideline-edit works!
+  <a routerLink="/guideline">Back to list of guidelines</a>
 </p>
+
+<ng-container *ngIf="guideline != null">
+  <form class="needs-validation" novalidate [formGroup]="guidelineForm">
+    <fieldset>
+      <legend>Add Guideline</legend>
+
+      <div class="row">
+
+        <div class="col-5">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="name">Name of guideline:</label>
+            <div class="col-8">
+
+              <input type="text" class="form-control" id="name" [(ngModel)]="guideline.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}"
+                formControlName="name" placeholder="Name of Guideline" />
+
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+
+                <div *ngIf="name.errors.required != null">A name is required for a guideline.</div>
+              </div>
+              <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.firstName != null">{{error.errors.firstName}}</div>-->
+
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="file"> File of guideline:</label>
+            <div class="col-8">
+              <input type="text" class="form-control" id="file" [(ngModel)]="guideline.file" [ngClass]="{'is-invalid': file.invalid && file.dirty, 'is-valid': file.valid && file.dirty}"
+                formControlName="file" placeholder="File of guideline" />
+              <div *ngIf="file.invalid && (file.dirty || file.touched)" class="invalid-feedback">
+                <div *ngIf="file.errors.required != null">A file is required to add a guideline.</div>
+              </div>
+              <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.firstName != null">{{error.errors.firstName}}</div>-->
+            </div>
+
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="type"> Type of guideline:</label>
+            <div class="col-8">
+              <select id="type" class="form-control" >
+                <option value="functionnal">Functionnal guideline</option>
+                <option value="technical">Technical guideline</option>
+              </select>
+            </div>
+          </div>
+          
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="description"> Description of guideline:</label>
+            <div class="col-8">
+              <!-- <input type="text" class="form-control" id="description" [(ngModel)]="guideline.description" [ngClass]="{'is-invalid': description.invalid && description.dirty, 'is-valid': description.valid && description.dirty}"
+                formControlName="description" placeholder="Description of guideline" /> -->
+                <input type="text" class="form-control" id="description" [(ngModel)]="guideline.description"
+                formControlName="description" placeholder="Description of guideline" />
+              <!-- <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback">
+                <div *ngIf="description.errors.required != null">A description is required for a guideline.</div>
+              </div> -->
+              <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.firstName != null">{{error.errors.firstName}}</div>-->
+           </div>
+          </div>
+        
+          <div class="form-group row">
+            <div class="col-8">
+              <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </fieldset>
+  </form>
+
+</ng-container>

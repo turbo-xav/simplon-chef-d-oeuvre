@@ -19,16 +19,13 @@ public interface GuidelineRepository extends JpaRepository<Guideline, Integer> {
      * @param id
      * @return
      */
-    
-	
-    Guideline getById(int id);
+     Guideline getById(int id);
     
     /**
      * 
      * @param id
      * @return
      */
-    
     @Query("SELECT g FROM Guideline g LEFT OUTER JOIN FETCH g.user u LEFT OUTER JOIN FETCH u.role r WHERE g.id = :id")
     Guideline getGuidelineByIdWithUser(@Param("id") int id);
     
@@ -37,8 +34,7 @@ public interface GuidelineRepository extends JpaRepository<Guideline, Integer> {
      * @param name
      * @return
      */
-    
-    List<Guideline> getByName(String name);
+     List<Guideline> getByName(String name);
     
     
     /**

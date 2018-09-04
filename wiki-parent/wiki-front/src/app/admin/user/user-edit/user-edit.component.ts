@@ -109,7 +109,7 @@ export class UserEditComponent implements OnInit {
   }
 
   save() {
-    // if ( this.userForm.valid ) {
+    if ( this.userForm.valid ) {
       this.userService.saveUser(this.user).subscribe(
         () => {
           this.router.navigateByUrl('/admin/user');
@@ -119,7 +119,7 @@ export class UserEditComponent implements OnInit {
           console.log(this.error.errors);
         }
       );
-   // }
+   }
   }
 
 }

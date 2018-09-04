@@ -11,8 +11,25 @@ export class GuidelineService {
 
   constructor(private http: HttpClient) { }
 
-public getGuidelines(): Observable<Guideline[]> {
- return this.http.get<Guideline[]>(this.restUrl);
-}
+  public saveGuideline(guideline: Guideline): Observable<Guideline> {
+    if (guideline.id != null) {
+      return this.http.put<Guideline>(this.restUrl, guideline);
+    } else {
+      return this.http.post<Guideline>(this.restUrl, guideline);
+    }
+  }
+
+  public getGuidelines(): Observable<Guideline[]> {
+    return this.http.get<Guideline[]>(this.restUrl);
+  }
+
+  public getGuideline(id: number): Observable<Guideline> {
+    return this.http.get<Guideline>(this.restUrl + '/' + id);
+  }
+
+  public deleteGuideline(id: number) {
+    return this.http.delete(this.restUrl + '/' + id);
+  }
 
 }
+
