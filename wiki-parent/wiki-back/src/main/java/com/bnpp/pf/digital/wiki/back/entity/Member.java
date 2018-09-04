@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "wiki_tbl_member")
 public class Member {
@@ -51,6 +53,7 @@ public class Member {
 	 * Function of member
 	 */
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_function")
 	private Function function;

@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "wiki_tbl_team")
 
@@ -40,7 +42,8 @@ public class Team {
 	/**
 	 * sub teams
 	 */
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
 	private List<Team> teams = new ArrayList<Team>();
 
@@ -56,15 +59,16 @@ public class Team {
 	/**
 	 * parent Team
 	 */
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+	private List<Member> members = new ArrayList<Member>();
 
-	@ManyToMany(mappedBy = "team")
-	private Set<Member> members = new HashSet<Member>();
-
-	public Set<Member> getMembers() {
+	public List<Member> getMembers() {
 		return members;
 	}
 
-	public void setMembers(Set<Member> members) {
+	public void setMembers(List<Member> members) {
 		this.members = members;
 	}
 
@@ -110,7 +114,7 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + ", teams=" + teams + ", team=" + team + ", members=" + members
+		return "Team [id=" + id + ", name=" + name + ", teams=" + teams.size() + ", team=" + team + ", members=" + members
 				+ "]";
 	}
 

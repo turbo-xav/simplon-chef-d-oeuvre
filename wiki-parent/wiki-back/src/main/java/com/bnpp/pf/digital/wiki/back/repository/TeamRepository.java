@@ -18,7 +18,11 @@ import com.bnpp.pf.digital.wiki.back.entity.Team;
 public interface TeamRepository extends JpaRepository<Team, Integer>{
     
 	 
-	@Query("SELECT t FROM Team t")
+	
+	@Query("SELECT t FROM Team t "
+			+ " LEFT OUTER JOIN FETCH t.teams ts "
+			+ " LEFT OUTER JOIN FETCH t.team  tp "
+			)
 	public List<Team> findAll();
 	
 	/**
@@ -27,7 +31,12 @@ public interface TeamRepository extends JpaRepository<Team, Integer>{
      * @return
      */
     
-	@Query("SELECT t FROM Team t WHERE t.id = :id")
+	@Query(
+			"SELECT t FROM Team t "
+					+ " LEFT OUTER JOIN FETCH t.teams ts "
+					+ " LEFT OUTER JOIN FETCH t.team  tp "
+					+"WHERE t.id = :id"
+			)
 	Team getById(@Param("id") int id);
 		    
     /**

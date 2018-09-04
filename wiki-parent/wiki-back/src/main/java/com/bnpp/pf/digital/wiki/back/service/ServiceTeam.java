@@ -15,9 +15,7 @@ public class ServiceTeam implements IServiceTeam {
 
     @Autowired
     private TeamRepository teamRepository;
-    
-    
-        
+            
     /* (non-Javadoc)
 	 * @see com.bnpp.pf.digital.wiki.back.service.IServiceRole#findAll()
 	 */
@@ -32,8 +30,8 @@ public class ServiceTeam implements IServiceTeam {
     }
     
     
-    public Team save(Team function) {       
-			return teamRepository.save(function);		
+    public Team save(Team team) {       
+			return teamRepository.save(team);		
     }
     
     /* (non-Javadoc)
