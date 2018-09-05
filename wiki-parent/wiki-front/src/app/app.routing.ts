@@ -1,6 +1,5 @@
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
-import { GuidelineComponent } from './guideline/guideline.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -15,9 +14,10 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
 import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
-import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
 import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
+import { GuidelineComponent } from './admin/guideline/guideline.component';
+import { GuidelineEditComponent } from './admin/guideline/guideline-edit/guideline-edit.component';
 
 
 const appRoutes: Routes = [
@@ -35,6 +35,10 @@ const appRoutes: Routes = [
     { path: 'admin/organisationnal-chart/team', component: TeamComponent },
     { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
     { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
+    { path: 'admin/guideline', component: GuidelineComponent },
+    { path: 'admin/guideline/edit', component: GuidelineEditComponent },
+    { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
+
 
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
@@ -42,9 +46,7 @@ const appRoutes: Routes = [
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
 
     { path: 'organizationnalchart', component: OrganizationchartComponent },
-    { path: 'guideline', component: GuidelineComponent },
-    { path: 'guideline/edit', component: GuidelineEditComponent },
-    { path: 'guideline/edit/:id', component: GuidelineEditComponent },
+
     { path: 'diagnostic', component: DiagnosticComponent },
     { path: 'home', component: HomeComponent }
 

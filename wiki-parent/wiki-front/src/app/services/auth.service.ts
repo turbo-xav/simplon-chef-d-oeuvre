@@ -24,7 +24,7 @@ export class AuthService {
 
   public auth(uid: string, password: string): boolean {
 
-    const authUser = new User(null, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
+    const authUser = new User(1, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
     authUser.setRole(new Role(1, 'Admin'));
 
 

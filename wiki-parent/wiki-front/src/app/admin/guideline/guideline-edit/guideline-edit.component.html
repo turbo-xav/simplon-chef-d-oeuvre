@@ -1,5 +1,5 @@
 <p>
-  <a routerLink="/guideline">Back to list of guidelines</a>
+  <a routerLink="/admin/guideline">Back to list of guidelines</a>
 </p>
 
 <ng-container *ngIf="guideline != null">
@@ -44,28 +44,42 @@
           <div class="form-group row">
             <label class="col-4 col-form-label" for="type"> Type of guideline:</label>
             <div class="col-8">
-              <select id="type" class="form-control" >
+              <select id="type" class="form-control" formControlName="type" [(ngModel)]="guideline.type">
                 <option value="functionnal">Functionnal guideline</option>
                 <option value="technical">Technical guideline</option>
               </select>
             </div>
           </div>
-          
+
 
           <div class="form-group row">
             <label class="col-4 col-form-label" for="description"> Description of guideline:</label>
             <div class="col-8">
-              <!-- <input type="text" class="form-control" id="description" [(ngModel)]="guideline.description" [ngClass]="{'is-invalid': description.invalid && description.dirty, 'is-valid': description.valid && description.dirty}"
-                formControlName="description" placeholder="Description of guideline" /> -->
-                <input type="text" class="form-control" id="description" [(ngModel)]="guideline.description"
-                formControlName="description" placeholder="Description of guideline" />
-              <!-- <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback">
+              <input type="text" class="form-control" id="description" [(ngModel)]="guideline.description"
+                formControlName="description" placeholder="Description of guideline" [ngClass]="{'is-invalid': description.invalid && description.dirty, 'is-valid': description.valid && description.dirty}" />
+              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback">
                 <div *ngIf="description.errors.required != null">A description is required for a guideline.</div>
-              </div> -->
-              <!--<div class="errorMsg" *ngIf="error.errors != null && error.errors.firstName != null">{{error.errors.firstName}}</div>-->
-           </div>
+              </div>
+            </div>
           </div>
-        
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label">Upload guideline:</label>
+            <div class="col-8">
+              <form method="POST" action="uploadFile" enctype="multipart/form-data">
+                <div>
+                  File to upload: <input type="file" name="file">
+                </div>
+                <div>
+                  Name file: <input type="text" name="nameFile" />
+                </div>
+                <div>
+                  Press here to upload the file! <input type="submit" value="Upload">
+                </div>
+              </form>
+            </div>
+          </div>
+
           <div class="form-group row">
             <div class="col-8">
               <button class="btn btn-primary" type="submit" (click)="save()">Save</button>

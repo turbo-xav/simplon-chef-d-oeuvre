@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
-import { GuidelineComponent } from './guideline/guideline.component';
+
 import { ArchitectureTeamComponent } from './architecture-team/architecture-team.component';
 import { RefServiceComponent } from './ref-service/ref-service.component';
 import { FooterComponent } from './footer/footer.component';
@@ -38,8 +38,7 @@ import { MenuService } from './menu.service';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
-import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
-import { GuidelineDeleteComponent } from './guideline/guideline-delete/guideline-delete.component';
+
 
 
 const interceptors = [{
@@ -55,6 +54,8 @@ import { OrganisationnalChartComponent } from './admin/organisationnal-chart/org
 import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
 import { TeamService } from './services/team.service';
+import { GuidelineEditComponent } from './admin/guideline/guideline-edit/guideline-edit.component';
+import { GuidelineComponent } from './admin/guideline/guideline.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -85,7 +86,6 @@ export function initializeApp(appConfig: AppConfig) {
     NotAllowedComponent,
     DisconnectedComponent,
     GuidelineEditComponent,
-    GuidelineDeleteComponent,
     OrganisationnalChartComponent,
     TeamComponent,
     TeamEditComponent

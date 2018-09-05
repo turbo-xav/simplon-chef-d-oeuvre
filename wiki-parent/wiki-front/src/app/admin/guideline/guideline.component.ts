@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Guideline } from '../models/guideline';
-import { GuidelineService } from '../services/guideline.service';
+import { Component, OnInit } from '../../../../node_modules/@angular/core';
+import { Guideline } from '../../models/guideline';
+import { GuidelineService } from '../../services/guideline.service';
+
+
 
 @Component({
   selector: 'app-guideline',
@@ -24,6 +26,12 @@ export class GuidelineComponent implements OnInit {
       }
     );
   }
-
+deleteGuideline(id: number) {
+this.guidelineservice.deleteGuideline(id).subscribe(
+  () => {
+   this.loadGuidelines();
+  }
+);
+}
 
 }

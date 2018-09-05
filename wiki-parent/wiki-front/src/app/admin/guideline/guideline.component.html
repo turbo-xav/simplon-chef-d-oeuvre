@@ -1,0 +1,32 @@
+
+ <h3> Manage the guidelines</h3>
+<a routerLink="/admin/guideline/edit">Add a guideline</a>
+<div class="content">
+ 
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Document file</th>
+          <th>Type</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guideline of guidelines">
+            <td>{{guideline.name}}</td>
+            <td>{{guideline.description}}</td>
+            <td>{{guideline.file}}</td>
+            <td>{{guideline.type}}</td>
+            <td><ng-container *ngIf="guideline.user !== null">{{guideline.user.firstName}} {{guideline.user.lastName}}</ng-container></td>
+            <td><button type="button" routerLink="/guideline/edit/{{guideline.id}}">Update</button></td> 
+            <td><button type="buton" (click)="deleteGuideline(guideline.id)">Delete</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  &nbsp;
+  &nbsp;
+</div>

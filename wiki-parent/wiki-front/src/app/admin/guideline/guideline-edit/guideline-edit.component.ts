@@ -1,12 +1,15 @@
-import { UserService } from './../../services/user.service';
-import { GuidelineService } from './../../services/guideline.service';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { Guideline } from './../../models/guideline';
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
-import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
-import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
-import { Error } from './../../models/technical/error';
+import { Guideline } from '../../../models/guideline';
+import { User } from '../../../models/user';
+import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { GuidelineService } from '../../../services/guideline.service';
+import { UserService } from '../../../services/user.service';
+import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { OnInit, Component } from '../../../../../node_modules/@angular/core';
+import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { Error } from '../../../models/technical/error';
+
+
 
 
 @Component({
@@ -22,6 +25,7 @@ export class GuidelineEditComponent implements OnInit {
   guidelineForm: FormGroup;
 
   constructor(
+    private authService: AuthService,
     private fb: FormBuilder,
     private guidelineService: GuidelineService,
     private userservice: UserService,
@@ -30,6 +34,8 @@ export class GuidelineEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.guideline = new Guideline(null, '', '', '', '');
     const id = this.route.snapshot.paramMap.get('id');
     if (id != null) {
       this.guidelineService.getGuideline(Number(id)).subscribe(
@@ -41,8 +47,6 @@ export class GuidelineEditComponent implements OnInit {
           }
         }
       );
-    } else {
-      this.guideline = new Guideline(null, '', '', '', '');
     }
     this.createFormControls();
   }
@@ -73,12 +77,14 @@ export class GuidelineEditComponent implements OnInit {
   }
 
   get description() {
-    return this.guidelineForm.get('decription');
+    return this.guidelineForm.get('description');
   }
 
   save() {
-   console.log(this.guidelineForm);
+
     if (this.guidelineForm.valid) {
+      const user: User = this.authService.getUser();
+      this.guideline.user = user;
       this.guidelineService.saveGuideline(this.guideline).subscribe(
         () => {
           this.router.navigateByUrl('/guideline');
