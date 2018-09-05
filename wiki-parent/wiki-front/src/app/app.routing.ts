@@ -18,6 +18,11 @@ import { TeamComponent } from './admin/organisationnal-chart/team/team.component
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
 import { GuidelineComponent } from './admin/guideline/guideline.component';
 import { GuidelineEditComponent } from './admin/guideline/guideline-edit/guideline-edit.component';
+import { FonctionComponent } from './admin/organisationnal-chart/fonction/fonction.component';
+import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
+import { MemberComponent } from './admin/organisationnal-chart/member/member.component';
+import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
+
 
 
 const appRoutes: Routes = [
@@ -31,10 +36,22 @@ const appRoutes: Routes = [
     { path: 'admin/user', component: UserComponent        , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit/:id', component: UserEditComponent , canActivate: [AuthGuard]        },
     { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
+
     { path: 'admin/organisationnal-chart', component: OrganisationnalChartComponent , canActivate: [AuthGuard]        },
+
     { path: 'admin/organisationnal-chart/team', component: TeamComponent },
     { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
     { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
+
+    { path: 'admin/organisationnal-chart/function', component: FonctionComponent },
+    { path: 'admin/organisationnal-chart/function/edit', component: FonctionEditComponent },
+    { path: 'admin/organisationnal-chart/function/edit/:id', component: FonctionEditComponent },
+
+    { path: 'admin/organisationnal-chart/member', component: MemberComponent },
+    { path: 'admin/organisationnal-chart/member/edit', component: MemberEditComponent },
+    { path: 'admin/organisationnal-chart/member/edit/:id', component: MemberEditComponent },
+
+
     { path: 'admin/guideline', component: GuidelineComponent },
     { path: 'admin/guideline/edit', component: GuidelineEditComponent },
     { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },

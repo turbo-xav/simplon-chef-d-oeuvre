@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from '../../../models/member';
+import { MemberService } from '../../../services/member.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-member',
@@ -7,9 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberComponent implements OnInit {
 
-  constructor() { }
+  members: Member[] = [];
+  error: Error;
+  constructor(private memberService: MemberService ) {
+
+  }
 
   ngOnInit() {
+    this.loadMembers();
+  }
+
+  delete(id: number) {
+      this.memberService.deleteMember(id).subscribe(
+          () => {
+            this.loadMembers();
+        }
+      );
+  }
+
+  loadMembers() {
+    this.memberService.getMembers().subscribe(
+      (members: Member[]) => {
+        this.members = members;
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
+      }
+    );
   }
 
 }

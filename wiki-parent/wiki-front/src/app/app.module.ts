@@ -62,6 +62,7 @@ import { MemberComponent } from './admin/organisationnal-chart/member/member.com
 import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
 import { FonctionComponent } from './admin/organisationnal-chart/fonction/fonction.component';
 import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
+import { MemberService } from './services/member.service';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -122,6 +123,7 @@ providers: [
   GuidelineService,
   TeamService,
   FonctionService,
+  MemberService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,

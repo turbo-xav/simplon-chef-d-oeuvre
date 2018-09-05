@@ -4,21 +4,22 @@ import { Fonction } from './fonction';
 
 export class Member {
     id: number = null;
-    name: string;
-    fonction: Fonction;
+    firstName: string;
+    lastName: string;
+    mail: string;
+    function: Fonction;
     team: Team;
 
 
-    public constructor(id: number, name: string) {
+    public constructor(id: number) {
         this.id = id;
-        this.name = name;
     }
 
     public setFunction(myFunction: Fonction) {
-        this.fonction = myFunction;
+        this.function = myFunction;
     }
     public getFunction(): Fonction {
-        return this.fonction;
+        return this.function;
     }
 
     public setTeam(team: Team) {

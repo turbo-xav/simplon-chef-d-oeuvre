@@ -1,3 +1,75 @@
 <p>
-  member-edit works!
+  <a routerLink="/admin/organisationnal-chart/member">Back to list of members</a>
 </p>
+<ng-container *ngIf="member != null">
+<form class="needs-validation" novalidate [formGroup]="memberForm">
+<fieldSet>
+  <legend>Member</legend>
+  <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+  <div class="row">
+    <div class="col-5">
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="firtName">FirstName :</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="firstName" [(ngModel)]="member.firstName" [ngClass]="{'is-invalid': firstName.invalid && firstName.dirty, 'is-valid': firstName.valid && firstName.dirty}" formControlName="firstName" placeholder="firstName of Member" />
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-feedback">
+              <div *ngIf="firstName.errors.required">A name is required for a member.</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="lastName">FirstName :</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="lastName" [(ngModel)]="member.lastName" [ngClass]="{'is-invalid': lastName.invalid && lastName.dirty, 'is-valid': lastName.valid && lastName.dirty}" formControlName="lastName" placeholder="lastName of Member" />
+          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-feedback">
+              <div *ngIf="lastName.errors.required">A name is required for a member.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="mail">Mail :</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="mail" [(ngModel)]="member.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}" formControlName="mail" placeholder="mail of Member" />
+          <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
+              <div *ngIf="mail.errors.required">A name is required for a member.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="team">Team :</label>
+        <div class="col-8">
+
+            <select *ngIf="member.team !== null" id="role" formControlName="team" [(ngModel)]="member.team.id" #teamSelect>
+                <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+            </select>
+
+            <select *ngIf="member.team === null" id="role" formControlName="team" (change)="changeTeam(roleSelect.value)" #roleSelect>
+                <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+            </select>
+        </div>       
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label" for="fonction">Function :</label>
+      <div class="col-8">  
+        <select *ngIf="member.function !== null" id="fonction" formControlName="fonction" [(ngModel)]="member.function.id" #fonctionSelect>
+            <option *ngFor="let fonction of fonctions" [value]="fonction.id">{{fonction.name}}</option>
+        </select>
+
+        <select *ngIf="member.function === null" id="fonction" formControlName="fonction" (change)="changeTeam(fonctionSelect.value)" #fonctionSelect>
+            <option *ngFor="let fonction of fonctions" [value]="fonction.id">{{fonction.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    </div>
+    <div class="col-7">
+        <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+    </div>
+  </div>
+</fieldSet>
+</form>
+</ng-container>

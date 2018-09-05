@@ -1,3 +1,33 @@
+<h2>Manage members</h2>
 <p>
-  member works!
+    <a routerLink="/admin/organisationnal-chart/member">Back to manage users</a>
 </p>
+<p> 
+  <a routerLink="/admin/organisationnal-chart/member/edit">Add a member</a>
+</p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+<table>
+  <thead>
+    <tr>      
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Mail</th>
+      <th>Team</th>
+      <th>Function</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let member of members">     
+      <td>{{member.firstName}}</td>
+      <td>{{member.lastName}}</td>
+      <td>{{member.mail}}</td>
+      <td>{{member.team.name}}</td>
+      <td>{{member.function.name}}</td>
+      <td>
+        <a href="#" routerLink="/admin/organisationnal-chart/member/edit/{{member.id}}">Edit</a>
+        <a (click)="delete(member.id)">Delete</a>
+    </tr>
+    
+  </tbody>
+</table>

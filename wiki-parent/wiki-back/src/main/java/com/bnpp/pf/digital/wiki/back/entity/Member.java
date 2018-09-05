@@ -53,7 +53,6 @@ public class Member {
 	 * Function of member
 	 */
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_function")
 	private Function function;
