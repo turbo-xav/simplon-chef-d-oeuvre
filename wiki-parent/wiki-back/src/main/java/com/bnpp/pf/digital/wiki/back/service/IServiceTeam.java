@@ -20,6 +20,17 @@ public interface IServiceTeam {
 	 * @return
 	 */
 	Team getById(int id);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	 
+
+	Team findTopByTeam();
+	
+	
+	List<Team> findSubTeamsFromTopTeam();
 
 	/**
 	 * 
@@ -37,5 +48,6 @@ public interface IServiceTeam {
 	 */
 
 	void deleteById(int id);
-
+	
+	
 }

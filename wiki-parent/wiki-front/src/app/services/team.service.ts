@@ -24,6 +24,15 @@ export class TeamService {
     return this.http.get<Team[]>(this.restUrl);
   }
 
+  public getTopTeam(): Observable<Team> {
+    return this.http.get<Team>(this.restUrl + '/topTeam');
+  }
+
+  public getSubTeamsFromTopTeam(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.restUrl + '/topTeam/subTeams');
+  }
+ 
+
   public getTeam(id: number): Observable<Team> {
     return this.http.get<Team>(this.restUrl + '/' + id);
   }

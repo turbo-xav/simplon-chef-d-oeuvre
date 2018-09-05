@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
@@ -26,7 +25,6 @@ import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
 import { ErrorComponent } from './authentication/error/error.component';
-// import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ErrorService } from './services/error.service';
 import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
@@ -35,11 +33,10 @@ import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
-import { MenuService } from './menu.service';
+import { MenuService } from './services/menu.service';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
-
 
 
 const interceptors = [{

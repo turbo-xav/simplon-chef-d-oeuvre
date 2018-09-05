@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../menu.service';
+import { MenuService } from '../services/menu.service';
 import * as jquery from 'jquery';
 
 

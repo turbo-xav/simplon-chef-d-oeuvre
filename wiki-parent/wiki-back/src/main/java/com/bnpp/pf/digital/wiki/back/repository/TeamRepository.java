@@ -19,7 +19,7 @@ public interface TeamRepository extends JpaRepository<Team, Integer>{
     
 	 
 	
-	@Query("SELECT t FROM Team t "
+	@Query("SELECT distinct t FROM Team t "
 			+ " LEFT OUTER JOIN FETCH t.teams ts "
 			+ " LEFT OUTER JOIN FETCH t.team  tp "
 			)
@@ -38,6 +38,27 @@ public interface TeamRepository extends JpaRepository<Team, Integer>{
 					+"WHERE t.id = :id"
 			)
 	Team getById(@Param("id") int id);
+	
+	/**
+     * 
+     * @param id
+     * @return
+     */
+    
+	Team findTopByTeam(Team team);
+	
+	/**
+     * 
+     * @param id
+     * @return
+     */
+    
+	@Query(
+			"SELECT t FROM Team t "
+					+ " LEFT OUTER JOIN FETCH t.teams ts "
+					+" WHERE ts.team IS NULL"
+			)
+	List<Team> findSubTeamsFromTopTeam();
 		    
     /**
      * 

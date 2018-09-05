@@ -48,5 +48,18 @@ public class ServiceTeam implements IServiceTeam {
     public void deleteById(int id) {
     	teamRepository.deleteById(id);
     }
+
+
+	@Override
+	public Team findTopByTeam() {
+		
+		return teamRepository.findTopByTeam(null);
+	}
+	
+	@Override
+	public List<Team> findSubTeamsFromTopTeam() {
+		
+		return teamRepository.findSubTeamsFromTopTeam();
+	}
       
 }

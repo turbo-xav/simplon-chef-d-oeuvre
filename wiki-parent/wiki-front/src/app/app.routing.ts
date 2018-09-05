@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
 
-    { path: 'organizationnalchart', component: OrganizationchartComponent },
+    { path: 'organisationnal-chart', component: OrganizationchartComponent },
 
     { path: 'diagnostic', component: DiagnosticComponent },
     { path: 'home', component: HomeComponent }

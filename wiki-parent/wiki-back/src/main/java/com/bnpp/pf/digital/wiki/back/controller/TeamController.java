@@ -64,6 +64,34 @@ public class TeamController {
 		}
 
 	}
+	
+	@RequestMapping(path = "/topTeam", method = RequestMethod.GET)
+	@ResponseBody
+	// @Transactional
+	public ResponseEntity<?> getTopTeam() {
+		try {
+			Team team = serviceTeam.findTopByTeam();
+			return new ResponseEntity<Team>(team, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(path = "/topTeam/subTeams", method = RequestMethod.GET)
+	@ResponseBody
+	// @Transactional
+	public ResponseEntity<?> findSubTeamsFromTopTeam() {
+		try {
+			List<Team> teams = serviceTeam.findSubTeamsFromTopTeam();
+			return new ResponseEntity<List<Team>>(teams, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@RequestMapping(path = "{id}", method = RequestMethod.GET)
 	@ResponseBody

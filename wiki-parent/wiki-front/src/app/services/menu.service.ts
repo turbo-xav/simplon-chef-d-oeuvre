@@ -1,4 +1,4 @@
-import { Menu } from './menu';
+import { Menu } from '../models/technical/menu';
 import { Injectable } from '@angular/core';
 
 
@@ -24,7 +24,7 @@ export class MenuService {
       'name': 'Organization chart',
       'description': 'Ca va bientôt fonctionner !!!',
       'position': 'header',
-      'path': '/organizationchart',
+      'path': '/organisationnal-chart',
     },
     {
       'id': 2,

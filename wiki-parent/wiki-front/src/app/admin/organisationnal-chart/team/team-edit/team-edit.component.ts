@@ -20,7 +20,9 @@ export class TeamEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private teamService: TeamService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit() {
+
     const id = this.route.snapshot.paramMap.get('id');
+
     if ( id != null ) {
       this.teamService.getTeam(Number(id)).subscribe(
         (team: Team) => {
@@ -33,6 +35,7 @@ export class TeamEditComponent implements OnInit {
       );
     } else {
       this.team = new Team(null, '');
+      console.log(this.team);
     }
 
     this.createFormControls();
@@ -70,7 +73,7 @@ export class TeamEditComponent implements OnInit {
     this.error = null;
     if ( this.teamForm.valid ) {
 
-      if ( isNaN(this.team.team.id ) ) {
+      if (this.team.team != null && isNaN(this.team.team.id ) ) {
         this.team.team = null;
       }
 

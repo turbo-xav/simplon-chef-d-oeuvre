@@ -12,7 +12,7 @@
       <div class="form-group row">
         <label class="col-4 col-form-label" for="name">Name :</label>
         <div class="col-8">
-          <input type="text" class="form-control" id="name" [(ngModel)]="team.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of Role" />
+          <input type="text" class="form-control" id="name" [(ngModel)]="team.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of team" />
           <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
               <div *ngIf="name.errors.required">A name is required for a team.</div>
           </div>
@@ -20,7 +20,7 @@
       </div> 
 
       <div class="form-group row">
-        <label class="col-4 col-form-label" for="role">Role :</label>
+        <label class="col-4 col-form-label" for="role">Team :</label>
         <div class="col-8">
   
             <select *ngIf="team.team !== null" id="team" formControlName="teamParent" [(ngModel)]="team.team.id" #teamSelect>
