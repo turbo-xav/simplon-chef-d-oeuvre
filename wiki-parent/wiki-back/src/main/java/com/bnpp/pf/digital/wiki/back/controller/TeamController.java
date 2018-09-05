@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.Team;
-import com.bnpp.pf.digital.wiki.back.entity.Team;
-import com.bnpp.pf.digital.wiki.back.service.IServiceTeam;
+import com.bnpp.pf.digital.wiki.back.exception.FunctionnalException;
+import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
 import com.bnpp.pf.digital.wiki.back.service.IServiceTeam;
 
 @RestController
@@ -107,22 +107,22 @@ public class TeamController {
 
 			if (team.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
-			} else {
-				System.err.println(team);
-				team = serviceTeam.save(team);
-				//System.err.println(team);
+			} else {				
+				team = serviceTeam.save(team);				
 				return new ResponseEntity<Integer>(team.getId(), HttpStatus.OK);
-
 			}
 
-		} catch (DataIntegrityViolationException e) {
+		}catch(FunctionnalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}catch(TechnicalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
-
 	}
 
 	/**
@@ -135,19 +135,25 @@ public class TeamController {
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody Team team) {
 		try {
+
 			if (team.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
-			} else {
-				team = serviceTeam.save(team);
-				return new ResponseEntity<Team>(team, HttpStatus.OK);
-
+			} else {				
+				team = serviceTeam.save(team);				
+				return new ResponseEntity<Integer>(team.getId(), HttpStatus.OK);
 			}
-		} catch (DataIntegrityViolationException e) {
+
+		}catch(FunctionnalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}catch(TechnicalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
+		
 	}
 }

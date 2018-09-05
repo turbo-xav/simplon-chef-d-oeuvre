@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "wiki_tbl_function")
 public class Function {
@@ -35,7 +37,7 @@ public class Function {
 	/**
 	 * List of members
 	 */
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "function", fetch = FetchType.LAZY)
 	private List<Member> members = new ArrayList<Member>();
 

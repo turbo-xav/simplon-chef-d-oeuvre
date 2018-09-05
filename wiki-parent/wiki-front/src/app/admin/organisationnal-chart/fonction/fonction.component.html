@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>      
+      <th>Function</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fonctionMember of fonctionsMembers">     
+      <td>{{fonctionMember.name}}</td>
+      <td>
+        <a href="#" routerLink="/admin/organisationnal-chart/function/edit/{{fonctionMember.id}}">Edit</a>
+        <a (click)="delete(fonctionMember.id)">Delete</a>
+    </tr>    
+  </tbody>
+</table>

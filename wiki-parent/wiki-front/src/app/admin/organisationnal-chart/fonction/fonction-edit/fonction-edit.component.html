@@ -1,0 +1,27 @@
+<p>
+  <a routerLink="/admin/organisationnal-chart/function">Back to list of functions</a>
+</p>
+<ng-container *ngIf="fonction != null">
+<form class="needs-validation" novalidate [formGroup]="roleForm">
+<fieldSet>
+  <legend>Role</legend>
+  <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+  <div class="row">
+    <div class="col-5">
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="name">Name :</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="name" [(ngModel)]="fonction.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of Role" />
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+              <div *ngIf="name.errors.required">A name is required for a role.</div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="col-7">
+        <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+    </div>
+  </div>
+</fieldSet>
+</form>
+</ng-container>

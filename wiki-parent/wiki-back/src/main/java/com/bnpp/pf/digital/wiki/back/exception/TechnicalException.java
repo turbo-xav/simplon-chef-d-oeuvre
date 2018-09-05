@@ -3,7 +3,7 @@ package com.bnpp.pf.digital.wiki.back.exception;
 public class TechnicalException extends Exception {
 
 	public static enum TECHNICAL_EXCEPTION_TYPE {
-		DB_ERROR,
+		DB_ERROR			,
 		TECHNICAL_ERROR
 	};
 	

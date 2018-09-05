@@ -21,7 +21,7 @@ import { GuidelineEditComponent } from './admin/guideline/guideline-edit/guideli
 
 
 const appRoutes: Routes = [
-    { path: '',  redirectTo: 'home', pathMatch: 'full' },
+    // { path: '',  redirectTo: 'home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
@@ -38,7 +38,6 @@ const appRoutes: Routes = [
     { path: 'admin/guideline', component: GuidelineComponent },
     { path: 'admin/guideline/edit', component: GuidelineEditComponent },
     { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
-
 
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },
