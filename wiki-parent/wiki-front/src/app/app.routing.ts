@@ -18,10 +18,12 @@ import { DisconnectedComponent } from './authentication/error/disconnected/disco
 import { GuidelineEditComponent } from './guideline/guideline-edit/guideline-edit.component';
 import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
+import { FonctionComponent } from './admin/organisationnal-chart/fonction/fonction.component';
+import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
 
 
 const appRoutes: Routes = [
-    { path: '',  redirectTo: 'home', pathMatch: 'full' },
+    // { path: '',  redirectTo: 'home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
@@ -35,6 +37,9 @@ const appRoutes: Routes = [
     { path: 'admin/organisationnal-chart/team', component: TeamComponent },
     { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
     { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
+    { path: 'admin/organisationnal-chart/function', component: FonctionComponent },
+    { path: 'admin/organisationnal-chart/function/edit', component: FonctionEditComponent },
+    { path: 'admin/organisationnal-chart/function/edit/:id', component: FonctionEditComponent },
 
     { path: 'authentication/account/create', component: AccountCreateComponent },
     { path: 'authentication/get-password', component: GetPasswordComponent },

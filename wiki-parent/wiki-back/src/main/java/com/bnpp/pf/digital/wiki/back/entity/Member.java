@@ -54,7 +54,7 @@ public class Member {
 	 */
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_function")
 	private Function function;
 
@@ -63,7 +63,7 @@ public class Member {
 	 * 
 	 */
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_team")
 	private Team team;
 

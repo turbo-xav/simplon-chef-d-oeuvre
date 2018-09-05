@@ -8,6 +8,7 @@
   <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
   <div class="row">
     <div class="col-5">
+      
       <div class="form-group row">
         <label class="col-4 col-form-label" for="name">Name :</label>
         <div class="col-8">
@@ -17,7 +18,27 @@
           </div>
         </div>
       </div> 
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="role">Role :</label>
+        <div class="col-8">
+  
+            <select *ngIf="team.team !== null" id="team" formControlName="teamParent" [(ngModel)]="team.team.id" #teamSelect>
+              <option [value]="null">Choose a team</option>  
+              <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+            </select>
+  
+            <select *ngIf="team.team === null" id="team" formControlName="teamParent" (change)="changeTeam(teamSelect.value)" #teamSelect>
+                <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+            </select>
+        </div>
     </div>
+
+    </div>
+
+   
+
+
     <div class="col-7">
         <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
     </div>

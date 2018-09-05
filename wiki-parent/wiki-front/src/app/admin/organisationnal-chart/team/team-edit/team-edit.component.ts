@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class TeamEditComponent implements OnInit {
 
   team: Team;
+  teams: Team[];
   error: Error;
   teamForm: FormGroup;
 
@@ -35,13 +36,24 @@ export class TeamEditComponent implements OnInit {
     }
 
     this.createFormControls();
+    this.loadTeams();
+  }
+
+  private loadTeams(): void {
+    this.teamService.getTeams().subscribe(
+      (teams: Team[]) => {
+        this.teams = teams;
+      }
+    );
   }
 
   createFormControls() {
     const name = new FormControl('', [Validators.required]);
+    const teamParent = new FormControl('', []);
 
     this.teamForm = this.fb.group({
-      name: name
+      name: name,
+      teamParent: teamParent
     });
   }
 
@@ -49,9 +61,19 @@ export class TeamEditComponent implements OnInit {
     return this.teamForm.get('name');
   }
 
+  get teamParent() {
+    return this.teamForm.get('teamParent');
+  }
+
   save() {
+
     this.error = null;
     if ( this.teamForm.valid ) {
+
+      if ( isNaN(this.team.team.id ) ) {
+        this.team.team = null;
+      }
+
       this.teamService.saveTeam(this.team).subscribe(
         () => {
           this.router.navigateByUrl('/admin/organisationnal-chart/team');
@@ -61,6 +83,10 @@ export class TeamEditComponent implements OnInit {
         }
       );
     }
+  }
+
+  changeTeam(teamId: number) {
+    this.team.team  = (teamId) ? new Team(teamId, null) : null;
   }
 
 }

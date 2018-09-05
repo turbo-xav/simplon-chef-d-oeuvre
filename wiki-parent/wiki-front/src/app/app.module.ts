@@ -1,3 +1,4 @@
+import { FonctionService } from './services/fonction.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './services/auth.service';
@@ -56,6 +57,11 @@ import { TeamComponent } from './admin/organisationnal-chart/team/team.component
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
 import { TeamService } from './services/team.service';
 
+import { MemberComponent } from './admin/organisationnal-chart/member/member.component';
+import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
+import { FonctionComponent } from './admin/organisationnal-chart/fonction/fonction.component';
+import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
+
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
 }
@@ -88,7 +94,11 @@ export function initializeApp(appConfig: AppConfig) {
     GuidelineDeleteComponent,
     OrganisationnalChartComponent,
     TeamComponent,
-    TeamEditComponent
+    TeamEditComponent,
+    MemberComponent,
+    MemberEditComponent,
+    FonctionComponent,
+    FonctionEditComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +121,7 @@ providers: [
   MenuService,
   GuidelineService,
   TeamService,
+  FonctionService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,

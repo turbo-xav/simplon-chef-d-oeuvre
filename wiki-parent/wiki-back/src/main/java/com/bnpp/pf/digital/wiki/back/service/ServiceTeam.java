@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.pf.digital.wiki.back.entity.Team;
+import com.bnpp.pf.digital.wiki.back.exception.FunctionnalException;
 import com.bnpp.pf.digital.wiki.back.repository.TeamRepository;
 
 @Component
@@ -30,8 +31,14 @@ public class ServiceTeam implements IServiceTeam {
     }
     
     
-    public Team save(Team team) {       
-			return teamRepository.save(team);		
+    public Team save(Team team) throws Exception {       
+		if(team.getTeam() != null) {
+			if(team.getTeam().getId() == team.getId()) {
+				throw new FunctionnalException("you can't create a team wich is own parent");
+			}
+		}
+    	  	
+		return teamRepository.save(team);		
     }
     
     /* (non-Javadoc)
