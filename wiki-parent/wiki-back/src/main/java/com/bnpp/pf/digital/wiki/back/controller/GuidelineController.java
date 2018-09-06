@@ -1,11 +1,13 @@
 package com.bnpp.pf.digital.wiki.back.controller;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -113,7 +115,7 @@ public class GuidelineController {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
 				guideline = serviceGuideline.save(guideline);
-				//guideline.getUser().getRole().getId();
+				// guideline.getUser().getRole().getId();
 				return new ResponseEntity<Integer>(guideline.getId(), HttpStatus.OK);
 
 			}
