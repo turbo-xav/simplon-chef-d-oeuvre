@@ -49,6 +49,7 @@ export class MemberEditComponent implements OnInit {
     this.createFormControls();
     this.loadTeams();
     this.loadFonctions();
+    console.log('member : ', this.member);
   }
 
   loadFonctions() {
@@ -122,6 +123,14 @@ export class MemberEditComponent implements OnInit {
         }
       );
     }
+  }
+
+  public changeTeam(teamId: number) {
+    this.member.team = new Team(teamId, '');
+  }
+
+  public changeFunction(functionId: number) {
+    this.member.function = new Fonction(functionId, '');
   }
 
 }

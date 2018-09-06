@@ -1,5 +1,6 @@
+<h2>Role edit</h2>
 <p>
-    <a routerLink="/admin/role">Back to list of roles</a>
+    <a class="btn btn-outline-primary" routerLink="/admin/role"><< Back to list of roles</a>
 </p>
 <ng-container *ngIf="role != null">
 <form class="needs-validation" novalidate [formGroup]="roleForm">
@@ -9,9 +10,10 @@
     <div class="row">
       <div class="col-5">
         <div class="form-group row">
-          <label class="col-4 col-form-label" for="name">Name :</label>
+          <label class="col-4 col-form-label" for="name">Name : (*)</label>
           <div class="col-8">
             <input type="text" class="form-control" id="name" [(ngModel)]="role.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of Role" />
+            <small class="form-text text-muted">Nb : Role will be saved with uppercase transformation</small>
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
                 <div *ngIf="name.errors.required">A name is required for a role.</div>
             </div>
@@ -19,7 +21,7 @@
         </div> 
       </div>
       <div class="col-7">
-          <button class="btn btn-primary" type="submit" (click)="save()">Save</button>
+          <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
       </div>
     </div>
   </fieldSet>

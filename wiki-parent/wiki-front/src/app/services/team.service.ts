@@ -3,6 +3,7 @@ import { AppConfig } from '../app.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Team } from '../models/team';
+import { Member } from '../models/member';
 
 @Injectable()
 export class TeamService {
@@ -31,7 +32,10 @@ export class TeamService {
   public getSubTeamsFromTopTeam(): Observable<Team[]> {
     return this.http.get<Team[]>(this.restUrl + '/topTeam/subTeams');
   }
- 
+
+  public getMembersFromTeam(team: Team ): Observable<Member[]> {
+    return this.http.get<Member[]>(this.restUrl + '/topTeam/subTeams/members/' + team.id);
+  }
 
   public getTeam(id: number): Observable<Team> {
     return this.http.get<Team>(this.restUrl + '/' + id);

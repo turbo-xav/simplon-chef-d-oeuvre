@@ -1,10 +1,13 @@
 
  <h3> Manage the guidelines</h3>
-<a routerLink="/admin/guideline/edit">Add a guideline</a>
-<div class="content">
+<p>
+  <a class="btn btn-outline-primary" routerLink="/admin"><< Back to home admin</a>
+  <a class="btn btn-outline-primary" routerLink="/admin/guideline/edit">Add a guideline</a>
+</p>
+ <div class="content">
  
   <div>
-    <table>
+    <table class="table table-striped table-sm table-bordered table-hover table-responsive">
       <thead>
         <tr>
           <th>Name</th>
@@ -12,6 +15,7 @@
           <th>Document file</th>
           <th>Type</th>
           <th>Author</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -21,8 +25,9 @@
             <td>{{guideline.file}}</td>
             <td>{{guideline.type}}</td>
             <td><ng-container *ngIf="guideline.user !== null">{{guideline.user.firstName}} {{guideline.user.lastName}}</ng-container></td>
-            <td><button type="button" routerLink="/guideline/edit/{{guideline.id}}">Update</button></td> 
-            <td><button type="buton" (click)="deleteGuideline(guideline.id)">Delete</button></td>
+            <td>
+              <a class="btn btn-outline-primary" routerLink="/admin/guideline/edit/{{guideline.id}}" routerLinkActive="router-link-active" >Edit</a>
+              <a class="btn btn-outline-primary" href="#" (click)="deleteGuideline(guideline.id)" routerLinkActive="router-link-active">Delete</a></td>
           </tr>
       </tbody>
     </table>

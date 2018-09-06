@@ -1,13 +1,14 @@
 <h2>Manage roles</h2>
 <p>
-    <a routerLink="/admin/user">Back to manage users</a>
-</p>
-<p> 
-  <a routerLink="/admin/role/edit">Add a role</a>
+  <a class="btn btn-outline-primary" routerLink="/admin/user"><< Back to manage users</a>
+  <a class="btn btn-outline-primary" routerLink="/admin/role/edit">Add a role</a>
 </p>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
-<table>
-  <thead>
+<table class="table table-striped table-sm table-bordered table-hover table-responsive">
+  <caption>
+      <h4>Roles for users</h4>
+  </caption>
+  <thead  class="thead-light">
     <tr>      
       <th>Role</th>
       <th></th>
@@ -17,8 +18,8 @@
     <tr *ngFor="let role of roles">     
       <td>{{role.name}}</td>
       <td>
-        <a href="#" routerLink="/admin/role/edit/{{role.id}}">Edit</a>
-        <a (click)="delete(role.id)">Delete</a>
+        <a class="btn btn-outline-primary" routerLink="/admin/role/edit/{{role.id}}">Edit</a>
+        <a class="btn btn-outline-primary" href="#"  (click)="delete(role.id)">Delete</a>
     </tr>
     
   </tbody>

@@ -3,12 +3,12 @@ import { Fonction } from './fonction';
 
 
 export class Member {
-    id: number = null;
+    id: number;
     firstName: string;
     lastName: string;
     mail: string;
-    function: Fonction;
-    team: Team;
+    function: Fonction = null;
+    team: Team = null;
 
 
     public constructor(id: number) {

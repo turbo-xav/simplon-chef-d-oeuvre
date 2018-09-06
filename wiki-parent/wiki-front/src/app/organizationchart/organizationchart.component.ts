@@ -3,6 +3,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
+import { Member } from '../models/member';
 declare let google: any;
 @Component({
   selector: 'app-organizationchart',
@@ -22,17 +23,34 @@ export class OrganizationchartComponent implements OnInit {
 
     this.teamService.getTopTeam().subscribe(
     (topTeam: Team) => {
+
       this.topTeam = topTeam;
 
-      this.teamService.getSubTeamsFromTopTeam().subscribe(
-        (subTeams: Team[]) => {
-          this.topTeam.teams = subTeams;
-          this.initOrgChart();
-        }
-      );
-    }
-    );
-  }
+      this.teamService.getMembersFromTeam(topTeam).subscribe(
+        (members: Member[]) => {
+          topTeam.members = members;
+
+
+          this.teamService.getSubTeamsFromTopTeam().subscribe(
+            (subTeams: Team[]) => {
+              this.topTeam.teams = subTeams;
+              for ( let i = 0 ; i < subTeams.length ; i++) {
+                this.teamService.getMembersFromTeam(subTeams[i]).subscribe(
+                  (members: Member[]) => {
+                    //subTeams[i].members = members;
+                    subTeams[i].members = members;
+                    console.log('subTeams members :',  subTeams[i]);
+                    this.initOrgChart();
+                }
+              );
+            }
+           }
+          );
+        });
+
+     
+    });
+}
 
   ngOnInit() {
   }
@@ -53,16 +71,51 @@ export class OrganizationchartComponent implements OnInit {
 
 
       const myDatas: any[] = [];
-      if ( topTeam != null ) {
-        myDatas.push([{v: 'Dimitri'							, f: topTeam.name + ' Dimitri  Rorigues - Responsible'}, '', 'Big Boss']);
 
+      if ( topTeam != null ) {
+        //Ajout du Top manager
+        const bigBoss = [
+          {
+            v: topTeam.name							,
+            f: topTeam.name +  ' <br />' + topTeam.members[0].mail + ' : ' + topTeam.members[0].function.name  },
+            '',
+            'Big Boss'];
+        myDatas.push(bigBoss);
+
+        //Ajout des sous équipes
         if ( topTeam.teams.length > 0 ) {
           for ( let i = 0 ; i < topTeam.teams.length ; i++ ) {
-            myDatas.push([{v: topTeam.teams[i].name, f: topTeam.teams[i].name}, 'Dimitri', 'm\en bat les couilles']);
+            const subTeam: Team = topTeam.teams[i];
+            myDatas.push([{v: subTeam.name, f: subTeam.name}, topTeam.name, 'tooltip ?']);
+
+            //Ajout de membres
+            if ( subTeam.members) {
+              if ( subTeam.members.length > 0) {
+                for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
+                  const member = subTeam.members[j];
+
+                  let parent = subTeam.name;
+                  if ( j > 0) {
+                    parent = subTeam.members[j - 1].mail;
+                  }
+                  const memberToAdd = [
+                    {
+                      v: member.mail,
+                      f: member.function.name + ' : <br />' + member.firstName + member.lastName },
+                      parent,
+                      'tooltip ?'
+                    ];
+                  myDatas.push(memberToAdd);
+                }
+              }
+            }
+
           }
+
+
         }
 
-        console.log(myDatas);
+        //console.log(myDatas);
 
         //myDatas.push([{v: 'BE'									    , f: 'Bureau d\'étude'}, topTeam.name, 'm\en bat les couilles']);
         //myDatas.push([{v: 'SquadSouscription'			, f: 'Squad Souscription - Xavier Tagliarino - (Responsible)'}, topTeam.name, '']);

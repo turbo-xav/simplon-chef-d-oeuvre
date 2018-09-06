@@ -30,7 +30,7 @@
       </form>
     </div>
     <div class="col-7">
-      <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid" (click)="auth()">Sign In</button>
+      <button class="btn btn-outline-primary" type="submit" [disabled]="!profileForm.valid" (click)="auth()">Sign In</button>
       or
       <button type="button" class="btn btn-outline-primary" routerLink="authentication/account/create">Sign Up ?</button>
       <a routerLink="/authentication/get-password" class="badge badge-primary">Lost password ?</a>

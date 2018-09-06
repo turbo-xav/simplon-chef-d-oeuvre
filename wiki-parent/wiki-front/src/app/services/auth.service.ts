@@ -24,9 +24,8 @@ export class AuthService {
 
   public auth(uid: string, password: string): boolean {
 
-    const authUser = new User(1, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
-    authUser.setRole(new Role(1, 'Admin'));
-
+    //const authUser = new User(1, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
+    //authUser.setRole(new Role(1, 'Admin'));
 
     const params = 'username=' + uid + '&password=' + password;
     /*const param = new Array();
@@ -38,13 +37,18 @@ export class AuthService {
     this.http.post<any>(this.restUrl + '/login', params, { headers })
       .subscribe(
         (response) => {
+          this.http.get(this.restUrl + '/auth').subscribe(
+         (authUser: User) => {
+          console.log(authUser);
           this.authUserSubject.next(authUser);
-          // Stockage dans le local storage
-          const authInfos: AuthInfos = new AuthInfos();
-          authInfos.user = authUser;
-          const date: Date = new Date();
-          authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
-          sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
+                // Stockage dans le local storage
+                const authInfos: AuthInfos = new AuthInfos();
+                authInfos.user = authUser;
+                const date: Date = new Date();
+                authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
+                sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
+            }
+          );
     }
     ,
     (error) => {
