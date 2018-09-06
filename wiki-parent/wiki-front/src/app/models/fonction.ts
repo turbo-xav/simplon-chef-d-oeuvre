@@ -1,7 +1,7 @@
 import { Member } from './member';
 
 export class Fonction {
-    id: number = null;
+    id: number ;
     name: string;
     members: Member[] = [];
 

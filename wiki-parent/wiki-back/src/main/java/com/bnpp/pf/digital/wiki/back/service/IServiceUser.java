@@ -21,6 +21,15 @@ public interface IServiceUser {
 	 * @return
 	 */
 	User getById(int id);
+	
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	
+	User getByUID(String uid);
+	
 
 	/**
 	 * 

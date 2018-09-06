@@ -1,11 +1,15 @@
 <h2>Manage users</h2>
 <p>
-  <a routerLink="/admin/role">Manage Roles ?</a>
+<a class="btn btn-outline-primary" routerLink="/admin"><< Back to home admin</a>
+<a class="btn btn-outline-primary" routerLink="/admin/role">Manage roles</a>
+<a class="btn btn-outline-primary" routerLink="/admin/user/edit">Add a user</a>
 </p>
-
-<p><a routerLink="/admin/user/edit">Add a user</a></p>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
-<table>
+
+<table class="table table-striped table-sm table-bordered table-hover table-responsive">
+    <caption>
+        <h4>Wiki's users</h4>
+    </caption>
   <thead>
     <tr>      
       <th>Firstname</th>
@@ -15,6 +19,7 @@
       <th>Role</th>      
       <th>Enabled</th>
       <th>Locked</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -27,8 +32,8 @@
       <td>{{user.enabled === true?'yes':'no'}}</td>
       <td>{{user.locked === true?'yes':'no'}}</td>
       <td>
-        <a href="#" routerLink="/admin/user/edit/{{user.id}}">Edit</a>
-        <a (click)="delete(user.id)">Delete</a>
+        <a class="btn btn-outline-primary"  routerLink="/admin/user/edit/{{user.id}}">Edit</a>
+        <a class="btn btn-outline-primary" href="#" (click)="delete(user.id)">Delete</a>
     </tr>    
   </tbody>
 </table>

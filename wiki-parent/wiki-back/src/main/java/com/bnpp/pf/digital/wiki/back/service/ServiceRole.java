@@ -41,7 +41,8 @@ public class ServiceRole implements IServiceRole {
     
     @Transactional()
     public Role save(Role role) {       
-			return roleRepository.save(role);		
+    	role.setName(role.getName().toUpperCase());	
+    	return roleRepository.save(role);		
     }
     
     /* (non-Javadoc)

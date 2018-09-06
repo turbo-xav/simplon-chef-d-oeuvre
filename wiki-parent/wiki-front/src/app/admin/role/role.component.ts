@@ -3,6 +3,7 @@ import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
 import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 
+
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',

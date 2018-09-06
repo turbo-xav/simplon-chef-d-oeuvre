@@ -67,5 +67,10 @@ public class ServiceUser implements IServiceUser {
 		userRepository.save(user);
 		return user;
 	}
+
+	@Override
+	public User getByUID(String uid) {
+		return userRepository.getByUid(uid);
+	}
       
 }

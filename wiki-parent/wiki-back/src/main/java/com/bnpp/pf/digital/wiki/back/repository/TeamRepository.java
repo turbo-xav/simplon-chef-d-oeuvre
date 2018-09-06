@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.bnpp.pf.digital.wiki.back.entity.Member;
 import com.bnpp.pf.digital.wiki.back.entity.Team;
 
 /**
@@ -31,11 +32,10 @@ public interface TeamRepository extends JpaRepository<Team, Integer>{
      * @return
      */
     
-	@Query(
-			"SELECT t FROM Team t "
-					+ " LEFT OUTER JOIN FETCH t.teams ts "
-					+ " LEFT OUTER JOIN FETCH t.team  tp "
-					+"WHERE t.id = :id"
+	@Query("SELECT t FROM Team t "
+			+ " LEFT OUTER JOIN FETCH t.teams ts "
+			+ " LEFT OUTER JOIN FETCH t.team  tp "
+			+ " WHERE t.id = :id"
 			)
 	Team getById(@Param("id") int id);
 	
@@ -46,6 +46,9 @@ public interface TeamRepository extends JpaRepository<Team, Integer>{
      */
     
 	Team findTopByTeam(Team team);
+	
+	@Query("SELECT m FROM Member m WHERE m.team.id = :teamId ")
+	List<Member> findMembersByTeam(@Param("teamId") int teamId);
 	
 	/**
      * 

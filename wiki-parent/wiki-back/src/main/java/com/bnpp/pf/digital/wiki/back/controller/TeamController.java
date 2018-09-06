@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.pf.digital.wiki.back.entity.Member;
 import com.bnpp.pf.digital.wiki.back.entity.Team;
 import com.bnpp.pf.digital.wiki.back.exception.FunctionnalException;
 import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
@@ -79,6 +80,8 @@ public class TeamController {
 		}
 	}
 	
+	
+	
 	@RequestMapping(path = "/topTeam/subTeams", method = RequestMethod.GET)
 	@ResponseBody
 	// @Transactional
@@ -86,6 +89,20 @@ public class TeamController {
 		try {
 			List<Team> teams = serviceTeam.findSubTeamsFromTopTeam();
 			return new ResponseEntity<List<Team>>(teams, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(path = "/topTeam/subTeams/members/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	// @Transactional
+	public ResponseEntity<?> findSubTeamsMembers(@PathVariable("id") int teamId) {
+		try {
+			List<Member> members = serviceTeam.findMembersByTeam(teamId);
+			return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
@@ -149,6 +166,7 @@ public class TeamController {
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}

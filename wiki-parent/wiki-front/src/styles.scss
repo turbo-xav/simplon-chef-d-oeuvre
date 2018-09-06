@@ -6,3 +6,15 @@
 #organisation table {
     border-collapse: separate;	
 }
+
+caption {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    color: #868e96;
+    text-align: left;
+    caption-side: top;
+  }
+
+table.table > tbody > tr:hover > td{
+    background-color:#DDDDDD;
+}
