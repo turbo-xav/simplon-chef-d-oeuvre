@@ -4,35 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bnpp.pf.digital.wiki.back.service.FileService;
+import com.bnpp.pf.digital.wiki.back.entity.Guideline;
+import com.bnpp.pf.digital.wiki.back.service.ServiceFileUpload;
 
 @RestController
 public class UploadController {
-	
+
 	@Autowired
-	private FileService fileService;
-	
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	private ServiceFileUpload fileService;
+
+	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
 	@ResponseBody
-	public String uploadFile(@RequestParam("file") MultipartFile multipartFile) {
-		long fileSize = multipartFile.getSize();
-		String fileName = multipartFile.getOriginalFilename();
-		
-		//ModelAndView modelAndView = new ModelAndView("upload-success");
-		if(fileService.saveFile(multipartFile)) {
-		//Map<String, Object> modelMap = new HashMap<>();
-		//modelMap.put("fileName", fileName);
-		//modelMap.put("fileSize", fileSize);
-		//modelAndView.addAllObjects(modelMap);
-		//return modelAndView;
-			return fileName;
-		}
-		
-		return "loupé";
-		//return new ModelAndView("upload-failed");
+	public int uploadFile(/*@RequestPart("guideline") Guideline guideline,*/ @RequestPart("file") MultipartFile file) {
+		// long fileSize = multipartFile.getSize();
+		System.out.println("upload");
+		//System.out.println(monParam);
+		String fileName = file.getOriginalFilename();
+		System.out.println(fileName);
+		//System.out.println(guideline);
+		//if (fileService.saveFile(multipartFile)) {
+			//return fileName;
+		//}
+		return 1;
 	}
 }

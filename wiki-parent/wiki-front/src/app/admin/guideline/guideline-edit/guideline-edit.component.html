@@ -34,7 +34,8 @@
           <div class="form-group row">
             <label class="col-4 col-form-label" for="file"> File of guideline:</label>
             <div class="col-8">
-              <input type="text" class="form-control" id="file" [(ngModel)]="guideline.file" [ngClass]="{'is-invalid': file.invalid && file.dirty, 'is-valid': file.valid && file.dirty}"
+              <input (change)="onFileChanged($event)" type="file" class="form-control" id="file" [(ngModel)]="guideline.file"
+                [ngClass]="{'is-invalid': file.invalid && file.dirty, 'is-valid': file.valid && file.dirty}"
                 formControlName="file" placeholder="File of guideline" />
               <div *ngIf="file.invalid && (file.dirty || file.touched)" class="invalid-feedback">
                 <div *ngIf="file.errors.required != null">A file is required to add a guideline.</div>
@@ -66,22 +67,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label class="col-4 col-form-label">Upload guideline:</label>
-            <div class="col-8">
-              <form method="POST" action="uploadFile" enctype="multipart/form-data">
-                <div>
-                  File to upload: <input type="file" name="file">
-                </div>
-                <div>
-                  Name file: <input type="text" name="nameFile" />
-                </div>
-                <div>
-                  Press here to upload the file! <input type="submit" value="Upload">
-                </div>
-              </form>
-            </div>
-          </div>
+
 
 
           <div class="form-group row">

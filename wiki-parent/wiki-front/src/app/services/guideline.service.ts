@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 import { Guideline } from '../models/guideline';
@@ -29,6 +29,24 @@ export class GuidelineService {
 
   public deleteGuideline(id: number) {
     return this.http.delete(this.restUrl + '/' + id);
+  }
+
+  public upload(file) {
+    console.log(file);
+    
+    //const urlFileUpload = 'https://api.cloudinary.com/v1_1/dfexmhgqi/image/upload';
+    const urlFileUpload = 'http://localhost:8080/wiki-back/rest/upload';
+    const formData = new FormData();
+    formData.append('file', file);
+    //formData.append('monParam', 'xavier is the best');
+    
+   // const guideline = new Guideline(1, 'test', 'file', 'tech', 'desc');
+   // formData.append('guideline', JSON.stringify(guideline));
+
+    const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
+
+    this.http.post(urlFileUpload, formData).subscribe( () => { console.log('upload'); } );
+    //return this.http.post<any>(urlFileUpload, formData).subscribe( () => { console.log('upload'); } );
   }
 
 }

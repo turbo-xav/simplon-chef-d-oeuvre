@@ -54,13 +54,13 @@ export class GuidelineEditComponent implements OnInit {
     const name = new FormControl('', [Validators.required]);
     const file = new FormControl('', [Validators.required]);
     const type = new FormControl('', [Validators.required]);
-   const description = new FormControl('', [Validators.required, Validators.maxLength(120), Validators.minLength(10)]);
+    const description = new FormControl('', [Validators.required, Validators.maxLength(120), Validators.minLength(10)]);
 
 
     this.guidelineForm = this.fb.group({
       name: name,
       file: file,
-      type: type ,
+      type: type,
       description: description
     });
   }
@@ -95,5 +95,9 @@ export class GuidelineEditComponent implements OnInit {
         }
       );
     }
+  }
+
+    public  onFileChanged(event) {
+      this.guidelineService.upload(event.target.files[0]);
   }
 }

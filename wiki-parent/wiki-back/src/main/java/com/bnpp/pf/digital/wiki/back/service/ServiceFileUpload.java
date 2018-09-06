@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service("fileService")
-public class FileService {
+public class ServiceFileUpload {
 
 	public static final String SAVE_LOCATION = "C:/Users/piplo/git/simplon-chef-d-oeuvre/upload/";
 	
@@ -17,13 +17,11 @@ public class FileService {
         String fileName  = multipartFile.getOriginalFilename();
         String location = SAVE_LOCATION;
         File pathFile = new File(location);
-        //check if directory exist, if not, create directory
-        if(!pathFile.exists()){
-            pathFile.mkdir();
-        }
- 
+       
+        
         //create the actual file
-        pathFile = new File(location + fileName);
+        pathFile  = new File(location + fileName);
+     
         //save the actual file
         try {
             multipartFile.transferTo(pathFile);

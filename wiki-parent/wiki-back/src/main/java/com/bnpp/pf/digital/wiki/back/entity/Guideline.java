@@ -105,5 +105,14 @@ public class Guideline {
    	 */
     @Column
     private String type;
+
+
+	@Override
+	public String toString() {
+		return "Guideline [id=" + id + ", name=" + name + ", description=" + description + ", file=" + file + ", user="
+				+ user + ", type=" + type + "]";
+	}
+    
+    
     
 }
