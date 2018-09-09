@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +29,10 @@ public class Server {
 
 	@Column(length = 400, unique = true)
 	private String url;
+	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="fk_server")
+	private Server server;
 
 	// Relation with Applications
 	@JsonIgnore
@@ -67,6 +73,14 @@ public class Server {
 
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
+	}
+	
+	public Server getServer() {
+		return server;
+	}
+
+	public void setServer(Server server) {
+		this.server = server;
 	}
 
 	@Override

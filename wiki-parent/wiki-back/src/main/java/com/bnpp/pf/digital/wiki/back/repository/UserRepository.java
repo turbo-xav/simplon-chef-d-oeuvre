@@ -16,7 +16,7 @@ import com.bnpp.pf.digital.wiki.back.entity.User;
 
 //@Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
-    
+  
 	 
 	@Query("SELECT u FROM User u LEFT OUTER JOIN FETCH u.role r")
 	public List<User> findAll();
