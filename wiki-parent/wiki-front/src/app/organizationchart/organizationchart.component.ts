@@ -1,3 +1,5 @@
+import { MatIconModule } from '@angular/material/icon';
+import { Member } from './../models/member';
 import { Subject } from 'rxjs/Subject';
 import { Subscriber } from 'rxjs/Subscriber';
 import { TeamService } from './../services/team.service';
@@ -13,9 +15,8 @@ declare let google: any;
 export class OrganizationchartComponent implements OnInit {
 
   topTeam: Team;
- 
-  public constructor(private teamService: TeamService) {
 
+  public constructor(private teamService: TeamService) {
     this.loadTeams();
   }
 
@@ -30,37 +31,135 @@ export class OrganizationchartComponent implements OnInit {
         (members: Member[]) => {
           topTeam.members = members;
 
-
           this.teamService.getSubTeamsFromTopTeam().subscribe(
             (subTeams: Team[]) => {
               this.topTeam.teams = subTeams;
               for ( let i = 0 ; i < subTeams.length ; i++) {
                 this.teamService.getMembersFromTeam(subTeams[i]).subscribe(
-                  (members: Member[]) => {
-                    //subTeams[i].members = members;
-                    subTeams[i].members = members;
-                    console.log('subTeams members :',  subTeams[i]);
-                    this.initOrgChart();
+                  (myMembers: Member[]) => {
+                    subTeams[i].members = myMembers;
+                    if ( i === (subTeams.length - 1) ) {
+                      this.initOrgChart();
+                    }
                 }
               );
             }
            }
           );
-        });
-
-     
+        }
+        ,
+        (error) => { console.log(error); }
+        ,
+        () => { console.log('complete'); }
+      );
     });
 }
 
   ngOnInit() {
+
+  }
+
+  /**
+    * 
+    * Création de l'arborscence
+    *
+    * team {
+    *       id :
+    *       name:
+    *       functions:[
+    *                 function : name
+    *                 members: []
+    * ]
+    * ,
+    * teams[
+    *   team {
+    *         id :
+    *         name:
+    *         functions:[
+    *                   function : name
+    *                    members: []
+    *         }
+    * ]
+    *
+    *
+    * 
+    */
+  
+  private createArbo(topTeam: Team) {
+    console.log('createArbo');
+    let teamArboAndMembers = null;
+
+    if ( topTeam != null ) {
+      if ( topTeam != null ) {
+        // Ajout du Top manager
+        teamArboAndMembers = {
+          id : 'topTeam-' + topTeam.id      ,
+          name: topTeam.name	 ,
+          functions : [
+            {
+              name: topTeam.members[0].function.name,
+              members : [ topTeam.members[0] ],
+            }
+        ]
+        ,
+        teams : []
+        };
+      }
+
+      // Ajout des sous équipes
+      if ( topTeam.teams.length > 0 ) {
+        for ( let i = 0 ; i < topTeam.teams.length ; i++ ) {
+
+          const subTeam: Team = topTeam.teams[i];
+
+          const subTeamToInsert = {
+            id : 'subTeam-' + subTeam.id ,
+            name : subTeam.name ,
+            functions: []
+          };
+
+          teamArboAndMembers.teams.push(subTeamToInsert);
+
+
+          if ( subTeam.members) {
+            if ( subTeam.members.length > 0) {
+              for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
+                if ( subTeam.members[j].function) {
+                  const type = typeof(subTeamToInsert.functions[subTeam.members[j].function.id]);
+                  if ( type === 'undefined') {
+                      subTeamToInsert.functions[subTeam.members[j].function.id]
+                      = {
+                        id: subTeamToInsert.id + '-function-' + subTeam.members[j].function.id,
+                        name  : subTeam.members[j].function.name,
+                        members : []
+                      };
+                    } 
+
+                    subTeamToInsert.functions[subTeam.members[j].function.id].members.push(
+                      {
+                        id          : 'member-' + subTeam.members[j].id ,
+                        firstName   : subTeam.members[j].firstName      ,
+                        lastName    : subTeam.members[j].lastName       ,
+                        mail        : subTeam.members[j].mail
+                      }
+                    );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return teamArboAndMembers;
   }
 
   initOrgChart() {
-
+    console.log('initOrgChart');
     google.charts.load('current', {packages: ['orgchart']});
     google.charts.setOnLoadCallback(drawChart);
 
-   const topTeam = this.topTeam;
+
+   const arboTeam = this.createArbo(this.topTeam);
 
    function drawChart() {
 
@@ -72,88 +171,70 @@ export class OrganizationchartComponent implements OnInit {
 
       const myDatas: any[] = [];
 
-      if ( topTeam != null ) {
-        //Ajout du Top manager
+      //let teamArboAndMembers = null;
+    console.log(arboTeam);
+      if ( arboTeam != null ) {
+
         const bigBoss = [
           {
-            v: topTeam.name							,
-            f: topTeam.name +  ' <br />' + topTeam.members[0].mail + ' : ' + topTeam.members[0].function.name  },
+            v: arboTeam.id							,
+            f: arboTeam.name +  ' <br />'
+            + arboTeam.functions[0].members[0].firstName
+            + ' '
+            + arboTeam.functions[0].members[0].lastName
+            + ' : '
+            + arboTeam.functions[0].name  },
             '',
-            'Big Boss'];
-        myDatas.push(bigBoss);
+            'click top open / close'];
 
-        //Ajout des sous équipes
-        if ( topTeam.teams.length > 0 ) {
-          for ( let i = 0 ; i < topTeam.teams.length ; i++ ) {
-            const subTeam: Team = topTeam.teams[i];
-            myDatas.push([{v: subTeam.name, f: subTeam.name}, topTeam.name, 'tooltip ?']);
+          myDatas.push(bigBoss);
 
-            //Ajout de membres
-            if ( subTeam.members) {
-              if ( subTeam.members.length > 0) {
-                for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
-                  const member = subTeam.members[j];
-
-                  let parent = subTeam.name;
-                  if ( j > 0) {
-                    parent = subTeam.members[j - 1].mail;
-                  }
-                  const memberToAdd = [
-                    {
-                      v: member.mail,
-                      f: member.function.name + ' : <br />' + member.firstName + member.lastName },
-                      parent,
-                      'tooltip ?'
-                    ];
-                  myDatas.push(memberToAdd);
-                }
+          // Ajout du Top manager
+         /* teamArboAndMembers = {
+            id : 'topTeam-' + arboTeam.id      ,
+            name: arboTeam.name	 ,
+            functions : [
+              {
+                name: arboTeam.members[0].function.name,
+                members : [ arboTeam.members[0] ],
               }
+          ]
+          ,
+          teams : []
+          };*/
+
+
+        // Ajout du Top manager
+       /* const bigBoss = [
+          {
+            v: teamArboAndMembers.name							,
+            f: teamArboAndMembers.name +  ' <br />'
+            + teamArboAndMembers.functions[0].members[0].firstName
+            + ' '
+            + teamArboAndMembers.functions[0].members[0].lastName
+            + ' : '
+            + teamArboAndMembers.functions[0].name  },
+            '',
+            'click top open / close'];*/
+
+         //myDatas.push(bigBoss);
+
+        // Ajout des sous équipes
+        /*if ( arboTeam.teams.length > 0 ) {
+          for ( let i = 0 ; i < arboTeam.teams.length ; i++ ) {
+
+            const subTeam: Team = arboTeam.teams[i];
+
+            const subTeamToInsert = {
+              id : 'subTeam-' + subTeam.id ,
+              name : subTeam.name ,
+              functions: []
+            };
+
+            teamArboAndMembers.teams.push(subTeamToInsert);
             }
-
-          }
-
-
-        }
-
-        //console.log(myDatas);
-
-        //myDatas.push([{v: 'BE'									    , f: 'Bureau d\'étude'}, topTeam.name, 'm\en bat les couilles']);
-        //myDatas.push([{v: 'SquadSouscription'			, f: 'Squad Souscription - Xavier Tagliarino - (Responsible)'}, topTeam.name, '']);
-        //myDatas.push([{v: 'SquadRelationCompte'		, f: 'Squad Relation de Compte - Laurent KOWALCZYK (Responsible'}, topTeam.name, '']);
-        //myDatas.push([{v: 'SquadProspection'				, f: 'Squad Prospection Ilizette BOAVENTURA (Responsible)'}, topTeam.name, '']);
-
-      }
+      }*/
       data.addRows(myDatas);
-
-
-      /*data.addRows([
-        [{v: topTeam.name							, f: topTeam.name + ' Dimitri  Rorigues - Responsible'}, '', 'Big Boss'],
-
-
-
-        [{v: 'BE'									    , f: 'Bureau d\'étude'}, topTeam.name, 'm\en bat les couilles'],
-
-        [{v: 'SquadSouscription'			, f: 'Squad Souscription - Xavier Tagliarino - (Responsible)'}, topTeam.name, ''],
-        [{v: 'SquadRelationCompte'		, f: 'Squad Relation de Compte - Laurent KOWALCZYK (Responsible'}, topTeam.name, ''],
-        [{v: 'SquadProspection'				, f: 'Squad Prospection Ilizette BOAVENTURA (Responsible)'}, topTeam.name, ''],
-
-        [{v: 'BusinnessAnalystsSquadSouscription'	, f: 'Businness Analysts'}, 'SquadSouscription', ''],
-        [{v: 'DeveloperSquadSouscription'			, f: 'Developpers'}, 'SquadSouscription', ''],
-        [{v: 'dev1'			, f: '<p>Developper 1<br />Developper 2<br />Developper 3<p>'}, 'DeveloperSquadSouscription', ''],
-
-        [{v: 'ScrumMasterSquadSouscription'		, f: 'Scrum Master'}, 'SquadSouscription', ''],
-        [{v: 'TechLeadSquadSouscription'			, f: 'Tech Lead'}, 'SquadSouscription', ''],
-
-        [{v: 'BusinnessAnalystsSquadRelationCompte', f: 'Businness Analysts'}, 'SquadRelationCompte', ''],
-        [{v: 'DeveloperSquadRelationCompte'		, f: 'Developpers'}, 'SquadRelationCompte', ''],
-        [{v: 'ScrumMasterSquadRelationCompte'		, f: 'Scrum Master'}, 'SquadRelationCompte', ''],
-        [{v: 'TechLeadSquadRelationCompte'			, f: 'Tech Lead'}, 'SquadRelationCompte', ''],
-
-        [{v: 'BusinnessAnalystsSquadProspection'	, f: 'Businness Analysts'}, 'SquadProspection', ''],
-        [{v: 'DeveloperSquadProspection'			, f: 'Developpers'}, 'SquadProspection', ''],
-        [{v: 'ScrumMasterSquadProspection'		, f: 'Scrum Master'}, 'SquadProspection', ''],
-        [{v: 'TechLeadSquadProspection'			, f: 'Tech Lead'}, 'SquadProspection', '']
-      ]);*/
 
       // Create the chart.
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));

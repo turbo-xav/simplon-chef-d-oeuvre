@@ -20,12 +20,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         const authReq = req.clone({
             withCredentials: true,
           });
-        console.log(authReq);
+        //console.log(authReq);
         // send the newly created request
         return next.handle(authReq)
             .catch((error, caught) => {
 
-                console.log(error.status);
+                //console.log(error.status);
                 if (error instanceof HttpErrorResponse) {
                     if ( !navigator.onLine) {
                         this.errorService.addErrors(['navigator is off line']);
