@@ -36,7 +36,7 @@ public interface FunctionRepository extends JpaRepository<Function, Integer>{
      * @return
      */
 	@Query("SELECT f FROM Function f WHERE f.name = :name")
-	List<Function> getByName(@Param("name") String name);
+	Function getByName(@Param("name") String name);
         
     /**
      * 

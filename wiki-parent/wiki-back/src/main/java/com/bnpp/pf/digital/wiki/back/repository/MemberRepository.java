@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.bnpp.pf.digital.wiki.back.entity.Function;
 import com.bnpp.pf.digital.wiki.back.entity.Member;
+import com.bnpp.pf.digital.wiki.back.entity.Team;
 
 /**
  * 
@@ -29,6 +31,15 @@ public interface MemberRepository extends JpaRepository<Member, Integer>{
     
 	@Query("SELECT m FROM Member m WHERE m.id = :id")
 	Member getById(@Param("id") int id);
+	
+	/**
+     * 
+     * @param id
+     * @return
+     */
+    
+	int countByFunction(Function function);
+	
 		    
     /**
      * 

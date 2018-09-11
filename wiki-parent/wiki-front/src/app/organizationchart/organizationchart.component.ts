@@ -1,5 +1,5 @@
+import { NotAllowedComponent } from './../authentication/error/not-allowed/not-allowed.component';
 import { MatIconModule } from '@angular/material/icon';
-import { Member } from './../models/member';
 import { Subject } from 'rxjs/Subject';
 import { Subscriber } from 'rxjs/Subscriber';
 import { TeamService } from './../services/team.service';
@@ -48,9 +48,13 @@ export class OrganizationchartComponent implements OnInit {
           );
         }
         ,
-        (error) => { console.log(error); }
+        (error) => {
+          console.log(error);
+        }
         ,
-        () => { console.log('complete'); }
+        () => {
+          console.log('complete');
+      }
       );
     });
 }
@@ -86,7 +90,7 @@ export class OrganizationchartComponent implements OnInit {
     */
   
   private createArbo(topTeam: Team) {
-    console.log('createArbo');
+    //console.log('createArbo');
     let teamArboAndMembers = null;
 
     if ( topTeam != null ) {
@@ -124,18 +128,25 @@ export class OrganizationchartComponent implements OnInit {
           if ( subTeam.members) {
             if ( subTeam.members.length > 0) {
               for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
-                if ( subTeam.members[j].function) {
-                  const type = typeof(subTeamToInsert.functions[subTeam.members[j].function.id]);
-                  if ( type === 'undefined') {
-                      subTeamToInsert.functions[subTeam.members[j].function.id]
-                      = {
-                        id: subTeamToInsert.id + '-function-' + subTeam.members[j].function.id,
-                        name  : subTeam.members[j].function.name,
-                        members : []
-                      };
-                    } 
 
-                    subTeamToInsert.functions[subTeam.members[j].function.id].members.push(
+                if ( subTeam.members[j].function) {
+
+                  const functionId = 'team-' + subTeam.id + '-function-' + subTeam.members[j].function.id;
+                  let functionFound = subTeamToInsert.functions.find( function(myFunction) {
+                    return myFunction.id === functionId;
+                  });
+
+                  if (!functionFound) {
+                    functionFound = {
+                      id: functionId,
+                      name  :  subTeam.members[j].function.name,
+                      members : []
+                    };
+                      subTeamToInsert.functions.push
+                      (functionFound );
+                  }
+
+                  functionFound.members.push(
                       {
                         id          : 'member-' + subTeam.members[j].id ,
                         firstName   : subTeam.members[j].firstName      ,
@@ -154,86 +165,125 @@ export class OrganizationchartComponent implements OnInit {
   }
 
   initOrgChart() {
-    console.log('initOrgChart');
-    google.charts.load('current', {packages: ['orgchart']});
-    google.charts.setOnLoadCallback(drawChart);
 
+  google.charts.load('current', {packages: ['orgchart']});
+  google.charts.setOnLoadCallback(drawChart);
+  const arboTeam = this.createArbo(this.topTeam);
 
-   const arboTeam = this.createArbo(this.topTeam);
-
-   function drawChart() {
+  function drawChart() {
 
     const data = new google.visualization.DataTable();
-      data.addColumn('string', 'Name');
-      data.addColumn('string', 'Manager');
-      data.addColumn('string', 'ToolTip');
-
+    data.addColumn('string', 'Name');
+    data.addColumn('string', 'Manager');
+    data.addColumn('string', 'ToolTip');
 
       const myDatas: any[] = [];
 
-      //let teamArboAndMembers = null;
-    console.log(arboTeam);
+      console.log(arboTeam);
       if ( arboTeam != null ) {
 
+        // Ajout du Top manager
         const bigBoss = [
           {
             v: arboTeam.id							,
-            f: arboTeam.name +  ' <br />'
+            f:
+            '<p>'
+            + '<span class="team">'
+            + arboTeam.name
+            + '</span>'
+            +  ' :<br />'
+            + '<span class="responsible">'
             + arboTeam.functions[0].members[0].firstName
             + ' '
             + arboTeam.functions[0].members[0].lastName
-            + ' : '
-            + arboTeam.functions[0].name  },
+            + '</span>'
+            + '<br />'
+            + '<a href="mailto:' + arboTeam.functions[0].members[0].mail + '">' + arboTeam.functions[0].members[0].mail + '</a>'
+            // + ' : '
+            // + arboTeam.functions[0].name
+            + '</p>'
+          },
             '',
-            'click top open / close'];
+            'click top open / close'
+          ];
 
-          myDatas.push(bigBoss);
+           myDatas.push(bigBoss);
 
-          // Ajout du Top manager
-         /* teamArboAndMembers = {
-            id : 'topTeam-' + arboTeam.id      ,
-            name: arboTeam.name	 ,
-            functions : [
-              {
-                name: arboTeam.members[0].function.name,
-                members : [ arboTeam.members[0] ],
+          // Ajout des sous équipes
+          if (arboTeam.teams.length > 0) {
+            for ( let i = 0 ; i < arboTeam.teams.length ; i++ ) {
+              const myTeam =  arboTeam.teams[i];
+
+              const subTeam = [
+                {
+                  v: myTeam.id ,
+                  f: myTeam.name
+                }
+                ,
+                arboTeam.id           ,
+                'click top open / close'
+              ];
+              myDatas.push(subTeam);
+
+
+              // Ajout de la fonction à l'équipe
+              if ( myTeam.functions.length > 0) {
+                const functions = myTeam.functions;
+                for ( let j = 0 ; j < functions.length ; j++ ) {
+
+                  const fonctionEc = functions[j];
+
+                  const myFunction = [
+                    {
+                      v: fonctionEc.id ,
+                      f: fonctionEc.name
+                    }
+                    ,
+                    myTeam.id           ,
+                    'click top open / close'
+                  ];
+
+                  if ( fonctionEc.name !== 'Responsible') {
+                    myDatas.push(myFunction);
+                  }
+
+                  // Ajout des membres à une fonction
+                  if ( fonctionEc.members.length > 0 ) {
+                    let nextId = null;
+                    for ( let k = 0 ; k < fonctionEc.members.length ; k ++) {
+
+                      const memberEc =  fonctionEc.members[k];
+
+                      const myMember = [
+                        {
+                          v: memberEc.id ,
+                          f: memberEc.firstName + memberEc.lastName
+                        }
+                        ,
+                        (nextId != null) ? nextId : fonctionEc.id           ,
+                        'click top open / close'
+                      ];
+
+                      if ( fonctionEc.name === 'Responsible') {
+                        subTeam[0].f +=
+                         '<br /><span class="responsible">'
+                        + memberEc.firstName + ' ' + memberEc.lastName
+                        + '</span>'
+                        + '<br />'
+                        + '<a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a>'
+                       ;
+                      } else {
+                        myDatas.push(myMember);
+                        nextId = memberEc.id;
+                      }
+                    }
+                  }
+                }
               }
-          ]
-          ,
-          teams : []
-          };*/
-
-
-        // Ajout du Top manager
-       /* const bigBoss = [
-          {
-            v: teamArboAndMembers.name							,
-            f: teamArboAndMembers.name +  ' <br />'
-            + teamArboAndMembers.functions[0].members[0].firstName
-            + ' '
-            + teamArboAndMembers.functions[0].members[0].lastName
-            + ' : '
-            + teamArboAndMembers.functions[0].name  },
-            '',
-            'click top open / close'];*/
-
-         //myDatas.push(bigBoss);
-
-        // Ajout des sous équipes
-        /*if ( arboTeam.teams.length > 0 ) {
-          for ( let i = 0 ; i < arboTeam.teams.length ; i++ ) {
-
-            const subTeam: Team = arboTeam.teams[i];
-
-            const subTeamToInsert = {
-              id : 'subTeam-' + subTeam.id ,
-              name : subTeam.name ,
-              functions: []
-            };
-
-            teamArboAndMembers.teams.push(subTeamToInsert);
             }
-      }*/
+          }
+        }
+
       data.addRows(myDatas);
 
       // Create the chart.
@@ -245,4 +295,3 @@ export class OrganizationchartComponent implements OnInit {
     }
   }
 }
-

@@ -3,9 +3,7 @@
     color:red;
 }
 
-#organisation table {
-    border-collapse: separate;	
-}
+
 
 caption {
     padding-top: 0.75rem;
@@ -17,4 +15,19 @@ caption {
 
 table.table > tbody > tr:hover > td{
     background-color:#DDDDDD;
+}
+
+/** Organisationnal Chart **/
+#organisation table {
+    border-collapse: separate;	
+}
+
+span.responsible{
+    color:red;
+}
+
+span.team {
+    color:rgba(228, 119, 105,1);
+    font-size:16px;
+    font-weight:bold;
 }
