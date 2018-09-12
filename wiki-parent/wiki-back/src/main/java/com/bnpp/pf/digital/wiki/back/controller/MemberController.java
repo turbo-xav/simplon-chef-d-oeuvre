@@ -207,7 +207,7 @@ public class MemberController {
 		 	
 			 	for(Member memberTeam: teamMembers) {
 			 		System.out.println("Member Team Function : " + memberTeam.getFunction().getName());
-			 		if(memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
+			 		if(memberTeam.getId() != member.getId() && memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
 			 			throw new FunctionnalException("Team can't have more than one reponsible");
 			 		}
 			 	}

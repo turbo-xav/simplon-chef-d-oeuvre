@@ -47,11 +47,11 @@ export class OrganizationchartComponent implements OnInit {
         }
         ,
         (error) => {
-          console.log(error);
+        //  console.log(error);
         }
         ,
         () => {
-          console.log('complete');
+         // console.log('complete');
       }
       );
     });
@@ -181,7 +181,7 @@ export class OrganizationchartComponent implements OnInit {
 
       const myDatas: any[] = [];
 
-      console.log(arboTeam);
+      // console.log(arboTeam);
       if ( arboTeam != null ) {
 
         // Ajout du Top manager
@@ -220,13 +220,14 @@ export class OrganizationchartComponent implements OnInit {
               const subTeam = [
                 {
                   v: myTeam.id ,
-                  f: myTeam.name
+                  f: '<p><span class="subTeam">' + myTeam.name + '</span></p>'
                 }
                 ,
                 arboTeam.id           ,
-                'click top open / close'
+                (myTeam.functions.length > 0) ? 'click top open / close' : 'no personn in this team'
               ];
               myDatas.push(subTeam);
+             // console.log(subTeam);
               indexesToCollapse.push(indexAdd);
               indexAdd++;
 
@@ -241,7 +242,7 @@ export class OrganizationchartComponent implements OnInit {
                   const myFunction = [
                     {
                       v: fonctionEc.id ,
-                      f: fonctionEc.name
+                      f: '<p><span class="memberInfos">' + fonctionEc.name + '</span></p>'
                     }
                     ,
                     myTeam.id           ,
@@ -250,7 +251,6 @@ export class OrganizationchartComponent implements OnInit {
 
                   if ( fonctionEc.name !== 'Responsible') {
                     myDatas.push(myFunction);
-                   // indexesToCollapse.push(indexAdd);
                     indexAdd++;
                   }
 
@@ -264,9 +264,11 @@ export class OrganizationchartComponent implements OnInit {
                       const myMember = [
                         {
                           v: memberEc.id ,
-                          f: '<p>' + memberEc.firstName + memberEc.lastName
-                          + '<br /><a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a>'
-                          + '</p>'
+                          f: '<p><span class="memberInfos">'
+                          + memberEc.firstName + ' ' + memberEc.lastName
+                          + '<br /><a href="mailto:' + memberEc.mail + '">' 
+                          + memberEc.mail
+                          + '</a></span></p>'
                         }
                         ,
                         (nextId != null) ? nextId : fonctionEc.id           ,
@@ -296,17 +298,33 @@ export class OrganizationchartComponent implements OnInit {
 
       data.addRows(myDatas);
 
-    
-
       // Create the chart.
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));
 
       // Draw the chart, setting the allowHtml option to true for the tooltips.
-      chart.draw(data, {allowHtml: true, allowCollapse: true,  selectedNodeClass: '', size: 'medium'});
-      // tslint:disable-next-line:forin
-      for ( const keyToCollapse in indexesToCollapse ) {
-        chart.collapse(indexesToCollapse[keyToCollapse], true);
+      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'large'});
+      const childsRow = chart.getChildrenIndexes(0);
+
+      for ( let i = 0 ; i < childsRow.length ; i++) {
+        chart.collapse(childsRow[i], true);
       }
+
+    // When the table is selected, update the orgchart.
+    // The select handler. Call the chart's getSelection() method
+    function selectHandler() {
+    const selectedItem = chart.getSelection()[0];
+    if (selectedItem) {
+      for ( let i = 0 ; i < childsRow.length ; i++) {
+        chart.collapse(childsRow[i], true);
+      }
+      chart.collapse(selectedItem.row, false);
+      
+    }
+    }
+
+    // Listen for the 'select' event, and call my function selectHandler() when
+    // the user selects something on the chart.
+    google.visualization.events.addListener(chart, 'select', selectHandler);
     }
   }
 }
