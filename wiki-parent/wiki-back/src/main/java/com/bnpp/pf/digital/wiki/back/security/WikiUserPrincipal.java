@@ -27,7 +27,7 @@ public class WikiUserPrincipal implements UserDetails {
 		WikiAuthority wikiAuthority = new WikiAuthority(user.getRole().getName());
 		
 		List<? extends GrantedAuthority> listAuthority = Collections.singletonList(wikiAuthority);	
-		System.out.println(listAuthority);
+		//System.out.println(listAuthority);
 		return listAuthority;
 	}
 	

@@ -3,8 +3,6 @@ package com.bnpp.pf.digital.wiki.back.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernate.type.descriptor.java.ArrayMutabilityPlan;
-
 public class WikiError {
 
 	private String msg = "";

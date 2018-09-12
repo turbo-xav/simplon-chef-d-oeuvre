@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bnpp.pf.digital.wiki.back.entity.Function;
 import com.bnpp.pf.digital.wiki.back.entity.Member;
-import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.entity.dto.MemberDto;
+import com.bnpp.pf.digital.wiki.back.exception.FunctionnalException;
+import com.bnpp.pf.digital.wiki.back.service.IServiceFunction;
 import com.bnpp.pf.digital.wiki.back.service.IServiceMember;
 
 @RestController
@@ -40,8 +43,6 @@ public class MemberController {
 
 	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this member is not possible please verify your datas";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this member";
-
 	private static final String MISSING_FIRSTNAME_ERROR_MSG = "please specify a firstName ";
 
 	private static final String MISSING_LASTNAME_ERROR_MSG = "please specify a lastName";
@@ -53,7 +54,11 @@ public class MemberController {
 	
 	@Autowired
 	private IServiceMember serviceMember;
-
+	
+	@Autowired
+	private IServiceFunction serviceFunction;
+	
+	
 	public MemberController() {
 
 	}
@@ -111,23 +116,30 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Member member) {
-		try {
+	public ResponseEntity<?> update(@RequestBody MemberDto memberDto) {
+		
+	try {
 
-			WikiError wikiError = this.checkMemberDatas(member);   		
+			WikiError wikiError = this.checkMemberDatas(memberDto);   		
     		
     		if(wikiError.getErrors().size() > 0) {
     			wikiError.setMsg("some errors has stopped saving of the member");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
+    		
     		}    		
+    		
+    		checkBeforeSave(memberDto);
+    		
+    		Member member = memberDto.toMember();
     		serviceMember.save(member);
         	return new ResponseEntity<Integer>(member.getId(), HttpStatus.OK);
-
+		}catch(FunctionnalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 
@@ -141,7 +153,7 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> insert(@RequestBody Member member) {
+	public ResponseEntity<?> insert(@RequestBody MemberDto member) {
 		try {
 			WikiError wikiError = this.checkMemberDatas(member);   		
     		
@@ -149,9 +161,12 @@ public class MemberController {
     			wikiError.setMsg("some errors has stopped saving of the member");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
     		}    		
-    		serviceMember.save(member);
+    		serviceMember.save(member.toMember());
         	return new ResponseEntity<Integer>(member.getId(), HttpStatus.OK);
-		} catch (DataIntegrityViolationException e) {
+		}catch(FunctionnalException e){
+			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}
+		catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -160,7 +175,7 @@ public class MemberController {
 		}
 	}
 	
-	 private WikiError checkMemberDatas(Member member) {
+	 private WikiError checkMemberDatas(MemberDto member) {
 	    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	    	
 	    	WikiError wikiError = new WikiError("");
@@ -182,4 +197,23 @@ public class MemberController {
 			
 			return wikiError;
 	    }
+	 
+	 private boolean checkBeforeSave(MemberDto memberDto) throws Exception {
+		 	 	   		
+		 	Member member = serviceMember.getById(memberDto.getId());
+		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  
+		 	if(member != null) {
+		 		List<Member> teamMembers = serviceMember.getMembersByTeam(member.getTeam()); 
+		 	
+			 	for(Member memberTeam: teamMembers) {
+			 		System.out.println("Member Team Function : " + memberTeam.getFunction().getName());
+			 		if(memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
+			 			throw new FunctionnalException("Team can't have more than one reponsible");
+			 		}
+			 	}
+		 	}
+		 	
+		 	
+	    	return true;
+	 }
 }

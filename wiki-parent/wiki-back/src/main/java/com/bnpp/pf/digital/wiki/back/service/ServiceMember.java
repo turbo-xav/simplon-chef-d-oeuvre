@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bnpp.pf.digital.wiki.back.entity.Function;
 import com.bnpp.pf.digital.wiki.back.entity.Member;
 import com.bnpp.pf.digital.wiki.back.entity.Team;
-import com.bnpp.pf.digital.wiki.back.repository.FunctionRepository;
 import com.bnpp.pf.digital.wiki.back.repository.MemberRepository;
 
 @Component
@@ -19,8 +17,7 @@ public class ServiceMember implements IServiceMember {
     @Autowired
     private MemberRepository memberRepository;
     
-    @Autowired
-    private FunctionRepository functionRepository;
+    
     
    
     /* (non-Javadoc)
@@ -39,20 +36,7 @@ public class ServiceMember implements IServiceMember {
     
     
     public Member save(Member member) {       
-		
-    	boolean okToSave = true;
-    	   	
-    	   	   	
-    	/*int nb = memberRepository.countByFunction(functionRepository.getByName("Responsible"));
-    	if( nb >= 1 && member.getFunction().getName().equals("Responsible")) {
-    		okToSave = false;    		
-    	}*/    	
-    	
-    	if(okToSave) {    	
-    		return memberRepository.save(member);
-    	}
-    	
-    	return member;
+		return memberRepository.save(member);    	
     }
     
     /* (non-Javadoc)
@@ -62,5 +46,11 @@ public class ServiceMember implements IServiceMember {
     public void deleteById(int id) {               
     	memberRepository.deleteById(id);
     }
+
+
+	@Override
+	public List<Member> getMembersByTeam(Team team) {
+		return memberRepository.getMembersByTeam(team);
+	}
       
 }

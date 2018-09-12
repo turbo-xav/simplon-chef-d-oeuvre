@@ -3,6 +3,7 @@ import { Member } from './member';
 export class Fonction {
     id: number ;
     name: string;
+    description: string;
     members: Member[] = [];
 
 

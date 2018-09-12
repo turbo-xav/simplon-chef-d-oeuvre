@@ -56,7 +56,6 @@ export class MemberEditComponent implements OnInit {
     this.fonctionService.getFonctions().subscribe(
       (fonctions: Fonction[]) => {
         this.fonctions = fonctions;
-        console.log(this.fonctions);
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;
@@ -114,6 +113,7 @@ export class MemberEditComponent implements OnInit {
   save() {
     this.error = null;
     if ( this.memberForm.valid ) {
+      console.log(this.member);
       this.memberService.saveMember(this.member).subscribe(
         () => {
           this.router.navigateByUrl('/admin/organisationnal-chart/member');

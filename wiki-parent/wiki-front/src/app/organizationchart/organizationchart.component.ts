@@ -1,11 +1,9 @@
-import { NotAllowedComponent } from './../authentication/error/not-allowed/not-allowed.component';
-import { MatIconModule } from '@angular/material/icon';
-import { Subject } from 'rxjs/Subject';
-import { Subscriber } from 'rxjs/Subscriber';
 import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
+
+
 declare let google: any;
 @Component({
   selector: 'app-organizationchart',
@@ -140,6 +138,7 @@ export class OrganizationchartComponent implements OnInit {
                     functionFound = {
                       id: functionId,
                       name  :  subTeam.members[j].function.name,
+                      description: subTeam.members[j].function.description,
                       members : []
                     };
                       subTeamToInsert.functions.push
@@ -171,6 +170,9 @@ export class OrganizationchartComponent implements OnInit {
   const arboTeam = this.createArbo(this.topTeam);
 
   function drawChart() {
+
+    let indexAdd = 0;
+    const indexesToCollapse = [];
 
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Name');
@@ -208,6 +210,7 @@ export class OrganizationchartComponent implements OnInit {
           ];
 
            myDatas.push(bigBoss);
+           indexAdd++;
 
           // Ajout des sous équipes
           if (arboTeam.teams.length > 0) {
@@ -224,6 +227,8 @@ export class OrganizationchartComponent implements OnInit {
                 'click top open / close'
               ];
               myDatas.push(subTeam);
+              indexesToCollapse.push(indexAdd);
+              indexAdd++;
 
 
               // Ajout de la fonction à l'équipe
@@ -240,11 +245,13 @@ export class OrganizationchartComponent implements OnInit {
                     }
                     ,
                     myTeam.id           ,
-                    'click top open / close'
+                    fonctionEc.description
                   ];
 
                   if ( fonctionEc.name !== 'Responsible') {
                     myDatas.push(myFunction);
+                   // indexesToCollapse.push(indexAdd);
+                    indexAdd++;
                   }
 
                   // Ajout des membres à une fonction
@@ -257,7 +264,9 @@ export class OrganizationchartComponent implements OnInit {
                       const myMember = [
                         {
                           v: memberEc.id ,
-                          f: memberEc.firstName + memberEc.lastName
+                          f: '<p>' + memberEc.firstName + memberEc.lastName
+                          + '<br /><a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a>'
+                          + '</p>'
                         }
                         ,
                         (nextId != null) ? nextId : fonctionEc.id           ,
@@ -274,6 +283,7 @@ export class OrganizationchartComponent implements OnInit {
                        ;
                       } else {
                         myDatas.push(myMember);
+                        indexAdd++;
                         nextId = memberEc.id;
                       }
                     }
@@ -286,12 +296,17 @@ export class OrganizationchartComponent implements OnInit {
 
       data.addRows(myDatas);
 
+    
+
       // Create the chart.
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));
 
       // Draw the chart, setting the allowHtml option to true for the tooltips.
       chart.draw(data, {allowHtml: true, allowCollapse: true,  selectedNodeClass: '', size: 'medium'});
-
+      // tslint:disable-next-line:forin
+      for ( const keyToCollapse in indexesToCollapse ) {
+        chart.collapse(indexesToCollapse[keyToCollapse], true);
+      }
     }
   }
 }

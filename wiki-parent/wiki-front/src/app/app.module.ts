@@ -60,6 +60,7 @@ import { MemberEditComponent } from './admin/organisationnal-chart/member/member
 import { FonctionComponent } from './admin/organisationnal-chart/fonction/fonction.component';
 import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
 import { MemberService } from './services/member.service';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -107,6 +108,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
+    EditorModule,// <- Important part
     routing
   ],
 providers: [
