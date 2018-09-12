@@ -318,7 +318,6 @@ export class OrganizationchartComponent implements OnInit {
         chart.collapse(childsRow[i], true);
       }
       chart.collapse(selectedItem.row, false);
-      
     }
     }
 
