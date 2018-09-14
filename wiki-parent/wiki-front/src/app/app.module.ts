@@ -99,7 +99,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    EditorModule,// <- Important part
+    EditorModule, // <- Important part
     routing
   ],
 providers: [
