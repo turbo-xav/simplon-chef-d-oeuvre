@@ -59,6 +59,7 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberService } from './services/member.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DataTableUtils } from './utils/dataTableUtils';
+import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -111,6 +112,7 @@ export function initializeApp(appConfig: AppConfig) {
 providers: [
   ErrorService ,
   DataTableUtils,
+  OrganisationnalChartService,
   AuthService ,
   RoleService ,
   UserService ,

@@ -20,7 +20,7 @@ export class RoleComponent implements OnInit {
 
   }
 
-  protected gererateDataTable(): void {
+  private gererateDataTable(): void {
     this.dataTableUtils.generate();
   }
 

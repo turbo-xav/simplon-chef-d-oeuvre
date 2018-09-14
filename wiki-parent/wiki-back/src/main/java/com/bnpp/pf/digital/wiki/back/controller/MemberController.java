@@ -140,6 +140,7 @@ public class MemberController {
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {			
+			System.out.println(e);
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 
@@ -176,6 +177,7 @@ public class MemberController {
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -204,8 +206,24 @@ public class MemberController {
 	    }
 	 
 	 private boolean checkBeforeSave(MemberDto memberDto) throws Exception {
-		 	 	   		
-		 	Member member = serviceMember.getById(memberDto.getId());
+		 	
+		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  	   		
+		 	//System.out.println(functionMemberDto.getName());
+		 	//System.out.println(memberDto.getFirstName());
+		 	//System.out.println(memberDto.getTeam().getId());
+		 	
+		 	List<Member> teamMembers = serviceMember.getMembersByTeam(memberDto.getTeam().toTeam()); 
+		 	//System.out.println(teamMembers.size());
+		 	
+		 	for(Member memberTeam: teamMembers) {
+		 		System.out.println("Member Team Function : " + memberTeam.getFunction().getName());
+		 		if(memberTeam.getId() != memberDto.getId() && memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
+		 			throw new FunctionnalException("Team can't have more than one reponsible");
+		 		}
+		 	}
+		 	
+		 	
+		 	/*Member member = serviceMember.getById(memberDto.getId());
 		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  
 		 	if(member != null) {
 		 		List<Member> teamMembers = serviceMember.getMembersByTeam(member.getTeam()); 
@@ -216,7 +234,7 @@ public class MemberController {
 			 			throw new FunctionnalException("Team can't have more than one reponsible");
 			 		}
 			 	}
-		 	}
+		 	}*/
 		 	
 		 	
 	    	return true;
