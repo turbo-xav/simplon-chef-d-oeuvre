@@ -1,7 +1,10 @@
+import { DataTableUtils } from '../../utils/dataTableUtils';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
 import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import * as jquery from 'jquery';
+import 'datatables.net';
 
 
 @Component({
@@ -13,8 +16,12 @@ export class RoleComponent implements OnInit {
 
   roles: Role[] = [];
   error: Error;
-  constructor(private roleService: RoleService ) {
+  constructor(private roleService: RoleService, private dataTableUtils: DataTableUtils ) {
 
+  }
+
+  protected gererateDataTable(): void {
+    this.dataTableUtils.generate();
   }
 
   ngOnInit() {
@@ -33,9 +40,9 @@ export class RoleComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       (roles: Role[]) => {
         this.roles = roles;
+        this.gererateDataTable();
       },
       (response: HttpErrorResponse) => {
-        
         this.error = response.error;
       }
     );

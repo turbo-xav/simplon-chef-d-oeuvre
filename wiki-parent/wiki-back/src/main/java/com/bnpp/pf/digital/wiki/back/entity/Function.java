@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,6 +35,12 @@ public class Function {
 
 	@Column(length = 100)
 	private String name;
+	
+	@Column(name="description")
+	@Type(type="text")
+	private String description;
+
+	
 
 	/**
 	 * List of members
@@ -63,6 +71,14 @@ public class Function {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<Member> getMembers() {

@@ -1,19 +1,12 @@
-package com.bnpp.pf.digital.wiki.back.entity;
+package com.bnpp.pf.digital.wiki.back.entity.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "wiki_tbl_member")
-public class Member {
-	
+import com.bnpp.pf.digital.wiki.back.entity.Member;
+
+public class MemberDto {
 	/**
 	 * Id of member : primary key
 	 * 
@@ -27,42 +20,36 @@ public class Member {
 	 * firstName of member
 	 */
 
-	@Column(length = 100)
+	
 	private String firstName;
 	
 	/**
 	 * lastName of member
 	 */
 
-	@Column(length = 100)
+	
 	private String lastName;
 	
 	/**
 	 * mail of member
 	 */
 
-	@Column(length = 100)
+	
 	private String mail;
 	
-	
-	
-
 	/**
 	 * Function of member
 	 */
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_function")
-	private Function function;
+	
+	private FunctionDto function;
 
 	/**
 	 * Team of member
 	 * 
 	 */
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_team")
-	private Team team;
+	private TeamDto team;
 
 	public int getId() {
 		return id;
@@ -95,31 +82,42 @@ public class Member {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
-	public Function getFunction() {
+		
+	public FunctionDto getFunction() {
 		return function;
 	}
-	
-	public void setFunction(Function function) {
+
+	public void setFunction(FunctionDto function) {
 		this.function = function;
 	}
 
-	public Team getTeam() {
+	public TeamDto getTeam() {
 		return team;
 	}
 
-	public void setTeam(Team team) {
+	public void setTeam(TeamDto team) {
 		this.team = team;
+	}
+
+	public Member toMember() {
+		Member member = new Member();
+		member.setId(this.getId());
+		member.setFirstName(this.getFirstName());
+		member.setLastName(this.getLastName());
+		member.setMail(this.getMail());
+		member.setFunction(this.getFunction().toFunction());
+		member.setTeam(this.getTeam().toTeam());
+		
+		return member;
 	}
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", mail=" + mail
-				+ ", function=" + function + ", team=" + team + "]";
+		return "MemberDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", mail=" + mail
+				+ ", function=" + function.getName() + ", team=" + team.getName() + "]";
 	}
 	
 	
-	
-	
-}
 
+
+}

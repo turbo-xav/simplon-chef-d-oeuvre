@@ -1,11 +1,11 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 /* You can add global styles to this file, and also import other style files */
 .errorMsg {
     color:red;
 }
 
-#organisation table {
-    border-collapse: separate;	
-}
+
 
 caption {
     padding-top: 0.75rem;
@@ -17,4 +17,60 @@ caption {
 
 table.table > tbody > tr:hover > td{
     background-color:#DDDDDD;
+}
+
+/** Organisationnal Chart **/
+#organisation table {
+    border-collapse: separate;	
+}
+
+span.responsible{
+    color:red;
+    font-size:14px;
+}
+
+span.team, span.subTeam, span.memberInfos  {
+    color:rgba(228, 119, 105,1);
+    font-size:16px;
+    font-weight:bold;
+}
+
+span.subTeam {
+    font-size:12px;
+}
+
+span.memberInfos {
+    font-size:12px;
+    color:black;
+}
+
+.nodeCase {
+    box-shadow: 5px 5px;
+    background-color: antiquewhite;
+    border-radius: 10%;
+    width:100px;
+    height:50px;
+    font-size:8px;
+}
+
+.selectedCase {
+    background-color:#DDDDDD;
+    opacity: 20%;
+    border:.5px solid black;
+}
+
+
+h3{
+	
+	margin: 1% auto 0;
+    text-transform: uppercase;
+    text-align: center;
+	font-style: italic;
+  	font-size: 2em;
+    font-weight: bold, 200;
+    color:#5DADE2;
+	text-shadow: 0 1px white, 0 2px black;
+}
+div.dataTables_wrapper div.dataTables_paginate {
+    text-align: left;
 }

@@ -2,8 +2,6 @@ package com.bnpp.pf.digital.wiki.back.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
 

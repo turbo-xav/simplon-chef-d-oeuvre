@@ -1,4 +1,4 @@
-<h2>Function edit</h2>
+<h3>Function edit</h3>
 <p>
   <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/function"><< Back to list of functions</a>
 </p>
@@ -17,6 +17,18 @@
           <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
               <div *ngIf="name.errors.required">Choose a name for this function it appears in team organisational chart</div>
           </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="description">Description :</label>
+        <div class="col-8">
+          <editor [(ngModel)]="fonction.description" formControlName="description" [init]="{plugins: 'link'}"></editor>
+          <!--<input type="text" class="form-control" id="description" [(ngModel)]="fonction.description" [ngClass]="{'is-invalid': description.invalid && description.dirty, 'is-valid': description.valid && description.dirty}" formControlName="description" placeholder="Name of function" />-->
+          <small class="form-text text-muted">This field is optionnal </small>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback">
+              <div *ngIf="description.errors.required">Choose a description for this function it appears in team organisational chart</div>
+          </div>
+
         </div>
       </div> 
     </div>

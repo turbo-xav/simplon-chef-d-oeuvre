@@ -13,11 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.bnpp.pf.digital.wiki.back.service.WikiDigitalUserDetailsService;
 
@@ -67,7 +62,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("configure");
+		//System.out.println("configure");
 	  
 		 http
 	        .cors()
@@ -87,8 +82,11 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()//allow CORS option calls
 	        //.antMatchers("/rest/auth/logout").permitAll()
 	        .antMatchers("/rest/role/**").access("hasRole('ADMIN')")	        
-			.antMatchers("/rest/user/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/user/**").access("hasRole('ADMIN')")
 			.antMatchers("/rest/guideline/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/member/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/team/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/function/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
 	        .antMatchers("/**").permitAll()
 	        .and()
 	        .logout().logoutUrl("/rest/logout")

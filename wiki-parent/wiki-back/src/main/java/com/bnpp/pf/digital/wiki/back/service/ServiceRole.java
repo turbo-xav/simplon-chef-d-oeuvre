@@ -1,6 +1,5 @@
 package com.bnpp.pf.digital.wiki.back.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.entity.User;
-import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
-import com.bnpp.pf.digital.wiki.back.exception.TechnicalException.TECHNICAL_EXCEPTION_TYPE;
 import com.bnpp.pf.digital.wiki.back.repository.RoleRepository;
 import com.bnpp.pf.digital.wiki.back.repository.UserRepository;
 

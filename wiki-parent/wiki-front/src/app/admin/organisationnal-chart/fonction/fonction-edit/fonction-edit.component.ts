@@ -39,14 +39,20 @@ export class FonctionEditComponent implements OnInit {
 
   createFormControls() {
     const name = new FormControl('', [Validators.required]);
+    const description = new FormControl('');
 
     this.roleForm = this.fb.group({
-      name: name
+      name: name,
+      description: description
     });
   }
 
   get name() {
     return this.roleForm.get('name');
+  }
+
+  get description() {
+    return this.roleForm.get('description');
   }
 
   save() {

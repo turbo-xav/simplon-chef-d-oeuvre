@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bnpp.pf.digital.wiki.back.entity.Member;
+import com.bnpp.pf.digital.wiki.back.entity.Team;
 import com.bnpp.pf.digital.wiki.back.repository.MemberRepository;
 
 @Component
@@ -15,6 +16,8 @@ public class ServiceMember implements IServiceMember {
 
     @Autowired
     private MemberRepository memberRepository;
+    
+    
     
    
     /* (non-Javadoc)
@@ -32,9 +35,8 @@ public class ServiceMember implements IServiceMember {
     }
     
     
-    @Transactional()
     public Member save(Member member) {       
-			return memberRepository.save(member);		
+		return memberRepository.save(member);    	
     }
     
     /* (non-Javadoc)
@@ -44,5 +46,11 @@ public class ServiceMember implements IServiceMember {
     public void deleteById(int id) {               
     	memberRepository.deleteById(id);
     }
+
+
+	@Override
+	public List<Member> getMembersByTeam(Team team) {
+		return memberRepository.getMembersByTeam(team);
+	}
       
 }

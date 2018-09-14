@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '../../../models/team';
 import { TeamService } from '../../../services/team.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataTableUtils } from '../../../utils/dataTableUtils';
 
 @Component({
   selector: 'app-team',
@@ -12,7 +13,7 @@ export class TeamComponent implements OnInit {
 
   teams: Team[] = [];
   error: Error;
-  constructor(private teamService: TeamService ) {
+  constructor(private teamService: TeamService, private dataTableUtils: DataTableUtils ) {
 
   }
 
@@ -28,13 +29,17 @@ export class TeamComponent implements OnInit {
       );
   }
 
+  private gererateDataTable(): void {
+    this.dataTableUtils.generate();
+  }
+
   loadTeams() {
     this.teamService.getTeams().subscribe(
       (teams: Team[]) => {
         this.teams = teams;
+        this.gererateDataTable();
       },
       (response: HttpErrorResponse) => {
-        
         this.error = response.error;
       }
     );

@@ -2,7 +2,6 @@ package com.bnpp.pf.digital.wiki.back.service;
 
 import java.util.List;
 
-import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +56,10 @@ public class ServiceUser implements IServiceUser {
     public void deleteById(int id) {   
     	userRepository.deleteById(id);
     }
+    
+    /**
+     * 
+     */
 
 	
 	public User createAccount(User user) {
@@ -67,8 +70,9 @@ public class ServiceUser implements IServiceUser {
 		userRepository.save(user);
 		return user;
 	}
+	
+	
 
-	@Override
 	public User getByUID(String uid) {
 		return userRepository.getByUid(uid);
 	}
