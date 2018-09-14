@@ -7,9 +7,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
-
-import { ArchitectureTeamComponent } from './architecture-team/architecture-team.component';
-import { RefServiceComponent } from './ref-service/ref-service.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoleComponent } from './admin/role/role.component';
@@ -61,6 +58,8 @@ import { FonctionComponent } from './admin/organisationnal-chart/fonction/foncti
 import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
 import { MemberService } from './services/member.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { DataTableUtils } from './utils/dataTableUtils';
+
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -73,8 +72,6 @@ export function initializeApp(appConfig: AppConfig) {
     HeaderComponent,
     BodyComponent,
     GuidelineComponent,
-    ArchitectureTeamComponent,
-    RefServiceComponent,
     FooterComponent,
     AuthenticationComponent,
     AdminComponent,
@@ -113,6 +110,7 @@ export function initializeApp(appConfig: AppConfig) {
   ],
 providers: [
   ErrorService ,
+  DataTableUtils,
   AuthService ,
   RoleService ,
   UserService ,

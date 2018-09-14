@@ -1,6 +1,7 @@
 import { Component, OnInit } from '../../../../node_modules/@angular/core';
 import { Guideline } from '../../models/guideline';
 import { GuidelineService } from '../../services/guideline.service';
+import { DataTableUtils } from '../../utils/dataTableUtils';
 
 
 
@@ -13,16 +14,21 @@ export class GuidelineComponent implements OnInit {
 
   guidelines: Guideline[] = [];
 
-  constructor(private guidelineservice: GuidelineService) { }
+  constructor(private guidelineservice: GuidelineService, private dataTableUtils: DataTableUtils) { }
 
   ngOnInit() {
     this.loadGuidelines();
+  }
+
+  private gererateDataTable(): void {
+    this.dataTableUtils.generate();
   }
 
   loadGuidelines() {
     this.guidelineservice.getGuidelines().subscribe(
       (guidelines: Guideline[]) => {
         this.guidelines = guidelines;
+        this.gererateDataTable();
       }
     );
   }

@@ -60,7 +60,7 @@ export class AuthGuard implements CanActivate {
         if ( typeof acl[componentName] !== 'undefined' ) {
             console.log(acl[componentName].authorizedRoles.indexOf(role));
             if ( acl[componentName].authorizedRoles.indexOf(role) === -1 ) {
-                this.router.navigate(['authentication/error/disconnected'], { queryParams: { returnUrl: state.url }});
+                this.router.navigate(['authentication/error/not-allowed'], { queryParams: { returnUrl: state.url }});
                 return false;
             }
         } else {

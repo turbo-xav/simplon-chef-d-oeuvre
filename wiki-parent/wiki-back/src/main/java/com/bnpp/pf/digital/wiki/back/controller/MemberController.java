@@ -153,16 +153,21 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> insert(@RequestBody MemberDto member) {
+	public ResponseEntity<?> insert(@RequestBody MemberDto memberDto) {
 		try {
-			WikiError wikiError = this.checkMemberDatas(member);   		
+			WikiError wikiError = this.checkMemberDatas(memberDto);   		
     		
     		if(wikiError.getErrors().size() > 0) {
     			wikiError.setMsg("some errors has stopped saving of the member");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
-    		}    		
-    		serviceMember.save(member.toMember());
+    		} 
+    		
+    		checkBeforeSave(memberDto);
+    		
+    		Member member = memberDto.toMember();
+    		serviceMember.save(member);
         	return new ResponseEntity<Integer>(member.getId(), HttpStatus.OK);
+		
 		}catch(FunctionnalException e){
 			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}

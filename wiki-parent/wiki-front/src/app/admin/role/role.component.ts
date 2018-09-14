@@ -1,3 +1,4 @@
+import { DataTableUtils } from '../../utils/dataTableUtils';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
@@ -15,27 +16,16 @@ export class RoleComponent implements OnInit {
 
   roles: Role[] = [];
   error: Error;
-  constructor(private roleService: RoleService ) {
+  constructor(private roleService: RoleService, private dataTableUtils: DataTableUtils ) {
 
   }
 
   protected gererateDataTable(): void {
-    jquery(document).ready(
-      function() {
-        const table: any = jquery('.table');
-        table.DataTable({
-                          'searching': false,
-                          'language': {
-                                        'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json'
-                            }
-                      });
+    this.dataTableUtils.generate();
   }
-);
-}
 
   ngOnInit() {
     this.loadRoles();
-    //jquery('table.table').DataTable();
   }
 
   delete(id: number) {

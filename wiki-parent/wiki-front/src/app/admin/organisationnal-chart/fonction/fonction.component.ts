@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Fonction } from '../../../models/fonction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FonctionService } from '../../../services/fonction.service';
+import { DataTableUtils } from '../../../utils/dataTableUtils';
 
 @Component({
   selector: 'app-fonction',
@@ -12,7 +13,7 @@ export class FonctionComponent implements OnInit {
 
   fonctionsMembers: Fonction[] = [];
   error: Error;
-  constructor(private fonctionService: FonctionService ) {
+  constructor(private fonctionService: FonctionService, private dataTableUtils: DataTableUtils ) {
   }
 
   ngOnInit() {
@@ -27,10 +28,15 @@ export class FonctionComponent implements OnInit {
       );
   }
 
+  private gererateDataTable(): void {
+    this.dataTableUtils.generate();
+  }
+
   loadFonctionsMembers() {
     this.fonctionService.getFonctions().subscribe(
       (fonctionsMembers: Fonction[]) => {
         this.fonctionsMembers = fonctionsMembers;
+        this.gererateDataTable();
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;
