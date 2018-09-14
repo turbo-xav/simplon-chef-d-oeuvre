@@ -312,8 +312,9 @@ export class OrganizationchartComponent implements OnInit {
     // The select handler. Call the chart's getSelection() method
     function selectHandler() {
     const selectedItem = chart.getSelection()[0];
-
-    if (selectedItem) {
+    //console.log(selectedItem);
+    //console.log(chart.getCollapsedNodes().indexOf(selectedItem.row));
+    if (typeof selectedItem !==  'undefined') {
       // console.log(chart.getCollapsedNodes().indexOf(selectedItem.row));
       // chart.collapse(selectedItem.row, true);
       // if ( chart.getCollapsedNodes().indexOf(selectedItem.row) !== -1) {
