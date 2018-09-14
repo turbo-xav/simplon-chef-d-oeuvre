@@ -38,13 +38,6 @@ import { NotAllowedComponent } from './authentication/error/not-allowed/not-allo
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
 
-
-const interceptors = [{
-  provide: HTTP_INTERCEPTORS,
-  useClass: HttpErrorInterceptor,
-  multi: true
-}];
-
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './app.config';
 import { HttpModule } from '@angular/http';
@@ -115,7 +108,6 @@ providers: [
   RoleService ,
   UserService ,
   AuthGuard  ,
-  interceptors,
   MenuService,
   GuidelineService,
   TeamService,

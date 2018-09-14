@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,7 +37,7 @@ public class Server {
 
 	// Relation with Applications
 	@JsonIgnore
-	@OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "application", fetch = FetchType.LAZY)
 	private List<Application> applications = new ArrayList<Application>();
 
 	// Default constructor
