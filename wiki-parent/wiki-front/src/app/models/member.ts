@@ -7,6 +7,7 @@ export class Member {
     firstName: string;
     lastName: string;
     mail: string;
+    tel: string;
     function: Fonction = null;
     team: Team = null;
 

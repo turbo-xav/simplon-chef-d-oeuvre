@@ -35,13 +35,6 @@ import { NotAllowedComponent } from './authentication/error/not-allowed/not-allo
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
 
-
-const interceptors = [{
-  provide: HTTP_INTERCEPTORS,
-  useClass: HttpErrorInterceptor,
-  multi: true
-}];
-
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './app.config';
 import { HttpModule } from '@angular/http';
@@ -59,6 +52,7 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberService } from './services/member.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DataTableUtils } from './utils/dataTableUtils';
+import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -105,17 +99,17 @@ export function initializeApp(appConfig: AppConfig) {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    EditorModule,// <- Important part
+    EditorModule, // <- Important part
     routing
   ],
 providers: [
   ErrorService ,
   DataTableUtils,
+  OrganisationnalChartService,
   AuthService ,
   RoleService ,
   UserService ,
   AuthGuard  ,
-  interceptors,
   MenuService,
   GuidelineService,
   TeamService,

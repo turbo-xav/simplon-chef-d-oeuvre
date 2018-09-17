@@ -1,8 +1,8 @@
+import { OrganisationnalChartService } from './../services/organisationnal-chart.service';
 import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
-
 
 declare let google: any;
 @Component({
@@ -14,26 +14,26 @@ export class OrganizationchartComponent implements OnInit {
 
   topTeam: Team;
 
-  public constructor(private teamService: TeamService) {
+  public constructor(private organisationnalChartService: OrganisationnalChartService) {
     this.loadTeams();
   }
 
   private loadTeams() {
 
-    this.teamService.getTopTeam().subscribe(
+    this.organisationnalChartService.getTopTeam().subscribe(
     (topTeam: Team) => {
 
       this.topTeam = topTeam;
 
-      this.teamService.getMembersFromTeam(topTeam).subscribe(
+      this.organisationnalChartService.getMembersFromTeam(topTeam).subscribe(
         (members: Member[]) => {
           topTeam.members = members;
 
-          this.teamService.getSubTeamsFromTopTeam().subscribe(
+          this.organisationnalChartService.getSubTeamsFromTopTeam().subscribe(
             (subTeams: Team[]) => {
               this.topTeam.teams = subTeams;
               for ( let i = 0 ; i < subTeams.length ; i++) {
-                this.teamService.getMembersFromTeam(subTeams[i]).subscribe(
+                this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
                     if ( i === (subTeams.length - 1) ) {
@@ -84,11 +84,10 @@ export class OrganizationchartComponent implements OnInit {
     * ]
     *
     *
-    * 
+    *
     */
-  
+
   private createArbo(topTeam: Team) {
-    //console.log('createArbo');
     let teamArboAndMembers = null;
 
     if ( topTeam != null ) {
@@ -173,7 +172,7 @@ export class OrganizationchartComponent implements OnInit {
 
     let indexAdd = 0;
     const indexesToCollapse = [];
-
+   
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Name');
     data.addColumn('string', 'Manager');
@@ -210,6 +209,7 @@ export class OrganizationchartComponent implements OnInit {
           ];
 
            myDatas.push(bigBoss);
+           indexesToCollapse.push(indexAdd);
            indexAdd++;
 
           // Ajout des sous équipes
@@ -227,7 +227,6 @@ export class OrganizationchartComponent implements OnInit {
                 (myTeam.functions.length > 0) ? 'click top open / close' : 'no personn in this team'
               ];
               myDatas.push(subTeam);
-             // console.log(subTeam);
               indexesToCollapse.push(indexAdd);
               indexAdd++;
 
@@ -266,8 +265,8 @@ export class OrganizationchartComponent implements OnInit {
                           v: memberEc.id ,
                           f: '<p><span class="memberInfos">'
                           + memberEc.firstName + ' ' + memberEc.lastName
-                          + '<br /><a href="mailto:' + memberEc.mail + '">' 
-                          + memberEc.mail
+                          + '&nbsp;<a href="mailto:' + memberEc.mail + '">'
+                          + '<img src="/assets/img/mail.png" title="send a mail to ' + memberEc.firstName + '"/>'
                           + '</a></span></p>'
                         }
                         ,
@@ -277,11 +276,11 @@ export class OrganizationchartComponent implements OnInit {
 
                       if ( fonctionEc.name === 'Responsible') {
                         subTeam[0].f +=
-                         '<br /><span class="responsible">'
+                         '<p><span class="responsible">'
                         + memberEc.firstName + ' ' + memberEc.lastName
                         + '</span>'
                         + '<br />'
-                        + '<a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a>'
+                        + '<a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a></p>'
                        ;
                       } else {
                         myDatas.push(myMember);
@@ -302,7 +301,7 @@ export class OrganizationchartComponent implements OnInit {
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));
 
       // Draw the chart, setting the allowHtml option to true for the tooltips.
-      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'large'});
+      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'medium'});
       const childsRow = chart.getChildrenIndexes(0);
 
       for ( let i = 0 ; i < childsRow.length ; i++) {
@@ -313,12 +312,24 @@ export class OrganizationchartComponent implements OnInit {
     // The select handler. Call the chart's getSelection() method
     function selectHandler() {
     const selectedItem = chart.getSelection()[0];
-    if (selectedItem) {
-      for ( let i = 0 ; i < childsRow.length ; i++) {
-        chart.collapse(childsRow[i], true);
+    //console.log(selectedItem);
+    //console.log(chart.getCollapsedNodes().indexOf(selectedItem.row));
+    if (typeof selectedItem !==  'undefined') {
+      // console.log(chart.getCollapsedNodes().indexOf(selectedItem.row));
+      // chart.collapse(selectedItem.row, true);
+      // if ( chart.getCollapsedNodes().indexOf(selectedItem.row) !== -1) {
+      //   chart.collapse(selectedItem.row, false);
+      // }
+      // console.log(chart.getCollapsedNodes());
+      // chart.collapse(0, true);
+      if (indexesToCollapse.indexOf(selectedItem.row) !== -1) {
+
+        for ( let i = 0 ; i < childsRow.length ; i++) {
+            chart.collapse(childsRow[i], true);
+          }
+          chart.collapse(selectedItem.row, false);
+        }
       }
-      chart.collapse(selectedItem.row, false);
-    }
     }
 
     // Listen for the 'select' event, and call my function selectHandler() when
