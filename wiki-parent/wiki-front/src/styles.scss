@@ -45,11 +45,13 @@ span.memberInfos {
 }
 
 .nodeCase {
-    box-shadow: 5px 5px;
-    background-color: antiquewhite;
-    border-radius: 10%;
-    width:100px;
-    height:50px;
+    box-shadow: 1px 1px 12px #888;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12);
+    zoom: 1;
+    background-color: #fcf6d1;
+    border: 5px solid #fff;
+    border-radius: 8%;
+    width:200px;    
     font-size:8px;
 }
 

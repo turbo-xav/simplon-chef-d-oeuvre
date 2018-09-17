@@ -38,6 +38,13 @@ public class Member {
 	private String lastName;
 	
 	/**
+	 * lastName of member
+	 */
+
+	@Column(length = 10)
+	private String tel;
+	
+	/**
 	 * mail of member
 	 */
 
@@ -94,6 +101,15 @@ public class Member {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+	
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public Function getFunction() {

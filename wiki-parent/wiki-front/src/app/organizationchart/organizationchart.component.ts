@@ -266,8 +266,8 @@ export class OrganizationchartComponent implements OnInit {
                           v: memberEc.id ,
                           f: '<p><span class="memberInfos">'
                           + memberEc.firstName + ' ' + memberEc.lastName
-                          + '<br /><a href="mailto:' + memberEc.mail + '">' 
-                          + memberEc.mail
+                          + '&nbsp;<a href="mailto:' + memberEc.mail + '">'
+                          + '<img src="/assets/img/mail.png" title="send a mail to ' + memberEc.firstName + '"/>'
                           + '</a></span></p>'
                         }
                         ,
@@ -302,7 +302,7 @@ export class OrganizationchartComponent implements OnInit {
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));
 
       // Draw the chart, setting the allowHtml option to true for the tooltips.
-      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'large'});
+      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'medium'});
       const childsRow = chart.getChildrenIndexes(0);
 
       for ( let i = 0 ; i < childsRow.length ; i++) {
