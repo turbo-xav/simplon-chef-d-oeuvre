@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,11 +33,6 @@ public class Server {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_server")
 	private Server server;
-
-	// Relation with Applications
-	@JsonIgnore
-	@OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
-	private List<Application> applications = new ArrayList<Application>();
 
 	// Default constructor
 	public Server() {
@@ -66,14 +61,6 @@ public class Server {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	public List<Application> getApplications() {
-		return applications;
-	}
-
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
-	}
 	
 	public Server getServer() {
 		return server;
@@ -83,11 +70,4 @@ public class Server {
 		this.server = server;
 	}
 
-	@Override
-	public String toString() {
-		return "Server [id=" + id + ", name=" + name + ", url=" + url + ", applications=" + applications + "]";
-	}
-
-	
-	
 }

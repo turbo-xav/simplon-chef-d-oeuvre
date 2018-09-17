@@ -51,6 +51,11 @@ public class MemberController {
 
 	private static final String INVALID_MAIL_ERROR_MSG = "please specify a valid mail adress (ex : jean-pierre.dupond@cetelem.fr)";
 	
+	private static final String MISSING_TEL_ERROR_MSG = "please specify a tel (ex : 0146399718)";
+	
+	private static final String BAD_TEL_FORMAT_ERROR_MSG = "please specify a good format for tel (ex : 0146399718)";
+	
+	
 	
 	@Autowired
 	private IServiceMember serviceMember;
@@ -140,6 +145,7 @@ public class MemberController {
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {			
+			System.out.println(e);
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 
@@ -176,12 +182,15 @@ public class MemberController {
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	 private WikiError checkMemberDatas(MemberDto member) {
-	    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+	    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&ï¿½*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+	    	
+	    	String TEL_PATTERN = "'^0[1-9]{1}[0-9]{8}$";
 	    	
 	    	WikiError wikiError = new WikiError("");
 						
@@ -191,12 +200,17 @@ public class MemberController {
 			
 			if (member.getLastName().isEmpty()) {
 				wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
-			}			
+			}
+			
+			if (member.getTel().isEmpty()) {
+				wikiError.addError("tel", BAD_TEL_FORMAT_ERROR_MSG);
+			} else if(!Pattern.compile(TEL_PATTERN).matcher(member.getTel()).matches()) {
+				
+			}
 			
 			if (member.getMail().isEmpty()) {
 				wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
-			}
-			else if(!Pattern.compile(EMAIL_PATTERN).matcher(member.getMail()).matches()) {
+			} else if(!Pattern.compile(EMAIL_PATTERN).matcher(member.getMail()).matches()) {
 				wikiError.addError("mail", INVALID_MAIL_ERROR_MSG);
 			}
 			
@@ -204,21 +218,17 @@ public class MemberController {
 	    }
 	 
 	 private boolean checkBeforeSave(MemberDto memberDto) throws Exception {
-		 	 	   		
-		 	Member member = serviceMember.getById(memberDto.getId());
-		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  
-		 	if(member != null) {
-		 		List<Member> teamMembers = serviceMember.getMembersByTeam(member.getTeam()); 
+		 		
+		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  	   		
+		 	List<Member> teamMembers = serviceMember.getMembersByTeam(memberDto.getTeam().toTeam()); 
 		 	
-			 	for(Member memberTeam: teamMembers) {
-			 		System.out.println("Member Team Function : " + memberTeam.getFunction().getName());
-			 		if(memberTeam.getId() != member.getId() && memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
-			 			throw new FunctionnalException("Team can't have more than one reponsible");
-			 		}
-			 	}
+		 	for(Member memberTeam: teamMembers) {
+		 		System.out.println("Member Team Function : " + memberTeam.getFunction().getName());
+		 		if(memberTeam.getId() != memberDto.getId() && memberTeam.getFunction().getName().equals("Responsible") && functionMemberDto.getName().equals("Responsible")) {
+		 			throw new FunctionnalException("Team can't have more than one reponsible");
+		 		}
 		 	}
-		 	
-		 	
+		 		 	
 	    	return true;
 	 }
 }
