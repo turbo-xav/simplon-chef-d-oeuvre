@@ -19,3 +19,29 @@ img{
     font-weight: bold;
     color: black;
 }
+
+input.form-control {
+    width:80px;
+    font-size:12px; 
+}
+
+@media (max-width: 768px) {
+    label{
+        font-size:8px;
+        width:50px;
+        height:20px;
+        display:block;
+    }
+
+    input.form-control[_ngcontent-c3]{
+        width:50px;
+        font-size:8px; 
+        height:20px;
+    }
+
+    button {
+        font-size:8px;
+        width:50px;
+        height:20px;
+    }
+  }

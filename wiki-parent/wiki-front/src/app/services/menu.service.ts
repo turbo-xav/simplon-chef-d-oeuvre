@@ -1,4 +1,4 @@
-import { Menu } from '../models/technical/menu';
+import { ItemMenu } from '../models/technical/itemMenu';
 import { Injectable } from '@angular/core';
 
 
@@ -9,19 +9,19 @@ export class MenuService {
     this.selectedMenu = this.menu[0];
 
   }
-  public selectedMenu: Menu;
+  public selectedMenu: ItemMenu;
 
-  menu: Menu[] = [
+  menu: ItemMenu[] = [
     {
       'id': 0,
       'name': 'Homepage',
       'description': 'Page under construction !',
       'position': 'header',
-      'path': '/home',
+      'path': '',
     },
     {
       'id': 1,
-      'name': 'Organization chart',
+      'name': 'Team Organizationnal chart',
       'description': 'Ca va bientôt fonctionner !!!',
       'position': 'header',
       'path': '/organisationnal-chart',
@@ -44,7 +44,7 @@ export class MenuService {
 
   ];
 
-  getList(position): Menu [] {
+  getList(position): ItemMenu [] {
     return this.menu.filter(item => item.position === position);
   }
   }

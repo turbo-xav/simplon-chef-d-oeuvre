@@ -26,7 +26,6 @@ import { MemberEditComponent } from './admin/organisationnal-chart/member/member
 
 
 const appRoutes: Routes = [
-    // { path: '',  redirectTo: 'home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
@@ -63,8 +62,7 @@ const appRoutes: Routes = [
 
     { path: 'organisationnal-chart', component: OrganizationchartComponent },
 
-    { path: 'diagnostic', component: DiagnosticComponent },
-    { path: 'home', component: HomeComponent }
+    { path: 'diagnostic', component: DiagnosticComponent }   
 
   ];
 

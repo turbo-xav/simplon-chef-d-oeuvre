@@ -1,6 +1,24 @@
 
 .navbar-toggler {
     cursor: pointer;
+    /*display:none;*/
+}
+
+
+@media (min-width: 768px) {
+  .monMenu {
+    width:50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .monMenu {
+    display:block;
+  }
+
+  .navbar-toggler {
+    display:block;
+  }
 }
 
 @media (min-width: 768px) {
@@ -8,17 +26,14 @@
       width: 750px;
     }
   }
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
     .container {
       width: 970px;
     }
-  }
-  @media (min-width: 1200px) {
+}
+
+@media (min-width: 1200px) {
     .container {
       width: 1170px;
     }
-  }
- 
- .bg-custom{
-  background-color:#66ccff;
- }
+}
