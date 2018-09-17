@@ -188,7 +188,7 @@ public class MemberController {
 	}
 	
 	 private WikiError checkMemberDatas(MemberDto member) {
-	    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+	    	String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&ï¿½*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	    	
 	    	String TEL_PATTERN = "'^0[1-9]{1}[0-9]{8}$";
 	    	
@@ -218,7 +218,7 @@ public class MemberController {
 	    }
 	 
 	 private boolean checkBeforeSave(MemberDto memberDto) throws Exception {
-		 	
+		 		
 		 	Function functionMemberDto = serviceFunction.getById(memberDto.getFunction().getId());  	   		
 		 	List<Member> teamMembers = serviceMember.getMembersByTeam(memberDto.getTeam().toTeam()); 
 		 	
