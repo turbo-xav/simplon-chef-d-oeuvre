@@ -31,7 +31,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         this.errorService.addErrors(['navigator is off line']);
                     } else if (error.status === 401) {
                         this.errorService.addErrors(['you are not connected']);
-                        this.authService.logOut();
                         this.router.navigateByUrl('/authentication/error/disconnected');
                     }  else if (error.status === 403) {
                         this.errorService.addErrors(['you are not allowed to acess to this feature']);
