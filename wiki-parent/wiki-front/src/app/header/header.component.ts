@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../services/menu.service';
 import * as jquery from 'jquery';
+import { ItemMenu } from '../models/technical/itemMenu';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,14 +12,40 @@ import * as jquery from 'jquery';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public menuService: MenuService) { }
 
-  ngOnInit() {
+ constructor(public menuService: MenuService,  private router: Router) { }
+
+  get selectedMenu(): ItemMenu  {
+    return this.menuService.selectedMenu;
   }
 
-  selectMenu (name) {
-    this.menuService.selectedMenu = name;
-    // tslint:disable-next-line:no-unused-expression
-    jquery('.navbar-toggler:visible').click();
+  ngOnInit() {
+    for ( let i = 0 ; i < this.menuService.menu.length ; i++) {
+      if (location.pathname === this.menuService.menu[i].path) {
+        this.menuService.selectedMenu = this.menuService.menu[i];
+        break;
+      }
+    }
+
+    jquery(window).bind('resize', function() {
+      if (jquery('.navbar-toggler:visible').length > 0) {
+        jquery('.monMenu').fadeOut(500);
+      } else {
+        jquery('.monMenu').fadeIn(500);
+      }
+    });
+  }
+  selectMenu (itemMenu: ItemMenu) {
+     this.menuService.selectedMenu = itemMenu;
+  }
+
+  toggleMenu() {
+    if (jquery('.navbar-toggler:visible').length > 0) {
+      if ( jquery('.monMenu:visible').length) {
+        jquery('.monMenu').fadeOut(500);
+      } else {
+        jquery('.monMenu').fadeIn(500);
+      }
+    }
   }
 }

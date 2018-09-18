@@ -2,6 +2,7 @@ import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
+import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
 
 
 declare let google: any;
@@ -14,26 +15,26 @@ export class OrganizationchartComponent implements OnInit {
 
   topTeam: Team;
 
-  public constructor(private teamService: TeamService) {
+  public constructor(private organisationnalChartService: OrganisationnalChartService) {
     this.loadTeams();
   }
 
   private loadTeams() {
 
-    this.teamService.getTopTeam().subscribe(
+    this.organisationnalChartService.getTopTeam().subscribe(
     (topTeam: Team) => {
 
       this.topTeam = topTeam;
 
-      this.teamService.getMembersFromTeam(topTeam).subscribe(
+      this.organisationnalChartService.getMembersFromTeam(topTeam).subscribe(
         (members: Member[]) => {
           topTeam.members = members;
 
-          this.teamService.getSubTeamsFromTopTeam().subscribe(
+          this.organisationnalChartService.getSubTeamsFromTopTeam().subscribe(
             (subTeams: Team[]) => {
               this.topTeam.teams = subTeams;
               for ( let i = 0 ; i < subTeams.length ; i++) {
-                this.teamService.getMembersFromTeam(subTeams[i]).subscribe(
+                this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
                     if ( i === (subTeams.length - 1) ) {

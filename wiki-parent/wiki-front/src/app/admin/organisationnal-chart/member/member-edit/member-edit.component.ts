@@ -80,6 +80,7 @@ export class MemberEditComponent implements OnInit {
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const team = new FormControl('', [Validators.required]);
     const fonction = new FormControl('', [Validators.required]);
+    const tel = new FormControl('', [Validators.required, Validators.pattern('^0[1-9]{1}[0-9]{8}$')]);
 
     this.memberForm = this.fb.group({
       firstName: firstName,
@@ -87,6 +88,7 @@ export class MemberEditComponent implements OnInit {
       mail: mail,
       team: team,
       fonction: fonction,
+      tel: tel
     });
   }
 
@@ -100,6 +102,10 @@ export class MemberEditComponent implements OnInit {
 
   get mail() {
     return this.memberForm.get('mail');
+  }
+
+  get tel() {
+    return this.memberForm.get('tel');
   }
 
   get team() {

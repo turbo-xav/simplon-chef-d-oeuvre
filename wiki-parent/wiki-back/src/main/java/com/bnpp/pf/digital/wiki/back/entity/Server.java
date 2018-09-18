@@ -73,7 +73,6 @@ public class Server {
 	}
 	
 	
-
 	@Override
 	public String toString() {
 		return "Server [id=" + id + ", name=" + name + ", url=" + url + ", applications=" + applications + "]";

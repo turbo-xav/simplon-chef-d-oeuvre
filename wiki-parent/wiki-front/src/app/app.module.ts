@@ -35,6 +35,13 @@ import { NotAllowedComponent } from './authentication/error/not-allowed/not-allo
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { GuidelineService } from './services/guideline.service';
 
+
+const interceptors = [{
+  provide: HTTP_INTERCEPTORS,
+  useClass: HttpErrorInterceptor,
+  multi: true
+}];
+
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './app.config';
 import { HttpModule } from '@angular/http';
@@ -54,6 +61,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { DataTableUtils } from './utils/dataTableUtils';
 import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
+import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -102,7 +110,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    EditorModule, // <- Important part
+    EditorModule,
     routing
   ],
 providers: [
@@ -112,9 +120,11 @@ providers: [
   RoleService ,
   UserService ,
   AuthGuard  ,
+  interceptors,
   MenuService,
   GuidelineService,
   TeamService,
+  OrganisationnalChartService,
   FonctionService,
   MemberService,
   AppConfig,

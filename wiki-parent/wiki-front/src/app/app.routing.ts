@@ -27,7 +27,6 @@ import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
 
 
 const appRoutes: Routes = [
-    // { path: '',  redirectTo: 'home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
@@ -67,9 +66,6 @@ const appRoutes: Routes = [
     { path: 'admin/diagnostic', component: DiagnosticComponent },
     { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
     { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
-
-    { path: 'home', component: HomeComponent },
-
     { path: 'diagnostic' , component: DiagnosticViewVisitorComponent }
 
   ];

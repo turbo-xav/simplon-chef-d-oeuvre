@@ -37,7 +37,19 @@
           <input type="text" class="form-control" id="mail" [(ngModel)]="member.mail" [ngClass]="{'is-invalid': mail.invalid && mail.dirty, 'is-valid': mail.valid && mail.dirty}" formControlName="mail" placeholder="mail of Member" />
           <small class="form-text text-muted">Ex: jean-pierre.dupond@cetelem.fr </small>
           <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="invalid-feedback">
-              <div *ngIf="mail.errors.required">A name is required for a member.</div>
+              <div *ngIf="mail.errors.required">A mail is required for a member.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="tel">Tel(*) :</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="tel" [(ngModel)]="member.tel" [ngClass]="{'is-invalid': tel.invalid && tel.dirty, 'is-valid': tel.valid && tel.dirty}" formControlName="tel" placeholder="tel of Member" />
+          <small class="form-text text-muted">Ex: jean-pierre.dupond@cetelem.fr </small>
+          <div *ngIf="tel.invalid && (tel.dirty || tel.touched)" class="invalid-feedback">
+              <div *ngIf="tel.errors.required">A tel is required for a member.</div>
+              <div *ngIf="tel.errors.pattern">Bad tel format (ex : 0146399715).</div>
           </div>
         </div>
       </div>

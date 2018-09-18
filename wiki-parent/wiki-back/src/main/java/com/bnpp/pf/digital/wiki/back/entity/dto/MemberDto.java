@@ -38,6 +38,13 @@ public class MemberDto {
 	private String mail;
 	
 	/**
+	 * mail of member
+	 */
+
+	
+	private String tel;
+	
+	/**
 	 * Function of member
 	 */
 
@@ -105,6 +112,7 @@ public class MemberDto {
 		member.setFirstName(this.getFirstName());
 		member.setLastName(this.getLastName());
 		member.setMail(this.getMail());
+		member.setTel(this.getTel());
 		member.setFunction(this.getFunction().toFunction());
 		member.setTeam(this.getTeam().toTeam());
 		
@@ -115,6 +123,20 @@ public class MemberDto {
 	public String toString() {
 		return "MemberDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", mail=" + mail
 				+ ", function=" + function.getName() + ", team=" + team.getName() + "]";
+	}
+
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
+	}
+
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 	

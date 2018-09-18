@@ -1,40 +1,21 @@
 <div class="container" class="bg-info">
   <div class="row">
-    <div class="col-lg-1 col align-self-center">
-      <!--Navbar-->
-      <nav class="navbar navbar-expand{-sm|-md|-lg|-xl} navbar-light bg-info">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="col-sm-2 col-xs-2">
+      <nav class="navbar navbar-light">
+            <button (click)="toggleMenu()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
       </nav>
-      <!--/.Navbar-->
     </div>
-    <div class="col-lg-9 text-sm-center mx-auto d-none d-sm-block col align-self-center" >
-     
-        <h2 class="text align-self-center">Wiki Patrimoine Digital France</h2>
-     
+    <div class="col-sm-6 col-xs-1 d-xs-none d--block" >     
+        <h2 class="text align-self-center">Wiki Patrimoine Digital France</h2>     
     </div>
-    <div class="col-lg-2 col align-self-center">
+    <div class="col-sm-4 col-xs-5">
       <app-authentication></app-authentication>
     </div>
   </div>
 </div>
-<div class="row">
-<div class="col-lg-1 collapse navbar-collapse p-3 mb-2 bg-custom" id="navbarSupportedContent">
-
-    <!-- Links -->
-      <a class="nav-link" id="fontSize" *ngFor="let m of menuService.getList('header')" [style.color]="menuService.selectedMenu.name === m.name ? 'black' : 'grey'"
-      (click)="selectMenu(m, $event)" routerLink="{{m.path}}">
-      {{m.name}}</a>
-    
-    <!-- Links -->
-
-  </div>
-</div>
-
-
-
-
-
-
+<nav class="nav nav-pills nav-fill flex-column flex-md-row monMenu">
+    <a (click)="toggleMenu()" *ngFor="let itemMenu of menuService.getList('header')" class="nav-link nav-item {{itemMenu === selectedMenu ? 'active':''}}" (click)="selectMenu(itemMenu)" routerLink="{{itemMenu.path}}">{{itemMenu.name}}</a>
+</nav>
