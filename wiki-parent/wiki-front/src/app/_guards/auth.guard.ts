@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
 
        const component: any =   route.component;
        let componentName = component.name.replace('Component', '');
+
        componentName = componentName.charAt(0).toLowerCase() + componentName.slice(1);
        const acl = {
             admin : {
@@ -58,15 +59,13 @@ export class AuthGuard implements CanActivate {
         // User must be in authorized group
         const role = this.authService.getUser().getRole().name;
         if ( typeof acl[componentName] !== 'undefined' ) {
-            console.log(acl[componentName].authorizedRoles.indexOf(role));
             if ( acl[componentName].authorizedRoles.indexOf(role) === -1 ) {
                 this.router.navigate(['authentication/error/not-allowed'], { queryParams: { returnUrl: state.url }});
                 return false;
             }
         } else {
-            console.log('pb avec la route ', route.url);
+            console.log('authentifié uniquement pas de droit particulier', route.url);
         }
-
         return true;
     }
 }

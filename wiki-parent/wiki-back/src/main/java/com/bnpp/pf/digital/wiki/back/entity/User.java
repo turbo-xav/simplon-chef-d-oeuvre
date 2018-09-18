@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO)    
+    @GeneratedValue(strategy=GenerationType.IDENTITY)    
     private int id;
     
     @Column(length=6, unique=true)

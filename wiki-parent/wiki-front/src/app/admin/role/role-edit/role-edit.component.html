@@ -11,8 +11,7 @@
       <div class="col-5">
         <div class="form-group row">
           <label class="col-4 col-form-label" for="name">Name : (*)</label>
-          <div class="col-8">
-              {{role.name}}
+          <div class="col-8">              
             <input type="text" class="form-control" id="name" [(ngModel)]="role.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of Role" />
             <small class="form-text text-muted">Nb : Role will be saved with uppercase transformation</small>
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">

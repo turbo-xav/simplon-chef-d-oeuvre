@@ -28,8 +28,8 @@
       <td>{{member.team.name}}</td>
       <td>{{member.function.name}}</td>
       <td>
-        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/member/edit/{{member.id}}">Edit</a>
-        <a class="btn btn-outline-primary" href="#"  (click)="delete(member.id)">Delete</a>
+        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/member/edit/{{member.id}}" title="edit member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" (click)="delete(member.id)" title="delete member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/bin.png" /></a>
     </tr>
     
   </tbody>

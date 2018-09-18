@@ -32,8 +32,9 @@
       <td>{{user.enabled === true?'yes':'no'}}</td>
       <td>{{user.locked === true?'yes':'no'}}</td>
       <td>
-        <a class="btn btn-outline-primary"  routerLink="/admin/user/edit/{{user.id}}">Edit</a>
-        <a class="btn btn-outline-primary" href="#" (click)="delete(user.id)">Delete</a>
+        <a class="btn btn-outline-primary"  routerLink="/admin/user/edit/{{user.id}}" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" href="#" (click)="delete(user.id)" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/bin.png" /></a>
+      </td>
     </tr>    
   </tbody>
 </table>

@@ -5,6 +5,7 @@ import { Role } from '../models/role';
 import { Subject } from 'rxjs/Subject';
 import { AuthInfos } from '../models/auth/authInfos';
 import { AppConfig } from '../app.config';
+import { Observable } from 'rxjs/Observable';
 
 
 
@@ -20,39 +21,46 @@ export class AuthService {
   }
 
   constructor(private http: HttpClient) {
+    this.authUserSubject.subscribe(
+      (authUser: User) => {
+        this.registerUserInLocalStorage(authUser);
+      }
+    );
+  }
+
+  private registerUserInLocalStorage(authUser: User) {
+    const authInfos: AuthInfos = new AuthInfos();
+    authInfos.user = authUser;
+    const date: Date = new Date();
+    authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
+    sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
   }
 
   public auth(uid: string, password: string): boolean {
 
-    //const authUser = new User(1, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
-    //authUser.setRole(new Role(1, 'Admin'));
+    // const authUser = new User(1, uid, 'Xavier', 'Tagliarino', 'xavier.tagliarino@gmail.com', password, true, true);
+    // authUser.setRole(new Role(1, 'Admin'));
 
     const params = 'username=' + uid + '&password=' + password;
-    /*const param = new Array();
-    param['username'] = uid;
-    param['password'] = password;*/
+    // const param = new Array();
+    // param['username'] = uid;
+    // param['password'] = password;
 
     const headers = new HttpHeaders( { 'Content-Type': 'application/x-www-form-urlencoded' });
 
     this.http.post<any>(this.restUrl + '/login', params, { headers })
       .subscribe(
-        (response) => {
+        () => {
           this.http.get(this.restUrl + '/auth').subscribe(
          (authUser: User) => {
-          console.log(authUser);
           this.authUserSubject.next(authUser);
-                // Stockage dans le local storage
-                const authInfos: AuthInfos = new AuthInfos();
-                authInfos.user = authUser;
-                const date: Date = new Date();
-                authInfos.expire = date.getTime() + ( 30 * 60 * 1000 );
-                sessionStorage.setItem('authInfos', JSON.stringify(authInfos));
+                 // Stockage dans le local storage
+                this.registerUserInLocalStorage(authUser);
             }
           );
     }
     ,
     (error) => {
-      console.log('error ', error);
       this.logOut();
     }
   );
@@ -67,7 +75,6 @@ export class AuthService {
     if ( this.getAuthInfos() != null) {
       if ( this.getAuthInfos().user != null && this.getAuthInfos().expire != null) {
         const date: Date = new Date();
-        const currentTime = date.getTime();
         if ( this.getAuthInfos().expire > date.getTime()) {
           return true;
         }
@@ -115,10 +122,17 @@ export class AuthService {
     ,
     (error) => {
       console.log('error ', error);
-      //this.logOut();
     });
     }
 
   }
 
+  public saveUser(user: User): Observable<User> {
+
+    if ( user.id != null ) {
+      const observableUser: Observable<User> =
+      this.http.put<User>(this.restUrl + '/user', user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
+      return observableUser;
+    }
+  }
 }

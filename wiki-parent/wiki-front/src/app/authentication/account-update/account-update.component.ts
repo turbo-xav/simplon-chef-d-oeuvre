@@ -5,14 +5,14 @@ import { User } from '../../models/user';
 import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../node_modules/@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
-
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-account-create',
-  templateUrl: './account-create.component.html',
-  styleUrls: ['./account-create.component.scss']
+  selector: 'app-account-update',
+  templateUrl: './account-update.component.html',
+  styleUrls: ['./account-update.component.scss']
 })
-export class AccountCreateComponent implements OnInit {
+export class AccountUpdateComponent implements OnInit {
 
   user: User;
 
@@ -24,14 +24,13 @@ export class AccountCreateComponent implements OnInit {
 
   constructor(
               private fb: FormBuilder,
-              private userService: UserService,
+              private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute
             ) { }
 
   ngOnInit() {
-    this.user = new User(null, '', '', '', '', '', false, true);
-    this.user.role = null;
+    this.user = this.authService.getUser();
     this.createFormControls();
     this.noAccount = true;
   }
@@ -69,10 +68,11 @@ export class AccountCreateComponent implements OnInit {
   save() {
     this.error = null;
     if ( this.userForm.valid ) {
-      this.userService.createAccount(this.user).subscribe(
+      this.authService.saveUser(this.user).subscribe(
         () => {
           this.noAccount = false;
-          // this.router.navigateByUrl('/');
+          this.authService.authUserSubject.next(this.user);
+          //this.router.navigateByUrl('/');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;

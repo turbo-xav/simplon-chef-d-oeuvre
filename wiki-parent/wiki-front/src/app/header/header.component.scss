@@ -1,39 +1,20 @@
 
 .navbar-toggler {
-    cursor: pointer;
-    /*display:none;*/
+    cursor: pointer;    
 }
 
-
-@media (min-width: 768px) {
-  .monMenu {
-    width:50%;
-  }
+#menuTitleAndAuth {
+  border:1px black solid;
+  border-radius:15px;
 }
+
 
 @media (max-width: 768px) {
-  .monMenu {
+  .burgerMenu {
     display:block;
   }
 
   .navbar-toggler {
     display:block;
   }
-}
-
-@media (min-width: 768px) {
-    .container {
-      width: 750px;
-    }
-  }
-@media (min-width: 992px) {
-    .container {
-      width: 970px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container {
-      width: 1170px;
-    }
 }

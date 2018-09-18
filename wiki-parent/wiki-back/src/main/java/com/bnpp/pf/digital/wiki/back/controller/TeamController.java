@@ -158,15 +158,19 @@ public class TeamController {
 			}
 
 		}catch(FunctionnalException e){
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}catch(TechnicalException e){
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}catch (DataIntegrityViolationException e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -190,14 +194,19 @@ public class TeamController {
 			}
 
 		}catch(FunctionnalException e){
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}catch(TechnicalException e){
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}catch (DataIntegrityViolationException e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (DataAccessException e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 		

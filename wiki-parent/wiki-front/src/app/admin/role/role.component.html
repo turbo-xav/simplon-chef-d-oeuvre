@@ -18,8 +18,8 @@
     <tr *ngFor="let role of roles">     
       <td>{{role.name}}</td>
       <td>
-        <a class="btn btn-outline-primary" routerLink="/admin/role/edit/{{role.id}}">Edit</a>
-        <a class="btn btn-outline-primary" href="#"  (click)="delete(role.id)">Delete</a>
+        <a class="btn btn-outline-primary" routerLink="/admin/role/edit/{{role.id}}" title="edit role : {{role.name}}"><img src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" href="#"  (click)="delete(role.id)" title="delete role : {{role.name}}"><img src="/assets/img/bin.png" /></a>
     </tr>
     
   </tbody>
