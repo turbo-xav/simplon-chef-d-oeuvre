@@ -78,7 +78,7 @@ public class ApplicationController {
 		}
 	}
 	
-	@RequestMapping(path = "{codeApp}", method = RequestMethod.GET)
+	@RequestMapping(path = "codeApp/{codeApp}", method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getByCodeApp(@PathVariable("codeApp") String codeApp) {
@@ -94,7 +94,7 @@ public class ApplicationController {
 	}
 	
 	
-	@RequestMapping(path = "{title}", method = RequestMethod.GET)
+	@RequestMapping(path = "title/{title}", method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getByTitle(@PathVariable("title") String title) {

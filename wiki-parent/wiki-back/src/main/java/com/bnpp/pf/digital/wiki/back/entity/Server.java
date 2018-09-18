@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,20 +21,36 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Server {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(length = 200, unique = true)
 	private String name;
 
-	@Column(length = 400, unique = true)
-	private String url;
-	
-  	// Relation with Applications
+	// Relation with Diagnostic
 	@JsonIgnore
-	@ManyToMany(mappedBy = "servers", fetch = FetchType.LAZY)
-	private List<Application> applications = new ArrayList<Application>();
+	@OneToMany(mappedBy = "server", fetch = FetchType.LAZY)
+	private List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 
+	
+	// Relation with Layer
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_layer")
+	private Layer layer;
+	
+	
+	
+	
+	public Layer getLayer() {
+		return layer;
+	}
+
+	public void setLayer(Layer layer) {
+		this.layer = layer;
+	}
+
+
+	
 	// Default constructor
 	public Server() {
 	}
@@ -56,28 +71,18 @@ public class Server {
 		this.name = name;
 	}
 
-	public String getUrl() {
-		return url;
+
+	public List<Diagnostic> getDiagnostics() {
+		return diagnostics;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setDiagnostics(List<Diagnostic> diagnostics) {
+		this.diagnostics = diagnostics;
 	}
 
-	public List<Application> getApplications() {
-		return applications;
-	}
-
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
-	}
-	
-	
 	@Override
 	public String toString() {
-		return "Server [id=" + id + ", name=" + name + ", url=" + url + ", applications=" + applications + "]";
+		return "Server [id=" + id + ", name=" + name + ", diagnostics=" + diagnostics + ", layer=" + layer + "]";
 	}
 
-	
-	
 }

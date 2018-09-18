@@ -73,7 +73,7 @@ public class ServerController {
 		}
 	}
 	
-	@RequestMapping(path = "{name}", method = RequestMethod.GET)
+	@RequestMapping(path = "name/{name}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getByName(@PathVariable("name") String name) {
 		try {
@@ -104,7 +104,7 @@ public class ServerController {
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody Server server) {
 		try {
-			if (server.getName().isEmpty() && server.getUrl().isEmpty()) {
+			if (server.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
 				server = serviceServer.save(server);
@@ -124,7 +124,7 @@ public class ServerController {
 	@ResponseBody
 	public ResponseEntity<?> update(@RequestBody Server server) {
 		try {
-			if (server.getName().isEmpty() && server.getUrl().isEmpty()) {
+			if (server.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
 				server = serviceServer.save(server);

@@ -72,7 +72,7 @@ public class LayerController {
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-	@RequestMapping(path = "{name}", method = RequestMethod.GET)
+	@RequestMapping(path = "name/{name}", method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getByName(@PathVariable("name") String name) {

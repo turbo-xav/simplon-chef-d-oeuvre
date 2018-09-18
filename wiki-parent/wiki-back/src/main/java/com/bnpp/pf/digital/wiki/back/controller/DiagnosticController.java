@@ -14,36 +14,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.pf.digital.wiki.back.entity.Environ;
-import com.bnpp.pf.digital.wiki.back.entity.Layer;
-import com.bnpp.pf.digital.wiki.back.service.IServiceEnviron;
+import com.bnpp.pf.digital.wiki.back.entity.Diagnostic;
+import com.bnpp.pf.digital.wiki.back.entity.Server;
+import com.bnpp.pf.digital.wiki.back.service.IserviceDiagnostic;
+import com.bnpp.pf.digital.wiki.back.service.ServiceDiagnostic;
 
 @RestController
-@RequestMapping("/environment")
-public class EnvironController {
+@RequestMapping("/diagnostic")
+public class DiagnosticController {
 
-	private static final String LISTING_ERROR_MSG = "get list of environments is not possible, please verify your database.";
+	private static final String LISTING_ERROR_MSG = "get list of diagnostics is not possible, please verify your database.";
 
-	private static final String GETTING_ERROR_MSG = "get this environment is not possible, please verify your database.";
+	private static final String GETTING_ERROR_MSG = "get this diagnostic is not possible, please verify your database.";
 
-	private static final String DELETING_BY_ID_ERROR_MSG = "delete this environment is not possible, please verify your database.";
+	private static final String DELETING_BY_ID_ERROR_MSG = "delete this diagnostic is not possible, please verify your database.";
 
-	private static final String CREATING_ERROR_MSG = "creating this environment is not possible, please verify your database.";
+	private static final String CREATING_ERROR_MSG = "creating this diagnostic is not possible, please verify your database.";
 
-	private static final String UPDATING_ERROR_MSG = "updating this environment is not possible, please verify your database.";
+	private static final String UPDATING_ERROR_MSG = "updating this diagnostic is not possible, please verify your database.";
 
-	private static final String CREATING_INTERITY_ERROR_MSG = "creating this environment is not possible, please verify if you are not create an exiting environment.";
+	private static final String CREATING_INTERITY_ERROR_MSG = "creating this diagnostic is not possible, please verify if you are not create an exiting diagnostic.";
 
-	private static final String UPDATING_INTERITY_ERROR_MSG = "updating this environment is not possible, please verify if you are not update a environment with the same name.";
+	private static final String UPDATING_INTERITY_ERROR_MSG = "updating this diagnostic is not possible, please verify if you are not update a diagnostic with the same name.";
 
-	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "creating this environment is not possible, please verify your datas.";
+	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "creating this diagnostic is not possible, please verify your datas.";
 
-	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this environment is not possible, please verify your datas.";
+	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this diagnostic is not possible, please verify your datas.";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this environment.";
+	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this diagnostic.";
 
 	@Autowired
-	private IServiceEnviron serviceEnviron;
+	private IserviceDiagnostic serviceDiagnostic;
 
 	@RequestMapping(method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
@@ -51,8 +52,8 @@ public class EnvironController {
 	public ResponseEntity<?> getAll() {
 
 		try {
-			List<Environ> environs = serviceEnviron.findAll();
-			return new ResponseEntity<List<Environ>>(environs, HttpStatus.OK);
+			List<Diagnostic> diagnostics = serviceDiagnostic.findAll();
+			return new ResponseEntity<List<Diagnostic>>(diagnostics, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
@@ -64,8 +65,8 @@ public class EnvironController {
 	@ResponseBody
 	public ResponseEntity<?> getById(@PathVariable("id") int id) {
 		try {
-			Environ environ = serviceEnviron.getById(id);
-			return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+			Diagnostic diagnostic = serviceDiagnostic.getById(id);
+			return new ResponseEntity<Diagnostic>(diagnostic, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
@@ -73,18 +74,16 @@ public class EnvironController {
 		}
 	}
 
-	@RequestMapping(path = "name/{name}", method = RequestMethod.GET)
-	// @ResponseStatus(code=HttpStatus.OK)
+	@RequestMapping(path = "url/{url}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?> getByName(@PathVariable("name") String name) {
-
+	public ResponseEntity<?> getByName(@PathVariable("url") String url) {
 		try {
-			List<Environ> environs = serviceEnviron.getByName(name);
-			return new ResponseEntity<List<Environ>>(environs, HttpStatus.OK);
+			List<Diagnostic> diagnostics = serviceDiagnostic.getByUrl(url);
+			return new ResponseEntity<List<Diagnostic>>(diagnostics, HttpStatus.OK);
 		} catch (DataAccessException e) {
-			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -92,7 +91,7 @@ public class EnvironController {
 	@ResponseBody
 	public ResponseEntity<?> deleteById(@PathVariable("id") int id) {
 		try {
-			serviceEnviron.deleteById(id);
+			serviceDiagnostic.deleteById(id);
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -103,13 +102,13 @@ public class EnvironController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> insert(@RequestBody Environ environ) {
+	public ResponseEntity<?> insert(@RequestBody Diagnostic diagnostic) {
 		try {
-			if (environ.getName().isEmpty()) {
+			if (diagnostic.getUrl().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
-				environ = serviceEnviron.save(environ);
-				return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+				diagnostic = serviceDiagnostic.save(diagnostic);
+				return new ResponseEntity<Diagnostic>(diagnostic, HttpStatus.OK);
 			}
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -122,13 +121,13 @@ public class EnvironController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Environ environ) {
+	public ResponseEntity<?> update(@RequestBody Diagnostic diagnostic) {
 		try {
-			if (environ.getName().isEmpty()) {
+			if (diagnostic.getUrl().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
-				environ = serviceEnviron.save(environ);
-				return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+				diagnostic = serviceDiagnostic.save(diagnostic);
+				return new ResponseEntity<Diagnostic>(diagnostic, HttpStatus.OK);
 			}
 
 		} catch (DataIntegrityViolationException e) {
