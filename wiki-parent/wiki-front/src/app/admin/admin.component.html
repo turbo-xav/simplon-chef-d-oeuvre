@@ -1,37 +1,30 @@
+<app-test></app-test>
 <h2>What do you want to do ?</h2>
 
-<div class="row">
-  <div class="col-6">
-    <ul>
-      <li>
-        <a class="btn btn-outline-primary"  routerLink="/admin/guideline">Manage guidelines</a>
-      </li>
-      <li>
-          <a class="btn btn-outline-primary"  routerLink="/admin/organisationnal-chart">Manage the organisational chart</a>
-      </li>
-      <li>
-            <a class="btn btn-outline-primary"  routerLink="/admin/diagnostic">Manage diagnostic pages</a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-6">
-    <ul>
-      <li><a class="btn btn-outline-primary" routerLink="/admin/user">Manage users</a></li>
-    </ul>
-  </div>
-</div>
-
-
-<div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      <h4 class="text-white">Collapsed content</h4>
-      <span class="text-muted">Toggleable via the navbar brand.</span>
+<div id="navbarToggleExternalContent">
+  <div class="row">
+    <div class="col-{{businessMenu.length * 2}}">
+        <h4>Business management</h4>
+        <div>
+            <nav class="navbar navbar-light">
+              <a *ngFor="let businessItem of businessMenu" class="nav-link nav-item btn btn-outline-primary"  routerLink="{{businessItem.path}}">{{businessItem.name}}</a>   
+            </nav>
+        </div>   
     </div>
   </div>
-  <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
+  <div class="row">
+    <div class="col-{{adminMenu.length * 2}}" *ngIf="user.role.name == 'ADMIN'">
+      <h4>Admin management (users and roles)</h4>
+      <div>
+          <nav class="navbar navbar-light">
+              <a *ngFor="let adminItem of adminMenu" class="nav-link nav-item btn btn-outline-primary"  routerLink="{{adminItem.path}}">{{adminItem.name}}</a>         
+          </nav>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+ 
+

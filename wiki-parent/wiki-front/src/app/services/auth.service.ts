@@ -80,7 +80,7 @@ export class AuthService {
         }
       }
     }
-    this.logOut();
+
     return false;
 
   }
@@ -90,8 +90,10 @@ export class AuthService {
   }
 
   getAuthInfos(): AuthInfos {
+
       const jsonAuthInfos = JSON.parse(sessionStorage.getItem('authInfos'));
-      if ( jsonAuthInfos != null ) {
+
+      if ( jsonAuthInfos != null && jsonAuthInfos.user != null) {
         const authInfos: AuthInfos = new AuthInfos();
         authInfos.user = new User(
                                     jsonAuthInfos.user.id         ,

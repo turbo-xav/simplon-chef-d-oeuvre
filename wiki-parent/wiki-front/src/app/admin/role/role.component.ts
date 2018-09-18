@@ -21,7 +21,9 @@ export class RoleComponent implements OnInit {
   }
 
   protected gererateDataTable(): void {
-    this.dataTableUtils.generate();
+    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+      this.dataTableUtils.generate();
+    }
   }
 
   ngOnInit() {

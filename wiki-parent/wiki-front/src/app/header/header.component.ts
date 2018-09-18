@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   detectMenu() {
-    if (jquery('.navbar-toggler:visible').length > 0) {
+    if (jquery('#mainToggler:visible').length > 0) {
       jquery('.burgerMenu').fadeOut(250);
     } else {
       jquery('.burgerMenu').fadeIn(250);
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu() {
-   if (jquery('.navbar-toggler:visible').length > 0) {
+    if (jquery('#mainToggler:visible').length > 0) {
       if ( jquery('.burgerMenu:visible').length) {
         jquery('.burgerMenu').fadeOut(500);
       } else {

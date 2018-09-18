@@ -30,7 +30,9 @@ export class TeamComponent implements OnInit {
   }
 
   private gererateDataTable(): void {
-    this.dataTableUtils.generate();
+    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+      this.dataTableUtils.generate();
+    }
   }
 
   loadTeams() {

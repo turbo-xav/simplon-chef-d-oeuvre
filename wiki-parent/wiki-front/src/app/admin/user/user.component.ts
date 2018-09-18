@@ -18,8 +18,6 @@ export class UserComponent implements OnInit {
 
   }
 
- 
-
   ngOnInit() {
     this.loadUsers();
   }
@@ -33,7 +31,9 @@ export class UserComponent implements OnInit {
 }
 
 private gererateDataTable(): void {
-  this.dataTableUtils.generate();
+  if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+    this.dataTableUtils.generate();
+  }
 }
 
 loadUsers() {
