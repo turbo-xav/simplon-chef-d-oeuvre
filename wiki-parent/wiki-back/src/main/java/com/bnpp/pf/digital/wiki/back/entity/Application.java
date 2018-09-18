@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,11 +35,12 @@ public class Application {
 	@Column(length = 500, unique = true)
 	private String description;
 
-   
-	
 	// Relation with Servers
 	@JsonIgnore
-	@ManyToMany(mappedBy = "server", fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name = "appli_server", joinColumns = {
+			@JoinColumn(name = "fk_appli", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "fk_server", referencedColumnName = "id") })
 	private List<Server> servers = new ArrayList<Server>();
 
 	// Default constructor
@@ -84,19 +86,11 @@ public class Application {
 	public void setServers(List<Server> servers) {
 		this.servers = servers;
 	}
-	
-	public Application getApplication() {
-		return application;
-	}
-
-	public void setApplication(Application application) {
-		this.application = application;
-	}
 
 	@Override
 	public String toString() {
 		return "Application [id=" + id + ", codeApp=" + codeApp + ", title=" + title + ", description=" + description
-				+ "]";
+				+ ", servers=" + servers + "]";
 	}
 
 }

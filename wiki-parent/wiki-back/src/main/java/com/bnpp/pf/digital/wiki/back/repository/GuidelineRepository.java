@@ -27,7 +27,7 @@ public interface GuidelineRepository extends JpaRepository<Guideline, Integer> {
      * @return
      */
     @Query("SELECT g FROM Guideline g LEFT OUTER JOIN FETCH g.user u LEFT OUTER JOIN FETCH u.role r WHERE g.id = :id")
-    Guideline getGuidelineByIdWithUser(@Param("id") int id);
+    Guideline getGuidelineByIdWithUser(int id);
     
     /**
      * 

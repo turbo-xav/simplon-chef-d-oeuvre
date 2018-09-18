@@ -1,3 +1,4 @@
+import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
@@ -12,7 +13,6 @@ import { AccountCreateComponent } from './authentication/account-create/account-
 import { GetPasswordComponent } from './authentication/get-password/get-password.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorComponent } from './authentication/error/error.component';
-import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { DisconnectedComponent } from './authentication/error/disconnected/disconnected.component';
 import { TeamComponent } from './admin/organisationnal-chart/team/team.component';
 import { TeamEditComponent } from './admin/organisationnal-chart/team/team-edit/team-edit.component';
@@ -22,6 +22,7 @@ import { FonctionComponent } from './admin/organisationnal-chart/fonction/foncti
 import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fonction-edit/fonction-edit.component';
 import { MemberComponent } from './admin/organisationnal-chart/member/member.component';
 import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
+import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
 
 
 
@@ -63,8 +64,13 @@ const appRoutes: Routes = [
 
     { path: 'organisationnal-chart', component: OrganizationchartComponent },
 
-    { path: 'diagnostic', component: DiagnosticComponent },
-    { path: 'home', component: HomeComponent }
+    { path: 'admin/diagnostic', component: DiagnosticComponent },
+    { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
+    { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
+
+    { path: 'home', component: HomeComponent },
+
+    { path: 'diagnostic' , component: DiagnosticViewVisitorComponent }
 
   ];
 

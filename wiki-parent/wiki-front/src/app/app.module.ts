@@ -26,7 +26,7 @@ import { ErrorService } from './services/error.service';
 import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
 import { BodyComponent } from './body/body.component';
-import { DiagnosticComponent } from './diagnostic/diagnostic.component';
+import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
@@ -52,6 +52,8 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberService } from './services/member.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DataTableUtils } from './utils/dataTableUtils';
+import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
+import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -87,7 +89,9 @@ export function initializeApp(appConfig: AppConfig) {
     MemberComponent,
     MemberEditComponent,
     FonctionComponent,
-    FonctionEditComponent
+    FonctionEditComponent,
+    DiagnosticViewVisitorComponent,
+    DiagnosticEditComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    EditorModule,// <- Important part
+    EditorModule, // <- Important part
     routing
   ],
 providers: [

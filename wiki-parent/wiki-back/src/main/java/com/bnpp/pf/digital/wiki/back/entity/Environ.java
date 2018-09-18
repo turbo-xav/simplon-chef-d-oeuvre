@@ -8,10 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "wiki_tbl_layer")
-
-public class Layer {
-
+@Table(name = "wiki_tbl_environnment")
+public class Environ {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -37,7 +35,7 @@ public class Layer {
 
 	@Override
 	public String toString() {
-		return "Layer [id=" + id + ", name=" + name + "]";
+		return "Environ [id=" + id + ", name=" + name + "]";
 	}
 
 }

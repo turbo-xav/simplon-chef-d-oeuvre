@@ -31,13 +31,9 @@ public class Server {
 	@Column(length = 400, unique = true)
 	private String url;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_server")
-	private Server server;
-
-	// Relation with Applications
+  	// Relation with Applications
 	@JsonIgnore
-	@ManyToMany(mappedBy = "application", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "servers", fetch = FetchType.LAZY)
 	private List<Application> applications = new ArrayList<Application>();
 
 	// Default constructor
@@ -76,13 +72,7 @@ public class Server {
 		this.applications = applications;
 	}
 	
-	public Server getServer() {
-		return server;
-	}
-
-	public void setServer(Server server) {
-		this.server = server;
-	}
+	
 
 	@Override
 	public String toString() {
