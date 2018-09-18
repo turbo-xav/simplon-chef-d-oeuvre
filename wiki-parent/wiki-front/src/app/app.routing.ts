@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
@@ -23,6 +24,8 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberComponent } from './admin/organisationnal-chart/member/member.component';
 import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
 import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
+import { TestComponent } from './test/test.component';
+import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
 
 
 
@@ -56,7 +59,8 @@ const appRoutes: Routes = [
     { path: 'admin/guideline/edit', component: GuidelineEditComponent },
     { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
 
-    { path: 'authentication/account/create', component: AccountCreateComponent },
+    { path: 'authentication/account/create', component: AccountCreateComponent, canActivate: [AuthGuard]        },
+    { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard]        },
     { path: 'authentication/get-password', component: GetPasswordComponent },
     { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
     { path: 'authentication/error/disconnected', component: DisconnectedComponent },
@@ -66,7 +70,8 @@ const appRoutes: Routes = [
     { path: 'admin/diagnostic', component: DiagnosticComponent },
     { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
     { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
-    { path: 'diagnostic' , component: DiagnosticViewVisitorComponent }
+    { path: 'diagnostic' , component: DiagnosticViewVisitorComponent },
+    { path: 'test' , component: TestComponent }
 
   ];
 

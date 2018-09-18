@@ -22,7 +22,7 @@ export class User {
         enabled: boolean
     ) {
         this.id         = id;
-        this.uid        = lastName;
+        this.uid        = uid;
         this.firstName  = firstName;
         this.lastName   = lastName;
         this.mail       = mail;

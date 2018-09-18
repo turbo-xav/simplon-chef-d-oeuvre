@@ -35,7 +35,6 @@ export class TeamEditComponent implements OnInit {
       );
     } else {
       this.team = new Team(null, '');
-      console.log(this.team);
     }
 
     this.createFormControls();

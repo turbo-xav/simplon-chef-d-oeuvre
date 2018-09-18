@@ -17,8 +17,9 @@
     <tr *ngFor="let fonctionMember of fonctionsMembers">     
       <td>{{fonctionMember.name}}</td>
       <td>
-        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/function/edit/{{fonctionMember.id}}">Edit</a>
-        <a class="btn btn-outline-primary" href="#"  (click)="delete(fonctionMember.id)">Delete</a>
+        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/function/edit/{{fonctionMember.id}}" title="edit team : {{fonctionMember.name}}"><img src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" (click)="delete(fonctionMember.id)" title="delete function : {{fonctionMember.name}}"><img src="/assets/img/bin.png" /></a>
+      </td>
     </tr>    
   </tbody>
 </table>

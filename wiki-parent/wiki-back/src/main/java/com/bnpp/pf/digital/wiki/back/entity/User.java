@@ -17,48 +17,48 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="wiki_tbl_user")
+@Table(name = "wiki_tbl_user")
 public class User {
 
-    @Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    @Column(length=6, unique=true)
-    private String uid; 
-    
-    @Column(length=100)
-    private String firstName;
-    
-    @Column(length=100)
-    private String lastName;
-    
-    @Column(length=100, unique=true)
-    private String mail;
-    
-    @Column(length=20)
-    private String password;
-    
-    @Column
-    private boolean enabled;
-    
-    @Column
-    private boolean locked;
-    
-        
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_role")
-    private Role role; 
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY)    
-    private List<Guideline> guidelines = new ArrayList<Guideline>();   
-    
-    public User() {
-        
-    }
-    
-    public boolean isEnabled() {
+
+	private int id;
+
+	@Column(length = 6, unique = true)
+	private String uid;
+
+	@Column(length = 100)
+	private String firstName;
+
+	@Column(length = 100)
+	private String lastName;
+
+	@Column(length = 100, unique = true)
+	private String mail;
+
+	@Column(length = 20)
+	private String password;
+
+	@Column
+	private boolean enabled;
+
+	@Column
+	private boolean locked;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_role")
+	private Role role;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Guideline> guidelines = new ArrayList<Guideline>();
+
+	public User() {
+
+	}
+
+	public boolean isEnabled() {
 		return enabled;
 	}
 
@@ -73,7 +73,7 @@ public class User {
 	public void setLocked(boolean locked) {
 		this.locked = locked;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -129,18 +129,18 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 	public String toString() {
-		String	str =	"User :";
-				str +=	"\n id : "+ getId();
-				str +=	"\n firstName : "+ getFirstName();
-				str +=	"\n lastName : "+ getLastName();
-				str +=	"\n mail : "+ getMail();
-				str +=	"\n password : "+ getPassword();
-				str +=	"\n id : "+ getId();
-				str +=	"\n role : "+ getRole();
+		String str = "User :";
+		str += "\n id : " + getId();
+		str += "\n firstName : " + getFirstName();
+		str += "\n lastName : " + getLastName();
+		str += "\n mail : " + getMail();
+		str += "\n password : " + getPassword();
+		str += "\n id : " + getId();
+		str += "\n role : " + getRole();
 		return str;
-		
+
 	}
 
 }

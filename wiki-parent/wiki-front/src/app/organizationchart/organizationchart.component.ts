@@ -1,3 +1,4 @@
+import { takeUntil } from 'rxjs/operators';
 import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
@@ -29,7 +30,7 @@ export class OrganizationchartComponent implements OnInit {
       this.organisationnalChartService.getMembersFromTeam(topTeam).subscribe(
         (members: Member[]) => {
           topTeam.members = members;
-
+          
           this.organisationnalChartService.getSubTeamsFromTopTeam().subscribe(
             (subTeams: Team[]) => {
               this.topTeam.teams = subTeams;
@@ -37,6 +38,7 @@ export class OrganizationchartComponent implements OnInit {
                 this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
+                   
                     if ( i === (subTeams.length - 1) ) {
                       this.initOrgChart();
                     }
@@ -151,7 +153,8 @@ export class OrganizationchartComponent implements OnInit {
                         id          : 'member-' + subTeam.members[j].id ,
                         firstName   : subTeam.members[j].firstName      ,
                         lastName    : subTeam.members[j].lastName       ,
-                        mail        : subTeam.members[j].mail
+                        mail        : subTeam.members[j].mail           ,
+                        tel         : subTeam.members[j].tel
                       }
                     );
                 }
@@ -267,7 +270,7 @@ export class OrganizationchartComponent implements OnInit {
                           v: memberEc.id ,
                           f: '<p><span class="memberInfos">'
                           + memberEc.firstName + ' ' + memberEc.lastName
-                          + '<br /><a href="mailto:' + memberEc.mail + '">' 
+                          + '<a href="mailto:' + memberEc.mail + '">'
                           + memberEc.mail
                           + '</a></span></p>'
                         }
@@ -278,11 +281,13 @@ export class OrganizationchartComponent implements OnInit {
 
                       if ( fonctionEc.name === 'Responsible') {
                         subTeam[0].f +=
-                         '<br /><span class="responsible">'
+                         '<p><span class="responsible">'
                         + memberEc.firstName + ' ' + memberEc.lastName
                         + '</span>'
                         + '<br />'
-                        + '<a href="mailto:' + memberEc.mail + '">' + memberEc.mail + '</a>'
+                        + '<a href="mailto:' + memberEc.mail + '"><img src="/assets/img/mail.png" /></a>'
+                        + '<br /> <img src="/assets/img/tel.png" /> : ' + memberEc.tel
+                        + '</p>'
                        ;
                       } else {
                         myDatas.push(myMember);

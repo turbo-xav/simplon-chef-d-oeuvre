@@ -17,8 +17,9 @@
     <tr *ngFor="let team of teams">     
       <td>{{team.name}}</td>
       <td>
-        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/team/edit/{{team.id}}">Edit</a>
-        <a class="btn btn-outline-primary" href="#"  (click)="delete(team.id)">Delete</a>
+        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/team/edit/{{team.id}}" title="edit team : {{team.name}}"><img src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" href="#"  (click)="delete(team.id)" title="delete team : {{team.name}}"><img src="/assets/img/bin.png" /></a>
+      </td>
     </tr>
     
   </tbody>

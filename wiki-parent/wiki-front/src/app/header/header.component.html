@@ -1,21 +1,36 @@
-<div class="container" class="bg-info">
-  <div class="row">
-    <div class="col-sm-2 col-xs-2">
-      <nav class="navbar navbar-light">
-            <button (click)="toggleMenu()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-      </nav>
+<div class="container-fluid bg-light" id="menuTitleAndAuth">
+  
+  <div class="row">    
+    
+    <div class="col-8" >     
+        <h3 class="text-center">Patrimoine Digital France</h3>     
     </div>
-    <div class="col-sm-6 col-xs-1 d-xs-none d--block" >     
-        <h2 class="text align-self-center">Wiki Patrimoine Digital France</h2>     
-    </div>
-    <div class="col-sm-4 col-xs-5">
+
+    <div class="col-4">
       <app-authentication></app-authentication>
     </div>
+
   </div>
+
+  <div class="row">
+    
+    <nav class="navbar navbar-light d-xs-inline d-md-none">
+      <button (click)="toggleMenu()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <nav class="navbar navbar-light nav-pills nav-fill flex-column flex-md-row burgerMenu d-none d-md-flex">
+        <a (click)="toggleMenu()" *ngFor="let itemMenu of menuService.getList('header')" class="nav-link nav-item {{itemMenu === selectedMenu ? 'active':''}}" (click)="selectMenu(itemMenu)" routerLink="{{itemMenu.path}}">{{itemMenu.name}}</a>
+    </nav>
+
+  </div>
+
 </div>
-<nav class="nav nav-pills nav-fill flex-column flex-md-row monMenu">
+
+<div id="menuNavSecondary">
+  <nav class="navbar navbar-light nav-pills nav-fill flex-column flex-md-row d-xs-inline d-md-none burgerMenu">
     <a (click)="toggleMenu()" *ngFor="let itemMenu of menuService.getList('header')" class="nav-link nav-item {{itemMenu === selectedMenu ? 'active':''}}" (click)="selectMenu(itemMenu)" routerLink="{{itemMenu.path}}">{{itemMenu.name}}</a>
-</nav>
+  </nav>
+</div>

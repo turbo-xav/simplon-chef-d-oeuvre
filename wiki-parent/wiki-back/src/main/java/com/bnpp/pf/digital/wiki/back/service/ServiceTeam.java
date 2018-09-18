@@ -68,15 +68,16 @@ public class ServiceTeam implements IServiceTeam {
 		}
     	
     	
-    	
-    	Team teamInBddBeforeSaving = teamRepository.findOne(team.getId());
-    	if(teamInBddBeforeSaving.getTeam() == null && team.getTeam() != null) {
-    		throw new FunctionnalException("One top team is required, you can't affect this team as a child of another");
+    	if(team.getId() != 0) {
+    		Team teamInBddBeforeSaving = teamRepository.findOne(team.getId());
+	    	if(teamInBddBeforeSaving.getTeam() == null && team.getTeam() != null) {
+	    		throw new FunctionnalException("One top team is required, you can't affect this team as a child of another");
+	    	}
     	}
     	
     	
     	
-		return teamRepository.save(team);		
+    	return teamRepository.save(team);		
     }
     
     /* (non-Javadoc)

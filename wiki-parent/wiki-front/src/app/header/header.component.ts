@@ -26,25 +26,28 @@ export class HeaderComponent implements OnInit {
         break;
       }
     }
-
-    jquery(window).bind('resize', function() {
-      if (jquery('.navbar-toggler:visible').length > 0) {
-        jquery('.monMenu').fadeOut(500);
-      } else {
-        jquery('.monMenu').fadeIn(500);
-      }
-    });
+    this.detectMenu();
+    jquery(window).bind('resize', this.detectMenu);
   }
+
+  detectMenu() {
+    if (jquery('.navbar-toggler:visible').length > 0) {
+      jquery('.burgerMenu').fadeOut(250);
+    } else {
+      jquery('.burgerMenu').fadeIn(250);
+    }
+  }
+
   selectMenu (itemMenu: ItemMenu) {
      this.menuService.selectedMenu = itemMenu;
   }
 
   toggleMenu() {
-    if (jquery('.navbar-toggler:visible').length > 0) {
-      if ( jquery('.monMenu:visible').length) {
-        jquery('.monMenu').fadeOut(500);
+   if (jquery('.navbar-toggler:visible').length > 0) {
+      if ( jquery('.burgerMenu:visible').length) {
+        jquery('.burgerMenu').fadeOut(500);
       } else {
-        jquery('.monMenu').fadeIn(500);
+        jquery('.burgerMenu').fadeIn(500);
       }
     }
   }

@@ -17,12 +17,16 @@ export class AuthenticationComponent implements OnInit {
 
   error: string = null;
 
-  public userSubject:  Subject<User>;
+  //public user: User = null;
+
+  // public userSubject:  Subject<User>;
 
   public get user() {
     const user = this.authService.getUser();
+    //console.log(user);
     return user;
   }
+
 
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
 
