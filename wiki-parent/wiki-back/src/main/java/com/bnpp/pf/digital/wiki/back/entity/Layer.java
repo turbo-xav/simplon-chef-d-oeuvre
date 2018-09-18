@@ -9,14 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "wiki_tbl_environnment")
-public class Environ {
+@Table(name = "wiki_tbl_layer")
+
+public class Layer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -24,21 +28,32 @@ public class Environ {
 	@Column(length = 200, unique = true)
 	private String name;
 
-	
-	// Relation with Layer
+	// Relation with Server
 	@JsonIgnore
-	@OneToMany(mappedBy = "environ", fetch = FetchType.LAZY)
-	private List<Layer> layers = new ArrayList<Layer>();
+	@OneToMany(mappedBy = "layer", fetch = FetchType.LAZY)
+	private List<Server> servers = new ArrayList<Server>();
 
 	
+	// Relation with Environment
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_environ")
+	private Environ environ;
 	
 	
-	public List<Layer> getLayers() {
-		return layers;
+	public List<Server> getServers() {
+		return servers;
 	}
 
-	public void setLayers(List<Layer> layers) {
-		this.layers = layers;
+	public void setServers(List<Server> servers) {
+		this.servers = servers;
+	}
+
+	public Environ getEnviron() {
+		return environ;
+	}
+
+	public void setEnviron(Environ environ) {
+		this.environ = environ;
 	}
 
 	public int getId() {
@@ -59,7 +74,7 @@ public class Environ {
 
 	@Override
 	public String toString() {
-		return "Environ [id=" + id + ", name=" + name + ", layers=" + layers + "]";
+		return "Layer [id=" + id + ", name=" + name + ", servers=" + servers + ", environ=" + environ + "]";
 	}
 
 }

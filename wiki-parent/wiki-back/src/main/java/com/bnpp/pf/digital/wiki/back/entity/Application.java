@@ -14,15 +14,18 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "wiki_tbl_application")
+
 public class Application {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 
 	@Column(length = 20, unique = true)
@@ -31,16 +34,14 @@ public class Application {
 	@Column(length = 200, unique = true)
 	private String title;
 
-	@Column(length = 500, unique = true)
+	@Column(length = 500)
 	private String description;
 
-	// Relation with Servers
+	// Relation with Diagnostic
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "appli_server", joinColumns = {
-			@JoinColumn(name = "fk_appli", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "fk_server", referencedColumnName = "id") })
-	private List<Server> servers = new ArrayList<Server>();
+    @OneToMany(mappedBy = "application",fetch=FetchType.LAZY)    
+    private List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();   
+    
 
 	// Default constructor
 	public Application() {
@@ -78,18 +79,20 @@ public class Application {
 		this.description = description;
 	}
 
-	public List<Server> getServers() {
-		return servers;
+	public List<Diagnostic> getDiagnostics() {
+		return diagnostics;
 	}
 
-	public void setServers(List<Server> servers) {
-		this.servers = servers;
+	public void setDiagnostics(List<Diagnostic> diagnostics) {
+		this.diagnostics = diagnostics;
 	}
 
 	@Override
 	public String toString() {
 		return "Application [id=" + id + ", codeApp=" + codeApp + ", title=" + title + ", description=" + description
-				+ ", servers=" + servers + "]";
+				+ ", diagnostics=" + diagnostics + "]";
 	}
+
+
 
 }
