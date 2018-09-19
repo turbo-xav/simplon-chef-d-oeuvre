@@ -1,3 +1,5 @@
+import { ApplicationService } from './services/application.service';
+import { EnvironmentService } from './services/environment.service';
 import { FonctionService } from './services/fonction.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -63,8 +65,15 @@ import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagno
 import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
 import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 
+import { EnvironnementComponent } from './admin/diagnostic/environnement/environnement.component';
+import { EnvironnementEditComponent } from './admin/diagnostic/environnement/environnement-edit/environnement-edit.component';
+import { ApplicationComponent } from './admin/diagnostic/application/application.component';
+import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
+import { LayerComponent } from './admin/diagnostic/layer/layer.component';
+import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
+
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -102,8 +111,20 @@ export function initializeApp(appConfig: AppConfig) {
     FonctionEditComponent,
     DiagnosticViewVisitorComponent,
     DiagnosticEditComponent,
+<<<<<<< HEAD
+    TestComponent,
+    AccountUpdateComponent,
+    EnvironnementComponent,
+    EnvironnementEditComponent,
+    ApplicationComponent,
+    ApplicationEditComponent,
+    LayerComponent,
+    LayerEditComponent
+
+=======
     AccountUpdateComponent,
     NavBarComponent
+>>>>>>> fcc93fc5e9b5297bbca7fe964aaa093e55c64e48
   ],
   imports: [
     BrowserModule,
@@ -131,6 +152,8 @@ providers: [
   OrganisationnalChartService,
   FonctionService,
   MemberService,
+  EnvironmentService,
+  ApplicationService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,

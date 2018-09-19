@@ -25,6 +25,10 @@ import { MemberComponent } from './admin/organisationnal-chart/member/member.com
 import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
 import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
+import { EnvironnementComponent } from './admin/diagnostic/environnement/environnement.component';
+import { EnvironnementEditComponent } from './admin/diagnostic/environnement/environnement-edit/environnement-edit.component';
+import { ApplicationComponent } from './admin/diagnostic/application/application.component';
+import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
 
 
 
@@ -71,6 +75,14 @@ const appRoutes: Routes = [
     { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
     { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
     { path: 'diagnostic' , component: DiagnosticViewVisitorComponent },
+
+    { path: 'admin/diagnostic/environnement', component: EnvironnementComponent },
+  { path: 'admin/diagnostic/environnement/edit', component: EnvironnementEditComponent },
+  { path: 'admin/diagnostic/environnement/edit/:id', component: EnvironnementEditComponent },
+
+  { path: 'admin/diagnostic/application', component: ApplicationComponent },
+  { path: 'admin/diagnostic/application/edit', component: ApplicationEditComponent },
+  { path: 'admin/diagnostic/application/edit/:id', component: ApplicationEditComponent },
 
   ];
 

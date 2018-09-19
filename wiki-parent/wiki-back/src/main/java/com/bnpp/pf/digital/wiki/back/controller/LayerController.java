@@ -14,110 +14,102 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnpp.pf.digital.wiki.back.entity.Environ;
+import com.bnpp.pf.digital.wiki.back.entity.Application;
 import com.bnpp.pf.digital.wiki.back.entity.Layer;
-import com.bnpp.pf.digital.wiki.back.service.IServiceEnviron;
+import com.bnpp.pf.digital.wiki.back.service.IServiceLayer;
 
 @RestController
-@RequestMapping("/environment")
-public class EnvironController {
+@RequestMapping("/layer")
+public class LayerController {
 
-	private static final String LISTING_ERROR_MSG = "get list of environments is not possible, please verify your database.";
+	private static final String LISTING_ERROR_MSG = "get list of layers is not possible, please verify your database.";
 
-	private static final String GETTING_ERROR_MSG = "get this environment is not possible, please verify your database.";
+	private static final String GETTING_ERROR_MSG = "get this layer is not possible, please verify your database.";
 
-	private static final String DELETING_BY_ID_ERROR_MSG = "delete this environment is not possible, please verify your database.";
+	private static final String DELETING_BY_ID_ERROR_MSG = "delete this layer is not possible, please verify your database.";
 
-	private static final String CREATING_ERROR_MSG = "creating this environment is not possible, please verify your database.";
+	private static final String CREATING_ERROR_MSG = "creating this layer is not possible, please verify your database.";
 
-	private static final String UPDATING_ERROR_MSG = "updating this environment is not possible, please verify your database.";
+	private static final String UPDATING_ERROR_MSG = "updating this layer is not possible, please verify your database.";
 
-	private static final String CREATING_INTERITY_ERROR_MSG = "creating this environment is not possible, please verify if you are not create an exiting environment.";
+	private static final String CREATING_INTERITY_ERROR_MSG = "creating this layer is not possible, please verify if you are not create an exiting layer.";
 
-	private static final String UPDATING_INTERITY_ERROR_MSG = "updating this environment is not possible, please verify if you are not update a environment with the same name.";
+	private static final String UPDATING_INTERITY_ERROR_MSG = "updating this layer is not possible, please verify if you are not update a layer with the same name.";
 
-	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "creating this environment is not possible, please verify your datas.";
+	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "creating this layer is not possible, please verify your datas.";
 
-	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this environment is not possible, please verify your datas.";
+	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this layer is not possible, please verify your datas.";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this environment.";
-	
-	private static final String DELETING_BY_ID_INTEGRITY_ERROR_MSG = "Please verify if a layer page is not linked to this environment.";
+	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this layer.";
 
 	@Autowired
-	private IServiceEnviron serviceEnviron;
-
+	private IServiceLayer serviceLayer;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getAll() {
 
 		try {
-			List<Environ> environs = serviceEnviron.findAll();
-			return new ResponseEntity<List<Environ>>(environs, HttpStatus.OK);
+			List<Layer> layers = serviceLayer.findAll();
+			return new ResponseEntity<List<Layer>>(layers, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
 	@RequestMapping(path = "{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getById(@PathVariable("id") int id) {
 		try {
-			Environ environ = serviceEnviron.getById(id);
-			return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+			Layer layer = serviceLayer.getById(id);
+			return new ResponseEntity<Layer>(layer, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-
 	@RequestMapping(path = "name/{name}", method = RequestMethod.GET)
 	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getByName(@PathVariable("name") String name) {
 
 		try {
-			List<Environ> environs = serviceEnviron.getByName(name);
-			return new ResponseEntity<List<Environ>>(environs, HttpStatus.OK);
+			List<Layer> layers = serviceLayer.getByName(name);
+			return new ResponseEntity<List<Layer>>(layers, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	
 	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<?> deleteById(@PathVariable("id") int id) {
 		try {
-			serviceEnviron.deleteById(id);
+			serviceLayer.deleteById(id);
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
-		} catch(DataIntegrityViolationException e) {
-			System.out.println("1");
-			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_INTEGRITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
-		}
-		catch (DataAccessException e) {
-			System.out.println("2");
+		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			System.out.println("3");
 			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> insert(@RequestBody Environ environ) {
+	public ResponseEntity<?> insert(@RequestBody Layer layer) {
 		try {
-			if (environ.getName().isEmpty()) {
+			if (layer.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
-				environ = serviceEnviron.save(environ);
-				return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+				layer = serviceLayer.save(layer);
+				return new ResponseEntity<Integer>(layer.getId(), HttpStatus.OK);
 			}
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -127,16 +119,16 @@ public class EnvironController {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Environ environ) {
+	public ResponseEntity<?> update(@RequestBody Layer layer) {
 		try {
-			if (environ.getName().isEmpty()) {
+			if (layer.getName().isEmpty()) {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
-				environ = serviceEnviron.save(environ);
-				return new ResponseEntity<Environ>(environ, HttpStatus.OK);
+				layer = serviceLayer.save(layer);
+				return new ResponseEntity<Layer>(layer, HttpStatus.OK);
 			}
 
 		} catch (DataIntegrityViolationException e) {
@@ -148,5 +140,13 @@ public class EnvironController {
 		}
 
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,0 +1,31 @@
+<h3> Add an environment</h3>
+
+<p>
+  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/environnement/"><< Back to list of environments</a>
+</p>
+
+<ng-container *ngIf="environment != null">
+<form class="needs-validation" novalidate [formGroup]="envirForm">
+<fieldSet>
+  <legend>Environment</legend>
+</fieldSet>
+  <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+  <div class="row">
+    <div class="col-5">
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="name">Name : (*)</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="name" [(ngModel)]="environment.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of environment" />
+          <small class="form-text text-muted">This field is required </small>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+              <div *ngIf="name.errors.required">Choose a name for this environnment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7">
+        <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
+    </div>
+  </div>
+</form>
+</ng-container>
