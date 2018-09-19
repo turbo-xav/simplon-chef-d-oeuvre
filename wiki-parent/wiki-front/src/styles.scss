@@ -1,6 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 /* You can add global styles to this file, and also import other style files */
+a{
+    cursor:pointer;
+}
 .errorMsg {
     color:red;
 }
@@ -44,23 +47,23 @@ span.memberInfos {
 
 .nodeCase {
     box-shadow: 5px 5px;
-    background-color: antiquewhite;
+    background-color:#aaccf1;
     border-radius: 10%;
     width:100px;
     font-size:8px;
+    opacity:.7;
 }
 
 .selectedCase {
     background-color:#DDDDDD;
-    opacity: 20%;
+    opacity:.7;
     border:.5px solid black;
 }
 
 
 h3{
 	
-	margin: 1% auto 0;
-    text-transform: uppercase;
+	margin: 1% auto 0;    
     text-align: center;
 	font-style: italic;
   	font-size: 2em;

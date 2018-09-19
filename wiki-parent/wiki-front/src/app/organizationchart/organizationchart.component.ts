@@ -1,10 +1,8 @@
-import { takeUntil } from 'rxjs/operators';
-import { TeamService } from './../services/team.service';
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
 import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
-
+import * as jquery from 'jquery';
 
 declare let google: any;
 @Component({
@@ -41,15 +39,15 @@ export class OrganizationchartComponent implements OnInit {
                 this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
-                    console.log('complete subteams : ', subTeams[i].members);
-                    console.log('i = ' + i);
+                    // console.log('complete subteams : ', subTeams[i].members);
+                    // console.log('i = ' + i);
                     if ( i === (subTeams.length - 1) ) {
-                      console.log('i = ' + i);
+                      // console.log('i = ' + i);
                       this.initOrgChart(theTeam);
                     }
                 }
                 ,
-                (error) => { 
+                (error) => {
                   console.log(error);
                 } ,
                 () => {
@@ -77,7 +75,7 @@ export class OrganizationchartComponent implements OnInit {
   }
 
   /**
-    * 
+    *
     * Création de l'arborscence
     *
     * team {
@@ -332,7 +330,7 @@ export class OrganizationchartComponent implements OnInit {
 
     // When the table is selected, update the orgchart.
     // The select handler. Call the chart's getSelection() method
-    function selectHandler() {
+    /*function selectHandler() {
     const selectedItem = chart.getSelection()[0];
     if (selectedItem) {
       for ( let i = 0 ; i < childsRow.length ; i++) {
@@ -340,11 +338,11 @@ export class OrganizationchartComponent implements OnInit {
       }
       chart.collapse(selectedItem.row, false);
     }
-    }
+    }*/
 
     // Listen for the 'select' event, and call my function selectHandler() when
     // the user selects something on the chart.
-    google.visualization.events.addListener(chart, 'select', selectHandler);
+    //google.visualization.events.addListener(chart, 'select', selectHandler);
     }
   }
 }
