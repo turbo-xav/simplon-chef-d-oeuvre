@@ -4,4 +4,6 @@ export interface ItemMenu {
     description: string;
     position: string;
     path: string;
+    img: string;
+    icon: string;
 }

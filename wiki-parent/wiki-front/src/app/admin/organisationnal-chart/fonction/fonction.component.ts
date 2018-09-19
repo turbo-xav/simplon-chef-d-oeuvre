@@ -29,7 +29,9 @@ export class FonctionComponent implements OnInit {
   }
 
   private gererateDataTable(): void {
-    this.dataTableUtils.generate();
+    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+      this.dataTableUtils.generate();
+    }
   }
 
   loadFonctionsMembers() {

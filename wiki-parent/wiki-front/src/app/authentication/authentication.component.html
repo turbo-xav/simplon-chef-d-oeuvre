@@ -1,4 +1,5 @@
 <p *ngIf="error" class="errorMsg">{{error}}</p>
+
 <div *ngIf="user === null; then loginBlock; else userLogOutBlock"></div>
 <ng-template #loginBlock>
   <div class="row">
@@ -38,20 +39,27 @@
   </div>
 </ng-template>
 <ng-template #userLogOutBlock>
-  <p *ngIf="user != null" class="police">
-   
-    <a routerLink="/authentication/account/update" title="update yout account">
-      <img src="/assets/img/account.png" />
-      Bienvenue : {{ user.firstName }} {{ user.lastName }}     
-    </a>
-    <br />
-     Vous êtes connecté(e) en tant que : {{user.role.name}}</p>
- 
-  <p>
-    <a class="italic" routerLink="/admin" title="Go to admin menu"><img src="/assets/img/admin.png" alt="admin menu">Admin</a>
-    |
-    <a (click)="logOut()" title="Quit application">
-      <img src="/assets/img/exit.jpg" alt="disconnect from wiki" />
-    </a>
-  </p>
+  <div class="row">
+    <div class="col-lg-6 col-md-5 col-sm-3 col-xs-1">&nbsp;</div>
+    <div class="col-lg-6 col-md-7 col-sm-9 col-xs-11">
+      <p *ngIf="user != null" class="police">
+      
+        <a routerLink="/authentication/account/update" title="update yout account">
+          <img src="/assets/img/account.png" />
+          Bienvenue :  <strong>{{ user.firstName }} {{ user.lastName }}</strong>     
+        </a>
+        <br />
+        Vous êtes connecté(e) en tant que : <strong>{{user.role.name}}</strong></p>
+    
+      <p>
+        
+        <a class="italic" routerLink="/admin" title="Go to admin menu">
+        <img src="/assets/img/admin.png" alt="admin menu">Admin</a>
+        |
+        <a class="italic" (click)="logOut()" title="Quit application">
+          <img src="/assets/img/exit.jpg" alt="disconnect from wiki" /> Quit
+        </a>
+      </p>
+    </div>
+  </div>
 </ng-template>

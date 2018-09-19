@@ -17,31 +17,43 @@ export class OrganizationchartComponent implements OnInit {
   topTeam: Team;
 
   public constructor(private organisationnalChartService: OrganisationnalChartService) {
-    this.loadTeams();
+
   }
 
   private loadTeams() {
 
+    let theTeam: Team = null;
+
     this.organisationnalChartService.getTopTeam().subscribe(
     (topTeam: Team) => {
-
-      this.topTeam = topTeam;
+       theTeam = topTeam;
 
       this.organisationnalChartService.getMembersFromTeam(topTeam).subscribe(
         (members: Member[]) => {
           topTeam.members = members;
-          
+
           this.organisationnalChartService.getSubTeamsFromTopTeam().subscribe(
             (subTeams: Team[]) => {
-              this.topTeam.teams = subTeams;
+
+              theTeam.teams = subTeams;
               for ( let i = 0 ; i < subTeams.length ; i++) {
+
                 this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
-                   
+                    console.log('complete subteams : ', subTeams[i].members);
+                    console.log('i = ' + i);
                     if ( i === (subTeams.length - 1) ) {
-                      this.initOrgChart();
+                      console.log('i = ' + i);
+                      this.initOrgChart(theTeam);
                     }
+                }
+                ,
+                (error) => { 
+                  console.log(error);
+                } ,
+                () => {
+
                 }
               );
             }
@@ -50,18 +62,18 @@ export class OrganizationchartComponent implements OnInit {
         }
         ,
         (error) => {
-        //  console.log(error);
+            console.log(error);
         }
         ,
         () => {
-         // console.log('complete');
+            console.log('complete');
       }
       );
     });
 }
 
   ngOnInit() {
-
+    this.loadTeams();
   }
 
   /**
@@ -87,11 +99,11 @@ export class OrganizationchartComponent implements OnInit {
     * ]
     *
     *
-    * 
+    *
     */
-  
+
   private createArbo(topTeam: Team) {
-    //console.log('createArbo');
+
     let teamArboAndMembers = null;
 
     if ( topTeam != null ) {
@@ -117,6 +129,9 @@ export class OrganizationchartComponent implements OnInit {
 
           const subTeam: Team = topTeam.teams[i];
 
+          //console.log('team : ', 'i =' + i, topTeam.teams[i]);
+          //console.log('members : ', 'i =' + i, topTeam.teams[i].members);
+
           const subTeamToInsert = {
             id : 'subTeam-' + subTeam.id ,
             name : subTeam.name ,
@@ -125,7 +140,7 @@ export class OrganizationchartComponent implements OnInit {
 
           teamArboAndMembers.teams.push(subTeamToInsert);
 
-
+          //console.log('members :', subTeam.members);
           if ( subTeam.members) {
             if ( subTeam.members.length > 0) {
               for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
@@ -167,11 +182,12 @@ export class OrganizationchartComponent implements OnInit {
     return teamArboAndMembers;
   }
 
-  initOrgChart() {
+  initOrgChart(topTeam) {
 
   google.charts.load('current', {packages: ['orgchart']});
   google.charts.setOnLoadCallback(drawChart);
-  const arboTeam = this.createArbo(this.topTeam);
+
+  const arboTeam = this.createArbo(topTeam);
 
   function drawChart() {
 
@@ -185,7 +201,6 @@ export class OrganizationchartComponent implements OnInit {
 
       const myDatas: any[] = [];
 
-      // console.log(arboTeam);
       if ( arboTeam != null ) {
 
         // Ajout du Top manager

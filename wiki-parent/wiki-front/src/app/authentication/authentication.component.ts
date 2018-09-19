@@ -17,13 +17,8 @@ export class AuthenticationComponent implements OnInit {
 
   error: string = null;
 
-  //public user: User = null;
-
-  // public userSubject:  Subject<User>;
-
   public get user() {
     const user = this.authService.getUser();
-    //console.log(user);
     return user;
   }
 
@@ -55,10 +50,6 @@ export class AuthenticationComponent implements OnInit {
       return;
     }
     this.router.navigateByUrl('/');
-  }
-
-  public isAuth() {
-    return this.authService.isAuth();
   }
 
   public logOut() {
