@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AppConfig } from '../app.config';
 import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs/Observable';
+import { Layer } from '../models/layer';
 
 @Injectable()
 export class EnvironmentService {
@@ -30,4 +31,9 @@ public getEnvironment(id: number): Observable<Environment> {
 public deleteEnvironment(id: number) {
 return this.http.delete(this.restUrl + '/' + id);
 }
+
+public getLayersByEnviron(id: number): Observable<Layer[]> {
+  return this.http.get<Layer[]>(this.restUrl + '/getLayersByEnviron/' + id);
+}
+
 }

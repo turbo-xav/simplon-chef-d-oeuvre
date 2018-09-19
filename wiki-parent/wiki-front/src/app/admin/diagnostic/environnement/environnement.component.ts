@@ -3,6 +3,7 @@ import { Environment } from './../../../models/environment';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 import { EnvironmentService } from '../../../services/environment.service';
+import { Layer } from '../../../models/layer';
 
 
 @Component({
@@ -40,10 +41,21 @@ loadEnvironments() {
   this.environmentService.getEnvironments().subscribe(
     (environments: Environment[]) => {
       this.environments = environments;
-      this.gererateDataTable();
-    },
+      for ( let i = 0 ; i < this.environments.length ; i++) {
+        this.environmentService.getLayersByEnviron(this.environments[i].id).subscribe(
+          (layers: Layer[]) => {
+            this.environments[i].layers = layers;
+          }
+        );
+      }
+   },
     (response: HttpErrorResponse) => {
       this.error = response.error;
+    }
+    ,
+    () => {
+      console.log( this.environments);
+      this.gererateDataTable();
     }
   );
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.bnpp.pf.digital.wiki.back.entity.Environ;
+import com.bnpp.pf.digital.wiki.back.entity.Layer;
 
 
 
@@ -21,3 +22,4 @@ public List<Environ> findAll();
 		
 	void deleteById(int id);
 }
+
