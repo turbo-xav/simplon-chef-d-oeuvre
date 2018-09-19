@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input  } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
@@ -6,8 +6,12 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
   templateUrl: './modal-basic.component.html',
   styleUrls: ['./modal-basic.component.scss']
 })
+
 export class ModalBasicComponent implements AfterViewInit {
-  constructor(private ngxSmartModalService: NgxSmartModalService) {
+
+  @Input() idModal: string;
+
+  constructor(public ngxSmartModalService: NgxSmartModalService) {
   }
 
   ngAfterViewInit() {
@@ -18,6 +22,6 @@ export class ModalBasicComponent implements AfterViewInit {
       prop4: 327652175423
     };
 
-    this.ngxSmartModalService.setModalData(obj, 'modal');
+    this.ngxSmartModalService.setModalData(obj, this.idModal);
   }
 }

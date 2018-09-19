@@ -259,7 +259,7 @@ export class OrganizationchartComponent implements OnInit {
                   const myFunction = [
                     {
                       v: fonctionEc.id ,
-                      f: '<p><span class="memberInfos">' + fonctionEc.name + '</span></p>'
+                      f: '<p><span class="memberInfos" data-function="' + fonctionEc.id + '">' + fonctionEc.name + '</span></p>'
                     }
                     ,
                     myTeam.id           ,
