@@ -62,7 +62,7 @@ export const menuList = [
       'description': '',
       'position': 'admin-business',
       'img': '',
-      'icon': 'hopital-o',
+      'icon': 'fa-hospital-o',
       'path': '/admin/diagnostic',
     }
     ,

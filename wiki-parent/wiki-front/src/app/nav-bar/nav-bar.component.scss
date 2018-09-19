@@ -1,5 +1,13 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
+.navbar {
+  opacity:.5;
+}
+
+.navbar:hover {
+  opacity:1;
+}
+
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;
   width: 36px;
@@ -101,8 +109,7 @@
     padding-bottom: 0;
   }
 
-  .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa {
-    //display: block;
+  .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa {    
     width: 80px;
     margin: 2px auto 4px auto;
     top: 0;
