@@ -1,3 +1,33 @@
+<h3>Manage layers</h3>
 <p>
-  layer works!
+  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic">
+    << Back to manage diagnostics</a> <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/">Add
+      an layer
+  </a>
 </p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+<table class="table table-striped table-sm table-bordered table-hover table-responsive">
+  <caption>
+    <h4>Layers list</h4>
+  </caption>
+  <thead class="thead-light">
+    <tr>
+      <th>Layers name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let layer of layers">
+      <td>{{layer.name}}</td>
+  
+      <td class="alignButton">
+        <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/{{layer.id}}" title="edit layer : {{layer.name}}"><img
+            src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" (click)="delete(layer.id)" title="delete role : {{layer.name}}"><img
+            src="/assets/img/bin.png" /></a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+

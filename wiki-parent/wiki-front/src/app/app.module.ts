@@ -1,3 +1,4 @@
+import { LayerService } from './services/layer.service';
 import { ApplicationService } from './services/application.service';
 import { EnvironmentService } from './services/environment.service';
 import { FonctionService } from './services/fonction.service';
@@ -150,6 +151,7 @@ providers: [
   MemberService,
   EnvironmentService,
   ApplicationService,
+  LayerService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,
