@@ -29,6 +29,8 @@ import { EnvironnementComponent } from './admin/diagnostic/environnement/environ
 import { EnvironnementEditComponent } from './admin/diagnostic/environnement/environnement-edit/environnement-edit.component';
 import { ApplicationComponent } from './admin/diagnostic/application/application.component';
 import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
+import { LayerComponent } from './admin/diagnostic/layer/layer.component';
+import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
 
 
 
@@ -83,6 +85,12 @@ const appRoutes: Routes = [
   { path: 'admin/diagnostic/application', component: ApplicationComponent },
   { path: 'admin/diagnostic/application/edit', component: ApplicationEditComponent },
   { path: 'admin/diagnostic/application/edit/:id', component: ApplicationEditComponent },
+
+  { path: 'admin/diagnostic/layer', component: LayerComponent },
+  { path: 'admin/diagnostic/layer/edit', component: LayerEditComponent },
+  { path: 'admin/diagnostic/layer/edit/:id', component: LayerEditComponent },
+
+
 
   ];
 
