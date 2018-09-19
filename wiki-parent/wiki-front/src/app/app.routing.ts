@@ -24,13 +24,13 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberComponent } from './admin/organisationnal-chart/member/member.component';
 import { MemberEditComponent } from './admin/organisationnal-chart/member/member-edit/member-edit.component';
 import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
-import { TestComponent } from './test/test.component';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
 
 
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '',  redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'authentication/error', component: ErrorComponent     },
     { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
     { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard]        },
@@ -71,7 +71,6 @@ const appRoutes: Routes = [
     { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
     { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
     { path: 'diagnostic' , component: DiagnosticViewVisitorComponent },
-    { path: 'test' , component: TestComponent }
 
   ];
 

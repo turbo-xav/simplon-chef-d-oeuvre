@@ -46,16 +46,18 @@
       
         <a routerLink="/authentication/account/update" title="update yout account">
           <img src="/assets/img/account.png" />
-          Bienvenue : {{ user.firstName }} {{ user.lastName }}     
+          Bienvenue :  <strong>{{ user.firstName }} {{ user.lastName }}</strong>     
         </a>
         <br />
-        Vous êtes connecté(e) en tant que : {{user.role.name}}</p>
+        Vous êtes connecté(e) en tant que : <strong>{{user.role.name}}</strong></p>
     
       <p>
-        <a class="italic" routerLink="/admin" title="Go to admin menu"><img src="/assets/img/admin.png" alt="admin menu">Admin</a>
+        
+        <a class="italic" routerLink="/admin" title="Go to admin menu">
+        <img src="/assets/img/admin.png" alt="admin menu">Admin</a>
         |
-        <a (click)="logOut()" title="Quit application">
-          <img src="/assets/img/exit.jpg" alt="disconnect from wiki" />
+        <a class="italic" (click)="logOut()" title="Quit application">
+          <img src="/assets/img/exit.jpg" alt="disconnect from wiki" /> Quit
         </a>
       </p>
     </div>

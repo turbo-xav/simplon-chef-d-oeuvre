@@ -62,8 +62,8 @@ import { DataTableUtils } from './utils/dataTableUtils';
 import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
 import { OrganisationnalChartService } from './services/organisationnal-chart.service';
-import { TestComponent } from './test/test.component';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -102,8 +102,8 @@ export function initializeApp(appConfig: AppConfig) {
     FonctionEditComponent,
     DiagnosticViewVisitorComponent,
     DiagnosticEditComponent,
-    TestComponent,
-    AccountUpdateComponent
+    AccountUpdateComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

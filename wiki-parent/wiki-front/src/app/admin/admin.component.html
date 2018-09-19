@@ -1,25 +1,17 @@
-<app-test></app-test>
+
 <h2>What do you want to do ?</h2>
 
 <div id="navbarToggleExternalContent">
   <div class="row">
     <div class="col-{{businessMenu.length * 2}}">
         <h4>Business management</h4>
-        <div>
-            <nav class="navbar navbar-light">
-              <a *ngFor="let businessItem of businessMenu" class="nav-link nav-item btn btn-outline-primary"  routerLink="{{businessItem.path}}">{{businessItem.name}}</a>   
-            </nav>
-        </div>   
+        <app-nav-bar [menuList]="businessMenu" navId="businessMenu"></app-nav-bar>  
     </div>
   </div>
   <div class="row">
     <div class="col-{{adminMenu.length * 2}}" *ngIf="user.role.name == 'ADMIN'">
       <h4>Admin management (users and roles)</h4>
-      <div>
-          <nav class="navbar navbar-light">
-              <a *ngFor="let adminItem of adminMenu" class="nav-link nav-item btn btn-outline-primary"  routerLink="{{adminItem.path}}">{{adminItem.name}}</a>         
-          </nav>
-      </div>
+      <app-nav-bar [menuList]="adminMenu" navId="adminMenu"></app-nav-bar>  
     </div>
   </div>
 </div>
