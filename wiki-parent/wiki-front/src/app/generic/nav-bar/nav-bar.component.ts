@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ItemMenu } from '../models/technical/itemMenu';
+import { ItemMenu } from '../../models/technical/itemMenu';
 import * as jquery from 'jquery';
 
 @Component({
@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
     const navId = this.navId;
 
     const component = this;
-
 
     jquery(document).ready(
       function() {

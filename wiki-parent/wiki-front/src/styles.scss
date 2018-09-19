@@ -1,5 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "~ngx-smart-modal/ngx-smart-modal";
+@import "app/app.component";
+
 /* You can add global styles to this file, and also import other style files */
 a{
     cursor:pointer;
@@ -59,7 +62,6 @@ span.memberInfos {
     opacity:.7;
     border:.5px solid black;
 }
-
 
 h3{
 	

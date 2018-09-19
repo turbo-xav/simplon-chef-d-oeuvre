@@ -73,7 +73,10 @@ import { ApplicationEditComponent } from './admin/diagnostic/application/applica
 import { LayerComponent } from './admin/diagnostic/layer/layer.component';
 import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
 
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './generic/nav-bar/nav-bar.component';
+import { ModalBasicComponent } from './generic/modal-basic/modal-basic.component';
+
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -117,7 +120,9 @@ export function initializeApp(appConfig: AppConfig) {
     ApplicationComponent,
     ApplicationEditComponent,
     LayerComponent,
-    LayerEditComponent
+    LayerEditComponent,
+    NavBarComponent,
+    ModalBasicComponent
 
   ],
   imports: [
@@ -130,6 +135,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatMenuModule,
     MatIconModule,
     EditorModule,
+    NgxSmartModalModule,
     routing
   ],
 providers: [
@@ -148,6 +154,7 @@ providers: [
   MemberService,
   EnvironmentService,
   ApplicationService,
+  NgxSmartModalService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,
