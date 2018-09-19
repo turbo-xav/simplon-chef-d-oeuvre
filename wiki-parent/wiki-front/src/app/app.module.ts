@@ -1,3 +1,5 @@
+import { ApplicationService } from './services/application.service';
+import { EnvironmentService } from './services/environment.service';
 import { FonctionService } from './services/fonction.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -64,8 +66,12 @@ import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diag
 import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 import { TestComponent } from './test/test.component';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
-
-
+import { EnvironnementComponent } from './admin/diagnostic/environnement/environnement.component';
+import { EnvironnementEditComponent } from './admin/diagnostic/environnement/environnement-edit/environnement-edit.component';
+import { ApplicationComponent } from './admin/diagnostic/application/application.component';
+import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
+import { LayerComponent } from './admin/diagnostic/layer/layer.component';
+import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
 }
@@ -103,7 +109,14 @@ export function initializeApp(appConfig: AppConfig) {
     DiagnosticViewVisitorComponent,
     DiagnosticEditComponent,
     TestComponent,
-    AccountUpdateComponent
+    AccountUpdateComponent,
+    EnvironnementComponent,
+    EnvironnementEditComponent,
+    ApplicationComponent,
+    ApplicationEditComponent,
+    LayerComponent,
+    LayerEditComponent
+
   ],
   imports: [
     BrowserModule,
@@ -131,6 +144,8 @@ providers: [
   OrganisationnalChartService,
   FonctionService,
   MemberService,
+  EnvironmentService,
+  ApplicationService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,

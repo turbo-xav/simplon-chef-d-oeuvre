@@ -26,7 +26,7 @@ public class Environ {
 
 	
 	// Relation with Layer
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "environ", fetch = FetchType.LAZY)
 	private List<Layer> layers = new ArrayList<Layer>();
 

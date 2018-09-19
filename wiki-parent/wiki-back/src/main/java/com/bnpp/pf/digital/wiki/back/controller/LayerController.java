@@ -109,7 +109,7 @@ public class LayerController {
 				return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} else {
 				layer = serviceLayer.save(layer);
-				return new ResponseEntity<Layer>(layer, HttpStatus.OK);
+				return new ResponseEntity<Integer>(layer.getId(), HttpStatus.OK);
 			}
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);

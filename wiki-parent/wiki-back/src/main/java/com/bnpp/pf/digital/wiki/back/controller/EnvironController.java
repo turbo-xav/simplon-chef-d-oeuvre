@@ -41,6 +41,8 @@ public class EnvironController {
 	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this environment is not possible, please verify your datas.";
 
 	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this environment.";
+	
+	private static final String DELETING_BY_ID_INTEGRITY_ERROR_MSG = "Please verify if a layer page is not linked to this environment.";
 
 	@Autowired
 	private IServiceEnviron serviceEnviron;
@@ -94,9 +96,15 @@ public class EnvironController {
 		try {
 			serviceEnviron.deleteById(id);
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
-		} catch (DataAccessException e) {
+		} catch(DataIntegrityViolationException e) {
+			System.out.println("1");
+			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_INTEGRITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+		catch (DataAccessException e) {
+			System.out.println("2");
 			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
+			System.out.println("3");
 			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
