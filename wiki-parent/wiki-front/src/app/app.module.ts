@@ -111,20 +111,16 @@ export function initializeApp(appConfig: AppConfig) {
     FonctionEditComponent,
     DiagnosticViewVisitorComponent,
     DiagnosticEditComponent,
-<<<<<<< HEAD
-    TestComponent,
+
     AccountUpdateComponent,
     EnvironnementComponent,
     EnvironnementEditComponent,
     ApplicationComponent,
     ApplicationEditComponent,
     LayerComponent,
-    LayerEditComponent
-
-=======
+    LayerEditComponent,
     AccountUpdateComponent,
     NavBarComponent
->>>>>>> fcc93fc5e9b5297bbca7fe964aaa093e55c64e48
   ],
   imports: [
     BrowserModule,

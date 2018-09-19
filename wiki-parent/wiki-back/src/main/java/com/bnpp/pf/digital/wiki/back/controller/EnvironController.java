@@ -148,5 +148,22 @@ public class EnvironController {
 		}
 
 	}
+	
+	
+	@RequestMapping(path = "getLayersByEnviron/{id}",method = RequestMethod.GET)
+	// @ResponseStatus(code=HttpStatus.OK)
+	@ResponseBody
+	public ResponseEntity<?> getLayersByEnviron(@PathVariable("id") int id) {
+
+		try {
+			List<Layer> layers = serviceEnviron.getLayersByEnviron(serviceEnviron.getById(id));
+			return new ResponseEntity<List<Layer>>(layers, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 }
