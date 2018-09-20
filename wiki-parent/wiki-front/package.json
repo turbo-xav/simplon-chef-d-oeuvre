@@ -29,7 +29,9 @@
     "datatables.net": "^1.10.19",
     "datatables.net-bs4": "^1.10.19",
     "jquery": "^3.3.1",
+    "ngx-smart-modal": "^7.0.3",
     "rxjs": "^5.5.6",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

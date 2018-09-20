@@ -1,0 +1,11 @@
+<ngx-smart-modal #myModal identifier="myModal">
+    <h1>Title</h1>
+    <p>Some stuff...</p>
+    <div *ngIf="myModal.hasData()">
+      <pre>{{ myModal.getData() | json }}</pre>
+    </div>
+  
+    <button (click)="myModal.close()">Close</button>
+</ngx-smart-modal>
+
+<button (click)="ngxSmartModalService.getModal('myModal').open()">Open myModal</button>

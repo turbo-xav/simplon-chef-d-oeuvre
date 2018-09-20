@@ -77,7 +77,10 @@ import { ServerEditComponent } from './admin/diagnostic/server/server-edit/serve
 import { ServerService } from './services/server.service';
 import { ServerComponent } from './admin/diagnostic/server/server.component';
 
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './generic/nav-bar/nav-bar.component';
+import { ModalBasicComponent } from './generic/modal-basic/modal-basic.component';
+
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -116,7 +119,6 @@ export function initializeApp(appConfig: AppConfig) {
     FonctionEditComponent,
     DiagnosticViewVisitorComponent,
     DiagnosticEditComponent,
-
     AccountUpdateComponent,
     EnvironnementComponent,
     EnvironnementEditComponent,
@@ -124,10 +126,15 @@ export function initializeApp(appConfig: AppConfig) {
     ApplicationEditComponent,
     LayerComponent,
     LayerEditComponent,
+
     AccountUpdateComponent,
     NavBarComponent,
     ServerComponent,
-    ServerEditComponent
+    ServerEditComponent,
+
+    NavBarComponent,
+    ModalBasicComponent
+
   ],
   imports: [
     BrowserModule,
@@ -139,6 +146,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatMenuModule,
     MatIconModule,
     EditorModule,
+    NgxSmartModalModule,
     routing
   ],
 providers: [
@@ -157,6 +165,7 @@ providers: [
   MemberService,
   EnvironmentService,
   ApplicationService,
+  NgxSmartModalService,
   LayerService,
   ServerService,
   AppConfig,
