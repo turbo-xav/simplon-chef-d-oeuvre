@@ -2,7 +2,7 @@
 <p>
   <a class="btn btn-outline-primary" routerLink="/admin/diagnostic">
     << Back to manage diagnostics</a> <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/">Add
-      an layer
+      a layer
   </a>
 </p>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
@@ -23,7 +23,7 @@
       <td class="alignButton">
         <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/{{layer.id}}" title="edit layer : {{layer.name}}"><img
             src="/assets/img/edit.png" /></a>
-        <a class="btn btn-outline-primary" (click)="delete(layer.id)" title="delete role : {{layer.name}}"><img
+        <a class="btn btn-outline-primary" (click)="delete(layer.id)" title="delete layer : {{layer.name}}"><img
             src="/assets/img/bin.png" /></a>
       </td>
     </tr>

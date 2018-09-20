@@ -30,7 +30,7 @@ export class EnvironnementEditComponent implements OnInit {
               if (environ != null) {
             this.environment = environ;
           } else {
-            this.router.navigateByUrl('admin/environnement');
+            this.router.navigateByUrl('admin/diagnostic/environnement');
           }
         }
       );

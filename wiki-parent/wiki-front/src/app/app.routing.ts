@@ -31,54 +31,56 @@ import { ApplicationComponent } from './admin/diagnostic/application/application
 import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
 import { LayerComponent } from './admin/diagnostic/layer/layer.component';
 import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
+import { ServerComponent } from './admin/diagnostic/server/server.component';
+import { ServerEditComponent } from './admin/diagnostic/server/server-edit/server-edit.component';
 
 
 
 const appRoutes: Routes = [
-    { path: '',  redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'authentication/error', component: ErrorComponent     },
-    { path: 'admin', component: AdminComponent           , canActivate: [AuthGuard]        },
-    { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard]        },
-    { path: 'admin/role/edit/:id', component: RoleEditComponent , canActivate: [AuthGuard]        },
-    { path: 'admin/role/edit', component: RoleEditComponent, canActivate: [AuthGuard]        },
-    { path: 'admin/user', component: UserComponent        , canActivate: [AuthGuard]        },
-    { path: 'admin/user/edit/:id', component: UserEditComponent , canActivate: [AuthGuard]        },
-    { path: 'admin/user/edit', component: UserEditComponent , canActivate: [AuthGuard]        },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'authentication/error', component: ErrorComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard] },
+  { path: 'admin/role/edit/:id', component: RoleEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin/role/edit', component: RoleEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin/user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'admin/user/edit/:id', component: UserEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin/user/edit', component: UserEditComponent, canActivate: [AuthGuard] },
 
-    { path: 'admin/organisationnal-chart', component: OrganisationnalChartComponent , canActivate: [AuthGuard]        },
+  { path: 'admin/organisationnal-chart', component: OrganisationnalChartComponent, canActivate: [AuthGuard] },
 
-    { path: 'admin/organisationnal-chart/team', component: TeamComponent },
-    { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
-    { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
+  { path: 'admin/organisationnal-chart/team', component: TeamComponent },
+  { path: 'admin/organisationnal-chart/team/edit', component: TeamEditComponent },
+  { path: 'admin/organisationnal-chart/team/edit/:id', component: TeamEditComponent },
 
-    { path: 'admin/organisationnal-chart/function', component: FonctionComponent },
-    { path: 'admin/organisationnal-chart/function/edit', component: FonctionEditComponent },
-    { path: 'admin/organisationnal-chart/function/edit/:id', component: FonctionEditComponent },
+  { path: 'admin/organisationnal-chart/function', component: FonctionComponent },
+  { path: 'admin/organisationnal-chart/function/edit', component: FonctionEditComponent },
+  { path: 'admin/organisationnal-chart/function/edit/:id', component: FonctionEditComponent },
 
-    { path: 'admin/organisationnal-chart/member', component: MemberComponent },
-    { path: 'admin/organisationnal-chart/member/edit', component: MemberEditComponent },
-    { path: 'admin/organisationnal-chart/member/edit/:id', component: MemberEditComponent },
+  { path: 'admin/organisationnal-chart/member', component: MemberComponent },
+  { path: 'admin/organisationnal-chart/member/edit', component: MemberEditComponent },
+  { path: 'admin/organisationnal-chart/member/edit/:id', component: MemberEditComponent },
 
 
-    { path: 'admin/guideline', component: GuidelineComponent },
-    { path: 'admin/guideline/edit', component: GuidelineEditComponent },
-    { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
+  { path: 'admin/guideline', component: GuidelineComponent },
+  { path: 'admin/guideline/edit', component: GuidelineEditComponent },
+  { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
 
-    { path: 'authentication/account/create', component: AccountCreateComponent, canActivate: [AuthGuard]        },
-    { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard]        },
-    { path: 'authentication/get-password', component: GetPasswordComponent },
-    { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
-    { path: 'authentication/error/disconnected', component: DisconnectedComponent },
+  { path: 'authentication/account/create', component: AccountCreateComponent, canActivate: [AuthGuard] },
+  { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard] },
+  { path: 'authentication/get-password', component: GetPasswordComponent },
+  { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
+  { path: 'authentication/error/disconnected', component: DisconnectedComponent },
 
-    { path: 'organisationnal-chart', component: OrganizationchartComponent },
+  { path: 'organisationnal-chart', component: OrganizationchartComponent },
 
-    { path: 'admin/diagnostic', component: DiagnosticComponent },
-    { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
-    { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
-    { path: 'diagnostic' , component: DiagnosticViewVisitorComponent },
+  { path: 'admin/diagnostic', component: DiagnosticComponent },
+  { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
+  { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
+  { path: 'diagnostic', component: DiagnosticViewVisitorComponent },
 
-    { path: 'admin/diagnostic/environnement', component: EnvironnementComponent },
+  { path: 'admin/diagnostic/environnement', component: EnvironnementComponent },
   { path: 'admin/diagnostic/environnement/edit', component: EnvironnementEditComponent },
   { path: 'admin/diagnostic/environnement/edit/:id', component: EnvironnementEditComponent },
 
@@ -90,8 +92,11 @@ const appRoutes: Routes = [
   { path: 'admin/diagnostic/layer/edit', component: LayerEditComponent },
   { path: 'admin/diagnostic/layer/edit/:id', component: LayerEditComponent },
 
+  { path: 'admin/diagnostic/server', component: ServerComponent },
+  { path: 'admin/diagnostic/server/edit', component: ServerEditComponent },
+  { path: 'admin/diagnostic/server/edit/:id', component: ServerEditComponent },
 
 
-  ];
+];
 
 export const routing = RouterModule.forRoot(appRoutes/*, { enableTracing: true }*/);

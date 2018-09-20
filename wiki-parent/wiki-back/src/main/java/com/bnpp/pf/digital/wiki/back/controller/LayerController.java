@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.Application;
 import com.bnpp.pf.digital.wiki.back.entity.Layer;
+import com.bnpp.pf.digital.wiki.back.entity.Server;
 import com.bnpp.pf.digital.wiki.back.service.IServiceLayer;
 
 @RestController
@@ -41,6 +42,8 @@ public class LayerController {
 	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this layer is not possible, please verify your datas.";
 
 	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this layer.";
+	
+	private static final String DELETING_BY_ID_INTEGRITY_ERROR_MSG = "Please verify if a server page is not linked to this layer.";
 
 	@Autowired
 	private IServiceLayer serviceLayer;
@@ -94,11 +97,17 @@ public class LayerController {
 		try {
 			serviceLayer.deleteById(id);
 			return new ResponseEntity<Integer>(id, HttpStatus.OK);
-		} catch (DataAccessException e) {
-			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
-		}
+			} catch(DataIntegrityViolationException e) {
+				System.out.println("1");
+				return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_INTEGRITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			}
+			catch (DataAccessException e) {
+				System.out.println("2");
+				return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			} catch (Exception e) {
+				System.out.println("3");
+				return new ResponseEntity<WikiError>(new WikiError(DELETING_BY_ID_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			}
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -142,6 +151,20 @@ public class LayerController {
 	}
 	
 	
+	@RequestMapping(path = "getServersByLayer/{id}",method = RequestMethod.GET)
+	// @ResponseStatus(code=HttpStatus.OK)
+	@ResponseBody
+	public ResponseEntity<?> getServersByLayer(@PathVariable("id") int id) {
+
+		try {
+			List<Server> servers = serviceLayer.getServersByLayer(serviceLayer.getById(id));
+			return new ResponseEntity<List<Server>>(servers, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}	
 	
 	
 	

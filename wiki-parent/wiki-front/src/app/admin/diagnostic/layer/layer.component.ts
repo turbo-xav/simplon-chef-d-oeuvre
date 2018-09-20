@@ -47,47 +47,4 @@ loadLayers() {
     }
   );
 }
-
-
-//   layer: Layer;
-//   environment: Environment[];
-
-//   error: Error = new Error('');
-
-//   layerForm = FormGroup;
-
-//   constructor(
-//     private formBuilder: FormBuilder,
-//     private environmentService: EnvironmentService,
-//     private layerService: LayerService,
-//     private router: Router,
-//     private route: ActivatedRoute
-
-
-//   ) { }
-
-//   ngOnInit() {
-//     const id = this.route.snapshot.paramMap.get('id');
-//     if (id != null) {
-//       this.layerService.getLayer(Number(id)).subscribe(
-//         (layer: Layer) => {
-//           if (layer != null) {
-//             this.layer = layer;
-//           } else {
-//             this.router.navigateByUrl('/admin/layer');
-//           }
-//         }
-//       );
-//     } else {
-//       this.layer = new Layer(null, '');
-//     }
-
-//     this.createFormControls();
-//     this.loadLayers();
-//   }
-
-//   loadLayers() {
-//     this.layerService.getEnv
-//   }
-// }
 }

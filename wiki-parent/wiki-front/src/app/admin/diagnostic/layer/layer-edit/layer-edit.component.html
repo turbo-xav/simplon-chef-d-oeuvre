@@ -1,3 +1,31 @@
+<h3> Add a layer</h3>
+
 <p>
-  layer-edit works!
+  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/environnement/"><< Back to list of layers</a>
 </p>
+
+<ng-container *ngIf="layer != null">
+<form class="needs-validation" novalidate [formGroup]="layerForm">
+<fieldSet>
+  <legend>Layer</legend>
+</fieldSet>
+  <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+  <div class="row">
+    <div class="col-5">
+      <div class="form-group row">
+        <label class="col-4 col-form-label" for="name">Name : (*)</label>
+        <div class="col-8">
+          <input type="text" class="form-control" id="name" [(ngModel)]="layer.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of layer" />
+          <small class="form-text text-muted">This field is required </small>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+              <div *ngIf="name.errors.required">Choose a name for this layer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7">
+        <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
+    </div>
+  </div>
+</form>
+</ng-container>

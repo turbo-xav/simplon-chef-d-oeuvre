@@ -73,8 +73,12 @@ import { ApplicationComponent } from './admin/diagnostic/application/application
 import { ApplicationEditComponent } from './admin/diagnostic/application/application-edit/application-edit.component';
 import { LayerComponent } from './admin/diagnostic/layer/layer.component';
 import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
+import { ServerEditComponent } from './admin/diagnostic/server/server-edit/server-edit.component';
+import { ServerService } from './services/server.service';
+import { ServerComponent } from './admin/diagnostic/server/server.component';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -121,7 +125,9 @@ export function initializeApp(appConfig: AppConfig) {
     LayerComponent,
     LayerEditComponent,
     AccountUpdateComponent,
-    NavBarComponent
+    NavBarComponent,
+    ServerComponent,
+    ServerEditComponent
   ],
   imports: [
     BrowserModule,
@@ -152,6 +158,7 @@ providers: [
   EnvironmentService,
   ApplicationService,
   LayerService,
+  ServerService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,
