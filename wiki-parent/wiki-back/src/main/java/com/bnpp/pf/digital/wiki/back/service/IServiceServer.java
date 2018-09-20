@@ -2,6 +2,7 @@ package com.bnpp.pf.digital.wiki.back.service;
 
 import java.util.List;
 
+import com.bnpp.pf.digital.wiki.back.entity.Diagnostic;
 import com.bnpp.pf.digital.wiki.back.entity.Server;
 
 public interface IServiceServer {
@@ -11,5 +12,7 @@ public interface IServiceServer {
 	List<Server> getByName(String name);
 	Server getById(int id);
 	public void deleteById(int id);
+	
+	public List <Diagnostic> getDiagnosticsByServer(Server server);
 
 }

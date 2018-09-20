@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bnpp.pf.digital.wiki.back.entity.Environ;
 import com.bnpp.pf.digital.wiki.back.entity.Layer;
 import com.bnpp.pf.digital.wiki.back.entity.Server;
 import com.bnpp.pf.digital.wiki.back.repository.LayerRepository;

@@ -17,6 +17,8 @@ public interface DiagnosticRepository extends JpaRepository <Diagnostic,Integer>
 	public Diagnostic getById(int id);
 	
 	public List<Diagnostic> getByUrl(String name);
+	
+	public List <Diagnostic> getDiagnosticsByServer(Server server);
 		
 	void deleteById(int id);
 }

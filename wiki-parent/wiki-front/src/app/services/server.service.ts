@@ -1,3 +1,4 @@
+import { Diagnostic } from './../models/diagnostic';
 import { Server } from './../models/server';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -26,6 +27,10 @@ export class ServerService {
 
   public getServer(id: number): Observable<Server> {
     return this.http.get<Server>(this.restUrl + '/' + id);
+  }
+// récupérer les diag du server
+  public getDiagnosticsByServer(id: number): Observable<Diagnostic[]> {
+    return this.http.get<Diagnostic[]>(this.restUrl + '/getDiagnosticsByServer/' + id);
   }
 
   public deleteServer(id: number) {

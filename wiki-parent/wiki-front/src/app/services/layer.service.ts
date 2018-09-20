@@ -30,6 +30,7 @@ export class LayerService {
     return this.http.get<Layer>(this.restUrl + '/' + id);
   }
 
+  // récupérer les servers de la layer
   public getServersByLayer(id: number): Observable<Server[]> {
     return this.http.get<Server[]>(this.restUrl + '/getServersByLayer/' + id);
   }

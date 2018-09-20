@@ -3,6 +3,7 @@ import { Layer } from './../../../models/layer';
 import { DataTableUtils } from './../../../utils/dataTableUtils';
 import { LayerService } from './../../../services/layer.service';
 import { Component, OnInit } from '@angular/core';
+import { Server } from '../../../models/server';
 
 @Component({
   selector: 'app-layer',
@@ -19,9 +20,6 @@ constructor(
   private dataTableUtils: DataTableUtils
 ) {}
 
-protected gererateDataTable(): void {
-  this.dataTableUtils.generate();
-}
 
 ngOnInit() {
   this.loadLayers();
@@ -36,14 +34,31 @@ delete(id: number) {
   );
 }
 
+private gererateDataTable(): void {
+  if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+    this.dataTableUtils.generate();
+  }
+}
+
 loadLayers() {
   this.layerService.getLayers().subscribe(
     (layers: Layer[]) => {
       this.layers = layers;
-      this.gererateDataTable();
-    },
+      for ( let i = 0 ; i < this.layers.length ; i++) {
+        this.layerService.getServersByLayer(this.layers[i].id).subscribe(
+          (servers: Server[]) => {
+            this.layers[i].servers = servers;
+          }
+        );
+      }
+   },
     (response: HttpErrorResponse) => {
       this.error = response.error;
+    }
+    ,
+    () => {
+      console.log( this.layers);
+      this.gererateDataTable();
     }
   );
 }

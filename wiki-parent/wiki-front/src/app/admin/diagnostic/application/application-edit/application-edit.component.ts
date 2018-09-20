@@ -17,7 +17,7 @@ export class ApplicationEditComponent implements OnInit {
   appliForm: FormGroup;
 
 
-  constructor(private fFormBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private applicationService: ApplicationService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -45,7 +45,7 @@ export class ApplicationEditComponent implements OnInit {
     const title = new FormControl('', [Validators.required]);
     const description = new FormControl('');
 
-    this.appliForm = this.fFormBuilder.group({
+    this.appliForm = this.formBuilder.group({
       codeApp: codeApp,
       title: title,
       description: description

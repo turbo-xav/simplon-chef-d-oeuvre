@@ -1,7 +1,7 @@
+import { environment } from './../../../../../environments/environment';
 import { EnvironmentService } from './../../../../services/environment.service';
 import { LayerService } from './../../../../services/layer.service';
 import { Environment } from './../../../../models/environment';
-import { environment } from './../../../../../environments/environment.prod';
 import { Component, OnInit } from '@angular/core';
 import { Layer } from '../../../../models/layer';
 import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../../node_modules/@angular/forms';
@@ -38,19 +38,19 @@ export class LayerEditComponent implements OnInit {
           if (layer != null) {
             this.layer = layer;
           } else {
-          this.router.navigateByUrl('/admin/diagnostic/layer');
+            this.router.navigateByUrl('/admin/diagnostic/layer');
+          }
         }
-      }
       );
     } else {
-      this.layer = new Layer (null, '');
+      this.layer = new Layer(null, '');
     }
 
     this.createFormControls();
-    this.loadLayers();
+    this.loadEnvironments();
   }
 
-  loadLayers() {
+  loadEnvironments() {
     this.environmentService.getEnvironments().subscribe(
       (environments: Environment[]) => {
         this.environments = environments;
@@ -61,30 +61,45 @@ export class LayerEditComponent implements OnInit {
     );
   }
 
+
   createFormControls() {
     const name = new FormControl('', [Validators.required]);
-    const layerEnvironment = new FormControl('', []);
+   // const environment = new FormControl('');
+   const layerEnvironment = new FormControl('');
 
     this.layerForm = this.formBuilder.group({
-      name : name,
+      name: name,
+      //environment: environment,
+     layerEnvironment : layerEnvironment,
     });
   }
   get name() {
     return this.layerForm.get('name');
   }
 
+  get layerEnvironment() {
+    return this.layerForm.get('layerEnvironment');
+  }
+
+  changeEnvironment(environmentId) {
+    this.layer.environ = new Environment(environmentId, null);
+  }
+
   save() {
-    if ( this.layerForm.valid ) {
+    if (this.layerForm.valid) {
+      // this.layer.name = this.layerForm.value['name'];
+      // this.layer.environment = this.layerForm.value['environment'];
+
       this.layerService.saveLayer(this.layer).subscribe(
         () => {
           this.router.navigateByUrl('/admin/diagnostic/layer');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;
-         // console.log(this.error.errors);
+          // console.log(this.error.errors);
         }
       );
-   }
+    }
   }
 
 }

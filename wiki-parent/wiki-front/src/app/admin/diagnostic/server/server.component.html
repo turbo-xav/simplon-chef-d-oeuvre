@@ -13,13 +13,18 @@
   <thead class="thead-light">
     <tr>
       <th>Servers name</th>
+      <th>Diagnostics name</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let server of servers">
       <td>{{server.name}}</td>
-  
+  <td>
+    <ul *ngFor="let diagnostic of server.diagnostics">
+      <li> {{diagnostic.name}} </li>
+    </ul>
+  </td>
       <td class="alignButton">
         <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/server/edit/{{server.id}}" title="edit server : {{server.name}}"><img
             src="/assets/img/edit.png" /></a>

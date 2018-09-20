@@ -1,7 +1,7 @@
 <h3> Add a layer</h3>
 
 <p>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/environnement/"><< Back to list of layers</a>
+  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/"><< Back to list of layers</a>
 </p>
 
 <ng-container *ngIf="layer != null">
@@ -9,9 +9,13 @@
 <fieldSet>
   <legend>Layer</legend>
 </fieldSet>
+
   <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+ 
   <div class="row">
+
     <div class="col-5">
+
       <div class="form-group row">
         <label class="col-4 col-form-label" for="name">Name : (*)</label>
         <div class="col-8">
@@ -22,10 +26,27 @@
           </div>
         </div>
       </div>
+
+
+      <div class="form-group row">
+          <label class="col-4 col-form-label" for="environ">Environment :</label>
+          <div class="col-8">
+
+              <select *ngIf="layer.environ !== null" id="environ" formControlName="layerEnvironment" [(ngModel)]="layer.environ.id" #environmentSelect>
+                  <option *ngFor="let environ of environments" [value]="environ.id">{{environ.name}}</option>
+              </select>
+
+              <select *ngIf="layer.environ === null" id="environ" formControlName="layerEnvironment" (change)="changeEnvironment(environmentSelect.value)" #environmentSelect>
+                  <option *ngFor="let environ of environments" [value]="environ.id">{{environ.name}}</option>
+              </select>
+              
+              <small class="form-text text-muted">Optional but it is recommanded to allow user actions on Wiki </small>
+          </div>
+          
+      </div>
+
     </div>
-    <div class="col-7">
-        <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
-    </div>
-  </div>
+   </div>
+  <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
 </form>
 </ng-container>

@@ -1,19 +1,27 @@
 import { Layer } from './layer';
+import { Diagnostic } from './diagnostic';
 export class Server {
     id: number = null;
     name: string;
-    layer: Layer = new Layer (null, null);
+    layer: Layer = new Layer(null, null);
+    diagnostics: Diagnostic [] = [];
 
-    public constructor(id: number, name: string) {
+
+    public constructor(
+        id: number,
+        name: string
+    ) {
         this.id = id;
         this.name = name;
     }
 
-    public setLay(layer: Layer): void {
+    public setLayer(layer: Layer): void {
         this.layer  = layer;
     }
 
-    public getLay(): Layer {
+    public getLayer(): Layer {
         return this.layer;
     }
+
+
 }

@@ -1,3 +1,4 @@
+import { Diagnostic } from './../../../models/diagnostic';
 import { ServerService } from './../../../services/server.service';
 import { Error } from './../../../models/technical/error';
 import { Component, OnInit } from '@angular/core';
@@ -13,17 +14,14 @@ import { Server } from '../../../models/server';
 })
 export class ServerComponent implements OnInit {
 
-servers: Server[] = [];
-error: Error;
+  servers: Server[] = [];
+  error: Error;
 
   constructor(
     private serverService: ServerService,
     private dataTableUtils: DataTableUtils
   ) { }
 
-  protected gererateDataTable(): void {
-    this.dataTableUtils.generate();
-  }
 
   ngOnInit() {
     this.loadServers();
@@ -37,14 +35,32 @@ error: Error;
     );
   }
 
+  private gererateDataTable(): void {
+    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+      this.dataTableUtils.generate();
+    }
+  }
+
+
   loadServers() {
     this.serverService.getServers().subscribe(
       (servers: Server[]) => {
         this.servers = servers;
-        this.gererateDataTable();
+        for (let i = 0; i < this.servers.length; i++) {
+          this.serverService.getDiagnosticsByServer(this.servers[i].id).subscribe(
+            (diagnostics: Diagnostic[]) => {
+              this.servers[i].diagnostics = diagnostics;
+            }
+          );
+        }
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;
+      }
+      ,
+      () => {
+        console.log( this.servers);
+        this.gererateDataTable();
       }
     );
   }
