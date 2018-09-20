@@ -34,19 +34,21 @@ import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-ed
 import { ServerComponent } from './admin/diagnostic/server/server.component';
 import { ServerEditComponent } from './admin/diagnostic/server/server-edit/server-edit.component';
 import { GuidelineViewVisitorComponent } from './guideline-view-visitor/guideline-view-visitor.component';
+import { NotFoundComponent } from './error/not-found/not-found.component';
 
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'authentication/error', component: ErrorComponent },
 
   { path: 'authentication/account/create', component: AccountCreateComponent, canActivate: [AuthGuard] },
   { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard] },
   { path: 'authentication/get-password', component: GetPasswordComponent },
+  { path: 'authentication/error/not-found', component: NotFoundComponent },
   { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
   { path: 'authentication/error/disconnected', component: DisconnectedComponent },
+  { path: 'authentication/error', component: ErrorComponent },
 
   { path: 'organisationnal-chart', component: OrganizationchartComponent },
   { path: 'guideline', component: GuidelineViewVisitorComponent },

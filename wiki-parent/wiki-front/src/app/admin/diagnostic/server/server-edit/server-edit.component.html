@@ -1,8 +1,6 @@
 <h3> Add a server</h3>
 
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/server/"><< Back to list of servers</a>
-</p>
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-server-edit'" navId="adminServerEdit"></app-nav-bar>
 
 <ng-container *ngIf="server != null">
 <form class="needs-validation" novalidate [formGroup]="serverForm">

@@ -1,8 +1,5 @@
 <h3>Manage applications</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic"> << Back to manage diagnostics</a>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/application/edit/">Add an application </a>
-</p>
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-application'" navId="adminApplication"></app-nav-bar>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 <table class="table table-striped table-sm table-bordered table-hover table-responsive">
   <caption>

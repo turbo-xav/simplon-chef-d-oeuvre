@@ -259,7 +259,7 @@ export const menuList = [
       'description': '',
       'position': 'admin-user-edit',
       'img': '',
-      'icon': 'fa-backward',
+      'icon': 'fa-plus-square',
       'path': '/admin/user',
     }
     ,
@@ -335,6 +335,16 @@ export const menuList = [
     ,
     {
       'id': 31,
+      'name': 'Manage applications',
+      'description': '',
+      'position': 'admin-diag',
+      'img': '',
+      'icon': 'fa-desktop',
+      'path': '/admin/diagnostic/application',
+    }
+    ,
+    {
+      'id': 32,
       'name': 'Back to admin',
       'description': '',
       'position': 'admin-guideline',
@@ -344,17 +354,17 @@ export const menuList = [
     }
     ,
     {
-      'id': 32,
+      'id': 33,
       'name': 'Add a guideline',
       'description': '',
       'position': 'admin-guideline',
       'img': '',
-      'icon': 'fa-edit',
+      'icon': 'fa-plus-square',
       'path': '/admin/guideline/edit',
     }
     ,
     {
-      'id': 33,
+      'id': 34,
       'name': 'Back to guidelines list',
       'description': '',
       'position': 'admin-guideline-edit',
@@ -364,7 +374,7 @@ export const menuList = [
     }
     ,
     {
-      'id': 34,
+      'id': 35,
       'name': 'Back to admin',
       'description': '',
       'position': 'admin-environnement',
@@ -374,17 +384,17 @@ export const menuList = [
     }
     ,
     {
-      'id': 35,
+      'id': 36,
       'name': 'Add an environnment',
       'description': '',
       'position': 'admin-environnement',
       'img': '',
-      'icon': 'fa-edit',
+      'icon': 'fa-plus-square',
       'path': '/admin/diagnostic/environnement/edit',
     }
     ,
     {
-      'id': 36,
+      'id': 37,
       'name': 'Back to environnments list',
       'description': '',
       'position': 'admin-environnement-edit',
@@ -393,7 +403,7 @@ export const menuList = [
       'path': '/admin/diagnostic/environnement',
     },
     {
-      'id': 37,
+      'id': 38,
       'name': 'Back to diagnostic admin',
       'description': '',
       'position': 'admin-layer',
@@ -402,17 +412,17 @@ export const menuList = [
       'path': '/admin/diagnostic',
     },
     {
-      'id': 38,
+      'id': 39,
       'name': 'Add a layer',
       'description': '',
       'position': 'admin-layer',
       'img': '',
-      'icon': 'fa-edit',
+      'icon': 'fa-plus-square',
       'path': '/admin/diagnostic/layer/edit',
     }
     ,
      {
-      'id': 39,
+      'id': 40,
       'name': 'Back to layers list',
       'description': '',
       'position': 'admin-layer-edit',
@@ -421,5 +431,63 @@ export const menuList = [
       'path': '/admin/diagnostic/layer',
     }
 
+    ,
+    {
+      'id': 41,
+      'name': 'Back to diagnostic admin',
+      'description': '',
+      'position': 'admin-server',
+      'img': '',
+      'icon': 'fa-backward',
+      'path': '/admin/diagnostic',
+    },
+    {
+      'id': 42,
+      'name': 'Add a server',
+      'description': '',
+      'position': 'admin-server',
+      'img': '',
+      'icon': 'fa-plus-square',
+      'path': '/admin/diagnostic/server/edit',
+    }
+    ,
+     {
+      'id': 43,
+      'name': 'Back to servers list',
+      'description': '',
+      'position': 'admin-server-edit',
+      'img': '',
+      'icon': 'fa-backward',
+      'path': '/admin/diagnostic/server',
+    }
+    ,
+    {
+      'id': 44,
+      'name': 'Back to diagnostic admin',
+      'description': '',
+      'position': 'admin-application',
+      'img': '',
+      'icon': 'fa-backward',
+      'path': '/admin/diagnostic',
+    },
+    {
+      'id': 45,
+      'name': 'Add an application',
+      'description': '',
+      'position': 'admin-application',
+      'img': '',
+      'icon': 'fa-plus-square',
+      'path': '/admin/diagnostic/application/edit',
+    }
+    ,
+     {
+      'id': 46,
+      'name': 'Back to applications list',
+      'description': '',
+      'position': 'admin-application-edit',
+      'img': '',
+      'icon': 'fa-backward',
+      'path': '/admin/diagnostic/application',
+    }
 
 ];
