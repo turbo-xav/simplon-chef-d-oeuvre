@@ -1,8 +1,11 @@
 import { Environment } from './environment';
+import { Server } from './server';
+
 export class Layer {
     id: number = null;
     name: string;
     environment: Environment = new Environment(null, null);
+    servers: Server [] = [];
 
 
 

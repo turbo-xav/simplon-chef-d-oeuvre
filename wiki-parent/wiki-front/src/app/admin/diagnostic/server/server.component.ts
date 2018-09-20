@@ -1,9 +1,10 @@
 import { ServerService } from './../../../services/server.service';
 import { Error } from './../../../models/technical/error';
 import { Component, OnInit } from '@angular/core';
-import { Server } from 'http';
+
 import { DataTableUtils } from '../../../utils/dataTableUtils';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Server } from '../../../models/server';
 
 @Component({
   selector: 'app-server',
@@ -25,7 +26,7 @@ error: Error;
   }
 
   ngOnInit() {
-    this.loadServers;
+    this.loadServers();
   }
 
   delete(id: number) {

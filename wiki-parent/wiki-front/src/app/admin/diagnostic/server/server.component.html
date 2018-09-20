@@ -1,3 +1,32 @@
+<h3>Manage servers</h3>
 <p>
-  server works!
+  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic">
+    << Back to manage diagnostics</a> <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/server/edit/">Add
+      a server
+  </a>
 </p>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+<table class="table table-striped table-sm table-bordered table-hover table-responsive">
+  <caption>
+    <h4>Servers list</h4>
+  </caption>
+  <thead class="thead-light">
+    <tr>
+      <th>Servers name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let server of servers">
+      <td>{{server.name}}</td>
+  
+      <td class="alignButton">
+        <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/server/edit/{{server.id}}" title="edit server : {{server.name}}"><img
+            src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" (click)="delete(server.id)" title="delete server : {{server.name}}"><img
+            src="/assets/img/bin.png" /></a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

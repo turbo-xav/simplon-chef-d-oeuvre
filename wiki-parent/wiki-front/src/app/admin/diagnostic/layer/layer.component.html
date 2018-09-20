@@ -13,13 +13,18 @@
   <thead class="thead-light">
     <tr>
       <th>Layers name</th>
+      <th>Servers name</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let layer of layers">
       <td>{{layer.name}}</td>
-  
+      <td>
+        <ul *ngFor="let server of layer.servers">
+          <li> {{server.name}} </li>
+        </ul>
+        </td>   
       <td class="alignButton">
         <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/{{layer.id}}" title="edit layer : {{layer.name}}"><img
             src="/assets/img/edit.png" /></a>
