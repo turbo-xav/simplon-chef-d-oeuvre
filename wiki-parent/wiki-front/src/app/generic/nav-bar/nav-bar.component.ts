@@ -1,5 +1,5 @@
+import { MenuService } from './../../services/menu.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ItemMenu } from '../../models/technical/itemMenu';
 import * as jquery from 'jquery';
 
 @Component({
@@ -9,15 +9,19 @@ import * as jquery from 'jquery';
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() menuList: ItemMenu[];
+  @Input() menuListId: string;
   @Input() navId: string;
 
-  constructor() { }
+  constructor(private menuService: MenuService) {}
+
+
+  public get menuList() {
+    return this.menuService.getList(this.menuListId);
+  }
 
   ngOnInit() {
 
     const navId = this.navId;
-
     const component = this;
 
     jquery(document).ready(

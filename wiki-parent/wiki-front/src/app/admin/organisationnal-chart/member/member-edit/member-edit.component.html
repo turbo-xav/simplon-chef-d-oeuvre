@@ -1,7 +1,5 @@
 <h3>Member edit</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/member"><< Back to list of members</a>
-</p>
+<app-nav-bar [menuListId]="'admin-member-edit'" navId="adminMemberEdit"></app-nav-bar>
 <ng-container *ngIf="member != null">
 <form class="needs-validation" novalidate [formGroup]="memberForm">
 <fieldSet>

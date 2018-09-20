@@ -1,8 +1,5 @@
 <h3>Manage roles</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/user"><< Back to manage users</a>
-  <a class="btn btn-outline-primary" routerLink="/admin/role/edit">Add a role</a>
-</p>
+<app-nav-bar [menuListId]="'admin-role'" navId="adminRole"></app-nav-bar>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 <table class="table table-striped table-sm table-bordered table-hover table-responsive">
   <caption>

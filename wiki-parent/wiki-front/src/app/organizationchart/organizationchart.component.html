@@ -1,4 +1,10 @@
-<h3>Organization Chart</h3>
+<h3><img src="/assets/img/organigrammes.jpg" width="100" height="100" /> Team organizationnal chart</h3>
 <div>
-<div id="organisation"></div>
+    <div id="organisation"></div>
+    <div id="listFonctions" >
+        <app-modal-function *ngFor="let function of functions" [fonction]="function" [idModal]="'function-'+function.id"></app-modal-function>
+    </div>
+    <div id="listMembers" >
+            <app-modal-member *ngFor="let member of members" [member]="member" [idModal]="'member-'+member.id"></app-modal-member>
+        </div>
 </div>

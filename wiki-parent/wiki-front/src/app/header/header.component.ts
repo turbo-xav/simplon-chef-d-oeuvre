@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../services/menu.service';
-import { ItemMenu } from '../models/technical/itemMenu';
 import { Router } from '@angular/router';
 
 
@@ -12,22 +10,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
 
- constructor(public menuService: MenuService,  private router: Router) { }
-
- public get mainMenuList() {
-    return this.menuService.getList('header');
- }
-
- public get selectedMenu(): ItemMenu  {
-    return this.menuService.selectedMenu;
-  }
+ constructor( private router: Router) { }
 
   ngOnInit() {
-  }
-
-
-  selectMenu (itemMenu: ItemMenu) {
-     this.menuService.selectedMenu = itemMenu;
   }
 
 }

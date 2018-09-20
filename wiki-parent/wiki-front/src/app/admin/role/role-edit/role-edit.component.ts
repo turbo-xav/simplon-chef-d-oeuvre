@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { RoleService } from '../../../services/role.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-role-edit',
   templateUrl: './role-edit.component.html',
@@ -16,7 +17,14 @@ export class RoleEditComponent implements OnInit {
   error: Error;
   roleForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private roleService: RoleService, private router: Router, private route: ActivatedRoute ) { }
+  constructor(
+
+                private fb: FormBuilder           ,
+                private roleService: RoleService  ,
+                private router: Router            ,
+                private route: ActivatedRoute
+              ) { }
+
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

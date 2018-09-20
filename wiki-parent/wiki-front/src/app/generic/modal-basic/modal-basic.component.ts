@@ -11,17 +11,20 @@ export class ModalBasicComponent implements AfterViewInit {
 
   @Input() idModal: string;
 
+  private datasObject: Object = null;
+
+  public get datas(): Object {
+    return this.datasObject;
+  }
+
+  public set datas(datas: Object) {
+     this.datasObject = datas;
+  }
+
   constructor(public ngxSmartModalService: NgxSmartModalService) {
   }
 
   ngAfterViewInit() {
-    const obj: Object = {
-      prop1: 'test',
-      prop2: true,
-      prop3: [{a: 'a', b: 'b'}, {c: 'c', d: 'd'}],
-      prop4: 327652175423
-    };
-
-    this.ngxSmartModalService.setModalData(obj, this.idModal);
+    this.ngxSmartModalService.setModalData(this.datas, this.idModal);
   }
 }

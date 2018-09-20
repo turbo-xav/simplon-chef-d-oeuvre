@@ -1,10 +1,6 @@
 <h3>User edit</h3>
-<p>
-    <a class="btn btn-outline-primary" routerLink="/admin/user"><< Back to list of users</a>
-</p>
+<app-nav-bar [menuListId]="'admin-user-edit'" navId="adminUserEdit"></app-nav-bar>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
-
-
 
 <ng-container *ngIf="user != null">
     <form class="needs-validation" novalidate [formGroup]="userForm">

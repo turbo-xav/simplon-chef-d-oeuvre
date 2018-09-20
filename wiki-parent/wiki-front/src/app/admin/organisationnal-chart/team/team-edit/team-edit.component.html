@@ -1,7 +1,5 @@
 <h3>Team edit</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/team"><< Back to list of teams</a>
-</p>
+<app-nav-bar [menuListId]="'admin-team-edit'" navId="adminMemberEdit"></app-nav-bar>
 <ng-container *ngIf="team != null">
 <form class="needs-validation" novalidate [formGroup]="teamForm">
 <fieldSet>

@@ -1,8 +1,6 @@
 <h3> Add an environment</h3>
 
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/environnement/"><< Back to list of environments</a>
-</p>
+<app-nav-bar  [menuListId]="'admin-environnement-edit'" navId="adminEnvironnementEdit"></app-nav-bar>
 
 <ng-container *ngIf="environment != null">
 <form class="needs-validation" novalidate [formGroup]="envirForm">

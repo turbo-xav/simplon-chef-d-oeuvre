@@ -1,7 +1,5 @@
 <h3>Function edit</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/function"><< Back to list of functions</a>
-</p>
+<app-nav-bar [menuListId]="'admin-function-edit'" navId="adminFunctionEdit"></app-nav-bar>
 <ng-container *ngIf="fonction != null">
 <form class="needs-validation" novalidate [formGroup]="roleForm">
 <fieldSet>

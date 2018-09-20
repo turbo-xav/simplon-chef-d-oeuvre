@@ -1,11 +1,15 @@
-<div class="content">
-    <h1> Diagnostics</h1>
-    &nbsp;
-    &nbsp;
-  </div>
 
-<p><a class="btn btn-outline-primary" routerLink="/admin"><< Back to home admin</a></p>
-<p><a class="btn btn-outline-primary" routerLink="/admin/diagnostic/environnement">Manage Environments</a></p>
-<p><a class="btn btn-outline-primary" routerLink="/admin/diagnostic/application">Manage Applications</a></p>
-<p><a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer">Manage Layers</a></p>
-<p><a class="btn btn-outline-primary" routerLink="/admin/diagnostic/server">Manage Servers</a></p>
+<div class="row">
+    <div class="col-12 mx-auto text-center" >
+        <h3>Manage the diagnostics pages</h3>
+        
+        <div class="row">                
+            <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-diag'" navId="adminDiag"></app-nav-bar>
+        </div>
+        
+        <hr />
+        
+        <img src="/assets/img/diag.jpg" alt="Orga">
+    </div>
+</div>
+

@@ -1,9 +1,35 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 @import "~ngx-smart-modal/ngx-smart-modal";
-@import "app/app.component";
+@import "app/app.component"; 
 
-/* You can add global styles to this file, and also import other style files */
+/*
+ * You can add global styles to this file, and also import other style files 
+ */
+
+body{
+    font-family: 'Helvetica Neue', sans-serif; 
+}
+
+ h1 { 
+    color:#5DADE2;    
+    font-size: 46px; 
+    font-weight: 100; 
+    line-height: 50px; 
+    letter-spacing: 1px;
+    
+}
+
+h2, h3{
+	
+	margin: 1% auto 0;    
+    text-align: center;
+	font-style: italic;
+  	font-size: 2em;
+    font-weight: bold, 200;
+    color:#5DADE2;	
+}
+
 a{
     cursor:pointer;
 }
@@ -30,12 +56,17 @@ table.table > tbody > tr:hover > td{
 
 span.responsible{
     color:red;
-    font-size:14px;
+    font-size:10px;
+}
+
+span.function{
+    color:red;
+    font-size:10px;
 }
 
 span.team, span.subTeam, span.memberInfos  {
     color:rgba(228, 119, 105,1);
-    font-size:16px;
+    font-size:14px;
     font-weight:bold;
 }
 
@@ -63,17 +94,12 @@ span.memberInfos {
     border:.5px solid black;
 }
 
-h3{
-	
-	margin: 1% auto 0;    
-    text-align: center;
-	font-style: italic;
-  	font-size: 2em;
-    font-weight: bold, 200;
-    color:#5DADE2;
-	text-shadow: 0 1px white, 0 2px black;
-}
-
 div.dataTables_wrapper div.dataTables_paginate {
     text-align: left;
+}
+
+/* Modal */
+.nsm-content {
+    border:1px solid black;
+    border-radius:15px;
 }

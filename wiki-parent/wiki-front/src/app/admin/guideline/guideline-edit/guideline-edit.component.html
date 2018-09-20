@@ -1,7 +1,5 @@
 <h3>Guideline edit</h3>
-<p>
-  <a class="btn btn-outline-primary" routerLink="/admin/guideline"><< Back to list of guidelines</a>
-</p>
+<app-nav-bar  [menuListId]="'admin-guideline-edit'" navId="adminGuidelineEdit"></app-nav-bar>
 
 <ng-container *ngIf="guideline != null">
   <form class="needs-validation" novalidate [formGroup]="guidelineForm">
