@@ -21,17 +21,14 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
   functions: Fonction[];
   members: Member[];
 
-  public constructor(
-                      private organisationnalChartService: OrganisationnalChartService,
-                       private fonctionService: FonctionService ,
-                       private memberService: MemberService) {
+  public constructor(private organisationnalChartService: OrganisationnalChartService ) {
     this.loadFunctions();
     this.loadMembers();
     this.loadTeams();
   }
 
   private loadMembers() {
-    this.memberService.getMembers().subscribe(
+    this.organisationnalChartService.getMembers().subscribe(
       (members: Member[]) => {
           this.members = members;
       }
@@ -39,7 +36,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
   }
 
   private loadFunctions() {
-    this.fonctionService.getFonctions().subscribe(
+    this.organisationnalChartService.getFonctions().subscribe(
       (functions: Fonction[]) => {
           this.functions = functions;
       }

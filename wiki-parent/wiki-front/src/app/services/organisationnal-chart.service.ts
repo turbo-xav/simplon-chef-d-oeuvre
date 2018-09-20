@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
+import { Fonction } from '../models/fonction';
 
 @Injectable()
 export class OrganisationnalChartService {
@@ -31,5 +32,13 @@ export class OrganisationnalChartService {
 
   public getTeam(id: number): Observable<Team> {
     return this.http.get<Team>(this.restUrl + '/' + id);
+  }
+
+  public getMembers(): Observable<Member[]> {
+    return this.http.get<Member[]>(this.restUrl + '/getMembers');
+  }
+
+  public getFonctions(): Observable<Fonction[]> {
+    return this.http.get<Fonction[]>(this.restUrl + '/getFunctions');
   }
 }
