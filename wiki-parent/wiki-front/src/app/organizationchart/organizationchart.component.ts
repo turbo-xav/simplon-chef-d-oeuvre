@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { MemberService } from './../services/member.service';
+import { FonctionService } from './../services/fonction.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
 import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
 import * as jquery from 'jquery';
+import { Fonction } from '../models/fonction';
 
 declare let google: any;
 @Component({
@@ -10,12 +13,41 @@ declare let google: any;
   templateUrl: './organizationchart.component.html',
   styleUrls: ['./organizationchart.component.scss']
 })
-export class OrganizationchartComponent implements OnInit {
+
+export class OrganizationchartComponent implements OnInit, AfterViewInit {
 
   topTeam: Team;
 
-  public constructor(private organisationnalChartService: OrganisationnalChartService) {
+  functions: Fonction[];
+  members: Member[];
 
+  public constructor(
+                      private organisationnalChartService: OrganisationnalChartService,
+                       private fonctionService: FonctionService ,
+                       private memberService: MemberService) {
+    this.loadFunctions();
+    this.loadMembers();
+    this.loadTeams();
+  }
+
+  private loadMembers() {
+    this.memberService.getMembers().subscribe(
+      (members: Member[]) => {
+          this.members = members;
+      }
+    );
+  }
+
+  private loadFunctions() {
+    this.fonctionService.getFonctions().subscribe(
+      (functions: Fonction[]) => {
+          this.functions = functions;
+      }
+    );
+  }
+
+  public get functionList() {
+    return this.functions;
   }
 
   private loadTeams() {
@@ -39,10 +71,9 @@ export class OrganizationchartComponent implements OnInit {
                 this.organisationnalChartService.getMembersFromTeam(subTeams[i]).subscribe(
                   (myMembers: Member[]) => {
                     subTeams[i].members = myMembers;
-                    // console.log('complete subteams : ', subTeams[i].members);
-                    // console.log('i = ' + i);
+
                     if ( i === (subTeams.length - 1) ) {
-                      // console.log('i = ' + i);
+
                       this.initOrgChart(theTeam);
                     }
                 }
@@ -71,7 +102,11 @@ export class OrganizationchartComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.loadTeams();
+    // this.loadTeams();
+  }
+
+  ngAfterViewInit() {
+    // this.loadTeams();
   }
 
   /**
@@ -152,7 +187,8 @@ export class OrganizationchartComponent implements OnInit {
 
                   if (!functionFound) {
                     functionFound = {
-                      id: functionId,
+                      id:  subTeam.members[j].function.id,
+                      alias: functionId,
                       name  :  subTeam.members[j].function.name,
                       description: subTeam.members[j].function.description,
                       members : []
@@ -163,7 +199,8 @@ export class OrganizationchartComponent implements OnInit {
 
                   functionFound.members.push(
                       {
-                        id          : 'member-' + subTeam.members[j].id ,
+                        id          : subTeam.members[j].id ,
+                        alias       : 'member-' + subTeam.members[j].id ,
                         firstName   : subTeam.members[j].firstName      ,
                         lastName    : subTeam.members[j].lastName       ,
                         mail        : subTeam.members[j].mail           ,
@@ -210,16 +247,22 @@ export class OrganizationchartComponent implements OnInit {
             + '<span class="team">'
             + arboTeam.name
             + '</span>'
-            +  ' :<br />'
-            + '<span class="responsible">'
+            +  '<br />'
+            + '<span title="click here to see infos about ' +
+            arboTeam.functions[0].members[0].firstName
+            + ' '
+            + arboTeam.functions[0].members[0].lastName
+            + '" data-member="'
+            + arboTeam.functions[0].members[0].id
+            + '" class="memberInfos responsible btn btn-sm btn-outline-primary">'
             + arboTeam.functions[0].members[0].firstName
             + ' '
             + arboTeam.functions[0].members[0].lastName
             + '</span>'
+
             + '<br />'
-            + '<a href="mailto:' + arboTeam.functions[0].members[0].mail + '">' + arboTeam.functions[0].members[0].mail + '</a>'
-            // + ' : '
-            // + arboTeam.functions[0].name
+
+            + '<span class="function">' + arboTeam.functions[0].name + '</span>'
             + '</p>'
           },
             '',
@@ -244,7 +287,6 @@ export class OrganizationchartComponent implements OnInit {
                 (myTeam.functions.length > 0) ? 'click top open / close' : 'no personn in this team'
               ];
               myDatas.push(subTeam);
-             // console.log(subTeam);
               indexesToCollapse.push(indexAdd);
               indexAdd++;
 
@@ -258,12 +300,17 @@ export class OrganizationchartComponent implements OnInit {
 
                   const myFunction = [
                     {
-                      v: fonctionEc.id ,
-                      f: '<p><span class="memberInfos" data-function="' + fonctionEc.id + '">' + fonctionEc.name + '</span></p>'
+                      v: fonctionEc.alias ,
+
+                      f: '<p '
+                      + 'class="btn btn-outline-primary btn-sm">'
+                      + '<span  class="functionInfos" data-function="' + fonctionEc.id + '">'
+                      + fonctionEc.name
+                      + '</span></p>'
                     }
                     ,
                     myTeam.id           ,
-                    fonctionEc.description
+                    'Click here to know more about ' + fonctionEc.name + ' Function'
                   ];
 
                   if ( fonctionEc.name !== 'Responsible') {
@@ -278,34 +325,29 @@ export class OrganizationchartComponent implements OnInit {
 
                       const memberEc =  fonctionEc.members[k];
 
+                      const fDetail =  '<p>'
+                      + '<a title="click here to see infos about '
+                      + memberEc.firstName + ' ' + memberEc.lastName
+                      + ' " data-member="' + memberEc.id + '" class="memberInfos responsible btn btn-sm btn-outline-primary">'
+                      + memberEc.firstName + ' ' + memberEc.lastName
+                      + '</a></p>';
+
                       const myMember = [
                         {
-                          v: memberEc.id ,
-                          f: '<p><span class="memberInfos">'
-                          + memberEc.firstName + ' ' + memberEc.lastName
-                          + '<a href="mailto:' + memberEc.mail + '">'
-                          + memberEc.mail
-                          + '</a></span></p>'
+                          v: memberEc.alias ,
+                          f: fDetail
                         }
                         ,
-                        (nextId != null) ? nextId : fonctionEc.id           ,
+                        (nextId != null) ? nextId : fonctionEc.alias           ,
                         'click top open / close'
                       ];
 
                       if ( fonctionEc.name === 'Responsible') {
-                        subTeam[0].f +=
-                         '<p><span class="responsible">'
-                        + memberEc.firstName + ' ' + memberEc.lastName
-                        + '</span>'
-                        + '<br />'
-                        + '<a href="mailto:' + memberEc.mail + '"><img src="/assets/img/mail.png" /></a>'
-                        + '<br /> <img src="/assets/img/tel.png" /> : ' + memberEc.tel
-                        + '</p>'
-                       ;
+                        subTeam[0].f += fDetail;
                       } else {
                         myDatas.push(myMember);
                         indexAdd++;
-                        nextId = memberEc.id;
+                        nextId = memberEc.alias;
                       }
                     }
                   }
@@ -319,9 +361,10 @@ export class OrganizationchartComponent implements OnInit {
 
       // Create the chart.
       const chart = new google.visualization.OrgChart(document.getElementById('organisation'));
-
+      google.visualization.events.addListener(chart, 'ready', readyHandler);
       // Draw the chart, setting the allowHtml option to true for the tooltips.
-      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'large'});
+      chart.draw(data, {allowHtml: true, allowCollapse: true, nodeClass: 'nodeCase', selectedNodeClass: 'selectedCase', size: 'medium'});
+
       const childsRow = chart.getChildrenIndexes(0);
 
       for ( let i = 0 ; i < childsRow.length ; i++) {
@@ -331,18 +374,39 @@ export class OrganizationchartComponent implements OnInit {
     // When the table is selected, update the orgchart.
     // The select handler. Call the chart's getSelection() method
     /*function selectHandler() {
-    const selectedItem = chart.getSelection()[0];
-    if (selectedItem) {
-      for ( let i = 0 ; i < childsRow.length ; i++) {
-        chart.collapse(childsRow[i], true);
+      const selectedItem = chart.getSelection()[0];
+      if (selectedItem) {
+        for ( let i = 0 ; i < childsRow.length ; i++) {
+          chart.collapse(childsRow[i], true);
+        }
+        chart.collapse(selectedItem.row, false);
       }
-      chart.collapse(selectedItem.row, false);
-    }
     }*/
 
     // Listen for the 'select' event, and call my function selectHandler() when
     // the user selects something on the chart.
     //google.visualization.events.addListener(chart, 'select', selectHandler);
+    function readyHandler() {
+
+      // Click on function détails
+      if ( jquery('.functionInfos').length > 0) {
+        jquery('.functionInfos').unbind('click');
+        jquery('.functionInfos').bind('click', function() {
+          jquery('#function-' + jquery(this).data('function') + '-modal-button').trigger('click');
+        });
+      }
+
+      // Click on function détails
+      if ( jquery('.memberInfos').length > 0) {
+        jquery('.memberInfos').unbind('click');
+        jquery('.memberInfos').bind('click', function() {
+          console.log(jquery(this).data('member'));
+          jquery('#member-' + jquery(this).data('member') + '-modal-button').trigger('click');
+        });
+      }
+    }
+
+
     }
   }
 }

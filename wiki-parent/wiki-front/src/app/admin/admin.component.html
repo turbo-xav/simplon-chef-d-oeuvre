@@ -1,5 +1,5 @@
 <div class="row">
-    <h2 class="col-4 mx-auto">Welcome to the admin section</h2>
+    <h3 class="col-4 mx-auto">Welcome to the admin section</h3>
 </div>
 <div class="row">  
   <div class="mx-auto col-8">
@@ -7,15 +7,16 @@
       <div class="col-12 flex-column ">          
           <div class="row">  
             <h4 class="col-2"><img src="/assets/img/business-management.png" />Business</h4>
-            <app-nav-bar class="col-10" [menuList]="businessMenu" navId="businessMenu"></app-nav-bar> 
+            <app-nav-bar class="col-10" [menuListId]="'admin-business'" navId="businessMenu"></app-nav-bar> 
           </div> 
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-12 flex-column" *ngIf="user.role.name == 'ADMIN'">     
         <div class="row">  
           <h4 class="col-2"><img src="/assets/img/admin-management.png" />Admin</h4>
-          <app-nav-bar class="col-10" [menuList]="adminMenu" navId="adminMenu"></app-nav-bar>  
+          <app-nav-bar class="col-10" [menuListId]="'admin-users-and-roles'" navId="adminMenu"></app-nav-bar>  
         </div>
       </div>
     </div>

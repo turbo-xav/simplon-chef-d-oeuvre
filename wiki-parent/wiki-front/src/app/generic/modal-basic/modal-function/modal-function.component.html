@@ -1,0 +1,15 @@
+<ngx-smart-modal #functionModal identifier="{{idModal}}">
+  <div *ngIf="functionModal.hasData()">
+      <h6>What is a {{ functionModal.getData().name}} ?</h6>
+      <div [innerHtml]="functionModal.getData().description"></div>     
+  </div>  
+  
+  <button class="btn btn-sm btn-outline-primary" (click)="functionModal.close()">Close</button>
+   
+</ngx-smart-modal>
+
+<div class="d-none">
+  <button id="{{idModal}}-modal-button" class="btn btn-outline-primary btn-sm" (click)="ngxSmartModalService.getModal(idModal).open()">
+    Open myModal
+  </button>
+</div>

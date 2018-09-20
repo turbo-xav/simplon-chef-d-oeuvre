@@ -81,6 +81,9 @@ import { NavBarComponent } from './generic/nav-bar/nav-bar.component';
 import { ModalBasicComponent } from './generic/modal-basic/modal-basic.component';
 
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+import { ModalFunctionComponent } from './generic/modal-basic/modal-function/modal-function.component';
+import { ModalMemberComponent } from './generic/modal-basic/modal-member/modal-member.component';
+import { GuidelineViewVisitorComponent } from './guideline-view-visitor/guideline-view-visitor.component';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -133,7 +136,10 @@ export function initializeApp(appConfig: AppConfig) {
     ServerEditComponent,
 
     NavBarComponent,
-    ModalBasicComponent
+    ModalBasicComponent,
+    ModalFunctionComponent,
+    ModalMemberComponent,
+    GuidelineViewVisitorComponent,
 
   ],
   imports: [

@@ -1,0 +1,17 @@
+<ngx-smart-modal #memberModal identifier="{{idModal}}">
+    <div *ngIf="memberModal.hasData()">
+        <h6 class="text-center">{{ memberModal.getData().firstName}} {{ memberModal.getData().lastName}}</h6>
+        <p><img src="/assets/img/tel.png"  /> : {{ memberModal.getData().tel}}</p>
+        <p><img src="/assets/img/mail.png"  /> : {{ memberModal.getData().mail}}</p>
+        <div [innerHtml]="memberModal.getData().description"></div>     
+    </div>  
+    
+    <button class="btn btn-sm btn-outline-primary" (click)="memberModal.close()">Close</button>
+     
+  </ngx-smart-modal>
+  
+  <div class="d-none">
+    <button id="{{idModal}}-modal-button" class="btn btn-outline-primary btn-sm" (click)="ngxSmartModalService.getModal(idModal).open()">
+      Open myModal
+    </button>
+  </div>

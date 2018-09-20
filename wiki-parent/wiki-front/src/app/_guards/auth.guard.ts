@@ -1,3 +1,4 @@
+import { OrganisationnalChartService } from './../services/organisationnal-chart.service';
 import { AdminComponent } from './../admin/admin.component';
 import { AuthService } from '../services/auth.service';
 import { Injectable, Component } from '@angular/core';
@@ -10,8 +11,9 @@ export class AuthGuard implements CanActivate {
 
     canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        //User must be authenticated
+        // User must be authenticated
         if ( !this.authService.isAuth() ) {
+            this.authService.logOut();
             this.router.navigate(['authentication/error/disconnected'], { queryParams: { returnUrl: state.url }});
             return false;
         }
@@ -52,6 +54,10 @@ export class AuthGuard implements CanActivate {
                 authorizedRoles : ['ADMIN' , 'TECHLEAD']
             },
             memberEdit : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            organisationnalChart : {
                 authorizedRoles : ['ADMIN' , 'TECHLEAD']
             }
         };
