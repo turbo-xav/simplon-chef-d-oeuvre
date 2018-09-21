@@ -1,8 +1,15 @@
 package com.bnpp.pf.digital.wiki.back.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -12,12 +19,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bnpp.pf.digital.wiki.back.entity.Guideline;
 import com.bnpp.pf.digital.wiki.back.service.IServiceGuideline;
+import com.bnpp.pf.digital.wiki.back.service.ServiceFileUpload;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.activation.MimetypesFileTypeMap;
 
 //@CrossOrigin(origins = { "http://localhost:4200", "*" })
 //@CrossOrigin(maxAge = 3600)
@@ -47,6 +61,9 @@ public class GuidelineController {
 
 	@Autowired
 	private IServiceGuideline serviceGuideline;
+	
+	@Autowired
+	private ServiceFileUpload fileService;
 
 	public GuidelineController() {
 
@@ -102,7 +119,73 @@ public class GuidelineController {
 	 * @param name
 	 * @return
 	 */
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+	@ResponseBody
+	public ResponseEntity<?> uploadFile(@RequestParam("guideline") String guidelineStr, @RequestPart("file") MultipartFile file) {
+		
+		 try {
+			 String fileName = file.getOriginalFilename();
+			 Guideline guideline = new ObjectMapper().readValue(guidelineStr, Guideline.class);
+			try {
+				
+				if (guideline.getName().isEmpty()) {
+					return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
+				} else {
+					guideline.setFile("guideline-"+guideline.getId()+"-"+file.getOriginalFilename());
+					guideline = serviceGuideline.save(guideline);					
+					if (fileService.saveFile(file, guideline.getFile())) {
+						return new ResponseEntity<Integer>(guideline.getId(), HttpStatus.OK);
+					}
+					else {
+						System.out.println("Pb file");
+					}			
 
+				}
+
+			} catch (DataIntegrityViolationException e) {
+				return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			} catch (DataAccessException e) {
+				return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			} catch (Exception e) {
+				return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+			}		
+			
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		return null;
+		
+	}
+	
+	 @RequestMapping(value = "/download/{id}", method = RequestMethod.GET, produces = "application/jpg")
+	    public @ResponseBody Resource downloadC(@PathVariable("id") int id, HttpServletResponse response) throws FileNotFoundException {
+	        
+		 	File file = fileService.getFile(serviceGuideline.getById(id).getFile());
+		 	
+		 	MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+		 	String contentType = mimetypesFileTypeMap.getContentType(file);
+			response.setContentType(contentType);
+	        response.setHeader("Content-Disposition", "inline; filename=" + file.getName());
+	        response.setHeader("Content-Length", String.valueOf(file.length()));
+	        return new FileSystemResource(file);
+	    }
+	
+	/**
+	  * 
+	  * @param guideline
+	  * @param multipartFile
+	  * @return
+	  */
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> update(@RequestBody Guideline guideline, @RequestParam("file") MultipartFile multipartFile) {

@@ -34,12 +34,17 @@ export class GuidelineComponent implements OnInit {
       }
     );
   }
-deleteGuideline(id: number) {
-this.guidelineservice.deleteGuideline(id).subscribe(
-  () => {
-   this.loadGuidelines();
+
+  deleteGuideline(id: number) {
+    this.guidelineservice.deleteGuideline(id).subscribe(
+      () => {
+      this.loadGuidelines();
+      }
+    );
   }
-);
-}
+
+  download(guideline: Guideline) {
+    console.log('download', guideline.file);
+  }
 
 }

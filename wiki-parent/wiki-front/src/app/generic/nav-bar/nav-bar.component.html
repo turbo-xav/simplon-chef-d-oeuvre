@@ -9,7 +9,7 @@
       <ul class="navbar-nav mr-auto">
           <li *ngFor="let itemMenu of menuList" class="nav-item" routerLinkActive="active">
               <a class="nav-link" routerLink="{{itemMenu.path}}">
-              <i class="fa {{itemMenu.icon}}"></i>
+              <i class="fa {{itemMenu.icon}}"></i>              
               {{itemMenu.name}}               
               <span class="sr-only">(current)</span>
               </a>
