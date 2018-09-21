@@ -1,12 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ServerService } from './../../services/server.service';
-import { ApplicationService } from './../../services/application.service';
 import { Diagnostic } from './../../models/diagnostic';
 import { Component, OnInit } from '@angular/core';
-import { Application } from '../../models/application';
-import { Server } from '../../models/server';
-import { FormGroup, FormBuilder } from '../../../../node_modules/@angular/forms';
-import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { DataTableUtils } from '../../utils/dataTableUtils';
 import { DiagnosticService } from '../../services/diagnostic.service';
 
@@ -36,7 +30,6 @@ export class DiagnosticComponent implements OnInit {
 
   ngOnInit() {
     console.log('cocuoud');
-  
     this.loadDiagnostics();
   }
   delete(id: number) {

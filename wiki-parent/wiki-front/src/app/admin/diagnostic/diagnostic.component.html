@@ -22,9 +22,8 @@
       <th>Code App</th>
       <th>Name of server</th>
       <th>Name of layer </th>
-      <th>Name of layer </th>
-
-      <th></th>
+      <th>Name of environ </th>
+     <th>pp</th>
     </tr>
   </thead>
   <tbody>
@@ -35,11 +34,12 @@
       <td>{{diagnostic.server.layer.name}}</td>
       <td>{{diagnostic.server.layer.environ.name}}</td>
 
-
+      <td>
       <a class="btn btn-outline-primary" routerLink="/admin/diagnostic//edit/{{diagnostic.id}}" title="edit application : {{diagnostic.url}}"><img
           src="/assets/img/edit.png" /></a>
       <a class="btn btn-outline-primary" (click)="delete(diagnostic.id)" title="delete role : {{diagnostic.url}}"><img
           src="/assets/img/bin.png" /></a>
+        </td>
     </tr>
   </tbody>
 </table>
