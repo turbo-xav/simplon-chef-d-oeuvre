@@ -22,7 +22,7 @@
             <td>{{guideline.description}}</td>
             <td>{{guideline.file}}</td>
             <td>{{guideline.type}}</td>
-            <td><i class="fa fa-download fa-3x" (click)="download(guideline)"></i></td>
+            <td><a href="{{getDownloadUrl(guideline)}}" title="Download guideline {{guideline.name}}"><i class="fa fa-download fa-3x"></i></a></td>
             <td><ng-container *ngIf="guideline.user !== null">{{guideline.user.firstName}} {{guideline.user.lastName}}</ng-container></td>
             <td>
               <a class="btn btn-outline-primary" routerLink="/admin/guideline/edit/{{guideline.id}}" routerLinkActive="router-link-active" title="edit guideline : {{guideline.name}}"><img src="/assets/img/edit.png" /></a>

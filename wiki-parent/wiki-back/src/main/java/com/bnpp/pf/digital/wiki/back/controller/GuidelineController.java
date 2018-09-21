@@ -167,7 +167,7 @@ public class GuidelineController {
 	}
 	
 	 @RequestMapping(value = "/download/{id}", method = RequestMethod.GET, produces = "application/jpg")
-	    public @ResponseBody Resource downloadC(@PathVariable("id") int id, HttpServletResponse response) throws FileNotFoundException {
+	    public @ResponseBody Resource download(@PathVariable("id") int id, HttpServletResponse response) throws FileNotFoundException {
 	        
 		 	File file = fileService.getFile(serviceGuideline.getById(id).getFile());
 		 	

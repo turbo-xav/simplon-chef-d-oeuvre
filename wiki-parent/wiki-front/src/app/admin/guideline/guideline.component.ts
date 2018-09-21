@@ -43,8 +43,8 @@ export class GuidelineComponent implements OnInit {
     );
   }
 
-  download(guideline: Guideline) {
-    console.log('download', guideline.file);
+  getDownloadUrl(guideline: Guideline) {
+    return this.guidelineservice.getDownloadUrl(guideline);
   }
 
 }

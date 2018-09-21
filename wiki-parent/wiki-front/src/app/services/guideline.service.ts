@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 import { Guideline } from '../models/guideline';
 import { AppConfig } from '../app.config';
+import { ResponseContentType } from '@angular/http';
 
 @Injectable()
 export class GuidelineService {
@@ -15,14 +16,19 @@ export class GuidelineService {
     const formData = new FormData();
     formData.append('file', fileToUpload);
     formData.append('guideline',  JSON.stringify(guideline));
-    //const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
+
     return this.http.post<Observable<any>>(this.restUrl + '/upload', formData);
 
+    // const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
     /*if (guideline.id != null) {
       return this.http.put<Guideline>(this.restUrl, guideline);
     } else {
       return this.http.post<Guideline>(this.restUrl, guideline);
     }*/
+  }
+
+  public getDownloadUrl(guideline: Guideline): String {
+    return this.restUrl + '/download/' + guideline.id;
   }
 
   public getGuidelines(): Observable<Guideline[]> {
@@ -36,25 +42,5 @@ export class GuidelineService {
   public deleteGuideline(id: number) {
     return this.http.delete(this.restUrl + '/' + id);
   }
-
-  public upload(file) {
-    
-    
-    //const urlFileUpload = 'https://api.cloudinary.com/v1_1/dfexmhgqi/image/upload';
-    const urlFileUpload = 'http://localhost:8080/wiki-back/rest/upload';
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    //formData.append('monParam', 'xavier is the best');
-    
-   // const guideline = new Guideline(1, 'test', 'file', 'tech', 'desc');
-   // formData.append('guideline', JSON.stringify(guideline));
-
-    const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
-
-    this.http.post(urlFileUpload, formData).subscribe( () => { console.log('upload'); } );
-    //return this.http.post<any>(urlFileUpload, formData).subscribe( () => { console.log('upload'); } );
-  }
-
 }
 

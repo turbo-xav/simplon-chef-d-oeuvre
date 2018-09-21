@@ -29,6 +29,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 if (error instanceof HttpErrorResponse) {
                     if ( !navigator.onLine) {
                         this.errorService.addErrors(['navigator is off line']);
+                    } else if (error.status === 200) {
+                        this.errorService.addErrors(['technical error with code status 200']);
                     } else if (error.status === 401) {
                         this.errorService.addErrors(['you are not connected']);
                         this.authService.logOut();
