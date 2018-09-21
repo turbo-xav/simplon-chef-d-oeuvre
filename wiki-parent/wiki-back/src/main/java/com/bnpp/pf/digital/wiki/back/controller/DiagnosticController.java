@@ -53,6 +53,7 @@ public class DiagnosticController {
 
 		try {
 			List<Diagnostic> diagnostics = serviceDiagnostic.findAll();
+			
 			return new ResponseEntity<List<Diagnostic>>(diagnostics, HttpStatus.OK);
 		} catch (DataAccessException e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);

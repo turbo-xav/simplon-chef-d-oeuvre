@@ -20,11 +20,13 @@ constructor(
   private dataTableUtils: DataTableUtils
 ) {}
 
+protected gererateDataTable(): void {
+  this.dataTableUtils.generate();
+}
 
 ngOnInit() {
   this.loadLayers();
-
-}
+ }
 
 delete(id: number) {
   this.layerService.deleteLayer(id).subscribe(
@@ -34,11 +36,6 @@ delete(id: number) {
   );
 }
 
-private gererateDataTable(): void {
-  if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
-    this.dataTableUtils.generate();
-  }
-}
 
 loadLayers() {
   this.layerService.getLayers().subscribe(

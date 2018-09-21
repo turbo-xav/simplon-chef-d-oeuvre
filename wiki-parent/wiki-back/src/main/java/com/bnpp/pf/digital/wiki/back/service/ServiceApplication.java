@@ -40,7 +40,9 @@ public class ServiceApplication implements IServiceApplication {
 		applicationRepository.deleteById(id);
 	}
 
-	
+	/*public List<Application> getAppliAllInfo(){
+		return applicationRepository.getAppliAllInfo();
+	}*/
 }
 
 

@@ -15,6 +15,8 @@ public interface IServiceApplication {
 	List <Application> getByCodeApp(String codeApp);
 	List <Application> getByTitle (String title);
 	
+	//List<Application> getAppliAllInfo();
+	
 	public void deleteById(int id);
 
 }

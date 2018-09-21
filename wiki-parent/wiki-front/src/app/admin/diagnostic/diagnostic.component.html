@@ -1,15 +1,45 @@
-
 <div class="row">
-    <div class="col-12 mx-auto text-center" >
-        <h3>Manage the diagnostics pages</h3>
-        
-        <div class="row">                
-            <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-diag'" navId="adminDiag"></app-nav-bar>
-        </div>
-        
-        <hr />
-        
-        <img src="/assets/img/diag.jpg" alt="Orga">
-    </div>
-</div>
+  <div class="col-12 mx-auto text-center">
+    <h3>Manage the diagnostics pages</h3>
 
+    <div class="row">
+      <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-diag'" navId="adminDiag"></app-nav-bar>
+    </div>
+
+  </div>
+
+
+
+</div>
+<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+<table class="table table-striped table-sm table-bordered table-hover table-responsive">
+  <caption>
+    <h4>Diagnostic list</h4>
+  </caption>
+  <thead class="thead-light">
+    <tr>
+      <th>url</th>
+      <th>Code App</th>
+      <th>Name of server</th>
+      <th>Name of layer </th>
+      <th>Name of layer </th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let diagnostic of diagnostics">
+      <td>{{diagnostic.url}}</td>
+      <td>{{diagnostic.application.codeApp}}</td>
+      <td>{{diagnostic.server.name}}</td>
+      <td>{{diagnostic.server.layer.name}}</td>
+      <td>{{diagnostic.server.layer.environ.name}}</td>
+
+
+      <a class="btn btn-outline-primary" routerLink="/admin/diagnostic//edit/{{diagnostic.id}}" title="edit application : {{diagnostic.url}}"><img
+          src="/assets/img/edit.png" /></a>
+      <a class="btn btn-outline-primary" (click)="delete(diagnostic.id)" title="delete role : {{diagnostic.url}}"><img
+          src="/assets/img/bin.png" /></a>
+    </tr>
+  </tbody>
+</table>

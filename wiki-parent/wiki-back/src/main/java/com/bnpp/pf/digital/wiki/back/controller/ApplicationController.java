@@ -1,5 +1,7 @@
 package com.bnpp.pf.digital.wiki.back.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.Application;
+import com.bnpp.pf.digital.wiki.back.entity.Diagnostic;
 import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.service.IServiceApplication;
 
@@ -42,7 +45,7 @@ public class ApplicationController {
 
 	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this application is not possible, please verify your datas.";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this application.";
+	private static final String MISSING_NAME_ERROR_MSG = "Please specify the name of this application.";
 	
 	private static final String DELETING_BY_ID_INTEGRITY_ERROR_MSG = "Please verify if a diagnostic page is not linked to this application.";
 	
@@ -178,7 +181,34 @@ public class ApplicationController {
 		}
 
 	}
+	
+	/*@RequestMapping(path = "/getAppliAllInfo", method = RequestMethod.GET)
+	@ResponseStatus(code=HttpStatus.OK)
+	@ResponseBody
+	public ResponseEntity<?> getAppliAllInfo() {
 
+		try {
+			List<Application> applications = serviceApplication.getAppliAllInfo();
+			for(Application app : applications) {
+				for(Diagnostic diag: app.getDiagnostics()) {
+					System.out.println(diag.getUrl());
+					
+				}
+			}
+			return new ResponseEntity<List<Application>>(applications, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			System.out.println(e);
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}*/
+
+	
+	
+	
+	
 	
 
 }

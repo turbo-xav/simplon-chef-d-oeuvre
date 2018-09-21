@@ -25,7 +25,6 @@ public class Application {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int id;
 
 	@Column(length = 20, unique = true)
