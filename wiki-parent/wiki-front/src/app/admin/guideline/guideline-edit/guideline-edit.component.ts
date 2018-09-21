@@ -23,12 +23,12 @@ export class GuidelineEditComponent implements OnInit {
   user: User;
   error: Error = new Error('');
   guidelineForm: FormGroup;
+  fileToUpLoad: File = null;
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
     private guidelineService: GuidelineService,
-    private userservice: UserService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -81,13 +81,12 @@ export class GuidelineEditComponent implements OnInit {
   }
 
   save() {
-
     if (this.guidelineForm.valid) {
       const user: User = this.authService.getUser();
       this.guideline.user = user;
-      this.guidelineService.saveGuideline(this.guideline).subscribe(
+      this.guidelineService.saveGuideline(this.guideline, this.fileToUpLoad).subscribe(
         () => {
-          this.router.navigateByUrl('/guideline');
+          this.router.navigateByUrl('/admin/guideline');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;
@@ -98,6 +97,6 @@ export class GuidelineEditComponent implements OnInit {
   }
 
     public  onFileChanged(event) {
-      this.guidelineService.upload(event.target.files[0]);
+      this.fileToUpLoad = event.target.files[0];
   }
 }

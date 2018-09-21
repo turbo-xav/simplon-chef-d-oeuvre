@@ -1,6 +1,7 @@
 package com.bnpp.pf.digital.wiki.back.service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
@@ -9,19 +10,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service("fileService")
 public class ServiceFileUpload {
 
-	public static final String SAVE_LOCATION = "C:/Users/piplo/git/simplon-chef-d-oeuvre/upload/";
+	private static final String SAVE_LOCATION = "C:\\GitRepository\\simplon-chef-d-oeuvre\\download\\";
 	
-	public boolean saveFile(MultipartFile multipartFile){
+
+	public boolean saveFile(MultipartFile multipartFile, String path){
         boolean result = false;
         //set the saved location and create a directory location
         String fileName  = multipartFile.getOriginalFilename();
-        String location = SAVE_LOCATION;
-        File pathFile = new File(location);
-       
-        
+                
         //create the actual file
-        pathFile  = new File(location + fileName);
-     
+        File pathFile  = new File(SAVE_LOCATION + path);
+        
         //save the actual file
         try {
             multipartFile.transferTo(pathFile);
@@ -31,4 +30,12 @@ public class ServiceFileUpload {
         }
         return result;
     }
+	
+	 public File getFile(String filePath) throws FileNotFoundException {
+	        File file = new File(SAVE_LOCATION+filePath);
+	        if (!file.exists()){
+	            throw new FileNotFoundException("file with path: " + filePath + " was not found.");
+	        }
+	        return file;
+	   }
 }

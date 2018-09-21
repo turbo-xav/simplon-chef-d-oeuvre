@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TouchSequence } from 'selenium-webdriver';
 
 
 @Component({
@@ -10,7 +12,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
 
- constructor( private router: Router) { }
+ constructor( private authService: AuthService ) { }
+
+ public get isAuth() {
+   return this.authService.isAuth();
+ }
 
   ngOnInit() {
   }

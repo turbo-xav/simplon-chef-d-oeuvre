@@ -1,8 +1,10 @@
 <p *ngIf="error" class="errorMsg">{{error}}</p>
 
 <div *ngIf="user === null; then loginBlock; else userLogOutBlock"></div>
+
+
 <ng-template #loginBlock>
-  <div class="row">
+  <div class="row border-left border-primary">
     <div class="col-6">
       <form class="needs-validation" novalidate [formGroup]="profileForm">
         <div class="form-group row">
@@ -38,10 +40,12 @@
     </div>
   </div>
 </ng-template>
+
+
 <ng-template #userLogOutBlock>
   <div class="row border-left border-primary">
-    <div class="col-lg-6 col-md-5 col-sm-3 col-xs-1">&nbsp;</div>
-    <div class="col-lg-6 col-md-7 col-sm-9 col-xs-11">
+    <div class="col-lg-1 col-md-5 col-sm-3 col-xs-1">&nbsp;</div>
+    <div class="col-lg-11 col-md-7 col-sm-9 col-xs-11">
       <p *ngIf="user != null" class="police">
       
         <a routerLink="/authentication/account/update" title="update yout account">
