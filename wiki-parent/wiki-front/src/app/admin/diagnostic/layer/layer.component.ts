@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Layer } from './../../../models/layer';
-import { DataTableUtils } from './../../../utils/dataTableUtils';
-import { LayerService } from './../../../services/layer.service';
+import { Layer } from '../../../models/layer';
+import { DataTableUtils } from '../../../utils/dataTableUtils';
+import { LayerService } from '../../../services/layer.service';
 import { Component, OnInit } from '@angular/core';
 import { Server } from '../../../models/server';
 

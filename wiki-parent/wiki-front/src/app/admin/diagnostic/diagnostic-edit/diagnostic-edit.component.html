@@ -1,3 +1,76 @@
-<p>
-  diagnostic-edit works!
-</p>
+<h3> Add a diagnostic</h3>
+
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-diagnostic-edit'" navId="adminDiagnosticEdit"></app-nav-bar>
+
+<ng-container *ngIf="diagnostic != null">
+  <form class="needs-validation" novalidate [formGroup]="diagForm">
+
+    <fieldSet>
+      <legend>Diagnostic</legend>
+    </fieldSet>
+
+    <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+
+    <div class="row">
+
+      <div class="col-5">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="url">URL(*) : </label>
+          <div class="col-8">
+            <input type="url" class="form-control" id="url" [(ngModel)]="diagnostic.url" [ngClass]="{'is-invalid': url.invalid && url.dirty, 'is-valid': url.valid && url.dirty}"
+              formControlName="url" placeholder="http://www.example.com" pattern="https?://.*" size="50" required>
+
+            <small class="form-text text-muted">This field is required </small>
+            <div *ngIf="url.invalid && (url.dirty || url.touched)" class="invalid-feedback">
+              <div *ngIf="url.errors.required">Choose a url for this diagnotic</div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="application">Application :</label>
+          <div class="col-8">
+
+            <select *ngIf="diagnostic.application.id !== null" id="application" formControlName="diagnosticApplication"
+              #applicationSelect>
+              <option *ngFor="let application of applications" [value]="application.id">{{application.codeApp}}</option>
+            </select>
+
+            <select *ngIf="diagnostic.application.id === null" id="application" formControlName="diagnosticApplication"
+              (change)="changeApplication(applicationSelect.value)" #applicationSelect>
+              <option *ngFor="let application of applications" [value]="application.id">{{application.codeApp}}</option>
+            </select>
+
+            <!-- <small class="form-text text-muted">Optional but it is recommanded to allow user actions on Wiki </small> -->
+
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="server">Server :</label>
+          <div class="col-8">
+
+            <select *ngIf="diagnostic.server.id !== null" id="server" formControlName="diagnosticServer" #serverSelect>
+              <option *ngFor="let server of servers" [value]="server.id">{{server.name}}</option>
+            </select>
+
+            <select *ngIf="diagnostic.server.id === null" id="server" formControlName="diagnosticServer" (change)="changeServer(serverSelect.value)"
+              #serverSelect>
+              <option *ngFor="let server of servers" [value]="server.id">{{server.name}}</option>
+            </select>
+
+            <!-- <small class="form-text text-muted">Optional but it is recommanded to allow user actions on Wiki </small> -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
+  </form>
+</ng-container>

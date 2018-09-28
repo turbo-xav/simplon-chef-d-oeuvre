@@ -2,9 +2,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -72,7 +72,7 @@ export class AccountUpdateComponent implements OnInit {
         () => {
           this.noAccount = false;
           this.authService.authUserSubject.next(this.user);
-          //this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/');
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;

@@ -6,6 +6,13 @@
     <h4>Environments list</h4>
   </caption>
   <thead class="thead-light">
+      <tr class="colorLign">
+          <th class="search" colspan="6">
+         <input class="champ" type="text" [(ngModel)]="queryString" id="search" name="search" placeholder="Search an environment" />
+       </th>
+     </tr>
+     <tr class="colorLign">
+     </tr>
     <tr>
       <th>Environments name</th>
       <th>Layers name</th>
@@ -13,10 +20,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let environment of environments">
+    <tr *ngFor="let environment of environments | FilterEnv:queryString ">
       <td>{{environment.name}}</td>
       <td>
-        <ul *ngFor="let layer of environment.layers">
+        <ul *ngFor="let layer of environment.layers" >
           <li> {{layer.name}} </li>
         </ul>
         </td>   

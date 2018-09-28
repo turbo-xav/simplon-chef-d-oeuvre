@@ -23,25 +23,25 @@ import com.bnpp.pf.digital.wiki.back.service.ServiceDiagnostic;
 @RequestMapping("/diagnostic")
 public class DiagnosticController {
 
-	private static final String LISTING_ERROR_MSG = "get list of diagnostics is not possible, please verify your database.";
+	private static final String LISTING_ERROR_MSG = "Get list of diagnostics is not possible, please verify your database.";
 
-	private static final String GETTING_ERROR_MSG = "get this diagnostic is not possible, please verify your database.";
+	private static final String GETTING_ERROR_MSG = "Get this diagnostic is not possible, please verify your database.";
 
-	private static final String DELETING_BY_ID_ERROR_MSG = "delete this diagnostic is not possible, please verify your database.";
+	private static final String DELETING_BY_ID_ERROR_MSG = "Delete this diagnostic is not possible, please verify your database.";
 
-	private static final String CREATING_ERROR_MSG = "creating this diagnostic is not possible, please verify your database.";
+	private static final String CREATING_ERROR_MSG = "Creating this diagnostic is not possible, please verify your database.";
 
-	private static final String UPDATING_ERROR_MSG = "updating this diagnostic is not possible, please verify your database.";
+	private static final String UPDATING_ERROR_MSG = "Updating this diagnostic is not possible, please verify your database.";
 
-	private static final String CREATING_INTERITY_ERROR_MSG = "creating this diagnostic is not possible, please verify if you are not create an exiting diagnostic.";
+	private static final String CREATING_INTERITY_ERROR_MSG = "Creating this diagnostic is not possible, please verify if you are not create an exiting diagnostic.";
 
-	private static final String UPDATING_INTERITY_ERROR_MSG = "updating this diagnostic is not possible, please verify if you are not update a diagnostic with the same name.";
+	private static final String UPDATING_INTERITY_ERROR_MSG = "Updating this diagnostic is not possible, please verify if you are not update a diagnostic with the same name.";
 
-	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "creating this diagnostic is not possible, please verify your datas.";
+	private static final String CREATING_DATA_ACCESS_ERROR_MSG = "Creating this diagnostic is not possible, please verify your datas.";
 
-	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "updating this diagnostic is not possible, please verify your datas.";
+	private static final String UPDATING_DATA_ACCESS_ERROR_MSG = "Updating this diagnostic is not possible, please verify your datas.";
 
-	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this diagnostic.";
+	private static final String MISSING_NAME_ERROR_MSG = "Please specify the name of this diagnostic.";
 
 	@Autowired
 	private IserviceDiagnostic serviceDiagnostic;

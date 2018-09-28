@@ -1,7 +1,7 @@
-import { DataTableUtils } from './../../../utils/dataTableUtils';
-import { Environment } from './../../../models/environment';
+import { DataTableUtils } from '../../../utils/dataTableUtils';
+import { Environment } from '../../../models/environment';
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentService } from '../../../services/environment.service';
 import { Layer } from '../../../models/layer';
 

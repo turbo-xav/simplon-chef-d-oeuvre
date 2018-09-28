@@ -1,6 +1,6 @@
-import { Diagnostic } from './../../../models/diagnostic';
-import { ServerService } from './../../../services/server.service';
-import { Error } from './../../../models/technical/error';
+import { Diagnostic } from '../../../models/diagnostic';
+import { ServerService } from '../../../services/server.service';
+import { Error } from '../../../models/technical/error';
 import { Component, OnInit } from '@angular/core';
 
 import { DataTableUtils } from '../../../utils/dataTableUtils';
@@ -46,22 +46,18 @@ export class ServerComponent implements OnInit {
     this.serverService.getServers().subscribe(
       (servers: Server[]) => {
         this.servers = servers;
-        for (let i = 0; i < this.servers.length; i++) {
-          this.serverService.getDiagnosticsByServer(this.servers[i].id).subscribe(
-            (diagnostics: Diagnostic[]) => {
-              this.servers[i].diagnostics = diagnostics;
-            }
-          );
-        }
+        this.gererateDataTable();
+        // for (let i = 0; i < this.servers.length; i++) {
+        //   this.serverService.getDiagnosticsByServer(this.servers[i].id).subscribe(
+        //     (diagnostics: Diagnostic[]) => {
+        //       this.servers[i].diagnostics = diagnostics;
+        //     }
+        //   );
+        // }
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;
       }
-      ,
-      () => {
-        console.log( this.servers);
-        this.gererateDataTable();
-      }
-    );
+      );
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '../../../../node_modules/@angular/forms';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-get-password',
@@ -38,7 +38,7 @@ export class GetPasswordComponent implements OnInit {
     return this.getForm.get('uid');
   }
 
-  reset(){
+  reset() {
     this.router.navigateByUrl('/');
   }
 

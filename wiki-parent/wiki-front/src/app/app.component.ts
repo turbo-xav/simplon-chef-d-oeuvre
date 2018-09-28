@@ -8,11 +8,11 @@ import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { tap, takeUntil, delay } from 'rxjs/operators';
-import { domRendererFactory3 } from '../../node_modules/@angular/core/src/render3/renderer';
+import { domRendererFactory3 } from '@angular/core/src/render3/renderer';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { map, catchError } from 'rxjs/operators';
-import { Observer } from '../../node_modules/rxjs/Observer';
+import { Observer } from 'rxjs/Observer';
 import { ErrorService } from './services/error.service';
 
 
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
     this.errors = [];
   }
 

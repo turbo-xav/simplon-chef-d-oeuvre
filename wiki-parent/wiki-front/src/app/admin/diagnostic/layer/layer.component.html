@@ -6,23 +6,31 @@
     <h4>Layers list</h4>
   </caption>
   <thead class="thead-light">
+      <tr class="colorLign">
+          <th class="search" colspan="6">
+         <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search a layer" />
+       </th>
+     </tr>
+     <tr class="colorLign">
+     </tr>
     <tr>
       <th>Layers name</th>
-      <th>Servers name</th>
+       <th>Servers name</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let layer of layers">
+    <tr *ngFor="let layer of layers | FilterLayer:queryString">
       <td>{{layer.name}}</td>
+ 
       <td>
         <ul *ngFor="let server of layer.servers">
           <li> {{server.name}} </li>
         </ul>
         </td>   
       <td class="alignButton">
-        <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/{{layer.id}}" title="edit layer : {{layer.name}}"><img
-            src="/assets/img/edit.png" /></a>
+        <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/layer/edit/{{layer.id}}" title="edit layer : {{layer.name}}">
+          <img src="/assets/img/edit.png" /></a>
         <a class="btn btn-outline-primary" (click)="delete(layer.id)" title="delete layer : {{layer.name}}"><img
             src="/assets/img/bin.png" /></a>
       </td>

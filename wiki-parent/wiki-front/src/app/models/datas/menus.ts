@@ -24,7 +24,7 @@ export const menuList = [
       'position': 'header',
       'img': '',
       'icon': 'fa-book',
-      'path': '/guideline',
+      'path': '/guidelineView',
     },
     {
       'id': 4,
@@ -33,7 +33,7 @@ export const menuList = [
       'position': 'header',
       'img': 'hopital-o',
       'icon': 'fa-hospital-o',
-      'path': '/diagnostic',
+      'path': '/diagnosticView',
     }
     ,
     {
@@ -488,6 +488,24 @@ export const menuList = [
       'img': '',
       'icon': 'fa-backward',
       'path': '/admin/diagnostic/application',
+    },
+    {
+      'id': 47,
+      'name': 'Add a diagnostic',
+      'description': '',
+      'position': 'admin-diag',
+      'img': '',
+      'icon': 'fa-plus-square',
+      'path': '/admin/diagnostic/edit',
+    },
+    {
+      'id': 48,
+      'name': 'Back to diagnostics list',
+      'description': '',
+      'position': 'admin-diagnostic-edit',
+      'img': '',
+      'icon': 'fa-backward',
+      'path': '/admin/diagnostic',
     }
 
 ];

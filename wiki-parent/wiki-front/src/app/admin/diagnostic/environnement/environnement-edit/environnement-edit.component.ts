@@ -1,9 +1,9 @@
-import { EnvironmentService } from './../../../../services/environment.service';
-import { Environment } from './../../../../models/environment';
+import { EnvironmentService } from '../../../../services/environment.service';
+import { Environment } from '../../../../models/environment';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '../../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '../../../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-environnement-edit',

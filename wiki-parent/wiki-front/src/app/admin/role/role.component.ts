@@ -2,7 +2,7 @@ import { DataTableUtils } from '../../utils/dataTableUtils';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
-import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import * as jquery from 'jquery';
 import 'datatables.net';
 

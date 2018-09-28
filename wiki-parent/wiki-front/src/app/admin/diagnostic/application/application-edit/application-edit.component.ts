@@ -1,9 +1,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Application } from '../../../../models/application';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApplicationService } from '../../../../services/application.service';
-import { HttpErrorResponse } from '../../../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-application-edit',

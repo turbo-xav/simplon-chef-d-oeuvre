@@ -1,5 +1,5 @@
-import { Diagnostic } from './../models/diagnostic';
-import { Server } from './../models/server';
+import { Diagnostic } from '../models/diagnostic';
+import { Server } from '../models/server';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../app.config';

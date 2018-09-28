@@ -1,5 +1,5 @@
-import { OrganisationnalChartService } from './../services/organisationnal-chart.service';
-import { AdminComponent } from './../admin/admin.component';
+import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
+import { AdminComponent } from '../admin/admin.component';
 import { AuthService } from '../services/auth.service';
 import { Injectable, Component } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';

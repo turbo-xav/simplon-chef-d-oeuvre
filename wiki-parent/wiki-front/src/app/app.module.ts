@@ -63,7 +63,6 @@ import { FonctionEditComponent } from './admin/organisationnal-chart/fonction/fo
 import { MemberService } from './services/member.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DataTableUtils } from './utils/dataTableUtils';
-import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
 import { OrganisationnalChartService } from './services/organisationnal-chart.service';
 import { AccountUpdateComponent } from './authentication/account-update/account-update.component';
@@ -84,9 +83,19 @@ import { ModalBasicComponent } from './generic/modal-basic/modal-basic.component
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { ModalFunctionComponent } from './generic/modal-basic/modal-function/modal-function.component';
 import { ModalMemberComponent } from './generic/modal-basic/modal-member/modal-member.component';
-import { GuidelineViewVisitorComponent } from './guideline-view-visitor/guideline-view-visitor.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
+import { DiagnosticViewVisitorComponent } from './viewVisitor/diagnostic-view-visitor/diagnostic-view-visitor.component';
+import { DiagViewVisitorService } from './services/diag-view-visitor.service';
 
+import { GuidelineViewVisitorComponent } from './viewVisitor/guideline-view-visitor/guideline-view-visitor.component';
+
+
+import { FilterDiagConsult } from './models/technical/searchPipe/filter-diag-consult';
+import { FilterPipe } from './models/technical/searchPipe/filterPipe';
+import { FilterServer } from './models/technical/searchPipe/filter-server';
+import { FilterAppli } from './models/technical/searchPipe/filter-appli';
+import { FilterEnv } from './models/technical/searchPipe/filter-env';
+import { FilterLayer } from './models/technical/searchPipe/filter-layer';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -142,7 +151,14 @@ export function initializeApp(appConfig: AppConfig) {
     ModalFunctionComponent,
     ModalMemberComponent,
     GuidelineViewVisitorComponent,
+    DiagnosticViewVisitorComponent,
     NotFoundComponent,
+    FilterPipe,
+    FilterDiagConsult,
+    FilterServer,
+    FilterAppli,
+    FilterEnv,
+    FilterLayer
 
   ],
   imports: [
@@ -156,7 +172,7 @@ export function initializeApp(appConfig: AppConfig) {
     MatIconModule,
     EditorModule,
     NgxSmartModalModule,
-    routing
+        routing
   ],
 providers: [
   ErrorService ,
@@ -178,6 +194,7 @@ providers: [
   LayerService,
   ServerService,
   DiagnosticService,
+  DiagViewVisitorService,
   AppConfig,
       { provide: APP_INITIALIZER,
         useFactory: initializeApp,

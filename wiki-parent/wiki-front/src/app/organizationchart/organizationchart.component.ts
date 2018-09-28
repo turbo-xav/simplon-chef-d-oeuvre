@@ -1,5 +1,5 @@
-import { MemberService } from './../services/member.service';
-import { FonctionService } from './../services/fonction.service';
+import { MemberService } from '../services/member.service';
+import { FonctionService } from '../services/fonction.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Team } from '../models/team';
 import { Member } from '../models/member';
@@ -159,8 +159,8 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
 
           const subTeam: Team = topTeam.teams[i];
 
-          //console.log('team : ', 'i =' + i, topTeam.teams[i]);
-          //console.log('members : ', 'i =' + i, topTeam.teams[i].members);
+          // console.log('team : ', 'i =' + i, topTeam.teams[i]);
+          // console.log('members : ', 'i =' + i, topTeam.teams[i].members);
 
           const subTeamToInsert = {
             id : 'subTeam-' + subTeam.id ,
@@ -170,7 +170,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
 
           teamArboAndMembers.teams.push(subTeamToInsert);
 
-          //console.log('members :', subTeam.members);
+          // console.log('members :', subTeam.members);
           if ( subTeam.members) {
             if ( subTeam.members.length > 0) {
               for ( let j = 0 ; j < subTeam.members.length ; j++ ) {
@@ -382,7 +382,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
 
     // Listen for the 'select' event, and call my function selectHandler() when
     // the user selects something on the chart.
-    //google.visualization.events.addListener(chart, 'select', selectHandler);
+    // google.visualization.events.addListener(chart, 'select', selectHandler);
     function readyHandler() {
 
       // Click on function détails

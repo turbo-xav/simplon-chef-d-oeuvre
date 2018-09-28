@@ -1,8 +1,7 @@
-import { Layer } from './layer';
-import { Server } from './server';
 import { Application } from './application';
+import { Server } from './server';
 
-export class Diagnostic {
+export class DiagViewVisitor {
     id: number = null;
     url: string;
     application: Application = new Application(null, null, null, null);

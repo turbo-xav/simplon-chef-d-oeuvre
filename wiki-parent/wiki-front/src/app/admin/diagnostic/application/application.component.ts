@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ApplicationService } from './../../../services/application.service';
+import { ApplicationService } from '../../../services/application.service';
 import { Component, OnInit } from '@angular/core';
 import { Application } from '../../../models/application';
 import { DataTableUtils } from '../../../utils/dataTableUtils';

@@ -1,0 +1,95 @@
+<h3> Consultation of Diagnostics</h3>
+<p>Find the diagnostic page for your problem</p>
+
+<div class="container">
+  <div class="row">
+
+
+
+  <form class="form-inline">
+
+      <input class="champ" type="hidden" [(ngModel)]="queryString" name="search" id="search" />
+
+    <div class="Col-sm-3 col-xs-6">
+      <label class="control-label" for="application">Application: </label>
+
+      <select class=" input-lg" id="application"  [(ngModel)]="selectedApplication" name="application">
+        <option value="0">Select an application</option>
+        <option *ngFor="let application of applications" value={{application.id}}>{{application.codeApp}}</option>
+      </select>
+    </div>
+
+
+    <div class=" col-sm-3 col-xs-6">
+      <label class="control-label" for="environ">Environment: </label>
+
+      <select (change)="onEnvironmentSelect($event.target.value)" [(ngModel)]="selectedEnviron" name="environ" class="input-lg" id="environ">
+            <option value="0">Select a environment</option>
+        <option *ngFor="let environ of envirs" value={{environ.id}}>{{environ.name}}</option>
+      </select>
+    </div>
+
+
+    <div class="Col-sm-3 col-xs-6">
+      <label class="control-label" for="layer">Layer: </label>
+
+      <select (change)="onLayerSelect($event.target.value)" [(ngModel)]="selectedLayer" name="layer" class=" input-lg"
+        id="layer">
+        <option value="0">Select a layer</option>
+        <option *ngFor="let layer of layers" value={{layer.id}}>{{layer.name}}</option>
+      </select>
+    </div>
+
+
+    <div class="Col-sm-3 col-xs-6">
+      <label class="control-label" for="server">Server: </label>
+
+      <select class=" input-lg"  [(ngModel)]="selectedServer" id="server" name="server">
+        <option value="0">Select a server</option>
+        <option *ngFor="let server of servers" value={{server.id}}>{{server.name}}</option>
+      </select>
+    </div>
+
+
+  </form>
+</div>
+
+
+<div class="row">
+
+
+<div class="col-sm-12" >
+
+</div>
+ 
+  <table class="table table-striped table-sm table-bordered table-hover table-responsive">
+      <caption>
+        <h5>Diagnostics list</h5>
+      </caption>
+    
+    
+      <thead class="thead-light">
+            <tr class="colorLign">
+        </tr>
+        <tr>
+          <th>URL</th>
+          <th>Code App</th>
+          <th>Name of server</th>
+          <th>Name of layer </th>
+          <th>Name of environ </th>
+     
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let diagnostic of diagnostics | FilterDiagConsult:queryString">
+            <td><a href="{{diagnostic.url}}">{{diagnostic.url}}</a></td>
+            <td>{{diagnostic.application.codeApp}}</td>
+            <td>{{diagnostic.server.name}}</td>
+            <td>{{diagnostic.server.layer.name}}</td>
+            <td>{{diagnostic.server.layer.environ.name}}</td>
+            
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ </div>

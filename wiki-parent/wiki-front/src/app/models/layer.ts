@@ -4,8 +4,7 @@ import { Server } from './server';
 
 
 export class Layer {
-    id: number = null;
-    name: string;
+
     environ: Environment = new Environment(null, null);
     servers: Server [] = [];
 
@@ -14,13 +13,15 @@ export class Layer {
 
 
     public constructor(
-        id: number,
-         name: string,
-    ) {
+       public id: number,
+       public  name: string,
+        ) {
         this.id = id;
         this.name = name;
 
     }
+
+
 
         public setEnv(environment: Environment): void {
             this.environ  = environment;

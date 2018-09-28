@@ -1,6 +1,6 @@
-import { Diagnostic } from './../models/diagnostic';
+import { Diagnostic } from '../models/diagnostic';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 

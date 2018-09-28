@@ -1,7 +1,7 @@
-import { Environment } from './../models/environment';
+import { Environment } from '../models/environment';
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../app.config';
-import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 import { Layer } from '../models/layer';
 

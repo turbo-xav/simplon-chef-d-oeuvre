@@ -1,12 +1,12 @@
 import { Guideline } from '../../../models/guideline';
 import { User } from '../../../models/user';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { GuidelineService } from '../../../services/guideline.service';
 import { UserService } from '../../../services/user.service';
-import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
-import { OnInit, Component } from '../../../../../node_modules/@angular/core';
-import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OnInit, Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Error } from '../../../models/technical/error';
 
 

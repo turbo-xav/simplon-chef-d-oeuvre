@@ -1,4 +1,4 @@
-import { menuList } from './../models/datas/menus';
+import { menuList } from '../models/datas/menus';
 import { ItemMenu } from '../models/technical/itemMenu';
 import { Injectable } from '@angular/core';
 

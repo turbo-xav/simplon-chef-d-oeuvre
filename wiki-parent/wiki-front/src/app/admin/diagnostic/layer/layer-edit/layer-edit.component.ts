@@ -1,12 +1,12 @@
-import { environment } from './../../../../../environments/environment';
-import { EnvironmentService } from './../../../../services/environment.service';
-import { LayerService } from './../../../../services/layer.service';
-import { Environment } from './../../../../models/environment';
+import { environment } from '../../../../../environments/environment';
+import { EnvironmentService } from '../../../../services/environment.service';
+import { LayerService } from '../../../../services/layer.service';
+import { Environment } from '../../../../models/environment';
 import { Component, OnInit } from '@angular/core';
 import { Layer } from '../../../../models/layer';
-import { FormGroup, FormBuilder, FormControl, Validators } from '../../../../../../node_modules/@angular/forms';
-import { ActivatedRoute, Router } from '../../../../../../node_modules/@angular/router';
-import { HttpErrorResponse } from '../../../../../../node_modules/@angular/common/http';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-layer-edit',
@@ -64,12 +64,11 @@ export class LayerEditComponent implements OnInit {
 
   createFormControls() {
     const name = new FormControl('', [Validators.required]);
-   // const environment = new FormControl('');
-   const layerEnvironment = new FormControl('');
+    const layerEnvironment = new FormControl('');
 
     this.layerForm = this.formBuilder.group({
       name: name,
-      //environment: environment,
+
      layerEnvironment : layerEnvironment,
     });
   }

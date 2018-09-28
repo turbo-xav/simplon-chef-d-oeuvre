@@ -1,8 +1,9 @@
 <h3> Add an application</h3>
 <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-application-edit'" navId="adminApplicationEdit"></app-nav-bar>
 <p>
-  <a class="btn btn-outline-primary" routerLink="/admin/diagnostic/application/">
-    << Back to list of applications</a> </p> <ng-container *ngIf="application != null">
+
+  </p>
+   <ng-container *ngIf="application != null">
       <form class="needs-validation" novalidate [formGroup]="appliForm">
         <fieldSet>
           <legend>Application</legend>

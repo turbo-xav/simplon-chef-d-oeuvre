@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DiagnosticViewVisitorComponent } from './diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
 import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
@@ -33,8 +32,10 @@ import { LayerComponent } from './admin/diagnostic/layer/layer.component';
 import { LayerEditComponent } from './admin/diagnostic/layer/layer-edit/layer-edit.component';
 import { ServerComponent } from './admin/diagnostic/server/server.component';
 import { ServerEditComponent } from './admin/diagnostic/server/server-edit/server-edit.component';
-import { GuidelineViewVisitorComponent } from './guideline-view-visitor/guideline-view-visitor.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
+import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
+import { GuidelineViewVisitorComponent } from './viewVisitor/guideline-view-visitor/guideline-view-visitor.component';
+import { DiagnosticViewVisitorComponent } from './viewVisitor/diagnostic-view-visitor/diagnostic-view-visitor.component';
 
 
 
@@ -51,8 +52,8 @@ const appRoutes: Routes = [
   { path: 'authentication/error', component: ErrorComponent },
 
   { path: 'organisationnal-chart', component: OrganizationchartComponent },
-  { path: 'guideline', component: GuidelineViewVisitorComponent },
-  { path: 'diagnostic', component: DiagnosticViewVisitorComponent },
+  { path: 'guidelineView', component: GuidelineViewVisitorComponent },
+  { path: 'diagnosticView', component: DiagnosticViewVisitorComponent },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard] },
@@ -82,9 +83,9 @@ const appRoutes: Routes = [
   { path: 'admin/guideline/edit/:id', component: GuidelineEditComponent },
 
   { path: 'admin/diagnostic', component: DiagnosticComponent },
-  { path: 'admin/diagnostic/edit', component: GuidelineEditComponent },
-  { path: 'admin/diagnostic/edit/:id', component: GuidelineEditComponent },
- 
+  { path: 'admin/diagnostic/edit', component: DiagnosticEditComponent },
+  { path: 'admin/diagnostic/edit/:id', component: DiagnosticEditComponent },
+
 
   { path: 'admin/diagnostic/environnement', component: EnvironnementComponent },
   { path: 'admin/diagnostic/environnement/edit', component: EnvironnementEditComponent },

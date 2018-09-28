@@ -1,4 +1,4 @@
-import { Component, OnInit } from '../../../../node_modules/@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Guideline } from '../../models/guideline';
 import { GuidelineService } from '../../services/guideline.service';
 import { DataTableUtils } from '../../utils/dataTableUtils';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { DataTableUtils } from '../../utils/dataTableUtils';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService, private dataTableUtils: DataTableUtils ) {
 
   }
- 
+
 
   ngOnInit() {
     this.loadUsers();

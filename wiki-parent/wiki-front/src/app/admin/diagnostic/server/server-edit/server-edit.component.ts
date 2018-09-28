@@ -1,11 +1,11 @@
-import { ServerService } from './../../../../services/server.service';
+import { ServerService } from '../../../../services/server.service';
 import { Component, OnInit } from '@angular/core';
 import { Server } from '../../../../models/server';
 import { Layer } from '../../../../models/layer';
-import { FormBuilder, FormGroup, FormControl, Validators } from '../../../../../../node_modules/@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LayerService } from '../../../../services/layer.service';
-import { Router, ActivatedRoute } from '../../../../../../node_modules/@angular/router';
-import { HttpErrorResponse } from '../../../../../../node_modules/@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-server-edit',

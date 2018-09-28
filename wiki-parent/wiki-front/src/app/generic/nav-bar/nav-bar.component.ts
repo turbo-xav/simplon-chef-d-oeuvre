@@ -1,4 +1,4 @@
-import { MenuService } from './../../services/menu.service';
+import { MenuService } from '../../services/menu.service';
 import { Component, OnInit, Input } from '@angular/core';
 import * as jquery from 'jquery';
 
