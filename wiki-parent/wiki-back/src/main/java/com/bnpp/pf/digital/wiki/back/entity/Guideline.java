@@ -41,7 +41,7 @@ public class Guideline {
     
     
     /**
-   	 * Pathfile of guideline
+   	 * Path file of guideline
    	 */
     @Column
     private String file;

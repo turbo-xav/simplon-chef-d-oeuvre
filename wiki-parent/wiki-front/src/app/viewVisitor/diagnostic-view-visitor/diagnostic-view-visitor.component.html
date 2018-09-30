@@ -1,6 +1,11 @@
 <h3> Consultation of Diagnostics</h3>
 <p>Find the diagnostic page for your problem</p>
 
+
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'diagnosticView'" navId="diagnosticView"></app-nav-bar>
+
+
+
 <div class="container">
   <div class="row">
 
@@ -8,48 +13,47 @@
 
   <form class="form-inline">
 
-      <input class="champ" type="hidden" [(ngModel)]="queryString" name="search" id="search" />
+      <!-- <input class="champ" type="hidden" [(ngModel)]="queryString" name="search" id="search" /> -->
 
-    <div class="Col-sm-3 col-xs-6">
-      <label class="control-label" for="application">Application: </label>
+<!--   
+      <label class="control-label" for="application">Application: </label> -->
 
       <select class=" input-lg" id="application"  [(ngModel)]="selectedApplication" name="application">
         <option value="0">Select an application</option>
         <option *ngFor="let application of applications" value={{application.id}}>{{application.codeApp}}</option>
       </select>
-    </div>
 
 
-    <div class=" col-sm-3 col-xs-6">
-      <label class="control-label" for="environ">Environment: </label>
+
+<!--    
+      <label class="control-label" for="environ">Environment: </label> -->
 
       <select (change)="onEnvironmentSelect($event.target.value)" [(ngModel)]="selectedEnviron" name="environ" class="input-lg" id="environ">
-            <option value="0">Select a environment</option>
+            <option value="0">Select an environment</option>
         <option *ngFor="let environ of envirs" value={{environ.id}}>{{environ.name}}</option>
       </select>
-    </div>
+   
 
 
-    <div class="Col-sm-3 col-xs-6">
-      <label class="control-label" for="layer">Layer: </label>
+<!--   
+      <label class="control-label" for="layer">Layer: </label> -->
 
       <select (change)="onLayerSelect($event.target.value)" [(ngModel)]="selectedLayer" name="layer" class=" input-lg"
         id="layer">
         <option value="0">Select a layer</option>
         <option *ngFor="let layer of layers" value={{layer.id}}>{{layer.name}}</option>
       </select>
-    </div>
+  
 
-
-    <div class="Col-sm-3 col-xs-6">
-      <label class="control-label" for="server">Server: </label>
+<!--    
+      <label class="control-label" for="server">Server: </label> -->
 
       <select class=" input-lg"  [(ngModel)]="selectedServer" id="server" name="server">
         <option value="0">Select a server</option>
         <option *ngFor="let server of servers" value={{server.id}}>{{server.name}}</option>
       </select>
-    </div>
-
+   
+    <button class="btn btn-primary" (click)="reset()">Reset</button>
 
   </form>
 </div>

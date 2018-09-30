@@ -28,7 +28,7 @@ import { routing } from './app.routing';
 import { ErrorComponent } from './authentication/error/error.component';
 import { ErrorService } from './services/error.service';
 import { HttpErrorInterceptor } from './_helpers/httpError.interceptor';
-import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
+
 import { BodyComponent } from './generic/body/body.component';
 import { DiagnosticComponent } from './admin/diagnostic/diagnostic.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -86,7 +86,6 @@ import { ModalMemberComponent } from './generic/modal-basic/modal-member/modal-m
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { DiagnosticViewVisitorComponent } from './viewVisitor/diagnostic-view-visitor/diagnostic-view-visitor.component';
 import { DiagViewVisitorService } from './services/diag-view-visitor.service';
-
 import { GuidelineViewVisitorComponent } from './viewVisitor/guideline-view-visitor/guideline-view-visitor.component';
 
 
@@ -96,6 +95,11 @@ import { FilterServer } from './models/technical/searchPipe/filter-server';
 import { FilterAppli } from './models/technical/searchPipe/filter-appli';
 import { FilterEnv } from './models/technical/searchPipe/filter-env';
 import { FilterLayer } from './models/technical/searchPipe/filter-layer';
+// tslint:disable-next-line:max-line-length
+import { ViewGuidelineFonctionnelComponent } from './viewVisitor/guideline-view-visitor/view-guideline-fonctionnel/view-guideline-fonctionnel.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-visitor/view-guideline-technique/view-guideline-technique.component';
+import { OrganizationchartComponent } from './viewVisitor/organizationchart/organizationchart.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -151,14 +155,15 @@ export function initializeApp(appConfig: AppConfig) {
     ModalFunctionComponent,
     ModalMemberComponent,
     GuidelineViewVisitorComponent,
-    DiagnosticViewVisitorComponent,
     NotFoundComponent,
     FilterPipe,
     FilterDiagConsult,
     FilterServer,
     FilterAppli,
     FilterEnv,
-    FilterLayer
+    FilterLayer,
+    ViewGuidelineFonctionnelComponent,
+    ViewGuidelineTechniqueComponent
 
   ],
   imports: [

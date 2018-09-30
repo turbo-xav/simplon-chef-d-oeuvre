@@ -10,6 +10,9 @@ export class GuidelineViewVisitorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+
+
 
 }

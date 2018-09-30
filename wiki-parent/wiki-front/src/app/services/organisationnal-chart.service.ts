@@ -13,7 +13,7 @@ export class OrganisationnalChartService {
 
   constructor(private http:  HttpClient) {
   }
- 
+
   public getTeams(): Observable<Team[]> {
     return this.http.get<Team[]>(this.restUrl);
   }

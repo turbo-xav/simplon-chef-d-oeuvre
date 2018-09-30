@@ -1,11 +1,11 @@
-import { MemberService } from '../services/member.service';
-import { FonctionService } from '../services/fonction.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Team } from '../models/team';
-import { Member } from '../models/member';
-import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
+
 import * as jquery from 'jquery';
-import { Fonction } from '../models/fonction';
+import { Fonction } from '../../models/fonction';
+import { Team } from '../../models/team';
+import { Member } from '../../models/member';
+import { OrganisationnalChartService } from '../../services/organisationnal-chart.service';
+
 
 declare let google: any;
 @Component({

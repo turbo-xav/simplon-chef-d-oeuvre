@@ -133,6 +133,13 @@ export class DiagnosticViewVisitorComponent implements OnInit {
       }
     );
   }
+
+  reset() {
+    this.selectedApplication = 0;
+    this.selectedEnviron = 0;
+    this.selectedLayer = 0;
+    this.selectedServer = 0;
+  }
 }
 
 

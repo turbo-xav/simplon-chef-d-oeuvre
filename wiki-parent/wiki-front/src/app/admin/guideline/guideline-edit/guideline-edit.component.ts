@@ -84,9 +84,10 @@ export class GuidelineEditComponent implements OnInit {
     if (this.guidelineForm.valid) {
       const user: User = this.authService.getUser();
       this.guideline.user = user;
-      this.guidelineService.saveGuideline(this.guideline, this.fileToUpLoad).subscribe(
+           this.guidelineService.saveGuideline(this.guideline, this.fileToUpLoad).subscribe(
         () => {
           this.router.navigateByUrl('/admin/guideline');
+          alert(this.guideline.user);
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;

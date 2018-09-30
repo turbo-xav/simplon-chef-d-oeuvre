@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OrganisationnalChartComponent } from './admin/organisationnal-chart/organisationnal-chart.component';
 import { NotAllowedComponent } from './authentication/error/not-allowed/not-allowed.component';
-import { OrganizationchartComponent } from './organizationchart/organizationchart.component';
+
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
@@ -36,6 +36,11 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
 import { DiagnosticEditComponent } from './admin/diagnostic/diagnostic-edit/diagnostic-edit.component';
 import { GuidelineViewVisitorComponent } from './viewVisitor/guideline-view-visitor/guideline-view-visitor.component';
 import { DiagnosticViewVisitorComponent } from './viewVisitor/diagnostic-view-visitor/diagnostic-view-visitor.component';
+import { OrganizationchartComponent } from './viewVisitor/organizationchart/organizationchart.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGuidelineFonctionnelComponent } from './viewVisitor/guideline-view-visitor/view-guideline-fonctionnel/view-guideline-fonctionnel.component';
+// tslint:disable-next-line:max-line-length
+import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-visitor/view-guideline-technique/view-guideline-technique.component';
 
 
 
@@ -53,6 +58,8 @@ const appRoutes: Routes = [
 
   { path: 'organisationnal-chart', component: OrganizationchartComponent },
   { path: 'guidelineView', component: GuidelineViewVisitorComponent },
+  { path: 'viewGuidelineFonctionnel', component: ViewGuidelineFonctionnelComponent},
+  { path: 'viewGuidelineTechnique', component: ViewGuidelineTechniqueComponent},
   { path: 'diagnosticView', component: DiagnosticViewVisitorComponent },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },

@@ -1,0 +1,33 @@
+/* Style buttons */
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+
+  cursor: pointer;
+  font-size: 15px;
+  width: 100px;
+  color: azure;
+  display: block;
+  margin : auto;
+
+}
+
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: rgb(54, 69, 114);
+}
+
+.block {
+  padding: 1em;
+  border: 1mm ridge#76D7C4;
+  width: 300px;
+  text-align: left;
+  background-color: rgb(155, 209, 198)
+  
+}
+
+ul {
+  list-style-type: none;
+  ;
+}

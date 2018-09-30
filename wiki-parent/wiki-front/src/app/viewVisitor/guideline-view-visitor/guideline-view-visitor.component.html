@@ -1,2 +1,28 @@
-<h3><img src="/assets/img/guidelines.jpg" width="100" height="100" alt="Guidelines"/> Guidelines</h3>
+<div class="container">
+  <!-- <div class="col-sm-5 fonctional" routerLink="/viewGuidelineFonctionnel">
+    <a class="btn btn-default guidelines" routerLink="/viewGuidelineFonctionnel" role="button">Functional Guidelines</a>
+  </div> -->
 
+  <h3> Consultation of guidelines</h3>
+  <p>Please choose the guideline according to your needs.</p>
+
+  <br>
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline'" navId="viewGuideline"></app-nav-bar>
+
+
+  <div class="row height">
+
+
+    <div class="col-sm-5 fonctional" routerLink="/viewGuidelineFonctionnel">
+      <a class="btn btn-default guidelines" routerLink="/viewGuidelineFonctionnel" role="button">Functional Guidelines</a>
+    </div>
+
+    <div class="col-sm-2 technical"></div>
+
+    <div class="col-sm-5 fonctional" routerLink="/viewGuidelineTechnique">
+      <a class="btn btn-default guidelines" routerLink="/viewGuidelineTechnique" role="button">Technical Guidelines</a>
+    </div>
+
+  </div>
+
+</div>

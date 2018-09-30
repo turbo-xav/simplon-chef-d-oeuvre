@@ -1,0 +1,33 @@
+<h3>
+  List of functional guidelines
+</h3>
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline-Functional'" navId="viewGuidelineFunctional"></app-nav-bar>
+
+
+<br>
+
+<!-- <div *ngFor="let guideline of listGuidelines">
+  <div *ngIf="guideline.type ==='Functionnal guideline'" class="block">
+
+    Name : {{guideline.name}}
+    Description: {{guideline.description}}
+    Type: {{guideline.type}}
+    Author: {{guideline.user.firstName}} {{guideline.user.lastName}}
+    <button class="btn"><i class="fa fa-download"></i> Download</button>
+  </div>
+
+</div> -->
+
+
+
+
+<ul *ngFor="let guideline of listGuidelines">
+  <li class="block" *ngIf="guideline.type ==='Functionnal guideline'">
+   <p> Name : {{guideline.name}}</p>
+   <p> File: {{guideline.file}}</p>
+    <p>Type: {{guideline.type}}</p>
+      <p>Description: {{guideline.description}}</p>
+    <button class="btn"><i class="fa fa-download"></i> Download</button>
+  </li>
+
+</ul>
