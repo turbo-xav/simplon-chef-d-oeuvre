@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,8 +47,27 @@ public class DiagnosticController {
 	@Autowired
 	private IserviceDiagnostic serviceDiagnostic;
 
+	
+	@RequestMapping(path = "getDiagnosticsWithParameters", method = RequestMethod.GET)
+	@ResponseBody
+	
+	public ResponseEntity<?> getDiagnosticsWithParameters(@RequestParam("appId") String appId , @RequestParam("envId") String envId, @RequestParam("layerId") String layerId, @RequestParam("serverId") String serverId ) {
+		//try {
+			 List<Diagnostic> diags = serviceDiagnostic.findByCriteria(appId, envId, layerId, serverId);
+			
+			return new ResponseEntity< List<Diagnostic>>(diags, HttpStatus.OK);
+		/*} catch (DataAccessException e) {
+			System.out.println(e.getStackTrace());
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}*/
+	}	
+	
+	
+	
 	@RequestMapping(method = RequestMethod.GET)
-	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getAll() {
 

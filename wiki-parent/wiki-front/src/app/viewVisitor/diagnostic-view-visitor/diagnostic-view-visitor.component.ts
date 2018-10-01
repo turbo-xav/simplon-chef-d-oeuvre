@@ -58,7 +58,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
   }
 
   onChangeApplication(applicationId: number) {
-
+this.loadDiagnostics();
     if (String(applicationId) === '') {
       this.loadEnvirons();
     } else {
@@ -71,7 +71,8 @@ export class DiagnosticViewVisitorComponent implements OnInit {
   }
 
   onEnvironmentSelect(envirId: number) {
-    if (String(envirId) === '') {
+this.loadDiagnostics();
+if (String(envirId) === '') {
       this.loadLayers();
     } else {
       this.environmentService.getLayersByEnviron(envirId).subscribe(
@@ -85,6 +86,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
     }
   }
   onLayerSelect(layerId: number) {
+    this.loadDiagnostics();
     if (String(layerId) === '') {
       this.loadServers();
     } else {
@@ -101,6 +103,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
   }
 
   onServerSelect(serverId: number) {
+    this.loadDiagnostics();
     if (String(serverId) === '') {
       this.loadServers();
     }
@@ -152,7 +155,12 @@ export class DiagnosticViewVisitorComponent implements OnInit {
 
 
   loadDiagnostics() {
-    this.diagnosticService.getDiagnostics().subscribe(
+    this.diagnosticService.getDiagnosticsWithParameters(
+          this.selectedApplication ,
+          this.selectedEnviron,
+          this.selectedLayer,
+          this.selectedServer
+          ).subscribe(
       (diagnostics: Diagnostic[]) => {
         this.diagnostics = diagnostics;
       },
