@@ -165,5 +165,18 @@ public class EnvironController {
 		}
 	}
 	
+	@RequestMapping(path = "getEnvironnmentsByApplication/{applicationId}",method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getEnvironnmentsByApplication(@PathVariable("applicationId") int applicationId) {
+		try {
+			List<Environ> environs = serviceEnviron.getEnvironnmentsByApplication(applicationId);
+			return new ResponseEntity<List<Environ>>(environs, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 }

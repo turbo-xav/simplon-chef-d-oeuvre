@@ -28,7 +28,9 @@ export class ApplicationService {
     return this.http.get<Application>(this.restUrl + '/' + id);
   }
 
-public deleteApplication(id: number) {
-return this.http.delete(this.restUrl + '/' + id);
-}
+  public deleteApplication(id: number) {
+    return this.http.delete(this.restUrl + '/' + id);
+  }
+
+ 
 }

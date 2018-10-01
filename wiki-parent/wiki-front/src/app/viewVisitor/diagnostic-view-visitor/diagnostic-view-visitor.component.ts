@@ -1,3 +1,4 @@
+import { Environment } from './../../models/environment';
 import { ServerService } from '../../services/server.service';
 import { EnvironmentService } from '../../services/environment.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { DiagViewVisitorService } from '../../services/diag-view-visitor.service';
 import { Diagnostic } from '../../models/diagnostic';
-import { Environment } from '../../models/environment';
 import { Layer } from '../../models/layer';
 import { Application } from '../../models/application';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,10 +24,10 @@ import { DiagnosticService } from '../../services/diagnostic.service';
 })
 export class DiagnosticViewVisitorComponent implements OnInit {
 
-  selectedApplication = 0;
-  selectedEnviron = 0;
-  selectedLayer = 0;
-  selectedServer = 0;
+  selectedApplication = '';
+  selectedEnviron = '';
+  selectedLayer = '';
+  selectedServer = '';
   diagnostics: Diagnostic[] = [];
   envirs: Environment[];
   layers: Layer[];
@@ -55,6 +55,19 @@ export class DiagnosticViewVisitorComponent implements OnInit {
     this.loadEnvirons();
     this.loadLayers();
     this.loadServers();
+  }
+
+  onChangeApplication(applicationId: number) {
+
+   if (String(applicationId) === '') {
+      this.loadEnvirons();
+    } else {
+      this.environmentService.getEnvironnements(applicationId).subscribe(
+        (envirs: Environment[]) => {
+          this.envirs = envirs;
+        }
+      );
+    }
   }
 
   onEnvironmentSelect(envirId: number) {
@@ -134,12 +147,6 @@ export class DiagnosticViewVisitorComponent implements OnInit {
     );
   }
 
-  reset() {
-    this.selectedApplication = 0;
-    this.selectedEnviron = 0;
-    this.selectedLayer = 0;
-    this.selectedServer = 0;
-  }
 }
 
 

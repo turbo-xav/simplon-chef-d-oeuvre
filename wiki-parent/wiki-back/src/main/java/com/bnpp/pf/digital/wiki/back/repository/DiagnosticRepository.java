@@ -2,6 +2,9 @@ package com.bnpp.pf.digital.wiki.back.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +15,9 @@ import com.bnpp.pf.digital.wiki.back.entity.Server;
 
 @Repository
 public interface DiagnosticRepository extends JpaRepository <Diagnostic,Integer>  {
+	
 
+	
 	/**
 	 * equivalent SQL :
 	 * SELECT * FROM wiki_tbl_diag diag

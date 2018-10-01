@@ -21,19 +21,23 @@ export class EnvironmentService {
     }
   }
 
-public getEnvironments(): Observable<Environment[]> {
-  return this.http.get<Environment[]>(this.restUrl);
-}
-public getEnvironment(id: number): Observable<Environment> {
-  return this.http.get<Environment>(this.restUrl + '/' + id);
-}
+  public getEnvironments(): Observable<Environment[]> {
+    return this.http.get<Environment[]>(this.restUrl);
+  }
+  public getEnvironment(id: number): Observable<Environment> {
+    return this.http.get<Environment>(this.restUrl + '/' + id);
+  }
 
-public deleteEnvironment(id: number) {
-return this.http.delete(this.restUrl + '/' + id);
-}
+  public deleteEnvironment(id: number) {
+    return this.http.delete(this.restUrl + '/' + id);
+  }
 
-public getLayersByEnviron(id: number): Observable<Layer[]> {
-  return this.http.get<Layer[]>(this.restUrl + '/getLayersByEnviron/' + id);
-}
+  public getLayersByEnviron(id: number): Observable<Layer[]> {
+    return this.http.get<Layer[]>(this.restUrl + '/getLayersByEnviron/' + id);
+  }
+
+  public getEnvironnements(applicationId: number) {
+    return this.http.get<Environment[]>(this.restUrl + '/getEnvironnmentsByApplication/' + applicationId);
+  }
 
 }

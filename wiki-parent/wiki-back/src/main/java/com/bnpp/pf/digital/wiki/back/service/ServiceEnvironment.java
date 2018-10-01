@@ -45,9 +45,8 @@ public class ServiceEnvironment implements IServiceEnviron{
 	public void deleteById(int id) {
 		environmentRepository.deleteById(id);
 	}
-
 	
-	}
-
-	
-
+	public List<Environ> getEnvironnmentsByApplication(int applicationId){
+		return environmentRepository.getEnvironnmentsByApplication(applicationId);
+	}	
+}
