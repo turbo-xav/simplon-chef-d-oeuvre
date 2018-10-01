@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service("fileService")
 public class ServiceFileUpload {
 
-	private static final String SAVE_LOCATION = "C:\\GitRepository\\simplon-chef-d-oeuvre\\download\\";
+	private static final String SAVE_LOCATION = "C:\\users\\piplo\\git\\simplon-chef-d-oeuvre";
 	
 
 	public boolean saveFile(MultipartFile multipartFile, String path){

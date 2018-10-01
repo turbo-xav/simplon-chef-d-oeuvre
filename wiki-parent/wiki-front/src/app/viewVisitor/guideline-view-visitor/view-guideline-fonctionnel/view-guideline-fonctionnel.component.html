@@ -6,28 +6,39 @@
 
 <br>
 
-<!-- <div *ngFor="let guideline of listGuidelines">
-  <div *ngIf="guideline.type ==='Functionnal guideline'" class="block">
-
-    Name : {{guideline.name}}
-    Description: {{guideline.description}}
-    Type: {{guideline.type}}
-    Author: {{guideline.user.firstName}} {{guideline.user.lastName}}
-    <button class="btn"><i class="fa fa-download"></i> Download</button>
-  </div>
-
-</div> -->
-
-
-
-
-<ul *ngFor="let guideline of listGuidelines">
+<!-- <ul *ngFor="let guideline of listGuidelines">
   <li class="block" *ngIf="guideline.type ==='Functionnal guideline'">
-   <p> Name : {{guideline.name}}</p>
-   <p> File: {{guideline.file}}</p>
+    <p> Name : {{guideline.name}}</p>
+    <p> File: {{guideline.file}}</p>
     <p>Type: {{guideline.type}}</p>
-      <p>Description: {{guideline.description}}</p>
+    <p>Description: {{guideline.description}}</p>
     <button class="btn"><i class="fa fa-download"></i> Download</button>
   </li>
 
-</ul>
+</ul> -->
+
+<section class="wrapper">
+  <div class="container-fostrap">
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4" >
+            <ng-container class="card"  *ngFor="let guideline of listGuidelines">
+            <div *ngIf="guideline.type ==='Functionnal guideline'">
+              <div class="card-content" >
+                <h4 class="card-title">{{guideline.name}} </h4>
+                <p> File: {{guideline.file}}</p>
+                <p>Type: {{guideline.type}}</p>
+                <p>Description: {{guideline.description}}</p>
+                <div class="card-read-more">
+                <button class="btn"><i class="fa fa-download"></i> Download</button>
+              </div>
+              </div>
+                          </div>
+          </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

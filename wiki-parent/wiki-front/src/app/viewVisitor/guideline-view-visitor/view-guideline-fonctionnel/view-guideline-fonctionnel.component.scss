@@ -18,16 +18,64 @@
   background-color: rgb(54, 69, 114);
 }
 
-.block {
-  padding: 1em;
-  border: 1mm ridge#76D7C4;
-  width: 300px;
-  text-align: left;
-  background-color: rgb(155, 209, 198)
+// .block {
+//   padding: 1em;
+//   border: 1mm ridge#76D7C4;
+//   width: 300px;
+//   text-align: left;
+//   background-color: rgb(155, 209, 198)
   
+// }
+
+// ul {
+//   list-style-type: none;
+//   ;
+// }
+.wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
 }
 
-ul {
-  list-style-type: none;
-  ;
+.container-fostrap {
+  display: table-cell;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.card {
+  display: block; 
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    transition: box-shadow .25s; 
+}
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.card-content {
+  padding:15px;
+  text-align:left;
+}
+.card-title {
+  margin-top:0px;
+  font-weight: 700;
+  font-size: 1.65em;
+}
+.card-title {
+  color: #000;
+  text-decoration: none !important;
+}
+
+
+.card-read-more {
+
+  padding:10px;
+  font-weight:600;
+
+
 }

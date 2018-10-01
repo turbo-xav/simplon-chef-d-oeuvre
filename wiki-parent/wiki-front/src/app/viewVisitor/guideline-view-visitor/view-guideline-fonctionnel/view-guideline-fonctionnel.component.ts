@@ -32,6 +32,55 @@ export class ViewGuidelineFonctionnelComponent implements OnInit {
         type: 'Functionnal guideline',
         description: 'description'
     },
+    {
+      id: 4,
+      name: 'Guide D',
+      file: 'string',
+      type: 'Functionnal guideline',
+      description: 'description'
+  },
+  {
+    id: 5,
+    name: 'Guide E',
+    file: 'string',
+    type: 'Functionnal guideline',
+    description: 'description'
+},
+{
+  id: 6,
+  name: 'Guide F',
+  file: 'string',
+  type: 'Functionnal guideline',
+  description: 'description'
+},
+{
+  id: 7,
+  name: 'Guide G',
+  file: 'string',
+  type: 'Technical guideline',
+  description: 'description'
+},
+{
+  id: 8,
+  name: 'Guide H',
+  file: 'string',
+  type: 'Functionnal guideline',
+  description: 'description'
+},
+{
+  id: 9,
+  name: 'Guide I',
+  file: 'string',
+  type: 'Functionnal guideline',
+  description: 'description'
+},
+{
+  id: 10,
+  name: 'Guide J',
+  file: 'string',
+  type: 'Functionnal guideline',
+  description: 'description'
+},
   ];
 
   ngOnInit() {
