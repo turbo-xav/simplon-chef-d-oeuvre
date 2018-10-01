@@ -5,6 +5,7 @@ package com.bnpp.pf.digital.wiki.back.service;
 import java.util.List;
 
 import com.bnpp.pf.digital.wiki.back.entity.Application;
+import com.bnpp.pf.digital.wiki.back.entity.Diagnostic;
 
 
 public interface IServiceApplication {
@@ -15,7 +16,6 @@ public interface IServiceApplication {
 	List <Application> getByCodeApp(String codeApp);
 	List <Application> getByTitle (String title);
 	
-	//List<Application> getAppliAllInfo();
 	
 	public void deleteById(int id);
 

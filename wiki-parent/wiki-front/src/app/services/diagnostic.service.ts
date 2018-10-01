@@ -26,6 +26,12 @@ export class DiagnosticService {
     return this.http.get<Diagnostic[]>(this.restUrl);
   }
 
+  public getDiagnosticsWithParameters(appId: string, envId: string, layerId: string, serverId: string): Observable<Diagnostic[]> {
+    return this.http.get<Diagnostic[]>(
+      this.restUrl + '/getDiagnosticsWithParameters?appId=' + appId + '&envId=' + envId + '&layerId=' + layerId + '&serverId=' + serverId
+      );
+  }
+
   public getDiagnostic(id: number): Observable<Diagnostic> {
     return this.http.get<Diagnostic>(this.restUrl + '/' + id);
   }

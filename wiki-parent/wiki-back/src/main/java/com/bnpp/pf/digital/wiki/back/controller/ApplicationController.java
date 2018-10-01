@@ -54,11 +54,9 @@ public class ApplicationController {
 	@Autowired
 	private IServiceApplication serviceApplication;
 
-	// public ApplicationController() {
-	// }
+	
 
 	@RequestMapping(method = RequestMethod.GET)
-	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getAll() {
 
