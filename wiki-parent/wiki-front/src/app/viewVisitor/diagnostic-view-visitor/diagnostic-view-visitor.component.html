@@ -48,7 +48,7 @@
 <!--    
       <label class="control-label" for="server">Server: </label> -->
 
-      <select class=" input-lg"  [(ngModel)]="selectedServer" id="server" name="server">
+      <select (change)="onServersSelect($event.target.value)"class=" input-lg"  [(ngModel)]="selectedServer" id="server" name="server">
         <option value="">Select a server</option>
         <option *ngFor="let server of servers" value={{server.id}}>{{server.name}}</option>
       </select>

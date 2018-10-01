@@ -83,15 +83,15 @@ export class DiagnosticEditComponent implements OnInit {
 
 
   createFormControls() {
-  const url = new FormControl('', [Validators.required]);
-  const diagnosticServer = new FormControl('');
-  const diagnosticApplication = new FormControl('');
+    const url = new FormControl('', [Validators.required]);
+    const diagnosticServer = new FormControl('');
+    const diagnosticApplication = new FormControl('');
 
-  this.diagForm = this.formBuilder.group({
-    url: url,
-    diagnosticServer : diagnosticServer,
-    diagnosticApplication: diagnosticApplication,
-  });
+    this.diagForm = this.formBuilder.group({
+      url: url,
+      diagnosticServer: diagnosticServer,
+      diagnosticApplication: diagnosticApplication,
+    });
   }
 
   get url() {
@@ -107,19 +107,19 @@ export class DiagnosticEditComponent implements OnInit {
   }
 
   changeServer(serverId) {
-this.diagnostic.server = new Server(serverId, null);
-// alert(this.diagnostic.server.id);
+    this.diagnostic.server = new Server(serverId, null);
+    // alert(this.diagnostic.server.id);
   }
 
   changeApplication(applicationId) {
     this.diagnostic.application = new Application(applicationId, null, null, null);
-      }
+  }
 
 
 
   save() {
     if (this.diagForm.valid) {
-                  this.diagnosticService.saveDiagnostic(this.diagnostic).subscribe(
+      this.diagnosticService.saveDiagnostic(this.diagnostic).subscribe(
         () => {
           this.router.navigateByUrl('/admin/diagnostic');
 

@@ -59,7 +59,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
 
   onChangeApplication(applicationId: number) {
 
-   if (String(applicationId) === '') {
+    if (String(applicationId) === '') {
       this.loadEnvirons();
     } else {
       this.environmentService.getEnvironnements(applicationId).subscribe(
@@ -71,25 +71,40 @@ export class DiagnosticViewVisitorComponent implements OnInit {
   }
 
   onEnvironmentSelect(envirId: number) {
-    this.environmentService.getLayersByEnviron(envirId).subscribe(
-      (layers: Layer[]) => {
-        this.layers = layers;
-      },
-      (response: HttpErrorResponse) => {
-        this.error = response.error;
-      }
-    );
+    if (String(envirId) === '') {
+      this.loadLayers();
+    } else {
+      this.environmentService.getLayersByEnviron(envirId).subscribe(
+        (layers: Layer[]) => {
+          this.layers = layers;
+        },
+        (response: HttpErrorResponse) => {
+          this.error = response.error;
+        }
+      );
+    }
   }
   onLayerSelect(layerId: number) {
-    this.layerService.getServersByLayer(layerId).subscribe(
-      (servers: Server[]) => {
-        this.servers = servers;
-      },
-      (response: HttpErrorResponse) => {
-        this.error = response.error;
-      }
-    );
+    if (String(layerId) === '') {
+      this.loadServers();
+    } else {
+      this.layerService.getServersByLayer(layerId).subscribe(
+        (servers: Server[]) => {
+          this.servers = servers;
+        },
+        (response: HttpErrorResponse) => {
+          this.error = response.error;
+        }
+      );
+
+    }
   }
+
+  onServerSelect(serverId: number) {
+    if (String(serverId) === '') {
+      this.loadServers();
+    }
+    }
 
   loadApplications() {
     this.applicationService.getApplications().subscribe(

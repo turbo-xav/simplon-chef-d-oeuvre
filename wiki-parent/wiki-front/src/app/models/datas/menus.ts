@@ -507,7 +507,8 @@ export const menuList = [
       'icon': 'fa-backward',
       'path': '/admin/diagnostic',
     },
-    {
+
+       {
       'id': 49,
       'name': 'Go to functionnal guidelines',
       'description': '',
@@ -571,6 +572,15 @@ export const menuList = [
       'icon': 'fa-backward',
       'path': '/home',
     },
-
+    ,
+    {
+     'id': 56,
+     'name': 'Back to diagnostics list',
+     'description': '',
+     'position': 'admin-diagnostic-edit',
+     'img': '',
+     'icon': 'fa-backward',
+     'path': '/admin/diagnostic',
+   }
 
 ];

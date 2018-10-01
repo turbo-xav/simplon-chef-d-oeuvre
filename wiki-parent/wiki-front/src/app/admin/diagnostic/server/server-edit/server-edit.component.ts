@@ -69,19 +69,19 @@ export class ServerEditComponent implements OnInit {
 
     this.serverForm = this.formBuilder.group({
       name: name,
-      serverLayer : serverLayer
+      serverLayer: serverLayer
     });
   }
   get name() {
     return this.serverForm.get('name');
   }
-get serverLayer() {
-  return this.serverForm.get('serverLayer');
-}
+  get serverLayer() {
+    return this.serverForm.get('serverLayer');
+  }
 
-changeLayer(layerId) {
-  this.server.layer = new Layer(layerId, null);
-}
+  changeLayer(layerId) {
+    this.server.layer = new Layer(layerId, null);
+  }
 
   save() {
     if (this.serverForm.valid) {

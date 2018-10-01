@@ -20,7 +20,6 @@
           <div class="col-8">
             <input type="url" class="form-control" id="url" [(ngModel)]="diagnostic.url" [ngClass]="{'is-invalid': url.invalid && url.dirty, 'is-valid': url.valid && url.dirty}"
               formControlName="url" placeholder="http://www.example.com" pattern="https?://.*" size="50" required>
-
             <small class="form-text text-muted">This field is required </small>
             <div *ngIf="url.invalid && (url.dirty || url.touched)" class="invalid-feedback">
               <div *ngIf="url.errors.required">Choose a url for this diagnotic</div>
@@ -35,12 +34,12 @@
           <label class="col-4 col-form-label" for="application">Application :</label>
           <div class="col-8">
 
-            <select *ngIf="diagnostic.application.id !== null" id="application" formControlName="diagnosticApplication"
+            <select *ngIf="diagnostic.application !== null" id="application" formControlName="diagnosticApplication" [(ngModel)]="diagnostic.application.id"
               #applicationSelect>
               <option *ngFor="let application of applications" [value]="application.id">{{application.codeApp}}</option>
             </select>
 
-            <select *ngIf="diagnostic.application.id === null" id="application" formControlName="diagnosticApplication"
+            <select *ngIf="diagnostic.application === null" id="application" formControlName="diagnosticApplication"
               (change)="changeApplication(applicationSelect.value)" #applicationSelect>
               <option *ngFor="let application of applications" [value]="application.id">{{application.codeApp}}</option>
             </select>
@@ -55,11 +54,11 @@
           <label class="col-4 col-form-label" for="server">Server :</label>
           <div class="col-8">
 
-            <select *ngIf="diagnostic.server.id !== null" id="server" formControlName="diagnosticServer" #serverSelect>
+            <select *ngIf="diagnostic.server !== null" id="server" formControlName="diagnosticServer" [(ngModel)]="diagnostic.server.id" #serverSelect>
               <option *ngFor="let server of servers" [value]="server.id">{{server.name}}</option>
             </select>
 
-            <select *ngIf="diagnostic.server.id === null" id="server" formControlName="diagnosticServer" (change)="changeServer(serverSelect.value)"
+            <select *ngIf="diagnostic.server === null" id="server" formControlName="diagnosticServer" (change)="changeServer(serverSelect.value)"
               #serverSelect>
               <option *ngFor="let server of servers" [value]="server.id">{{server.name}}</option>
             </select>

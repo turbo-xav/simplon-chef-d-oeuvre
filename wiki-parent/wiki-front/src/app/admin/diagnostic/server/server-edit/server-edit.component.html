@@ -3,50 +3,54 @@
 <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-server-edit'" navId="adminServerEdit"></app-nav-bar>
 
 <ng-container *ngIf="server != null">
-<form class="needs-validation" novalidate [formGroup]="serverForm">
-<fieldSet>
-  <legend>Server</legend>
-</fieldSet>
-  
-<p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
- 
-<div class="row">
-    
-  <div class="col-5">
-     
-    <div class="form-group row">
-        <label class="col-4 col-form-label" for="name">Name : (*)</label>
-        <div class="col-8">
-          <input type="text" class="form-control" id="name" [(ngModel)]="server.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}" formControlName="name" placeholder="Name of server" />
-          <small class="form-text text-muted">This field is required </small>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
+  <form class="needs-validation" novalidate [formGroup]="serverForm">
+
+    <fieldSet>
+      <legend>Server</legend>
+    </fieldSet>
+
+    <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
+
+    <div class="row">
+
+      <div class="col-5">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="name">Name(*) : </label>
+          <div class="col-8">
+            <input type="text" class="form-control" id="name" [(ngModel)]="server.name" [ngClass]="{'is-invalid': name.invalid && name.dirty, 'is-valid': name.valid && name.dirty}"
+              formControlName="name" placeholder="Name of server" />
+            <small class="form-text text-muted">This field is required </small>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">
               <div *ngIf="name.errors.required">Choose a name for this server</div>
+            </div>
           </div>
         </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label" for="layer">Layer :</label>
+          <div class="col-8">
+
+            <select *ngIf="server.layer !== null" id="layer" formControlName="serverLayer" [(ngModel)]="server.layer.id"
+              #layerSelect>
+              <option *ngFor="let layer of layers" [value]="layer.id">{{layer.name}}</option>
+            </select>
+
+            <select *ngIf="server.layer === null" id="layer" formControlName="serverLayer" (change)="changeLayer(layerSelect.value)"
+              #layerSelect>
+              <option *ngFor="let layer of layers" [value]="layer.id">{{layer.name}}</option>
+            </select>
+
+            <small class="form-text text-muted">Optional but it is recommanded to allow user actions on Wiki </small>
+          </div>
+
+        </div>
+
+
       </div>
 
-
-      <div class="form-group row">
-        <label class="col-4 col-form-label" for="layer">Layer :</label>
-        <div class="col-8">
-
-            <select *ngIf="server.layer !== null" id="layer" formControlName="serverLayer" [(ngModel)]="server.layer.id" #layerSelect>
-                <option *ngFor="let layer of layers" [value]="layer.id">{{layer.name}}</option>
-            </select>
-
-            <select *ngIf="server.layer === null" id="layer" formControlName="serverLayer" (change)="changeLayer(layerSelect.value)" #layerSelect>
-                <option *ngFor="let layer of layers" [value]="layer.id">{{layer.name}}</option>
-            </select>
-            
-            <small class="form-text text-muted">Optional but it is recommanded to allow user actions on Wiki </small>
-        </div>
-        
     </div>
-
-
-    </div>
-    
-        </div>
-        <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
-</form>
+    <button class="btn btn-outline-primary" type="submit" (click)="save()">Save</button>
+  </form>
 </ng-container>
