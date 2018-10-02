@@ -220,7 +220,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
   google.charts.setOnLoadCallback(drawChart);
 
   const arboTeam = this.createArbo(topTeam);
-
+  console.log(arboTeam);
   function drawChart() {
 
     let indexAdd = 0;
@@ -325,10 +325,12 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       const fDetail =  '<p>'
                       + '<a title="click here to see infos about '
                       + memberEc.firstName + ' ' + memberEc.lastName
-                      + ' " data-member="' + memberEc.id + '" class="memberInfos responsible btn btn-sm btn-outline-primary">'
+                      + ' " data-member="' + memberEc.id + '" class="memberInfos '
+                      + ( ( fonctionEc.name === 'Responsible' ) ? ' responsible ' : '')
+                      + ' btn btn-sm btn-outline-primary">'
                       + memberEc.firstName + ' ' + memberEc.lastName
                       + '</a></p>';
-
+                      //console.log(k, fonctionEc.name, nextId);
                       const myMember = [
                         {
                           v: memberEc.alias ,
@@ -342,6 +344,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       if ( fonctionEc.name === 'Responsible') {
                         subTeam[0].f += fDetail;
                       } else {
+
                         myDatas.push(myMember);
                         indexAdd++;
                         nextId = memberEc.alias;
