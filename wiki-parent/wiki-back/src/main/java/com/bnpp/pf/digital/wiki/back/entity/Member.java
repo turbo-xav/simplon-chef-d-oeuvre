@@ -48,7 +48,7 @@ public class Member {
 	 * mail of member
 	 */
 
-	@Column(length = 100)
+	@Column(length = 100, unique = true)
 	private String mail;
 	
 	

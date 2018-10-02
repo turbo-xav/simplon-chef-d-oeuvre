@@ -126,6 +126,8 @@ public class GuidelineController {
 		
 		 try {
 			 String fileName = file.getOriginalFilename();
+			 byte ptext[] = guidelineStr.getBytes();
+			 guidelineStr = new String(ptext, "UTF-8");
 			 Guideline guideline = new ObjectMapper().readValue(guidelineStr, Guideline.class);
 			try {
 				

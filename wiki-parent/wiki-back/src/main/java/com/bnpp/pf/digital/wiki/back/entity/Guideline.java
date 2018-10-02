@@ -112,7 +112,4 @@ public class Guideline {
 		return "Guideline [id=" + id + ", name=" + name + ", description=" + description + ", file=" + file + ", user="
 				+ user + ", type=" + type + "]";
 	}
-    
-    
-    
 }
