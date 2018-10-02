@@ -21,9 +21,7 @@ export class GuidelineComponent implements OnInit {
   }
 
   private gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
       this.dataTableUtils.generate();
-    }
   }
 
   loadGuidelines() {

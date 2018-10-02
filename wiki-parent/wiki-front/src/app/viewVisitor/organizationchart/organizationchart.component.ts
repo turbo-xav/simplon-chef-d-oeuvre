@@ -99,11 +99,11 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
 }
 
   ngOnInit() {
-    // this.loadTeams();
+
   }
 
   ngAfterViewInit() {
-    // this.loadTeams();
+
   }
 
   /**
@@ -178,8 +178,9 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                 if ( subTeam.members[j].function) {
 
                   const functionId = 'team-' + subTeam.id + '-function-' + subTeam.members[j].function.id;
+
                   let functionFound = subTeamToInsert.functions.find( function(myFunction) {
-                    return myFunction.id === functionId;
+                    return myFunction.id === subTeam.members[j].function.id;
                   });
 
                   if (!functionFound) {
@@ -220,7 +221,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
   google.charts.setOnLoadCallback(drawChart);
 
   const arboTeam = this.createArbo(topTeam);
-  console.log(arboTeam);
+  
   function drawChart() {
 
     let indexAdd = 0;
@@ -330,7 +331,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       + ' btn btn-sm btn-outline-primary">'
                       + memberEc.firstName + ' ' + memberEc.lastName
                       + '</a></p>';
-                      //console.log(k, fonctionEc.name, nextId);
+                      
                       const myMember = [
                         {
                           v: memberEc.alias ,
@@ -400,7 +401,6 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
       if ( jquery('.memberInfos').length > 0) {
         jquery('.memberInfos').unbind('click');
         jquery('.memberInfos').bind('click', function() {
-          console.log(jquery(this).data('member'));
           jquery('#member-' + jquery(this).data('member') + '-modal-button').trigger('click');
         });
       }

@@ -1,10 +1,11 @@
 import { DataTableUtils } from '../../utils/dataTableUtils';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Role } from '../../models/role';
 import { RoleService } from '../../services/role.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as jquery from 'jquery';
 import 'datatables.net';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,18 +13,21 @@ import 'datatables.net';
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.scss']
 })
+
 export class RoleComponent implements OnInit {
+
 
   roles: Role[] = [];
   error: Error;
-  constructor(private roleService: RoleService, private dataTableUtils: DataTableUtils ) {
+  // Our future instance of DataTable
+  dataTable: any;
+
+  constructor(private router: Router, private roleService: RoleService, private dataTableUtils: DataTableUtils ) {
 
   }
 
   protected gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
-      this.dataTableUtils.generate();
-    }
+    this.dataTableUtils.generate();
   }
 
   ngOnInit() {
@@ -33,6 +37,7 @@ export class RoleComponent implements OnInit {
   delete(id: number) {
       this.roleService.deleteRole(id).subscribe(
           () => {
+            this.dataTableUtils.remove(id);
             this.loadRoles();
         }
       );

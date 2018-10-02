@@ -36,9 +36,9 @@ export class ServerComponent implements OnInit {
   }
 
   private gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
+    //if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
       this.dataTableUtils.generate();
-    }
+    //}
   }
 
 

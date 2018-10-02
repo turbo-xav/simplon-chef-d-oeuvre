@@ -60,7 +60,6 @@ export class RoleEditComponent implements OnInit {
   save() {
     this.error = null;
     if ( this.roleForm.valid ) {
-      //this.role.name = this.name.value;
       this.roleService.saveRole(this.role).subscribe(
         () => {
           this.router.navigateByUrl('/admin/role');

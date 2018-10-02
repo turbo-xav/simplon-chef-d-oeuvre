@@ -18,22 +18,20 @@ export class MemberComponent implements OnInit {
   }
 
   ngOnInit() {
-  
     this.loadMembers();
   }
 
   delete(id: number) {
       this.memberService.deleteMember(id).subscribe(
           () => {
+            this.dataTableUtils.remove(id);
             this.loadMembers();
         }
       );
   }
 
   private gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
       this.dataTableUtils.generate();
-    }
   }
 
   loadMembers() {

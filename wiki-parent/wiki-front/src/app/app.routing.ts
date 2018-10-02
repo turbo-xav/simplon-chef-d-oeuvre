@@ -62,10 +62,15 @@ const appRoutes: Routes = [
   { path: 'guidelineTechnique', component: ViewGuidelineTechniqueComponent},
   { path: 'diagnosticView', component: DiagnosticViewVisitorComponent },
 
+
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/role', component: RoleComponent, canActivate: [AuthGuard]/*, runGuardsAndResolvers: 'always'*/ },
   { path: 'admin/role/edit/:id', component: RoleEditComponent, canActivate: [AuthGuard] },
   { path: 'admin/role/edit', component: RoleEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin/role/delete', redirectTo: 'admin/role', pathMatch: 'full' },
+
+
   { path: 'admin/user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'admin/user/edit/:id', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'admin/user/edit', component: UserEditComponent, canActivate: [AuthGuard] },
@@ -113,4 +118,4 @@ const appRoutes: Routes = [
 
 ];
 
-export const routing = RouterModule.forRoot(appRoutes/*, { enableTracing: true }*/);
+export const routing = RouterModule.forRoot(appRoutes, { /* enableTracing: true , onSameUrlNavigation: 'reload'*/ });

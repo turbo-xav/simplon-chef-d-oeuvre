@@ -26,15 +26,14 @@ export class UserComponent implements OnInit {
   delete(id: number) {
     this.userService.deleteUser(id).subscribe(
         () => {
+          this.dataTableUtils.remove(id);
           this.loadUsers();
       }
     );
 }
 
 private gererateDataTable(): void {
-  if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
     this.dataTableUtils.generate();
-  }
 }
 
 loadUsers() {

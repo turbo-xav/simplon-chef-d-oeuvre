@@ -27,7 +27,6 @@ export class DiagnosticComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('cocuoud');
     this.loadDiagnostics();
   }
   delete(id: number) {

@@ -8,6 +8,13 @@
 
   </div>
 
+  
+
+</div>
+
+<div class="d-inline-flex">
+  <p>Search </p>
+  <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search an element of diagnostics list" />
 </div>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 
@@ -18,23 +25,16 @@
   <caption>
     <h5>Diagnostics list</h5>
   </caption>
+  
 
-
-  <thead class="thead-light">
-    <tr class="colorLign">
-         <th class="search" colspan="6">
-        <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search an element of diagnostics list" />
-      </th>
-    </tr>
-    <tr class="colorLign">
-    </tr>
+  <thead class="thead-light">   
     <tr>
       <th>URL</th>
       <th>Code App</th>
       <th>Name of server</th>
       <th>Name of layer </th>
       <th>Name of environ </th>
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>

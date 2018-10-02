@@ -24,15 +24,14 @@ export class TeamComponent implements OnInit {
   delete(id: number) {
       this.teamService.deleteTeam(id).subscribe(
           () => {
+            this.dataTableUtils.remove(id);
             this.loadTeams();
         }
       );
   }
 
   private gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
-      this.dataTableUtils.generate();
-    }
+    this.dataTableUtils.generate();
   }
 
   loadTeams() {

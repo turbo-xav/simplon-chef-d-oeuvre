@@ -20,18 +20,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">     
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.uid}}</td>
-      <td>{{user.mail}}</td>
-      <td>{{user.role != null ? user.role.name : null}}</td>
-      <td>{{user.enabled === true?'yes':'no'}}</td>
-      <td>{{user.locked === true?'yes':'no'}}</td>
-      <td>
-        <a class="btn btn-outline-primary"  routerLink="/admin/user/edit/{{user.id}}" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/edit.png" /></a>
-        <a class="btn btn-outline-primary" (click)="delete(user.id)" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/bin.png" /></a>
-      </td>
-    </tr>    
+      <ng-container *ngFor="let user of users">
+      <tr class="row{{user.id}}">     
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.uid}}</td>
+        <td>{{user.mail}}</td>
+        <td>{{user.role != null ? user.role.name : null}}</td>
+        <td>{{user.enabled === true?'yes':'no'}}</td>
+        <td>{{user.locked === true?'yes':'no'}}</td>
+        <td>
+          <a class="btn btn-outline-primary"  routerLink="/admin/user/edit/{{user.id}}" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/edit.png" /></a>
+          <a class="btn btn-outline-primary" (click)="delete(user.id)" title="edit user : {{user.firstName}} {{user.lastName}}"><img src="/assets/img/bin.png" /></a>
+        </td>
+      </tr>  
+    </ng-container>  
   </tbody>
 </table>

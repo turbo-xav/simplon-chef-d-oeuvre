@@ -13,21 +13,23 @@
       <th>Tel</th>
       <th>Team</th>
       <th>Function</th>
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let member of members">     
-      <td>{{member.firstName}}</td>
-      <td>{{member.lastName}}</td>
-      <td>{{member.mail}}</td>
-      <td>{{member.tel}}</td>
-      <td>{{member.team.name}}</td>
-      <td>{{member.function.name}}</td>
-      <td>
-        <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/member/edit/{{member.id}}" title="edit member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/edit.png" /></a>
-        <a class="btn btn-outline-primary" (click)="delete(member.id)" title="delete member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/bin.png" /></a>
-    </tr>
-    
+      <ng-container *ngFor="let member of members">
+          <tr class="row{{member.id}}"> 
+            <td>{{member.firstName}}</td>
+            <td>{{member.lastName}}</td>
+            <td>{{member.mail}}</td>
+            <td>{{member.tel}}</td>
+            <td>{{member.team.name}}</td>
+            <td>{{member.function.name}}</td>
+            <td>
+              <a class="btn btn-outline-primary" routerLink="/admin/organisationnal-chart/member/edit/{{member.id}}" title="edit member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/edit.png" /></a>
+              <a class="btn btn-outline-primary" (click)="delete(member.id)" title="delete member : {{member.firstName}} {{member.lastName}}"><img src="/assets/img/bin.png" /></a>
+            </td>
+        </tr> 
+      </ng-container>  
   </tbody>
 </table>

@@ -23,15 +23,14 @@ export class FonctionComponent implements OnInit {
   delete(id: number) {
       this.fonctionService.deleteFonction(id).subscribe(
           () => {
+            this.dataTableUtils.remove(id);
             this.loadFonctionsMembers();
         }
       );
   }
 
   private gererateDataTable(): void {
-    if ( typeof this.dataTableUtils.getTable() ===  'undefined') {
-      this.dataTableUtils.generate();
-    }
+    this.dataTableUtils.generate();
   }
 
   loadFonctionsMembers() {
