@@ -37,8 +37,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
   error: Error = new Error('');
 
   constructor(
-    private diagViewVisitorService: DiagViewVisitorService,
-    private applicationService: ApplicationService,
+   private applicationService: ApplicationService,
     private environmentService: EnvironmentService,
     private layerService: LayerService,
     private serverService: ServerService,
@@ -170,7 +169,23 @@ if (String(envirId) === '') {
     );
   }
 
-}
+  resetSelectionAndReloadTable() {
+    this.diagnosticService.getDiagnosticsWithParameters(
+    this.selectedApplication = '',
+    this.selectedEnviron = '',
+    this.selectedLayer = '',
+    this.selectedServer = '').subscribe(
+      (diagnostics: Diagnostic[]) => {
+        this.diagnostics = diagnostics;
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
+      }
+    );
+  }
+
+  }
+
 
 
 

@@ -1,8 +1,37 @@
-<h3>
-    List of functional guidelines
-    </h3>
-    
-    
-    <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline-Technique'" navId="viewGuidelineTechnique"></app-nav-bar>
-    
-    
+    <div>
+            <h3 class="heading">
+              List of technical guidelines
+            </h3>
+          </div>
+          <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'guideline-Technique'" navId="guidelineTechnique"></app-nav-bar>
+          
+          
+          <br>
+          
+          <section class="wrapper">
+            <div class="container-fostrap">
+              <div class="content">
+                <div class="container">
+                  <div class="row">
+                    <ng-container class="col-xs-12 col-sm-4" *ngFor="let guideline of guidelines">
+                      <div class="card" *ngIf="guideline.type ==='tech'">
+                        <div class="card-content">
+                         <div>
+                               <h4 class="card-title">
+                            {{guideline.name}}
+                          </h4>
+                        </div>
+                          <br>
+                          <p class=""> Description: {{guideline.description}} </p>
+                        </div>
+                        <div class="card-read-more">
+                        <a href="{{getDownloadUrl(guideline)}}" title="Download guideline {{guideline.name}}"><i class="fa fa-download fa-3x"></i></a>
+                        </div>
+                      </div>
+                    </ng-container>
+          
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>

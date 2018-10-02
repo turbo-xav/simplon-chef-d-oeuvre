@@ -1,74 +1,37 @@
-<h3>
-  List of functional guidelines
-</h3>
-<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline-Functional'" navId="viewGuidelineFunctional"></app-nav-bar>
+<div>
+  <h3 class="heading">
+    List of functional guidelines
+  </h3>
+</div>
+<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'guideline-Functional'" navId="guidelineFunctional"></app-nav-bar>
 
 
 <br>
 
-<!-- <ul *ngFor="let guideline of listGuidelines">
-  <li class="block" *ngIf="guideline.type ==='Functionnal guideline'">
-    <p> Name : {{guideline.name}}</p>
-    <p> File: {{guideline.file}}</p>
-    <p>Type: {{guideline.type}}</p>
-    <p>Description: {{guideline.description}}</p>
-    <button class="btn"><i class="fa fa-download"></i> Download</button>
-  </li>
-
-</ul> -->
-
-<!-- <section class="wrapper">
-  <div class="container-fostrap">
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4">
-            <ng-container class="card" *ngFor="let guideline of listGuidelines">
-              <div *ngIf="guideline.type ==='Functionnal guideline'">
-                <div class="card-content">
-                  <h4 class="card-title">{{guideline.name}} </h4>
-                  <p> File: {{guideline.file}}</p>
-                  <p>Type: {{guideline.type}}</p>
-                  <p>Description: {{guideline.description}}</p>
-                  <div class="card-read-more">
-                    <button class="btn"><i class="fa fa-download"></i> Download</button>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <section class="wrapper">
   <div class="container-fostrap">
-
     <div class="content">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-4">
-            <ng-container class="card" *ngFor="let guideline of listGuidelines">
-              <div class="card-content" *ngIf="guideline.type ==='Functionnal guideline'">
-                <h4 class="card-title">
-                  Name : {{guideline.name}}
+          <ng-container class="col-xs-12 col-sm-4" *ngFor="let guideline of guidelines">
+            <div class="card" *ngIf="guideline.type ==='func'">
+              <div class="card-content">
+               <div>
+                     <h4 class="card-title">
+                  {{guideline.name}}
                 </h4>
-                <p class="">
-                  Name : {{guideline.name}}</p>
-                <p> File: {{guideline.file}}</p>
-                <p>Type: {{guideline.type}}</p>
-                <p>Description: {{guideline.description}}</p>
-                <div class="card-read-more">
-                  <button class="btn"><i class="fa fa-download"></i> Download</button>
-                </div>
               </div>
-            </ng-container>
-          </div>
+                <br>
+                <p class=""> Description: {{guideline.description}} </p>
+              </div>
+              <div class="card-read-more">
+              <a href="{{getDownloadUrl(guideline)}}" title="Download guideline {{guideline.name}}"><i class="fa fa-download fa-3x"></i></a>
+              </div>
+            </div>
+          </ng-container>
+
         </div>
       </div>
-
     </div>
   </div>
 </section>

@@ -1,28 +1,46 @@
 <div class="container">
-  <!-- <div class="col-sm-5 fonctional" routerLink="/viewGuidelineFonctionnel">
-    <a class="btn btn-default guidelines" routerLink="/viewGuidelineFonctionnel" role="button">Functional Guidelines</a>
-  </div> -->
 
   <h3> Consultation of guidelines</h3>
-  <p>Please choose the guideline according to your needs.</p>
+
 
   <br>
-<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline'" navId="viewGuideline"></app-nav-bar>
+  <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline'" navId="viewGuideline"></app-nav-bar>
 
 
-  <div class="row height">
 
 
-    <div class="col-sm-5 fonctional" routerLink="/viewGuidelineFonctionnel">
-      <a class="btn btn-default guidelines" routerLink="/viewGuidelineFonctionnel" role="button">Functional Guidelines</a>
+
+
+
+
+  <div class="container-fluid">
+    <div class="row-hexa hexa-slider " id="hexa-grid">
+      <div class="col-hexa center-block">
+        <div class="hexa">
+          <a class="hexa-link" routerLink="/guidelineFonctionnel">
+            <img class="hexa-img" src="https://images.unsplash.com/photo-1507754988072-8667848efc79?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=500&h=500&fit=crop&s=7e8f00aa7e8ced2c54a77ff93bb903e1"
+              alt="" />
+            <div class="hexa-content">
+              <h2 class="title">Functional guidelines</h2>
+              <br>
+              <p class="description">Access to functional guidelines</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-hexa center-block">
+        <div class="hexa">
+          <a class="hexa-link" routerLink="/guidelineTechnique">
+            <img class="hexa-img" src="https://images.unsplash.com/photo-1508061710991-50a947bab21c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=500&h=500&fit=crop&s=45f62847fb352343cc79868a05ab0f18"
+              alt="" />
+            <div class="hexa-content">
+              <h2 class="title">Technical Guidelines</h2>
+              <br>
+              <p class="description">Access to technical guidelines</p>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
-
-    <div class="col-sm-2 technical"></div>
-
-    <div class="col-sm-5 fonctional" routerLink="/viewGuidelineTechnique">
-      <a class="btn btn-default guidelines" routerLink="/viewGuidelineTechnique" role="button">Technical Guidelines</a>
-    </div>
-
   </div>
-
 </div>

@@ -58,8 +58,8 @@ const appRoutes: Routes = [
 
   { path: 'organisationnal-chart', component: OrganizationchartComponent },
   { path: 'guidelineView', component: GuidelineViewVisitorComponent },
-  { path: 'viewGuidelineFonctionnel', component: ViewGuidelineFonctionnelComponent},
-  { path: 'viewGuidelineTechnique', component: ViewGuidelineTechniqueComponent},
+  { path: 'guidelineFonctionnel', component: ViewGuidelineFonctionnelComponent},
+  { path: 'guidelineTechnique', component: ViewGuidelineTechniqueComponent},
   { path: 'diagnosticView', component: DiagnosticViewVisitorComponent },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },

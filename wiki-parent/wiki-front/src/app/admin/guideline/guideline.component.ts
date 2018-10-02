@@ -14,7 +14,7 @@ export class GuidelineComponent implements OnInit {
 
   guidelines: Guideline[] = [];
 
-  constructor(private guidelineservice: GuidelineService, private dataTableUtils: DataTableUtils) { }
+  constructor(private guidelineService: GuidelineService, private dataTableUtils: DataTableUtils) { }
 
   ngOnInit() {
     this.loadGuidelines();
@@ -27,7 +27,7 @@ export class GuidelineComponent implements OnInit {
   }
 
   loadGuidelines() {
-    this.guidelineservice.getGuidelines().subscribe(
+    this.guidelineService.getGuidelines().subscribe(
       (guidelines: Guideline[]) => {
         this.guidelines = guidelines;
         this.gererateDataTable();
@@ -36,7 +36,7 @@ export class GuidelineComponent implements OnInit {
   }
 
   deleteGuideline(id: number) {
-    this.guidelineservice.deleteGuideline(id).subscribe(
+    this.guidelineService.deleteGuideline(id).subscribe(
       () => {
       this.loadGuidelines();
       }
@@ -44,7 +44,7 @@ export class GuidelineComponent implements OnInit {
   }
 
   getDownloadUrl(guideline: Guideline) {
-    return this.guidelineservice.getDownloadUrl(guideline);
+    return this.guidelineService.getDownloadUrl(guideline);
   }
 
 }
