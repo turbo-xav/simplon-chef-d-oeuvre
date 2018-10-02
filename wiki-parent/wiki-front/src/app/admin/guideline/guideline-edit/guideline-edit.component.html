@@ -28,9 +28,9 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-4 col-form-label" for="file"> File of guideline:</label>
+            <label class="col-4 col-form-label" for="file"> Select file:</label>
             <div class="col-8">
-              <input (change)="onFileChanged($event)" type="file" class="form-control" id="file" 
+              <input (change)="onFileChanged($event)" type="file" class="form-control file" id="file" 
                 [ngClass]="{'is-invalid': file.invalid && file.dirty, 'is-valid': file.valid && file.dirty}"
                 formControlName="file" placeholder="File of guideline" />
               <div *ngIf="file.invalid && (file.dirty || file.touched)" class="invalid-feedback">
@@ -62,8 +62,6 @@
               </div>
             </div>
           </div>
-
-
 
 
           <div class="form-group row">
