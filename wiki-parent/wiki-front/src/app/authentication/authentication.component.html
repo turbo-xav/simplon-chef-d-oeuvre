@@ -44,25 +44,25 @@
 
 <ng-template #userLogOutBlock>
   <div class="row border-left border-primary">
-    <div class="col-lg-1 col-md-5 col-sm-3 col-xs-1">&nbsp;</div>
-    <div class="col-lg-11 col-md-7 col-sm-9 col-xs-11">
-      <p *ngIf="user != null" class="police">
+    <div class="col-lg-1 col-md-4 col-sm-2 col-xs-1">&nbsp;</div>
+    <div class="col-lg-11 col-md-8 col-sm-10 col-xs-11">
+      <div *ngIf="user != null" class="police">
       
         <a routerLink="/authentication/account/update" title="update yout account">
-          <img src="/assets/img/account.png" />
-          Bienvenue :  <strong>{{ user.firstName }} {{ user.lastName }}</strong>     
+          <img class="img-responsive" src="/assets/img/account.png" />
+          Welcome :  <strong>{{ user.firstName }} {{ user.lastName }}</strong>     
         </a>
         <br />
-        Vous êtes connecté(e) en tant que : <strong>{{user.role.name}}</strong></p>
-    
-      <p>
+        You are connected as : <strong>{{user.role.name}}</strong>
+      </div>
+      <div>
         
-        <a class="italic" routerLink="/admin" title="Go to admin menu">
-        <img src="/assets/img/admin.png" alt="admin menu">Admin</a>
+        <a routerLink="/admin" title="Go to admin menu">
+        <img class="img-responsive" src="/assets/img/admin.png" alt="go to admin menu"></a>
         |
-        <a class="italic" (click)="logOut()" title="Quit application">
-          <img src="/assets/img/exit.jpg" alt="disconnect from wiki" />Quit</a>
-      </p>
+        <a (click)="logOut()" title="Quit application">
+          <img class="img-responsive" src="/assets/img/exit.jpg" alt="disconnect from wiki" /></a>
+        </div>
     </div>
   </div>
 </ng-template>

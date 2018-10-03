@@ -52,7 +52,7 @@ export class GuidelineEditComponent implements OnInit {
   }
   createFormControls() {
     const name = new FormControl('', [Validators.required]);
-    const file = new FormControl('', [Validators.required]);
+    const file = new FormControl('');
     const type = new FormControl('', [Validators.required]);
     const description = new FormControl('', [Validators.required, Validators.maxLength(120), Validators.minLength(10)]);
 
@@ -87,11 +87,9 @@ export class GuidelineEditComponent implements OnInit {
            this.guidelineService.saveGuideline(this.guideline, this.fileToUpLoad).subscribe(
         () => {
           this.router.navigateByUrl('/admin/guideline');
-          alert(this.guideline.user);
         },
         (response: HttpErrorResponse) => {
           this.error = response.error;
-          console.log(this.error.errors);
         }
       );
     }

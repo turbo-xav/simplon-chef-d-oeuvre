@@ -100,6 +100,7 @@ import { ViewGuidelineFonctionnelComponent } from './viewVisitor/guideline-view-
 // tslint:disable-next-line:max-line-length
 import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-visitor/view-guideline-technique/view-guideline-technique.component';
 import { OrganizationchartComponent } from './viewVisitor/organizationchart/organizationchart.component';
+import { ViewGuidelineComponent } from './viewVisitor/view-guideline/view-guideline.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -163,7 +164,8 @@ export function initializeApp(appConfig: AppConfig) {
     FilterEnv,
     FilterLayer,
     ViewGuidelineFonctionnelComponent,
-    ViewGuidelineTechniqueComponent
+    ViewGuidelineTechniqueComponent,
+    ViewGuidelineComponent
 
   ],
   imports: [

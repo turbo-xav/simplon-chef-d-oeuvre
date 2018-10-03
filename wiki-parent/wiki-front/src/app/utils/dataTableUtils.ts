@@ -20,7 +20,7 @@ export class DataTableUtils {
             if (!jquery.fn.dataTable.isDataTable( '.table' ) ) {
                 jquery('.table').DataTable( {
                     'paging': false,
-                    'searching': true,
+                    'searching': false,
                             'language': {
                                             'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json'
                                 }

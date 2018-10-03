@@ -59,6 +59,8 @@ public class GuidelineController {
 
 	private static final String MISSING_NAME_ERROR_MSG = "please specify the name of this guideline.";
 
+	private static final String PB_FILE_ERROR_MSG = "there is some problem with uploaded file.";
+	
 	@Autowired
 	private IServiceGuideline serviceGuideline;
 	
@@ -122,29 +124,48 @@ public class GuidelineController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
 	@ResponseBody
-	public ResponseEntity<?> uploadFile(@RequestParam("guideline") String guidelineStr, @RequestPart("file") MultipartFile file) {
+	public ResponseEntity<?> uploadFile(@RequestParam("guideline") String guidelineStr, @RequestPart(value="file", required = false) MultipartFile file) {
 		
-		 try {
-			 String fileName = file.getOriginalFilename();
-			 byte ptext[] = guidelineStr.getBytes();
-			 guidelineStr = new String(ptext, "UTF-8");
-			 Guideline guideline = new ObjectMapper().readValue(guidelineStr, Guideline.class);
-			try {
-				
+		
+			 
+			try {						 
+				 byte ptext[] = guidelineStr.getBytes();
+				 guidelineStr = new String(ptext, "UTF-8");			
+				 Guideline guideline = new ObjectMapper().readValue(guidelineStr, Guideline.class);
 				if (guideline.getName().isEmpty()) {
 					return new ResponseEntity<WikiError>(new WikiError(MISSING_NAME_ERROR_MSG), HttpStatus.BAD_REQUEST);
 				} else {
-					guideline.setFile("guideline-"+guideline.getId()+"-"+file.getOriginalFilename());
-					guideline = serviceGuideline.save(guideline);					
-					if (fileService.saveFile(file, guideline.getFile())) {
-						return new ResponseEntity<Integer>(guideline.getId(), HttpStatus.OK);
+					
+					if(file != null) {
+						guideline.setFile("guideline-"+guideline.getId()+"-"+file.getOriginalFilename());
 					}
-					else {
-						System.out.println("Pb file");
-					}			
+					guideline = serviceGuideline.save(guideline);
+					
+					
+					if(file != null) {
+						if (fileService.saveFile(file, guideline.getFile())) {
+							return new ResponseEntity<Integer>(guideline.getId(), HttpStatus.OK);
+								
+						}
+						else {
+							return new ResponseEntity<WikiError>(new WikiError(PB_FILE_ERROR_MSG), HttpStatus.BAD_REQUEST);
+						}
+					}
+					
+					
 
 				}
 
+			}
+			 catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (DataIntegrityViolationException e) {
 				return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} catch (DataAccessException e) {
@@ -153,16 +174,7 @@ public class GuidelineController {
 				return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			}		
 			
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+			
 		
 		return null;
 		

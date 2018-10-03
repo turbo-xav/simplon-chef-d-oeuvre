@@ -14,24 +14,9 @@ export class ViewGuidelineFonctionnelComponent implements OnInit {
 
   error: Error = new Error('');
 
-  constructor(
-    private guidelineService: GuidelineService) { }
+  constructor() {
+  }
 
-    ngOnInit() {
-      this.loadGuidelines();
-    }
-
-    loadGuidelines() {
-      this.guidelineService.getGuidelines().subscribe(
-        (guidelines: Guideline[]) => {
-          this.guidelines = guidelines;
-        },
-        (response: HttpErrorResponse) => {
-          this.error = response.error;
-        }
-      );
-    }
-    getDownloadUrl(guideline: Guideline) {
-      return this.guidelineService.getDownloadUrl(guideline);
-    }
+  ngOnInit() {
+  }
 }
