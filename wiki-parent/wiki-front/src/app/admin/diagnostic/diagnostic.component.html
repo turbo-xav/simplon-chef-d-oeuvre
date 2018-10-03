@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row topMenu">
   <div class="col-12 mx-auto text-center">
     <h3>Manage the diagnostics pages</h3>
 
@@ -12,21 +12,17 @@
 
 </div>
 
-<div class="d-inline-flex">
-  <p>Search </p>
-  <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search an element of diagnostics list" />
+<div class="searchForm d-flex md-form active-cyan active-cyan-2 mb-3">
+    <input class="form-control" [(ngModel)]="queryString" type="text" id="search" placeholder="Search in diagnostics" aria-label="Search">
+    <i class="fa fa-search"></i>        
 </div>
+
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
 
 
 
 
 <table class="table table-striped table-sm table-bordered table-hover table-responsive">
-  <caption>
-    <h5>Diagnostics list</h5>
-  </caption>
-  
-
   <thead class="thead-light">   
     <tr>
       <th>URL</th>
