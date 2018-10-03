@@ -101,6 +101,7 @@ import { ViewGuidelineFonctionnelComponent } from './viewVisitor/guideline-view-
 import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-visitor/view-guideline-technique/view-guideline-technique.component';
 import { OrganizationchartComponent } from './viewVisitor/organizationchart/organizationchart.component';
 import { ViewGuidelineComponent } from './viewVisitor/view-guideline/view-guideline.component';
+import { GuidelineViewService } from './services/guideline-view.service';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -191,6 +192,7 @@ providers: [
   interceptors,
   MenuService,
   GuidelineService,
+  GuidelineViewService,
   TeamService,
   OrganisationnalChartService,
   FonctionService,

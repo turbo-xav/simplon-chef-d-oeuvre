@@ -1,47 +1,3 @@
-p {
-  text-align: center;
-}
-
-
-// select {
-
-//   border: 1px solid grey;
-//   border-radius: 5px;
-//   width: 200px;
-//   font-family: serif;
-// }
-
-// label {
- 
-//   display: block;
-//   font-family: serif;
-//  width: 150px;
-//   float: left;
-// }
-
-.form-inline {  
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-}
-
-.form-inline label {
-  margin: 5px 10px 0 5px;
-  display: block;
- 
- width: 100px;
-  float: left;
-}
-
-.form select {
-  margin: 0 15px 0 5px;
-    border: 1px solid grey;
-    border-radius: 5px;
-    width: 150px;
- 
-    
-  }
-
 .form-inline input {
   vertical-align: middle;
   margin: 5px 10px 5px 0;
@@ -72,3 +28,19 @@ margin-left: 10px;
     align-items: stretch;
   }
 }
+
+.fa{
+  font-size:24px;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media (max-width: 768px) {
+  select {
+    font-size: 10px;
+  }
+}
+
+div#myTable{
+  margin:20px 0 0 0;
+}
+

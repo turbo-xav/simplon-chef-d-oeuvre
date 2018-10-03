@@ -1,100 +1,79 @@
+<app-nav-bar [menuListId]="'diagnosticView'" navId="diagnosticView"></app-nav-bar>
+
 <h3> Consultation of Diagnostics</h3>
-<p>Find the diagnostic page for your problem</p>
-
-
-<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'diagnosticView'" navId="diagnosticView"></app-nav-bar>
-
-
+<h4 class="text-center">Find the diagnostic page for your problem</h4>
 
 <div class="container">
   <div class="row">
+    <div class="col-10">
+      <div class="row flex-column flex-md-row">
+        <div class="col-3">
+          <select (change)="onChangeApplication($event.target.value)" class="form-control" id="application" [(ngModel)]="selectedApplication"
+            name="application">
+            <option value="">Select an application</option>
+            <option *ngFor="let application of applications" value={{application.id}}>{{application.codeApp}}</option>
+          </select>
+        </div>
 
-
-
-  <form class="form-inline">
-
-      <!-- <input class="champ" type="hidden" [(ngModel)]="queryString" name="search" id="search" /> -->
-
-<!--   
-      <label class="control-label" for="application">Application: </label> -->
-
-      <select (change)="onChangeApplication($event.target.value)" class=" input-lg" id="application"  [(ngModel)]="selectedApplication" name="application">
-        <option value="">Select an application</option>
-        <option *ngFor="let application of applications" value={{application.id}}>{{application.codeApp}}</option>
-      </select>
-
-
-
-<!--    
-      <label class="control-label" for="environ">Environment: </label> -->
-
-      <select (change)="onEnvironmentSelect($event.target.value)" [(ngModel)]="selectedEnviron" name="environ" class="input-lg" id="environ">
+        <div class="col-3">
+          <select (change)="onEnvironmentSelect($event.target.value)" [(ngModel)]="selectedEnviron" name="environ"
+            class="form-control" id="environ">
             <option value="">Select an environment</option>
-        <option *ngFor="let environ of envirs" value={{environ.id}}>{{environ.name}}</option>
-      </select>
-   
+            <option *ngFor="let environ of envirs" value={{environ.id}}>{{environ.name}}</option>
+          </select>
+        </div>
+
+        <div class="col-3">
+          <select (change)="onLayerSelect($event.target.value)" [(ngModel)]="selectedLayer" name="layer" class="form-control"
+            id="layer">
+            <option value="">Select a layer</option>
+            <option *ngFor="let layer of layers" value={{layer.id}}>{{layer.name}}</option>
+          </select>
+        </div>
 
 
-<!--   
-      <label class="control-label" for="layer">Layer: </label> -->
+        <div class="col-3">
+          <select (change)="onServerSelect($event.target.value)" class="form-control" [(ngModel)]="selectedServer" id="server"
+            name="server">
+            <option value="">Select a server</option>
+            <option *ngFor="let server of servers" value={{server.id}}>{{server.name}}</option>
+          </select>
+        </div>
+      </div>      
+    </div>
 
-      <select (change)="onLayerSelect($event.target.value)" [(ngModel)]="selectedLayer" name="layer" class=" input-lg"
-        id="layer">
-        <option value="">Select a layer</option>
-        <option *ngFor="let layer of layers" value={{layer.id}}>{{layer.name}}</option>
-      </select>
-  
-
-<!--    
-      <label class="control-label" for="server">Server: </label> -->
-
-      <select (change)="onServerSelect($event.target.value)"class=" input-lg"  [(ngModel)]="selectedServer" id="server" name="server">
-        <option value="">Select a server</option>
-        <option *ngFor="let server of servers" value={{server.id}}>{{server.name}}</option>
-      </select>
-   
-    <!-- <button type="reset" class="btn btn-primary">Reset</button> -->
-    <button type="button" class="btn btn-primary"(click)="resetSelectionAndReloadTable()">Reset selections</button>
-
-  </form>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="resetSelectionAndReloadTable()">Reset</button>
+    </div>
 </div>
 
-
-<div class="row">
-
-
-<div class="col-sm-12" >
-
-</div>
- 
-  <table class="table table-striped table-sm table-bordered table-hover table-responsive">
-      <caption>
-        <h5>Diagnostics list</h5>
-      </caption>
-    
-    
+<div id="myTable">
+    <table class="table table-striped table-sm table-bordered table-hover table-responsive">
       <thead class="thead-light">
-            <tr class="colorLign">
+        <tr class="colorLign">
         </tr>
         <tr>
-          <th>URL</th>
+
           <th>Code App</th>
           <th>Name of server</th>
           <th>Name of layer </th>
           <th>Name of environ </th>
-     
+          <th>URL</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let diagnostic of diagnostics | FilterDiagConsult:queryString">
-            <td><a href="{{diagnostic.url}}">{{diagnostic.url}}</a></td>
-            <td>{{diagnostic.application.codeApp}}</td>
-            <td>{{diagnostic.server.name}}</td>
-            <td>{{diagnostic.server.layer.name}}</td>
-            <td>{{diagnostic.server.layer.environ.name}}</td>
-            
+          <td>{{diagnostic.application.codeApp}}</td>
+          <td>{{diagnostic.server.name}}</td>
+          <td>{{diagnostic.server.layer.name}}</td>
+          <td>{{diagnostic.server.layer.environ.name}}</td>
+          <td class="text-center">
+            <a href="{{diagnostic.url}}" target="_blanck">
+              <i class="fa fa-hospital-o fa-large"></i>
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
- </div>
+</div>

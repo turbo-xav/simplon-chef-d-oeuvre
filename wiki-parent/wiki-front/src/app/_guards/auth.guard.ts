@@ -1,3 +1,4 @@
+import { EnvironnementComponent } from './../admin/diagnostic/environnement/environnement.component';
 import { OrganisationnalChartService } from '../services/organisationnal-chart.service';
 import { AdminComponent } from '../admin/admin.component';
 import { AuthService } from '../services/auth.service';
@@ -58,6 +59,46 @@ export class AuthGuard implements CanActivate {
             }
             ,
             organisationnalChart : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            diagnostic : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            diagnosticEdit : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            application : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            applicationEdit : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            environnement : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            environnementEdit : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            server : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            serverEdit : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            layer : {
+                authorizedRoles : ['ADMIN' , 'TECHLEAD']
+            }
+            ,
+            layerEdit : {
                 authorizedRoles : ['ADMIN' , 'TECHLEAD']
             }
         };

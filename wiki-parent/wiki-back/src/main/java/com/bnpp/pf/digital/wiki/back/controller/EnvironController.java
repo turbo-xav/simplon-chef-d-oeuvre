@@ -149,9 +149,8 @@ public class EnvironController {
 
 	}
 	
-	
+	/*
 	@RequestMapping(path = "getLayersByEnviron/{id}",method = RequestMethod.GET)
-	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getLayersByEnviron(@PathVariable("id") int id) {
 
@@ -177,6 +176,7 @@ public class EnvironController {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 	}
+	*/
 	
 
 }

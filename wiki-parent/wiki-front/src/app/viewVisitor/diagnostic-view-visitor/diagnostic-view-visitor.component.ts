@@ -1,20 +1,11 @@
+import { Diagnostic } from './../../models/diagnostic';
 import { Environment } from './../../models/environment';
-import { ServerService } from '../../services/server.service';
-import { EnvironmentService } from '../../services/environment.service';
 import { Component, OnInit } from '@angular/core';
-
-
-import { DiagViewVisitorService } from '../../services/diag-view-visitor.service';
-import { Diagnostic } from '../../models/diagnostic';
 import { Layer } from '../../models/layer';
 import { Application } from '../../models/application';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ApplicationService } from '../../services/application.service';
-
-import { LayerService } from '../../services/layer.service';
 import { Server } from '../../models/server';
-import { DataTableUtils } from '../../utils/dataTableUtils';
-import { DiagnosticService } from '../../services/diagnostic.service';
+import { DiagViewVisitorService } from '../../services/diag-view-visitor.service';
 
 
 @Component({
@@ -36,14 +27,7 @@ export class DiagnosticViewVisitorComponent implements OnInit {
 
   error: Error = new Error('');
 
-  constructor(
-   private applicationService: ApplicationService,
-    private environmentService: EnvironmentService,
-    private layerService: LayerService,
-    private serverService: ServerService,
-    private diagnosticService: DiagnosticService,
-
-  ) { }
+  constructor(private diagViewVisitorService: DiagViewVisitorService) { }
 
 
 
@@ -61,7 +45,7 @@ this.loadDiagnostics();
     if (String(applicationId) === '') {
       this.loadEnvirons();
     } else {
-      this.environmentService.getEnvironnements(applicationId).subscribe(
+      this.diagViewVisitorService.getEnvironnements(applicationId).subscribe(
         (envirs: Environment[]) => {
           this.envirs = envirs;
         }
@@ -74,7 +58,7 @@ this.loadDiagnostics();
 if (String(envirId) === '') {
       this.loadLayers();
     } else {
-      this.environmentService.getLayersByEnviron(envirId).subscribe(
+      this.diagViewVisitorService.getLayersByEnviron(envirId).subscribe(
         (layers: Layer[]) => {
           this.layers = layers;
         },
@@ -89,12 +73,13 @@ if (String(envirId) === '') {
     if (String(layerId) === '') {
       this.loadServers();
     } else {
-      this.layerService.getServersByLayer(layerId).subscribe(
+      this.diagViewVisitorService.getServersByLayer(layerId).subscribe(
         (servers: Server[]) => {
           this.servers = servers;
         },
         (response: HttpErrorResponse) => {
-          this.error = response.error;
+          this.error = response
+          .error;
         }
       );
 
@@ -109,7 +94,7 @@ if (String(envirId) === '') {
     }
 
   loadApplications() {
-    this.applicationService.getApplications().subscribe(
+    this.diagViewVisitorService.getApplications().subscribe(
       (applications: Application[]) => {
         this.applications = applications;
       },
@@ -120,7 +105,7 @@ if (String(envirId) === '') {
   }
 
   loadEnvirons() {
-    this.environmentService.getEnvironments().subscribe(
+    this.diagViewVisitorService.getEnvironments().subscribe(
       (envirs: Environment[]) => {
         this.envirs = envirs;
       },
@@ -132,7 +117,7 @@ if (String(envirId) === '') {
 
 
   loadLayers() {
-    this.layerService.getLayers().subscribe(
+    this.diagViewVisitorService.getLayers().subscribe(
       (layers: Layer[]) => {
         this.layers = layers;
       },
@@ -142,7 +127,7 @@ if (String(envirId) === '') {
     );
   }
   loadServers() {
-    this.serverService.getServers().subscribe(
+    this.diagViewVisitorService.getServers().subscribe(
       (servers: Server[]) => {
         this.servers = servers;
       },
@@ -154,14 +139,14 @@ if (String(envirId) === '') {
 
 
   loadDiagnostics() {
-    this.diagnosticService.getDiagnosticsWithParameters(
+    this.diagViewVisitorService.getDiagnosticsWithParameters(
           this.selectedApplication ,
           this.selectedEnviron,
           this.selectedLayer,
           this.selectedServer
           ).subscribe(
-      (diagnostics: Diagnostic[]) => {
-        this.diagnostics = diagnostics;
+      (diags: Diagnostic[]) => {
+        this.diagnostics = diags;
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;
@@ -170,7 +155,7 @@ if (String(envirId) === '') {
   }
 
   resetSelectionAndReloadTable() {
-    this.diagnosticService.getDiagnosticsWithParameters(
+    this.diagViewVisitorService.getDiagnosticsWithParameters(
     this.selectedApplication = '',
     this.selectedEnviron = '',
     this.selectedLayer = '',
@@ -183,14 +168,4 @@ if (String(envirId) === '') {
       }
     );
   }
-
-  }
-
-
-
-
-
-
-
-
-
+}

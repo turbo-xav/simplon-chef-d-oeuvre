@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Guideline } from '../../models/guideline';
 import { GuidelineService } from '../../services/guideline.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { GuidelineViewService } from '../../services/guideline-view.service';
 
 @Component({
   selector: 'app-view-guideline',
@@ -13,19 +14,22 @@ export class ViewGuidelineComponent implements OnInit {
   // variable d'entreer du composant envoyé par un autre composant
   @Input() type: string;
 
+  typeTitle = '';
+
   guidelines: Guideline [];
 
   error: Error = new Error('');
 
   constructor(
-    private guidelineService: GuidelineService) { }
+    private guidelineViewService: GuidelineViewService) { }
 
     ngOnInit() {
+      this.typeTitle = this.type === 'tech' ? 'technical' : 'functionnal';
       this.loadGuidelines();
     }
 
     loadGuidelines() {
-      this.guidelineService.getGuidelines().subscribe(
+      this.guidelineViewService.getGuidelines().subscribe(
         (guidelines: Guideline[]) => {
           this.guidelines = guidelines;
           console.log('guidelines', this.guidelines);
@@ -36,7 +40,7 @@ export class ViewGuidelineComponent implements OnInit {
       );
     }
     getDownloadUrl(guideline: Guideline) {
-      return this.guidelineService.getDownloadUrl(guideline);
+      return this.guidelineViewService.getDownloadUrl(guideline);
     }
 
 }

@@ -87,7 +87,14 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/rest/member/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
 			.antMatchers("/rest/team/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
 			.antMatchers("/rest/function/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
-	        .antMatchers("/**").permitAll()
+			.antMatchers("/rest/layer/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/server/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/application/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+			.antMatchers("/rest/environment/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+	        .antMatchers("/rest/diagnostic/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
+	        
+			
+			.antMatchers("/**").permitAll()
 	        .and()
 	        .logout().logoutUrl("/rest/logout")
 	        .logoutSuccessUrl("/rest/auth/logout");

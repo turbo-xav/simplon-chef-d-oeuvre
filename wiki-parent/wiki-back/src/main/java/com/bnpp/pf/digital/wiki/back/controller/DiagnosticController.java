@@ -52,17 +52,17 @@ public class DiagnosticController {
 	@ResponseBody
 	
 	public ResponseEntity<?> getDiagnosticsWithParameters(@RequestParam("appId") String appId , @RequestParam("envId") String envId, @RequestParam("layerId") String layerId, @RequestParam("serverId") String serverId ) {
-		//try {
+		try {
 			 List<Diagnostic> diags = serviceDiagnostic.findByCriteria(appId, envId, layerId, serverId);
 			
 			return new ResponseEntity< List<Diagnostic>>(diags, HttpStatus.OK);
-		/*} catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			System.out.println(e.getStackTrace());
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			return new ResponseEntity<WikiError>(new WikiError(GETTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
-		}*/
+		}
 	}	
 	
 	

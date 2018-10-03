@@ -1,26 +1,31 @@
+<app-nav-bar [menuListId]="'view-guideline'" navId="viewGuideline"></app-nav-bar>
 <h3> Consultation of guidelines</h3>
-<app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'viewGuideline'" navId="viewGuideline"></app-nav-bar>
-
-<div class="container">
-  <div class="row">
-    <div class="col-6 text-center">
-      <a routerLink="/guidelineFonctionnel">
-        <img class="border rounded img-fluid" src="https://images.unsplash.com/photo-1507754988072-8667848efc79?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=500&h=500&fit=crop&s=7e8f00aa7e8ced2c54a77ff93bb903e1" alt="" />
-        <div class="description text-center">
-          <h2>Functional guidelines</h2>          
-          <p class="description">Access to functional guidelines</p>
-        </div>
-      </a>
-    </div>
-    
-    <div class="col-6 text-center"> 
-      <a routerLink="/guidelineTechnique">
-      <img class="border rounded img-fluid"  src="https://images.unsplash.com/photo-1508061710991-50a947bab21c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=500&h=500&fit=crop&s=45f62847fb352343cc79868a05ab0f18" alt="" />
-      <div class="description text-center">
-        <h2 class="title">Technical Guidelines</h2>        
-        <p class="description">Access to technical guidelines</p>
+<div id="intro">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 text-center">
+        <a routerLink="/guidelineFonctionnel">
+          <div class="img">
+            <img class="img-fluid" src="/assets/img/survival-guide.png" alt="" />
+          </div>
+          <div class="description text-center">
+            <h2>Functional guidelines</h2>          
+            <p class="description">Access to functional guidelines</p>
+          </div>
+        </a>
       </div>
-    </a>
-    </div>    
+      
+      <div class="col-6 text-center"> 
+        <a routerLink="/guidelineTechnique">
+          <div class="img">
+            <img class="img-fluid"  src="/assets/img/guide-technique.png" alt="" />
+          </div>
+          <div class="description text-center">
+            <h2 class="title">Technical Guidelines</h2>        
+           <p class="description">Access to technical guidelines</p>
+        </div>
+        </a>
+      </div>    
+    </div>
   </div>
 </div>

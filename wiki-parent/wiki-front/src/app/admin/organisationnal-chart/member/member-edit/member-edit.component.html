@@ -44,7 +44,7 @@
         <label class="col-4 col-form-label" for="tel">Tel(*) :</label>
         <div class="col-8">
           <input type="text" class="form-control" id="tel" [(ngModel)]="member.tel" [ngClass]="{'is-invalid': tel.invalid && tel.dirty, 'is-valid': tel.valid && tel.dirty}" formControlName="tel" placeholder="tel of Member" />
-          <small class="form-text text-muted">Ex: jean-pierre.dupond@cetelem.fr </small>
+          <small class="form-text text-muted">Ex: 0146399715 </small>
           <div *ngIf="tel.invalid && (tel.dirty || tel.touched)" class="invalid-feedback">
               <div *ngIf="tel.errors.required">A tel is required for a member.</div>
               <div *ngIf="tel.errors.pattern">Bad tel format (ex : 0146399715).</div>

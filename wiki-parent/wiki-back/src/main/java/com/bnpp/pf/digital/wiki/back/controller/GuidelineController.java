@@ -33,8 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.activation.MimetypesFileTypeMap;
 
-//@CrossOrigin(origins = { "http://localhost:4200", "*" })
-//@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/guideline")
 public class GuidelineController {
@@ -72,7 +70,6 @@ public class GuidelineController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	// @ResponseStatus(code=HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<?> getAll() {
 
@@ -199,7 +196,7 @@ public class GuidelineController {
 	  * @param multipartFile
 	  * @return
 	  */
-	
+	/*
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<?> update(@RequestBody Guideline guideline, @RequestParam("file") MultipartFile multipartFile) {
@@ -223,7 +220,7 @@ public class GuidelineController {
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
 
-	}
+	}*/
 
 	/**
 	 * 
@@ -231,7 +228,7 @@ public class GuidelineController {
 	 * @return
 	 */
 
-	@RequestMapping(method = RequestMethod.POST)
+	/*@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody Guideline guideline) {
 		try {
@@ -249,6 +246,6 @@ public class GuidelineController {
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
-	}
+	}*/
 
 }
