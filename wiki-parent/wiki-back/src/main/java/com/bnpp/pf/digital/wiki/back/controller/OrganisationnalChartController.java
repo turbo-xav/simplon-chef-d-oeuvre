@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bnpp.pf.digital.wiki.back.entity.Function;
 import com.bnpp.pf.digital.wiki.back.entity.Member;
 import com.bnpp.pf.digital.wiki.back.entity.Team;
-import com.bnpp.pf.digital.wiki.back.exception.FunctionnalException;
-import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
 import com.bnpp.pf.digital.wiki.back.service.IServiceFunction;
 import com.bnpp.pf.digital.wiki.back.service.IServiceMember;
 import com.bnpp.pf.digital.wiki.back.service.IServiceTeam;
@@ -51,7 +47,7 @@ public class OrganisationnalChartController {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getAll() {
-
+		
 		try {
 			List<Team> teams = serviceTeam.findAll();
 			return new ResponseEntity<List<Team>>(teams, HttpStatus.OK);

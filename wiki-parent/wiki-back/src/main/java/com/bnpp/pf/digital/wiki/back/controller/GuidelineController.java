@@ -136,9 +136,9 @@ public class GuidelineController {
 					if(file != null) {
 						guideline.setFile("guideline-"+guideline.getId()+"-"+file.getOriginalFilename());
 					}
+					
 					guideline = serviceGuideline.save(guideline);
-					
-					
+										
 					if(file != null) {
 						if (fileService.saveFile(file, guideline.getFile())) {
 							return new ResponseEntity<Integer>(guideline.getId(), HttpStatus.OK);
@@ -148,9 +148,6 @@ public class GuidelineController {
 							return new ResponseEntity<WikiError>(new WikiError(PB_FILE_ERROR_MSG), HttpStatus.BAD_REQUEST);
 						}
 					}
-					
-					
-
 				}
 
 			}
@@ -164,10 +161,13 @@ public class GuidelineController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (DataIntegrityViolationException e) {
+				e.printStackTrace();
 				return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} catch (DataAccessException e) {
+				e.printStackTrace();
 				return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			} catch (Exception e) {
+				e.printStackTrace();
 				return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 			}		
 			

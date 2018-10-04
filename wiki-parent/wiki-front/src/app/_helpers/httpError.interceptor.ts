@@ -39,7 +39,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                         this.errorService.addErrors(['you are not allowed to acess to this feature']);
                         this.router.navigateByUrl('/authentication/error/not-allowed');
                     } else if (error.status === 404) {
-                        this.errorService.addErrors(['module not found']);
+                        this.errorService.addErrors(['API method module not found please vérify back office']);
                         this.router.navigateByUrl('/authentication/error/not-found');
                     } else if (( error.status === 400 ) ) {
                         if ( typeof error.error !== 'undefined' ) {

@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "c4f39a1d-d39d-423b-9d62-e259635fc5c0",
+		"name": "Simplon Chef D'oeuvre Wiki Back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List all Roles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\" : null,\"name\":\"new role1\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an existing role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\" : 1,\"name\":\"Admin\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an existing role",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\" : 4}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all users with their roles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user with his role",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/user/41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"user",
+						"41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new user with a defined role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 41,\n    \"uid\": \"417165\",\n    \"firstName\": \"Xavier\",\n    \"lastName\": \"Tagliarino\",\n    \"mail\": \"xavier.tagliarino@gmail.com\",\n    \"password\": \"\",\n    \"enabled\": true,\n    \"locked\": false,\n    \"role\": {\n        \"id\": 1,\n        \"name\": \"Admin\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a user with a defined role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 96,\n    \"uid\": \"417168\",\n    \"firstName\": \"Xaavier\",\n    \"lastName\": \"Tagliarino\",\n    \"mail\": \"xavier.tagliarino@gmail.cm34\",\n    \"password\": \"\",\n    \"enabled\": true,\n    \"locked\": false,\n    \"role\": {\n        \"id\": 32,\n        \"name\": \"TechLead\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user with a defined role",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 96,\n    \"uid\": \"417168\",\n    \"firstName\": \"Xaavier\",\n    \"lastName\": \"Tagliarino\",\n    \"mail\": \"xavier.tagliarino@gmail.cm34\",\n    \"password\": \"\",\n    \"enabled\": true,\n    \"locked\": false,\n    \"role\": {\n        \"id\": 32,\n        \"name\": \"TechLead\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/wiki-back/rest/user/89",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wiki-back",
+						"rest",
+						"user",
+						"89"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
