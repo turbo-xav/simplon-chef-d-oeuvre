@@ -1,6 +1,6 @@
 <app-nav-bar [menuListId]="'organisationnal-chart'" navId="organisationnalChart"></app-nav-bar>
 <h3>Digital Team : Organisationnal Chart</h3>
-<div>
+<div id="orga">
     <div id="organisation"></div>
     <div id="listFonctions" >
         <app-modal-function *ngFor="let function of functions" [fonction]="function" [idModal]="'function-'+function.id"></app-modal-function>

@@ -33,9 +33,9 @@
       </form>
     </div>
     <div class="col-6">
-      <button class="btn btn-outline-primary" type="submit" [disabled]="!profileForm.valid" (click)="auth()">Sign In</button>
+      <button type="button" class="btn btn-outline-primary fa fa-sign-in" title="sign-in" type="submit" [disabled]="!profileForm.valid" (click)="auth()"></button>
       or
-      <button type="button" class="btn btn-outline-primary" routerLink="authentication/account/create">Sign Up ?</button>
+      <button type="button" class="btn btn-outline-primary btn-sm fa fa-user-plus" title="sign-up ?" routerLink="authentication/account/create"></button>
       <!--<a routerLink="/authentication/get-password" class="badge badge-primary">Lost password ?</a>-->
     </div>
   </div>
@@ -58,10 +58,13 @@
       <div>
         
         <a routerLink="/admin" title="Go to admin menu">
-        <img class="img-responsive" src="/assets/img/admin.png" alt="go to admin menu"></a>
+          <i class="fa fa-cogs" color="pink"></i>
+        </a>
+        <!-- <img class="img-responsive" src="/assets/img/admin.png" alt="go to admin menu"></a> -->
         |
         <a (click)="logOut()" title="Quit application">
-          <img class="img-responsive" src="/assets/img/exit.jpg" alt="disconnect from wiki" /></a>
+            <i class="fa fa-sign-out"></i></a>
+          <!-- <img class="img-responsive" src="/assets/img/exit.jpg" alt="disconnect from wiki" /></a> -->
         </div>
     </div>
   </div>

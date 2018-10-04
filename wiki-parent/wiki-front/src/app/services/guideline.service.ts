@@ -16,8 +16,8 @@ export class GuidelineService {
     const formData = new FormData();
     formData.append('file', fileToUpload);
     console.log(JSON.stringify(guideline));
-    formData.append('guideline',  JSON.stringify(guideline));
-    console.log('guideline',   guideline);
+    formData.append('guideline', JSON.stringify(guideline));
+    console.log('guideline', guideline);
     return this.http.post<Observable<any>>(this.restUrl + '/upload', formData);
 
     // const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
