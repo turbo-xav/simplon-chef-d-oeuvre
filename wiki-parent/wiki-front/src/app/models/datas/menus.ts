@@ -380,7 +380,7 @@ export const menuList = [
     'position': 'admin-environnement',
     'img': '',
     'icon': 'fa-backward',
-    'path': '/admin',
+    'path': '/admin/diagnostic',
   }
   ,
   {

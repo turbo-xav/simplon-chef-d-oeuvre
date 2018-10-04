@@ -1,22 +1,19 @@
 <h3>Manage layers</h3>
 <app-nav-bar class="col-6 mx-auto text-center" [menuListId]="'admin-layer'" navId="adminLayer"></app-nav-bar>
 <p class="errorMsg" *ngIf="error != null">{{error.msg}}</p>
-<table class="table table-striped table-sm table-bordered table-hover table-responsive">
-  <caption>
-    <h4>Layers list</h4>
-  </caption>
-  
-  <thead class="thead-light">
-      <tr class="colorLign">
-          <th class="search" colspan="6">
-         <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search a layer" />
-       </th>
-     </tr>
-     <tr class="colorLign">
-     </tr>
-    <tr>
-      <th>Layers name</th>
-       <th>Servers name</th>
+
+
+<div class="searchForm d-flex md-form active-cyan active-cyan-2 mb-3">
+    <input class="champ" type="text" [(ngModel)]="queryString" id="search" placeholder="Search a layer" />
+    <i class="fa fa-search"></i>
+  </div>
+
+<table class="table table-striped table-lg table-hover table-responsive">
+ 
+  <thead class="thead-dark">
+      <tr>
+      <th>Layer</th>
+       <th>Servers</th>
       <th></th>
     </tr>
   </thead>
@@ -26,7 +23,7 @@
  
       <td>
         <ul *ngFor="let server of layer.servers">
-          <li> {{server.name}} </li>
+          <li>- {{server.name}} </li>
         </ul>
         </td>   
       <td class="alignButton">
