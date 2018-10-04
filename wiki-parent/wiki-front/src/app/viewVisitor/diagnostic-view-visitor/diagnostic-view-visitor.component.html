@@ -1,11 +1,11 @@
 <app-nav-bar [menuListId]="'diagnosticView'" navId="diagnosticView"></app-nav-bar>
 
 <h3> Consultation of Diagnostics</h3>
-<h4 class="text-center">Find the diagnostic page for your problem</h4>
+<h6 class="text-center font-italic">Find the diagnostic page for your problem</h6>
 
 <div class="container">
-  <div class="row">
-    <div class="col-10">
+  <div class="row" id="mySelect">
+    <div class="col-11">
       <div class="row flex-column flex-md-row">
         <div class="col-3">
           <select (change)="onChangeApplication($event.target.value)" class="form-control" id="application" [(ngModel)]="selectedApplication"
@@ -42,22 +42,22 @@
       </div>      
     </div>
 
-    <div class="col-2">
+    <div class="col-1">
       <button class="btn btn-primary" (click)="resetSelectionAndReloadTable()">Reset</button>
     </div>
 </div>
 
-<div id="myTable">
-    <table class="table table-striped table-sm table-bordered table-hover table-responsive">
-      <thead class="thead-light">
+<div id="myTable" >
+    <table class="table table-striped table-lg table-hover table-responsive">
+      <thead class="thead-dark">
         <tr class="colorLign">
         </tr>
         <tr>
 
           <th>Code App</th>
-          <th>Name of server</th>
-          <th>Name of layer </th>
-          <th>Name of environ </th>
+          <th>Server</th>
+          <th>Layer </th>
+          <th>Environment </th>
           <th>URL</th>
         </tr>
       </thead>
