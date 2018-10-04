@@ -48,7 +48,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
-  { path: 'authentication/account/create', component: AccountCreateComponent, canActivate: [AuthGuard] },
+  { path: 'authentication/account/create', component: AccountCreateComponent },
   { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard] },
   { path: 'authentication/get-password', component: GetPasswordComponent },
   { path: 'authentication/error/not-found', component: NotFoundComponent },

@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
 
         // User must be authenticated
         if ( !this.authService.isAuth() ) {
+           
             this.authService.logOut();
             this.router.navigate(['authentication/error/disconnected'], { queryParams: { returnUrl: state.url }});
             return false;
@@ -23,6 +24,7 @@ export class AuthGuard implements CanActivate {
        let componentName = component.name.replace('Component', '');
 
        componentName = componentName.charAt(0).toLowerCase() + componentName.slice(1);
+
        const acl = {
             admin : {
                 authorizedRoles : ['ADMIN' , 'TECHLEAD']
