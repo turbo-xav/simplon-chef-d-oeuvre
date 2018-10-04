@@ -151,7 +151,7 @@ public class LayerController {
 	}
 	
 	
-	/*@RequestMapping(path = "getServersByLayer/{id}",method = RequestMethod.GET)
+	@RequestMapping(path = "getServersByLayer/{id}",method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getServersByLayer(@PathVariable("id") int id) {
 
@@ -163,12 +163,6 @@ public class LayerController {
 		} catch (Exception e) {
 			return new ResponseEntity<WikiError>(new WikiError(LISTING_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
-	}*/	
-	
-	
-	
-	
-	
-	
+	}
 	
 }

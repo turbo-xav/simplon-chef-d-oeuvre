@@ -81,6 +81,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 	        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()//allow CORS option calls
 	        //.antMatchers("/rest/auth/logout").permitAll()
+	        .antMatchers("/rest/user/account").permitAll()
 	        .antMatchers("/rest/role/**").access("hasRole('ADMIN')")	        
 			.antMatchers("/rest/user/**").access("hasRole('ADMIN')")
 			.antMatchers("/rest/guideline/**").access("hasRole('ADMIN') or hasRole('TECHLEAD')")
