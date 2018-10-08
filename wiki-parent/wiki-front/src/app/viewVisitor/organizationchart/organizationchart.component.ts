@@ -243,6 +243,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
             f:
             '<p>'
             + '<span class="team">'
+            + '<img src="/assets/img/team-boss.jpg" alt="team boss icon" />'
             + arboTeam.name
             + '</span>'
             +  '<br />'
@@ -278,7 +279,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
               const subTeam = [
                 {
                   v: myTeam.id ,
-                  f: '<p><span class="subTeam">' + myTeam.name + '</span></p>'
+                  f: '<p><span class="subTeam"><img src="/assets/img/team.png" alt="team icon" /><br />' + myTeam.name + '</span></p>'
                 }
                 ,
                 arboTeam.id           ,
@@ -303,6 +304,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       f: '<p '
                       + 'class="btn btn-outline-primary btn-sm">'
                       + '<span  class="functionInfos" data-function="' + fonctionEc.id + '">'
+                      + '<img src="/assets/img/function.png" alt="function icon" />'
                       + fonctionEc.name
                       + '</span></p>'
                     }
@@ -329,6 +331,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       + ' " data-member="' + memberEc.id + '" class="memberInfos '
                       + ( ( fonctionEc.name === 'Responsible' ) ? ' responsible ' : '')
                       + ' btn btn-sm btn-outline-primary">'
+                      + '<img src="/assets/img/team-member.jpg" alt="member icon" />'
                       + memberEc.firstName + ' ' + memberEc.lastName
                       + '</a></p>';
                       

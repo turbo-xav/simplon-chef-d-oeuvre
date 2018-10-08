@@ -65,7 +65,7 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label" for="password">Password : (*)</label>
                     <div class="col-8">
-                        <input type="text" class="form-control" id="password" [(ngModel)]="user.password" [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}"
+                        <input type="password" class="form-control" id="password" [(ngModel)]="user.password" [ngClass]="{'is-invalid': password.invalid && password.dirty, 'is-valid': password.valid && password.dirty}"
                             formControlName="password" placeholder="password of user" />
                             <small class="form-text text-muted">Choose a secured password (@Paris201811cetelem)  </small>
                         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">

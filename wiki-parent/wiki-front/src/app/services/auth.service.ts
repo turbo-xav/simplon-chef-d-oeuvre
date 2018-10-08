@@ -133,7 +133,7 @@ export class AuthService {
 
     if ( user.id != null ) {
       const observableUser: Observable<User> =
-      this.http.put<User>(this.restUrl + '/user', user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
+      this.http.put<User>(this.restUrl + '/auth', user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
       return observableUser;
     }
   }
