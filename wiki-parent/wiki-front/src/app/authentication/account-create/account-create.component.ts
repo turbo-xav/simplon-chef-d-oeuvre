@@ -41,7 +41,7 @@ export class AccountCreateComponent implements OnInit {
     const lastName = new FormControl('', [Validators.required]);
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
-    const password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    const password = new FormControl('', [Validators.required, Validators.minLength(4)]);
 
 
     this.userForm = this.fb.group({

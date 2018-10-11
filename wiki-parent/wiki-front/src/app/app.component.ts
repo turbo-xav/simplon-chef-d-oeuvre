@@ -36,6 +36,24 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.errors = [];
+
+    /*const subject = new Subject<number>();
+
+    subject.subscribe((number) => {
+        console.log(1, number);
+    });
+    
+    
+    subject.subscribe((number) => {
+        console.log(2, number);
+    });
+    
+    
+    subject.next(1);  // On envoie une donnée
+    subject.next(2);  // On envoie une autre donnée
+    subject.complete();
+    subject.next(3);  // On indique que l'observable n'enverra plus de données*/
+
   }
 
   private initializeErrors() {
