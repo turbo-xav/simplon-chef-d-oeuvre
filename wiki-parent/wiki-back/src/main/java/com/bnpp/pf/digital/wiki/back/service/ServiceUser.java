@@ -19,7 +19,7 @@ public class ServiceUser implements IServiceUser {
         
     /**
      * 
-     * @return
+     * @return all Fetch
      */
     
     public List<User> findAll() {

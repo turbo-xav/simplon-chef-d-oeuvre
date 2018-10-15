@@ -9,21 +9,21 @@ import com.bnpp.pf.digital.wiki.back.exception.TechnicalException;
 public interface IServiceUser {
 
 	/**
-	 * 
+	 * Get all users
 	 * @return
 	 */
 
 	List<User> findAll();
 
 	/**
-	 * 
+	 * Get one user by its Id
 	 * @param id
 	 * @return
 	 */
 	User getById(int id);
 	
 	/**
-	 * 
+	 * Get one user by its Id 
 	 * @param uid
 	 * @return
 	 */
@@ -32,7 +32,7 @@ public interface IServiceUser {
 	
 
 	/**
-	 * 
+	 * save user with all informations including its role
 	 * @param user
 	 * @return
 	 * @throws Exception 
@@ -41,7 +41,7 @@ public interface IServiceUser {
 	User save(User user) throws Exception;
 	
 	/**
-	 * 
+	 * Create a user account without a role
 	 * @param user
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public interface IServiceUser {
 
 
 	/**
-	 * 
+	 * Delete one user by its Id
 	 * @param id
 	 * @return
 	 */

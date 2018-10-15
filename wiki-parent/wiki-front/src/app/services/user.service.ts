@@ -25,7 +25,6 @@ export class UserService {
    */
   constructor(private http:  HttpClient) { }
 
-
   /**
     * Get a list of Users from the Back-End
     *
