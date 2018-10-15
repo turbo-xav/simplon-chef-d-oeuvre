@@ -78,6 +78,13 @@ span.subTeam {
 span.memberInfos {
     font-size:12px;
     color:black;
+    width:120px;
+    display:block;
+}
+
+a.memberInfos {
+    width:100%;
+    text-align:left; 
 }
 
 .nodeCase {

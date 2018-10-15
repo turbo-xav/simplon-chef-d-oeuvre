@@ -1,8 +1,12 @@
 <ngx-smart-modal #memberModal identifier="{{idModal}}">
     <div *ngIf="memberModal.hasData()">
-        <h6 class="text-center">{{ memberModal.getData().firstName}} {{ memberModal.getData().lastName}}</h6>
+        <h5 class="text-center">{{ memberModal.getData().firstName}} {{ memberModal.getData().lastName}}</h5>
         <p><img src="/assets/img/tel.png"  /> : {{ memberModal.getData().tel}}</p>
-        <p><img src="/assets/img/mail.png"  /> : {{ memberModal.getData().mail}}</p>
+        <p>
+          <a href="mailto:{{ memberModal.getData().mail}}">
+            <img src="/assets/img/mail.png"  /> : {{ memberModal.getData().mail}}
+          </a>
+        </p>
         <div [innerHtml]="memberModal.getData().description"></div>     
     </div>  
     

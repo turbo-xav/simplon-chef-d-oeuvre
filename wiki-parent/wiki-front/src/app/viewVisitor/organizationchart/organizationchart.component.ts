@@ -246,7 +246,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
             + '<img src="/assets/img/team-boss.jpg" alt="team boss icon" />'
             + arboTeam.name
             + '</span>'
-            +  '<br />'
+            //+  '<br />'
             + '<span title="click here to see infos about ' +
             arboTeam.functions[0].members[0].firstName
             + ' '
@@ -259,7 +259,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
             + arboTeam.functions[0].members[0].lastName
             + '</span>'
 
-            + '<br />'
+           // + '<br />'
 
             + '<span class="function">' + arboTeam.functions[0].name + '</span>'
             + '</p>'
@@ -377,7 +377,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
 
     // When the table is selected, update the orgchart.
     // The select handler. Call the chart's getSelection() method
-    /*function selectHandler() {
+    function selectHandler() {
       const selectedItem = chart.getSelection()[0];
       if (selectedItem) {
         for ( let i = 0 ; i < childsRow.length ; i++) {
@@ -385,11 +385,11 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
         }
         chart.collapse(selectedItem.row, false);
       }
-    }*/
+    }
 
     // Listen for the 'select' event, and call my function selectHandler() when
     // the user selects something on the chart.
-    // google.visualization.events.addListener(chart, 'select', selectHandler);
+    //google.visualization.events.addListener(chart, 'select', selectHandler);
     function readyHandler() {
 
       // Click on function détails

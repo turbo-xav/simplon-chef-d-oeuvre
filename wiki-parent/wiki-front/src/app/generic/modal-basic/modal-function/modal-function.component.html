@@ -1,6 +1,6 @@
 <ngx-smart-modal #functionModal identifier="{{idModal}}">
   <div *ngIf="functionModal.hasData()">
-      <h6>What is a {{ functionModal.getData().name}} ?</h6>
+      <h5>What is a {{ functionModal.getData().name}} ?</h5>
       <div [innerHtml]="functionModal.getData().description"></div>     
   </div>  
   
