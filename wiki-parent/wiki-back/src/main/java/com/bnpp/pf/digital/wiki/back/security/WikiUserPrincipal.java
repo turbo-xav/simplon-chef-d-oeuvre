@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.bnpp.pf.digital.wiki.back.entity.User;
 
@@ -34,6 +35,12 @@ public class WikiUserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {		
+	
+		/*BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode("@adminxavier");
+		System.out.println(hashedPassword);
+		System.out.println(user.getPassword());
+		System.out.println(passwordEncoder.matches("@adminxavier", user.getPassword()));*/
 		return user.getPassword();
 	}
 

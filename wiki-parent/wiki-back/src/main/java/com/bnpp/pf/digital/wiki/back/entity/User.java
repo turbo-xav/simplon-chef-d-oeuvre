@@ -37,7 +37,8 @@ public class User {
 	@Column(length = 100, unique = true)
 	private String mail;
 
-	@Column(length = 20)
+	@JsonIgnore
+	@Column(length = 100)
 	private String password;
 
 	@Column

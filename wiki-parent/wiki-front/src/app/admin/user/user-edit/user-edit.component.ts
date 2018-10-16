@@ -38,6 +38,7 @@ export class UserEditComponent implements OnInit {
         (user: User) => {
           if ( user != null ) {
             this.user = user;
+            this.user.password = '';
           } else {
             this.router.navigateByUrl('/admin/user');
           }
@@ -67,7 +68,7 @@ export class UserEditComponent implements OnInit {
     const lastName = new FormControl('', [Validators.required]);
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
-    const password = new FormControl('', [Validators.required]);
+    //const password = new FormControl('', [Validators.required]);
     const userRole = new FormControl('', []);
 
     this.userForm = this.fb.group({
@@ -75,7 +76,7 @@ export class UserEditComponent implements OnInit {
       lastName  :  lastName   ,
       mail      :  mail       ,
       uid       :  uid        ,
-      password  :  password   ,
+      //password  :  password   ,
       userRole  :  userRole
     });
   }
@@ -96,9 +97,9 @@ export class UserEditComponent implements OnInit {
     return this.userForm.get('uid');
   }
 
-  get password() {
+  /*get password() {
     return this.userForm.get('password');
-  }
+  }*/
 
   get userRole() {
     return this.userForm.get('userRole');

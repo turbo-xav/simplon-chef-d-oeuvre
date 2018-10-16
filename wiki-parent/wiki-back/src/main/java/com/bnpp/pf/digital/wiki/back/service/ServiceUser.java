@@ -3,6 +3,7 @@ package com.bnpp.pf.digital.wiki.back.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ public class ServiceUser implements IServiceUser {
     
     @Autowired
     private UserRepository userRepository;
+    
+    
         
     /**
      * 
@@ -42,7 +45,12 @@ public class ServiceUser implements IServiceUser {
      */
     
     public User save(User user) {
-        
+    	
+    	if( !user.getPassword().equals("") ) {
+    		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	}
+    	
     	userRepository.save(user);
     	return user;
     }
@@ -67,7 +75,8 @@ public class ServiceUser implements IServiceUser {
 		user.setRole(null);
 		user.setEnabled(false);
 		user.setLocked(false);
-		userRepository.save(user);
+		this.save(user);
+		//userRepository.save(user);
 		return user;
 	}
 	

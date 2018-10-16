@@ -78,7 +78,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> getAll(){
     	try {
-    		List<User> users = serviceUser.findAll(); 
+    		List<User> users = serviceUser.findAll();
          	return new ResponseEntity<List<User>>(users, HttpStatus.OK);
  		} 
          catch(DataAccessException e) {
@@ -136,11 +136,20 @@ public class UserController {
     		
     		WikiError wikiError = this.checkUserDatas(user);   		
     		
+    		User userFromBack = serviceUser.getById(user.getId());
+    		userFromBack.setUid(user.getUid());
+    		userFromBack.setFirstName(user.getFirstName());
+    		userFromBack.setLastName(user.getFirstName());
+    		userFromBack.setMail(user.getMail());
+    		userFromBack.setLocked(user.isLocked());
+    		userFromBack.setEnabled(user.isEnabled());
+    		userFromBack.setRole(user.getRole());  		
+    		
     		if(wikiError.getErrors().size() > 0) {
     			wikiError.setMsg("some errors has stopped saving of the user");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
     		}    		
-    		serviceUser.save(user);
+    		serviceUser.save(userFromBack);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
         	
         	
@@ -198,7 +207,8 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> createAccount(@RequestBody User user) {
     	try {
-			serviceUser.createAccount(user);
+			user.setPassword(user.getFirstName());
+    		serviceUser.createAccount(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
 		} catch (DataIntegrityViolationException e) {
 			return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
@@ -230,9 +240,9 @@ public class UserController {
 			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
 		}
 		
-		if (user.getPassword().isEmpty()) {
+		/*if (user.getPassword().isEmpty()) {
 			wikiError.addError("password", MISSING_PASSWORD_ERROR_MSG);
-		}
+		}*/
 		
 		if (user.getMail().isEmpty()) {
 			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);
