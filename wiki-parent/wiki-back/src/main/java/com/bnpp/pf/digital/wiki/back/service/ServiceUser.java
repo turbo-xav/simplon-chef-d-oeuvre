@@ -85,12 +85,14 @@ public class ServiceUser implements IServiceUser {
     		}
     	}
     	
-    	Role role = roleRepository.getByName("USER");
-    	if(role != null) {
-    		user.setRole(role);
+    	if(user.getRole() == null) {
+	    	Role role = roleRepository.getByName("USER");
+	    	if(role != null) {
+	    		user.setRole(role);
+	    	}
     	}
     	
-    	System.out.println(user.getPassword());
+    	//System.out.println(user.getPassword());
     	userRepository.save(user);
     	return user;
     }
