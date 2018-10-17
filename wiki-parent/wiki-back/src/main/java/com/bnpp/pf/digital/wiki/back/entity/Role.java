@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="wiki_tbl_role")
-
 public class Role {
 
     /**
