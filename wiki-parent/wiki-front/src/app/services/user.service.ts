@@ -1,3 +1,4 @@
+import { UserPassword } from './../models/auth/userPassword';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
@@ -43,6 +44,23 @@ export class UserService {
    */
   public createAccount(user: User): Observable<User> {
     return  this.http.post<User>(this.restUrl + '/account', user, { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) });
+  }
+
+  /**
+   *Create an account for a new User
+   * @param  {User} user
+   * @returns Observable
+   */
+
+   public updatePassword(uid, password): Observable<UserPassword> {
+    const userPassword: UserPassword = new UserPassword();
+    userPassword.uid = uid;
+    userPassword.password = password;
+    return  this.http.put<UserPassword>(
+                                  this.restUrl + '/account/update-password',
+                                  userPassword                 ,
+                                  { headers : new HttpHeaders( AppConfig.settings.apiBack.jsonHeaders ) }
+                                );
   }
 
    /**

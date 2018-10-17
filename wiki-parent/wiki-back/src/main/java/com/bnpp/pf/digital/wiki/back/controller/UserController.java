@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.entity.dto.UserPasswordDto;
 import com.bnpp.pf.digital.wiki.back.service.IServiceUser;
 
 //@CrossOrigin(origins = {"http://localhost:4200","*"})
@@ -203,11 +204,39 @@ public class UserController {
      * @return
      */
     
+    @RequestMapping(path="/account/update-password", method= RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<?> createAccount(@RequestBody UserPasswordDto userPasswordDto) {
+    	try {
+    		//System.out.println(userPasswordDto);
+    		
+    		User user = serviceUser.getByUID(userPasswordDto.getUid());
+    		if(user != null) {
+    			user.setPassword(userPasswordDto.getPassword());
+    		}
+    		serviceUser.save(user);
+    		return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
+		} catch (DataIntegrityViolationException e) {
+			return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
+		}
+        catch(DataAccessException e) {
+        	return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
+        }
+        catch(Exception e) {
+        	return new ResponseEntity<WikiError>(new WikiError(CREATING_ACCOUNT_ERROR_MSG), HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    
     @RequestMapping(path="/account", method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> createAccount(@RequestBody User user) {
-    	try {
-			user.setPassword(user.getFirstName());
+    	try {			
     		serviceUser.createAccount(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
 		} catch (DataIntegrityViolationException e) {

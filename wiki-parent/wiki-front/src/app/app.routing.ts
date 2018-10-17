@@ -41,6 +41,7 @@ import { OrganizationchartComponent } from './viewVisitor/organizationchart/orga
 import { ViewGuidelineFonctionnelComponent } from './viewVisitor/guideline-view-visitor/view-guideline-fonctionnel/view-guideline-fonctionnel.component';
 // tslint:disable-next-line:max-line-length
 import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-visitor/view-guideline-technique/view-guideline-technique.component';
+import { AccountPasswordComponent } from './authentication/account-password/account-password.component';
 
 
 
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
 
   { path: 'authentication/account/create', component: AccountCreateComponent },
   { path: 'authentication/account/update', component: AccountUpdateComponent, canActivate: [AuthGuard] },
-  { path: 'authentication/get-password', component: GetPasswordComponent },
+  { path: 'authentication/account/init-password', component: AccountPasswordComponent },
+  { path: 'authentication/account/get-password', component: GetPasswordComponent, canActivate: [AuthGuard] },
   { path: 'authentication/error/not-found', component: NotFoundComponent },
   { path: 'authentication/error/not-allowed', component: NotAllowedComponent },
   { path: 'authentication/error/disconnected', component: DisconnectedComponent },

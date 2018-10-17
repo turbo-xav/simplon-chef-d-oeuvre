@@ -31,6 +31,7 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
 	
     Role getById(int id);
     
+        
     /**
      * 
      * @param id
@@ -46,7 +47,7 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
      * @return
      */
     
-    List<Role> getByName(String name);
+    Role getByName(String name);
     
     
     /**

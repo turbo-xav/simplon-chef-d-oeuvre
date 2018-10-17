@@ -40,15 +40,15 @@ export class AccountUpdateComponent implements OnInit {
     const lastName = new FormControl('', [Validators.required]);
     const mail = new FormControl('', [Validators.required, Validators.email]);
     const uid = new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]);
-    const password = new FormControl('', [Validators.required, Validators.minLength(4)]);
-
+    //const password = new FormControl('', [Validators.required, Validators.minLength(4)]);
 
     this.userForm = this.fb.group({
       firstName: firstName,
       lastName: lastName,
       mail: mail,
-      uid: uid,
-      password: password
+      uid: uid
+      //,
+      //password: password
     });
   }
 
@@ -68,9 +68,9 @@ export class AccountUpdateComponent implements OnInit {
     return this.userForm.get('uid');
   }
 
-  get password() {
+ /* get password() {
     return this.userForm.get('password');
-  }
+  }*/
 
   save() {
     this.error = null;

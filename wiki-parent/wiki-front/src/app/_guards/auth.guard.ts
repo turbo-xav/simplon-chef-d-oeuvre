@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
 
         // User must be authenticated
         if ( !this.authService.isAuth() ) {
-           
             this.authService.logOut();
             this.router.navigate(['authentication/error/disconnected'], { queryParams: { returnUrl: state.url }});
             return false;

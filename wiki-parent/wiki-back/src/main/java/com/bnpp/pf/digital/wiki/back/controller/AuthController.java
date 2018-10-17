@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bnpp.pf.digital.wiki.back.entity.Member;
@@ -64,6 +65,12 @@ public class AuthController {
 		
 	}
 	
+	@RequestMapping(value="/generate-password",method = RequestMethod.GET)
+	@ResponseBody
+	public String generatePassword(@RequestParam("password") String password) {
+		return serviceUser.generatePassword(password);
+	}
+	
 		
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	@ResponseBody
@@ -97,18 +104,22 @@ public class AuthController {
     		if(wikiError.getErrors().size() > 0) {
     			wikiError.setMsg("some errors has stopped saving of the user");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
-    		}    		
+    		}
+    		
     		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
         	
         	
 		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
 			return new ResponseEntity<WikiError>(new WikiError(UPDATING_INTERITY_ERROR_MSG), HttpStatus.BAD_REQUEST);
 		}
         catch(DataAccessException e) {
+        	e.printStackTrace();
         	return new ResponseEntity<WikiError>(new WikiError(UPDATING_DATA_ACCESS_ERROR_MSG), HttpStatus.BAD_REQUEST);
         }
         catch(Exception e) {
+        	e.printStackTrace();
         	return new ResponseEntity<WikiError>(new WikiError(UPDATING_ERROR_MSG), HttpStatus.BAD_REQUEST);
         }   	
     }
@@ -131,9 +142,9 @@ public class AuthController {
 			wikiError.addError("lastName", MISSING_LASTNAME_ERROR_MSG);
 		}
 		
-		if (user.getPassword().isEmpty()) {
+		/*if (user.getPassword().isEmpty()) {
 			wikiError.addError("password", MISSING_PASSWORD_ERROR_MSG);
-		}
+		}*/
 		
 		if (user.getMail().isEmpty()) {
 			wikiError.addError("mail", MISSING_MAIL_ERROR_MSG);

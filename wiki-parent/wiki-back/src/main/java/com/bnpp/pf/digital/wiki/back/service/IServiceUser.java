@@ -57,5 +57,13 @@ public interface IServiceUser {
 	 */
 
 	void deleteById(int id);
+	
+	/**
+	 * Generate a crypted password
+	 * @param password
+	 * @return
+	 */
+	
+	String generatePassword(String password);
 
 }

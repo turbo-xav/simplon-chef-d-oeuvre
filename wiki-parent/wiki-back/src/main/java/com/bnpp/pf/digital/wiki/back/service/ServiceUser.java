@@ -7,7 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bnpp.pf.digital.wiki.back.entity.Role;
 import com.bnpp.pf.digital.wiki.back.entity.User;
+import com.bnpp.pf.digital.wiki.back.repository.RoleRepository;
 import com.bnpp.pf.digital.wiki.back.repository.UserRepository;
 
 @Component
@@ -18,6 +20,19 @@ public class ServiceUser implements IServiceUser {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private RoleRepository roleRepository;
+    
+    /**
+     * 
+     * @param password
+     * @return
+     */
+    
+    public String generatePassword(String password) {
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		return passwordEncoder.encode(password);
+    }
     
         
     /**
@@ -44,13 +59,38 @@ public class ServiceUser implements IServiceUser {
      * @return
      */
     
-    public User save(User user) {
+    public User save(User user) {   	
     	
-    	if( !user.getPassword().equals("") ) {
-    		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	if( user.getPassword() != null ) {
+    		//If a password is specified then we crypt it
+    		if(!user.getPassword().equals("")) {
+    			System.out.println(user.getPassword());
+    			user.setPassword(generatePassword(user.getPassword()));
+    		}//An empty password is forbidden, so we wake a default value (firstName)    		
+    		else {
+    			System.out.println(user.getFirstName());
+    			user.setPassword(generatePassword(user.getFirstName()));
+    		}
+    	//If password is null we affect the same like in database if exists or default value like firstName
+    	}else {
+    		User userFromBack = userRepository.getById(user.getId());    		    		
+    		if(userFromBack != null) {
+    			System.out.println(userFromBack.getPassword());
+    			user.setPassword(userFromBack.getPassword());
+    		}else {    			
+    			String password = user.getFirstName();
+    			String passwordEncrypted = generatePassword(password);
+    			System.out.println(passwordEncrypted);
+    			user.setPassword(passwordEncrypted);
+    		}
     	}
     	
+    	Role role = roleRepository.getByName("USER");
+    	if(role != null) {
+    		user.setRole(role);
+    	}
+    	
+    	System.out.println(user.getPassword());
     	userRepository.save(user);
     	return user;
     }
@@ -73,7 +113,7 @@ public class ServiceUser implements IServiceUser {
 	public User createAccount(User user) {
 		
 		user.setRole(null);
-		user.setEnabled(false);
+		user.setEnabled(true);
 		user.setLocked(false);
 		this.save(user);
 		//userRepository.save(user);

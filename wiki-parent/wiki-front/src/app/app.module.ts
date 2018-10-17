@@ -102,6 +102,7 @@ import { ViewGuidelineTechniqueComponent } from './viewVisitor/guideline-view-vi
 import { OrganizationchartComponent } from './viewVisitor/organizationchart/organizationchart.component';
 import { ViewGuidelineComponent } from './viewVisitor/view-guideline/view-guideline.component';
 import { GuidelineViewService } from './services/guideline-view.service';
+import { AccountPasswordComponent } from './authentication/account-password/account-password.component';
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -166,7 +167,8 @@ export function initializeApp(appConfig: AppConfig) {
     FilterLayer,
     ViewGuidelineFonctionnelComponent,
     ViewGuidelineTechniqueComponent,
-    ViewGuidelineComponent
+    ViewGuidelineComponent,
+    AccountPasswordComponent
 
   ],
   imports: [
