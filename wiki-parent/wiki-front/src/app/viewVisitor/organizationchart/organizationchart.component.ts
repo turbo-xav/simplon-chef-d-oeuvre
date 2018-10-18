@@ -334,7 +334,7 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
                       + '<img src="/assets/img/team-member.jpg" alt="member icon" />'
                       + memberEc.firstName + ' ' + memberEc.lastName
                       + '</a></p>';
-                      
+
                       const myMember = [
                         {
                           v: memberEc.alias ,
@@ -374,22 +374,25 @@ export class OrganizationchartComponent implements OnInit, AfterViewInit {
       for ( let i = 0 ; i < childsRow.length ; i++) {
         chart.collapse(childsRow[i], true);
       }
-
+      console.log(indexesToCollapse);
     // When the table is selected, update the orgchart.
     // The select handler. Call the chart's getSelection() method
     function selectHandler() {
+
       const selectedItem = chart.getSelection()[0];
       if (selectedItem) {
-        for ( let i = 0 ; i < childsRow.length ; i++) {
-          chart.collapse(childsRow[i], true);
+       if ( indexesToCollapse.indexOf(selectedItem.row) !== -1) {
+          for ( let i = 0 ; i < childsRow.length ; i++) {
+            chart.collapse(childsRow[i], true);
+          }
+          chart.collapse(selectedItem.row, false);
         }
-        chart.collapse(selectedItem.row, false);
       }
     }
 
     // Listen for the 'select' event, and call my function selectHandler() when
     // the user selects something on the chart.
-    //google.visualization.events.addListener(chart, 'select', selectHandler);
+    google.visualization.events.addListener(chart, 'select', selectHandler);
     function readyHandler() {
 
       // Click on function détails

@@ -135,22 +135,24 @@ public class UserController {
     public ResponseEntity<?> update(@RequestBody User user) {
     	try {			
     		
+    		System.out.println(user);
     		WikiError wikiError = this.checkUserDatas(user);   		
     		
-    		User userFromBack = serviceUser.getById(user.getId());
+    		/*User userFromBack = serviceUser.getById(user.getId());
     		userFromBack.setUid(user.getUid());
     		userFromBack.setFirstName(user.getFirstName());
     		userFromBack.setLastName(user.getFirstName());
     		userFromBack.setMail(user.getMail());
     		userFromBack.setLocked(user.isLocked());
     		userFromBack.setEnabled(user.isEnabled());
-    		userFromBack.setRole(user.getRole());  		
+    		userFromBack.setRole(user.getRole()); */ 		
     		
+    		//System.out.println(userFromBack);
     		if(wikiError.getErrors().size() > 0) {
     			wikiError.setMsg("some errors has stopped saving of the user");
     			return new ResponseEntity<WikiError>(wikiError, HttpStatus.BAD_REQUEST);    					
     		}    		
-    		serviceUser.save(userFromBack);
+    		serviceUser.save(user);
         	return new ResponseEntity<Integer>(user.getId(), HttpStatus.OK);
         	
         	

@@ -64,20 +64,25 @@ public class ServiceUser implements IServiceUser {
     	if( user.getPassword() != null ) {
     		//If a password is specified then we crypt it
     		if(!user.getPassword().equals("")) {
+    			System.out.println("1");
     			System.out.println(user.getPassword());
     			user.setPassword(generatePassword(user.getPassword()));
     		}//An empty password is forbidden, so we wake a default value (firstName)    		
     		else {
+    			System.out.println("2");
     			System.out.println(user.getFirstName());
     			user.setPassword(generatePassword(user.getFirstName()));
     		}
     	//If password is null we affect the same like in database if exists or default value like firstName
     	}else {
+    		System.out.println("3");
     		User userFromBack = userRepository.getById(user.getId());    		    		
     		if(userFromBack != null) {
+    			System.out.println("4");
     			System.out.println(userFromBack.getPassword());
     			user.setPassword(userFromBack.getPassword());
     		}else {    			
+    			System.out.println("5");
     			String password = user.getFirstName();
     			String passwordEncrypted = generatePassword(password);
     			System.out.println(passwordEncrypted);
