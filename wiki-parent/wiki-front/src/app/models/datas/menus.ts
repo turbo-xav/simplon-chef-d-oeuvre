@@ -48,7 +48,7 @@ export const menuList = [
   ,
   {
     'id': 6,
-    'name': 'Manage Organisationnal Chart',
+    'name': 'Manage Organizationnal Chart',
     'description': '',
     'position': 'admin-business',
     'img': '',
@@ -143,7 +143,7 @@ export const menuList = [
   ,
   {
     'id': 15,
-    'name': 'Manage roles',
+    'name': 'Manage Roles',
     'description': '',
     'position': 'admin-user',
     'img': '',
@@ -185,7 +185,7 @@ export const menuList = [
   ,
   {
     'id': 19,
-    'name': 'Back to admin organisationnal chart',
+    'name': 'Back to admin organizationnal chart',
     'description': '',
     'position': 'admin-team',
     'img': '',
@@ -225,7 +225,7 @@ export const menuList = [
   ,
   {
     'id': 23,
-    'name': 'Back to admin organisationnal chart',
+    'name': 'Back to admin organizationnal chart',
     'description': '',
     'position': 'admin-member',
     'img': '',
@@ -315,7 +315,7 @@ export const menuList = [
   ,
   {
     'id': 29,
-    'name': 'Manage servers',
+    'name': 'Manage Servers',
     'description': '',
     'position': 'admin-diag',
     'img': '',
@@ -325,7 +325,7 @@ export const menuList = [
   ,
   {
     'id': 30,
-    'name': 'Manage layers',
+    'name': 'Manage Layers',
     'description': '',
     'position': 'admin-diag',
     'img': '',
@@ -335,7 +335,7 @@ export const menuList = [
   ,
   {
     'id': 31,
-    'name': 'Manage applications',
+    'name': 'Manage Applications',
     'description': '',
     'position': 'admin-diag',
     'img': '',
