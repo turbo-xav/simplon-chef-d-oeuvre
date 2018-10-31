@@ -56,6 +56,8 @@ public class RoleController {
 	public ResponseEntity<?> getAll() {
 
 		try {
+			System.out.println(serviceRole.getClass().getSimpleName());
+			System.out.println(serviceRole.getClass().getName());
 			List<Role> roles = serviceRole.findAll();
 			return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
 		} catch (DataAccessException e) {

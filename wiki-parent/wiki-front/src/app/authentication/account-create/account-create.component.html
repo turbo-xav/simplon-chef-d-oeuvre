@@ -1,6 +1,7 @@
 
     <h3>Account creation</h3>
-    <p *ngIf="noAccount === false">Your account has been sucesfully created</p>
+    <p *ngIf="noAccount === false">Your account has been sucesfully created.
+    <br />Your password is your firstname. Please change it after your first authentication.</p>
 
     <p  *ngIf="error != null" class="errorMsg">Error : {{error.msg}}</p>
     <form *ngIf="noAccount === true" class="needs-validation" novalidate [formGroup]="userForm">
